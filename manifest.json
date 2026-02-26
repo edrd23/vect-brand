@@ -1,0 +1,21 @@
+{
+  "name": "VECT — RF Special Ops",
+  "short_name": "VECT",
+  "description": "Elite RF Operations. Sennheiser Spectera Rental & Coordination.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0A0A0A",
+  "theme_color": "#FF6B1A",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
