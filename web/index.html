@@ -1,25 +1,420 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vect - High Precision RF Ops</title>
-    <link rel="stylesheet" href="style.css">
+    <title>VECT — RF Special Ops | Sennheiser Spectera Rental</title>
+    <meta name="description"
+        content="VECT — RF Special Ops. Wireless rental, spectrum coordination and RF engineering powered by Sennheiser Spectera.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
+
 <body>
-    <div class="logo-container">
-        <svg id="vect-logo" viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
-            <path id="v-path" d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z" fill="#FF6B1A"/>
-            <path class="letter" d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z" fill="#F5F5F5"/>
-            <path class="letter" d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z" fill="#F5F5F5"/>
-            <path class="letter" d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5"/>
-        </svg>
-    </div>
-    
-    <div class="mission-status">
-        <span class="label">STATUS:</span> <span class="value">ACQUIRING SIGNAL...</span>
-    </div>
+
+    <!-- ═══════ NAVIGATION ═══════ -->
+    <nav>
+        <div class="nav-logo">
+            <a href="#">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </a>
+        </div>
+        <div class="nav-right">
+            <ul class="nav-links">
+                <li><a href="#services"><span class="it-text">Servizi</span><span class="en-text">Services</span></a>
+                </li>
+                <li><a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a></li>
+                <li><a href="#references"><span class="it-text">Referenze</span><span
+                            class="en-text">References</span></a></li>
+                <li><a href="#contact"><span class="it-text">Contatti</span><span class="en-text">Contact</span></a>
+                </li>
+            </ul>
+            <div class="lang-switcher">
+                <span class="lang-btn active" data-lang="it">IT</span>
+                <span class="lang-btn" data-lang="en">EN</span>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home" class="hero">
+        <!-- TECH BACKGROUND VISUAL -->
+        <div class="hero-bg-visual">
+            <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" style="stop-color:transparent;stop-opacity:0" />
+                        <stop offset="50%" style="stop-color:var(--vect-accent);stop-opacity:0.2" />
+                        <stop offset="100%" style="stop-color:transparent;stop-opacity:0" />
+                    </linearGradient>
+                </defs>
+                <path class="spectrum-wave" d="M0 200 Q 250 100 500 200 T 1000 200" stroke="url(#waveGrad)" fill="none"
+                    stroke-width="2" />
+                <path class="spectrum-wave-fast" d="M0 200 Q 250 300 500 200 T 1000 200" stroke="var(--vect-accent)"
+                    fill="none" stroke-width="0.5" stroke-dasharray="2,10" />
+                <g class="telemetry-nodes">
+                    <circle cx="200" cy="150" r="2" fill="var(--vect-accent)" class="pulse" />
+                    <circle cx="450" cy="250" r="2" fill="var(--vect-accent)" class="pulse" />
+                    <circle cx="800" cy="180" r="2" fill="var(--vect-accent)" class="pulse" />
+                </g>
+            </svg>
+        </div>
+
+        <div class="container hero-container">
+            <div class="hero-content reveal">
+                <div class="hero-logo-box">
+                    <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                            fill="#FF6B1A" />
+                        <path
+                            d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                            fill="#F5F5F5" />
+                        <path
+                            d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                            fill="#F5F5F5" />
+                        <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                    </svg>
+                </div>
+                <h1>
+                    <span class="it-text">Elite RF Operations.</span>
+                    <span class="en-text">Elite RF Operations.</span>
+                </h1>
+                <p class="hero-tagline">
+                    <span class="it-text">Zero Dropouts. Maximum Uptime.</span>
+                    <span class="en-text">Zero Dropouts. Maximum Uptime.</span>
+                </p>
+                <p>
+                    <span class="it-text">Service di radiofrequenza boutique specializzato per produzioni
+                        mission-critical.
+                        Noleggio Sennheiser Spectera e ingegneria dello spettro ad alta precisione.</span>
+                    <span class="en-text">Boutique RF coordination service specialized for mission-critical
+                        productions.
+                        Sennheiser Spectera rental and high-precision spectrum engineering.</span>
+                </p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-primary">
+                        <span class="it-text">Inizia Progetto</span>
+                        <span class="en-text">Start Project</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ SERVICES ═══════ -->
+    <section id="services" class="container">
+        <div class="reveal">
+            <span class="section-label">01 — <span class="it-text">Servizi</span><span
+                    class="en-text">Services</span></span>
+            <h2 class="section-title">
+                <span class="it-text">Soluzioni Radiofrequenza B2B</span>
+                <span class="en-text">B2B RF Solutions</span>
+            </h2>
+            <p class="section-desc">
+                <span class="it-text">Utilizziamo la tecnologia WMAS per garantire stabilità e scalabilità senza
+                    precedenti in ogni scenario operativo.</span>
+                <span class="en-text">We leverage WMAS technology to ensure unprecedented stability and scalability in
+                    every operational scenario.</span>
+            </p>
+        </div>
+
+        <!-- SPECTERA HIGHLIGHT -->
+        <div class="spectera-banner reveal">
+            <div class="banner-content">
+                <span class="banner-badge">Sennheiser Spectera</span>
+                <h3 class="banner-title">
+                    <span class="it-text">Il futuro è bidirezionale</span>
+                    <span class="en-text">The future is bidirectional</span>
+                </h3>
+                <p style="margin-bottom: 24px; color: var(--vect-silver);">
+                    <span class="it-text">Un unico ecosistema per gestire trasmissione e monitoraggio IEM. Latenza
+                        sub-millisecondo e coordinamento automatico.</span>
+                    <span class="en-text">A single ecosystem to manage transmission and IEM monitoring. Sub-millisecond
+                        latency and automatic coordination.</span>
+                </p>
+                <div class="banner-features">
+                    <div class="banner-feature"><span>●</span> 64 Audio Channels</div>
+                    <div class="banner-feature"><span>●</span> 0.7ms Latency</div>
+                    <div class="banner-feature"><span>●</span> UHF 470–698 MHz</div>
+                    <div class="banner-feature"><span>●</span> Dante Redundant</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-icon">📦</div>
+                <h3 class="service-title">Smart Rental</h3>
+                <p class="service-desc">
+                    <span class="it-text">Noleggio "Dry Hire" di unità Spectera pre-configurate. Rack ingegnerizzati e
+                        pronti al deploy immediato per tour e broadcast.</span>
+                    <span class="en-text">Dry Hire of pre-configured Spectera units. Engineered racks ready for
+                        immediate deployment in tours and broadcast.</span>
+                </p>
+            </div>
+            <div class="service-card reveal" style="border-color: var(--vect-accent);">
+                <div class="service-icon">⚡</div>
+                <h3 class="service-title">Tactical Ops</h3>
+                <p class="service-desc">
+                    <span class="it-text">Supporto "Wet Hire" d'élite. Operatore RF on-site dedicato al setup,
+                        coordinamento dinamico e monitoring real-time dello spettro.</span>
+                    <span class="en-text">Elite "Wet Hire" support. On-site RF operator dedicated to setup, dynamic
+                        coordination, and real-time spectrum monitoring.</span>
+                </p>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-icon">📡</div>
+                <h3 class="service-title">Strategic Planning</h3>
+                <p class="service-desc">
+                    <span class="it-text">Consulenza tecnica e gestione licenze. Analisi preventiva dello spettro,
+                        coordinamento multi-vendor e system design avanzato.</span>
+                    <span class="en-text">Technical consultancy and license management. Preventive spectrum analysis,
+                        multi-vendor coordination, and advanced system design.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- THE ADVANTAGE SECTION (NEW) -->
+        <div class="advantage-section reveal">
+            <h3 class="mono-label">SPECIFICATIONS // THE VECT ADVANTAGE</h3>
+            <div class="advantage-grid">
+                <div class="advantage-item">
+                    <h4 class="mono">WMAS POWER</h4>
+                    <p><span class="it-text">Fino a 64 canali audio bidirezionali in un singolo canale TV da
+                            8MHz.</span><span class="en-text">Up to 64 bidirectional audio channels in a single 8MHz TV
+                            channel.</span></p>
+                </div>
+                <div class="advantage-item">
+                    <h4 class="mono">ULTRA-LOW LATENCY</h4>
+                    <p><span class="it-text">Latenza fissa a 0.7ms, ideale per monitoraggio IEM critico e live
+                            broadcast.</span><span class="en-text">Fixed 0.7ms latency, ideal for critical IEM
+                            monitoring and live broadcast.</span></p>
+                </div>
+                <div class="advantage-item">
+                    <h4 class="mono">DANTE NATIVE</h4>
+                    <p><span class="it-text">Integrazione digitale totale con ridondanza primaria e secondaria di
+                            serie.</span><span class="en-text">Total digital integration with primary and secondary
+                            redundancy as standard.</span></p>
+                </div>
+                <div class="advantage-item">
+                    <h4 class="mono">EU COMPLIANCE</h4>
+                    <p><span class="it-text">Ingegneri esperti nelle normative spettrali italiane ed
+                            europee.</span><span class="en-text">Expert engineers in Italian and European spectral
+                            regulations.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ ABOUT ═══════ -->
+    <section id="about" class="container">
+        <div class="about-grid">
+            <div class="reveal">
+                <span class="section-label">02 — <span class="it-text">Chi Siamo</span><span
+                        class="en-text">About</span></span>
+                <h2 class="section-title">
+                    <span class="it-text">Precisione in ogni Hertz.</span>
+                    <span class="en-text">Precision in every Hertz.</span>
+                </h2>
+                <p style="margin-bottom: 24px;">
+                    <span class="it-text">VECT nasce dall'esigenza di elevare gli standard RF nel B2B. Non siamo solo
+                        fornitori, siamo partner tecnici che garantiscono l'integrità del segnale in ogni
+                        condizione.</span>
+                    <span class="en-text">VECT was born from the need to elevate RF standards in B2B. We are not just
+                        suppliers; we are technical partners who ensure signal integrity under all conditions.</span>
+                </p>
+                <div style="padding: 24px; border-left: 2px solid var(--vect-accent); background: var(--vect-dark);">
+                    <p style="font-style: italic; font-size: 15px; color: var(--vect-white);">
+                        <span class="it-text">"Il coordinamento RF non è un dettaglio, è la base su cui poggia l'intera
+                            produzione."</span>
+                        <span class="en-text">"RF coordination is not a detail; it's the foundation on which the entire
+                            production rests."</span>
+                    </p>
+                </div>
+            </div>
+            <div class="about-visual reveal">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <mask id="gridMask">
+                            <radialGradient id="maskGrad" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="white" stop-opacity="0.8" />
+                                <stop offset="100%" stop-color="white" stop-opacity="0" />
+                            </radialGradient>
+                        </mask>
+                    </defs>
+                    <g class="rf-grid" mask="url(#gridMask)">
+                        <path d="M0 250 L 500 250 M 250 0 L 250 500" stroke="var(--vect-graphite)" stroke-width="1" />
+                        <path class="peak" d="M100 250 L 120 180 L 140 250" fill="var(--vect-accent)" opacity="0.4" />
+                        <path class="peak" d="M300 250 L 320 120 L 340 250" fill="var(--vect-accent)" opacity="0.6" />
+                        <path class="peak" d="M400 250 L 415 210 L 430 250" fill="var(--vect-accent)" opacity="0.3" />
+                        <rect x="0" y="0" width="500" height="500" fill="none" stroke="var(--vect-graphite)"
+                            stroke-width="0.5" stroke-dasharray="10,10" />
+                    </g>
+                    <text x="20" y="480" class="mono" fill="var(--vect-ash)" font-size="10">SCANNING SPECTRUM... 100%
+                        OK</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ REFERENCES ═══════ -->
+    <section id="references" class="container">
+        <div class="reveal">
+            <span class="section-label">03 — <span class="it-text">Referenze</span><span
+                    class="en-text">References</span></span>
+            <h2 class="section-title">
+                <span class="it-text">Mission Logs // Operazioni Recenti</span>
+                <span class="en-text">Mission Logs // Recent Operations</span>
+            </h2>
+        </div>
+
+        <div class="services-grid" style="margin-top: 40px;">
+            <div class="service-card reveal">
+                <div class="mission-telemetry">
+                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="4" width="20" height="12" fill="var(--vect-accent)" opacity="0.2" />
+                        <rect x="25" y="8" width="15" height="4" fill="var(--vect-ash)" />
+                        <rect x="45" y="6" width="30" height="8" fill="var(--vect-accent)" />
+                    </svg>
+                </div>
+                <h4 class="mono" style="color: var(--vect-accent); font-size: 12px; margin-bottom: 10px;">CASE // 001
+                </h4>
+                <p style="font-size: 14px;">
+                    <span class="it-text">Coordinamento frequenze su larga scala per festival multi-stage (>50k
+                        pax).</span>
+                    <span class="en-text">Large-scale frequency coordination for multi-stage festivals (>50k
+                        pax).</span>
+                </p>
+            </div>
+            <div class="service-card reveal">
+                <div class="mission-telemetry">
+                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0" y="4" width="40" height="2" fill="var(--vect-accent)" />
+                        <rect x="0" y="8" width="30" height="2" fill="var(--vect-accent)" opacity="0.5" />
+                        <rect x="0" y="12" width="20" height="2" fill="var(--vect-accent)" opacity="0.2" />
+                    </svg>
+                </div>
+                <h4 class="mono" style="color: var(--vect-accent); font-size: 12px; margin-bottom: 10px;">CASE // 002
+                </h4>
+                <p style="font-size: 14px;">
+                    <span class="it-text">Setup Spectera completo per produzione televisiva prime-time.</span>
+                    <span class="en-text">Full Spectera setup for prime-time TV production.</span>
+                </p>
+            </div>
+            <div class="service-card reveal">
+                <div class="mission-telemetry">
+                    <svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="10" cy="15" r="5" fill="var(--vect-accent)" />
+                        <circle cx="25" cy="15" r="3" fill="var(--vect-accent)" opacity="0.6" />
+                        <circle cx="37" cy="15" r="2" fill="var(--vect-accent)" opacity="0.3" />
+                        <path d="M50 15 L 100 15" stroke="var(--vect-graphite)" stroke-width="1" />
+                    </svg>
+                </div>
+                <h4 class="mono" style="color: var(--vect-accent); font-size: 12px; margin-bottom: 10px;">CASE // 003
+                </h4>
+                <p style="font-size: 14px;">
+                    <span class="it-text">System design per installazione fissa in venue di alto profilo.</span>
+                    <span class="en-text">System design for fixed installation in high-profile venues.</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ CONTACT ═══════ -->
+    <section id="contact" class="container">
+        <div class="contact-grid">
+            <div class="reveal">
+                <span class="section-label">04 — <span class="it-text">Contatti</span><span
+                        class="en-text">Contact</span></span>
+                <h2 class="section-title">
+                    <span class="it-text">Pronti al Deploy.</span>
+                    <span class="en-text">Ready for Deploy.</span>
+                </h2>
+                <p style="color: var(--vect-silver);">
+                    <span class="it-text">Contattaci per preventivi, site survey o consulenze tecniche. Rispondiamo
+                        entro 24 ore.</span>
+                    <span class="en-text">Contact us for quotes, site surveys, or technical consulting. We respond
+                        within 24 hours.</span>
+                </p>
+
+                <ul class="contact-info-list">
+                    <li class="contact-info-item">
+                        <div class="info-label">Email</div>
+                        <div class="info-value"><a href="mailto:info@vect-rf.com">info@vect-rf.com</a></div>
+                    </li>
+                    <li class="contact-info-item">
+                        <div class="info-label"><span class="it-text">Telefono</span><span class="en-text">Phone</span>
+                        </div>
+                        <div class="info-value">+39 XXX XXX XXXX</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="reveal">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name"><span class="it-text">Nome / Società</span><span class="en-text">Name /
+                                Company</span></label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        <span class="it-text">Invia Richiesta</span>
+                        <span class="en-text">Send Request</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+            <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
