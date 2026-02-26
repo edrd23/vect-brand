@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Identity | VECT Special RF Ops</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0A0A0A;
+            --accent: #FF6B1A;
+            --white: #F5F5F5;
+            --grey: #888;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 60px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 13px;
+            color: var(--accent);
+        }
+
+        h1 {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 20px 0;
+            letter-spacing: -2px;
+        }
+
+        section {
+            margin-top: 80px;
+        }
+
+        h2 {
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .color-stack {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+
+        .color-card {
+            background: #111;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #222;
+        }
+
+        .swatch {
+            height: 80px;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .logo-display {
+            background: #111;
+            padding: 60px;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            border: 1px solid #222;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 40px;
+            color: var(--grey);
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← RETURN TO BASE</a>
+        <div class="mono">Protocol: Identity v1.0</div>
+        <h1>Brand Guidelines.</h1>
+
+        <section>
+            <h2>The Vision</h2>
+            <p>VECT rappresenta l'eccellenza tecnica nel mondo del radiofrequenza. La nostra identità è costruita su tre
+                pilastri: <strong>Precisione</strong>, <strong>Potenza</strong> e <strong>Chiarezza Digitale</strong>.
+            </p>
+        </section>
+
+        <section>
+            <h2>Identity Mark</h2>
+            <div class="logo-display">
+                <svg width="300" height="90" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+        </section>
+
+        <section>
+            <h2>Color Spectrum</h2>
+            <div class="color-stack">
+                <div class="color-card">
+                    <div class="swatch" style="background: #FF6B1A;"></div>
+                    <div class="mono">Signal Orange</div>
+                    <div style="font-size: 11px; color:#666">HEX: #FF6B1A</div>
+                </div>
+                <div class="color-card">
+                    <div class="swatch" style="background: #0A0A0A;"></div>
+                    <div class="mono">Obsidian Black</div>
+                    <div style="font-size: 11px; color:#666">HEX: #0A0A0A</div>
+                </div>
+                <div class="color-card">
+                    <div class="swatch" style="background: #F5F5F5;"></div>
+                    <div class="mono">Static White</div>
+                    <div style="font-size: 11px; color:#666">HEX: #F5F5F5</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>
