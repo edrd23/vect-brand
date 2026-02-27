@@ -44,68 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     })
 
-    // ═══════ TERMINAL BOOT SEQUENCE ═══════
-    const bootLoader = document.getElementById('boot-loader');
-    const bootLinesEl = document.getElementById('boot-lines');
-    const bootSequence = [
-        "INITIALIZING VECT CORE SYSTEMS...",
-        "LOADING RF PROPAGATION MODELS...",
-        "SYNCHRONIZING WITH DANTE NETWORK...",
-        "ACQUIRING GPS LOCK...",
-        "SPECTRUM SCAN: CLEAR",
-        "SYSTEM READY."
-    ];
 
-    if (bootLoader) {
-        // Only run once per session to not annoy the user
-        if (!sessionStorage.getItem('vect_booted')) {
-            document.body.style.overflow = 'hidden';
-            let lineIndex = 0;
-
-            function simulateTyping(text, callback) {
-                let charIndex = 0;
-                const lineNode = document.createElement('div');
-                bootLinesEl.appendChild(lineNode);
-
-                function typeChar() {
-                    if (charIndex < text.length) {
-                        lineNode.textContent += text.charAt(charIndex);
-                        charIndex++;
-                        setTimeout(typeChar, 15 + Math.random() * 20); // Fast typing
-                    } else {
-                        setTimeout(callback, 200 + Math.random() * 300); // Pause between lines
-                    }
-                }
-                typeChar();
-            }
-
-            function runSequence() {
-                if (lineIndex < bootSequence.length) {
-                    simulateTyping(bootSequence[lineIndex], () => {
-                        lineIndex++;
-                        runSequence();
-                    });
-                } else {
-                    // Sequence finished
-                    setTimeout(() => {
-                        bootLoader.classList.add('hidden');
-                        document.body.style.overflow = '';
-                        sessionStorage.setItem('vect_booted', 'true');
-                        // Trigger hero reveal
-                        const heroContent = document.querySelector('.hero-content');
-                        if (heroContent) {
-                            heroContent.style.animationName = 'heroEntry';
-                        }
-                    }, 500);
-                }
-            }
-
-            setTimeout(runSequence, 300);
-
-        } else {
-            bootLoader.style.display = 'none';
-        }
-    }
 
     // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
     const nav = document.querySelector('nav');
@@ -243,54 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ═══════ TACTICAL METER ANIMATION (STATIC LOCATION) ═══════
-    const meterBars = document.querySelectorAll('.meter-bars .bar');
-    const locId = document.querySelector('.loc-id');
-    const statusLabel = document.querySelector('.status');
-    const dynamicLabels = document.querySelectorAll('[data-dynamic-location]');
 
-    if (dynamicLabels.length > 0) {
-        dynamicLabels.forEach((el) => {
-            el.textContent = 'MILAN, IT';
-            el.style.color = 'var(--vect-accent)';
-        });
-    }
-    if (locId) {
-        locId.textContent = 'MILAN, IT';
-    }
-    if (statusLabel) {
-        statusLabel.textContent = 'LOCAL NODE ACTIVE';
-    }
-
-    let meterIntervalId = null;
-    if (meterBars.length > 0) {
-        meterIntervalId = window.setInterval(() => {
-            meterBars.forEach((bar) => {
-                const height = 60 + Math.floor(Math.random() * 40);
-                bar.style.height = `${height}%`;
-                bar.style.background = 'var(--vect-accent)';
-            });
-        }, 200);
-    }
-
-    // ═══════ MISSION UPTIME ═══════
-    const uptimeEl = document.querySelector('.uptime');
-    if (uptimeEl) {
-        const startedAt = Date.now();
-        window.setInterval(() => {
-            const elapsed = Math.floor((Date.now() - startedAt) / 1000);
-            const hh = String(Math.floor(elapsed / 3600)).padStart(2, '0');
-            const mm = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
-            const ss = String(elapsed % 60).padStart(2, '0');
-            uptimeEl.textContent = `${hh}:${mm}:${ss}`;
-        }, 1000);
-    }
-
-    window.addEventListener('beforeunload', () => {
-        if (meterIntervalId !== null) {
-            window.clearInterval(meterIntervalId);
-        }
-    });
 
     // ═══════ PWA SERVICE WORKER ═══════
     if ('serviceWorker' in navigator) {

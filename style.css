@@ -378,73 +378,7 @@ section {
     margin-bottom: 60px;
 }
 
-/* ═══════ TACTICAL METER (FLOATING) ═══════ */
-.tactical-meter {
-    position: fixed;
-    bottom: 40px;
-    right: 40px;
-    background: rgba(10, 10, 10, 0.9);
-    border: 1px solid var(--vect-graphite);
-    padding: 12px 18px;
-    border-radius: 8px;
-    z-index: 10002;
-    font-family: var(--font-mono);
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    transition: transform 0.3s ease;
-}
 
-.tactical-meter:hover {
-    border-color: var(--vect-accent);
-}
-
-.meter-label {
-    font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--vect-ash);
-}
-
-.meter-bars {
-    display: flex;
-    gap: 3px;
-    height: 12px;
-    align-items: flex-end;
-}
-
-.meter-bars .bar {
-    width: 6px;
-    background: var(--vect-graphite);
-    transition: height 0.15s ease;
-}
-
-.meter-data {
-    display: flex;
-    justify-content: space-between;
-    font-size: 10px;
-    gap: 20px;
-    margin-bottom: 5px;
-}
-
-.meter-data .freq {
-    color: var(--vect-accent);
-    transition: all 0.3s;
-}
-
-.meter-data .status {
-    color: var(--vect-success);
-    transition: all 0.3s;
-}
-
-.meter-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 5px;
-    font-size: 9px;
-    color: var(--vect-ash);
-    opacity: 0.8;
-}
 
 /* ═══════ DANTE TELEMETRY ═══════ */
 .dante-telemetry {
@@ -1048,52 +982,7 @@ footer {
     /* Reduce opacity slightly to make text more readable */
 }
 
-/* ═══════ TERMINAL BOOT LOADER ═══════ */
-.boot-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--vect-black);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 99999;
-    color: var(--vect-accent);
-    font-family: var(--font-mono);
-    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-}
 
-.boot-loader.hidden {
-    opacity: 0;
-    visibility: hidden;
-}
-
-.boot-text {
-    width: 100%;
-    max-width: 600px;
-    padding: 20px;
-    font-size: 14px;
-    line-height: 1.8;
-}
-
-.blinking-cursor {
-    animation: bootBlink 1s step-end infinite;
-}
-
-@keyframes bootBlink {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-}
 
 /* ═══════ ANIMATIONS ═══════ */
 .reveal {
