@@ -42,13 +42,98 @@ document.addEventListener('DOMContentLoaded', () => {
             const nextLang = btn.getAttribute('data-lang');
             setLang(nextLang === 'en' ? 'en' : 'it');
         });
-    });
+    })
 
-    // ═══════ STICKY NAVBAR ═══════
+    // ═══════ TERMINAL BOOT SEQUENCE ═══════
+    const bootLoader = document.getElementById('boot-loader');
+    const bootLinesEl = document.getElementById('boot-lines');
+    const bootSequence = [
+        "INITIALIZING VECT CORE SYSTEMS...",
+        "LOADING RF PROPAGATION MODELS...",
+        "SYNCHRONIZING WITH DANTE NETWORK...",
+        "ACQUIRING GPS LOCK...",
+        "SPECTRUM SCAN: CLEAR",
+        "SYSTEM READY."
+    ];
+
+    if (bootLoader) {
+        // Only run once per session to not annoy the user
+        if (!sessionStorage.getItem('vect_booted')) {
+            document.body.style.overflow = 'hidden';
+            let lineIndex = 0;
+
+            function simulateTyping(text, callback) {
+                let charIndex = 0;
+                const lineNode = document.createElement('div');
+                bootLinesEl.appendChild(lineNode);
+
+                function typeChar() {
+                    if (charIndex < text.length) {
+                        lineNode.textContent += text.charAt(charIndex);
+                        charIndex++;
+                        setTimeout(typeChar, 15 + Math.random() * 20); // Fast typing
+                    } else {
+                        setTimeout(callback, 200 + Math.random() * 300); // Pause between lines
+                    }
+                }
+                typeChar();
+            }
+
+            function runSequence() {
+                if (lineIndex < bootSequence.length) {
+                    simulateTyping(bootSequence[lineIndex], () => {
+                        lineIndex++;
+                        runSequence();
+                    });
+                } else {
+                    // Sequence finished
+                    setTimeout(() => {
+                        bootLoader.classList.add('hidden');
+                        document.body.style.overflow = '';
+                        sessionStorage.setItem('vect_booted', 'true');
+                        // Trigger hero reveal
+                        const heroContent = document.querySelector('.hero-content');
+                        if (heroContent) {
+                            heroContent.style.animationName = 'heroEntry';
+                        }
+                    }, 500);
+                }
+            }
+
+            setTimeout(runSequence, 300);
+
+        } else {
+            bootLoader.style.display = 'none';
+        }
+    }
+
+    // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
     const nav = document.querySelector('nav');
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+
     if (nav) {
         window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 80);
+            const currentScroll = window.scrollY;
+            nav.classList.toggle('scrolled', currentScroll > 80);
+
+            // ScrollSpy logic
+            let currentSection = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (currentScroll >= (sectionTop - 200)) { // Offset for navbar
+                    currentSection = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(currentSection)) {
+                    link.classList.add('active');
+                }
+            });
+
         }, { passive: true });
     }
 
@@ -139,20 +224,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ═══════ MOBILE MENU ═══════
     const menuToggle = document.getElementById('mobile-menu-toggle');
-    const navLinks = document.querySelector('.nav-links');
-    const navItems = document.querySelectorAll('.nav-links a');
+    const mobileNavLinks = document.querySelector('.nav-links');
+    const mobileNavItems = document.querySelectorAll('.nav-links a');
 
-    if (menuToggle && navLinks) {
+    if (menuToggle && mobileNavLinks) {
         menuToggle.addEventListener('click', () => {
             const isActive = menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active', isActive);
+            mobileNavLinks.classList.toggle('active', isActive);
             document.body.style.overflow = isActive ? 'hidden' : '';
         });
 
-        navItems.forEach((item) => {
+        mobileNavItems.forEach((item) => {
             item.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
-                navLinks.classList.remove('active');
+                mobileNavLinks.classList.remove('active');
                 document.body.style.overflow = '';
             });
         });

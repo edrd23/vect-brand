@@ -18,6 +18,14 @@
 
 <body id="top">
     <!-- ═══════ OVERLAYS ═══════ -->
+    <!-- TERMINAL BOOT SEOUENCE -->
+    <div id="boot-loader" class="boot-loader">
+        <div class="boot-text mono">
+            <span id="boot-lines"></span>
+            <span class="blinking-cursor">_</span>
+        </div>
+    </div>
+
     <div id="scanline"></div>
 
     <!-- TACTICAL SIGNAL METER (NEW) -->
@@ -559,11 +567,7 @@
                         within 24 hours.</span>
                 </p>
 
-                <ul class="contact-info-list">
-                    <li class="contact-info-item">
-                        <div class="info-label">Signal HQ / Visitor Base</div>
-                        <div class="info-value"><span data-dynamic-location>Milan, IT</span></div>
-                    </li>
+                <ul class="contact-info-list" id="contact-info-list">
                     <li class="contact-info-item">
                         <div class="info-label">Email</div>
                         <div class="info-value"><a href="mailto:info@vect-rf.com">info@vect-rf.com</a></div>
