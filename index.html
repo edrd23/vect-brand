@@ -11,7 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css?v=1.1">
+    <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <meta name="theme-color" content="#FF6B1A">
 </head>
@@ -138,8 +138,8 @@
                         <span class="it-text">Inizia Progetto</span>
                         <span class="en-text">Start Project</span>
                     </a>
-                    <a href="technical-deck.html" class="btn btn-outline" target="_blank">
-                        <span class="mono">TECHNICAL DECK (PDF)</span>
+                    <a href="technical-deck.html" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                        <span class="mono">TECHNICAL DECK</span>
                     </a>
                 </div>
             </div>
@@ -577,25 +577,29 @@
             </div>
 
             <div class="reveal">
-                <form id="contactForm">
+                <form id="contactForm" action="https://formsubmit.co/info@vect-rf.com" method="POST">
                     <div class="form-group">
                         <label for="name"><span class="it-text">Nome / Società</span><span class="en-text">Name /
                                 Company</span></label>
-                        <input type="text" id="name" required>
+                        <input type="text" id="name" name="name" autocomplete="name organization" required>
                     </div>
                     <div class="form-group">
                         <label for="email"><span class="it-text">Email</span><span class="en-text">Email</span></label>
-                        <input type="email" id="email" required>
+                        <input type="email" id="email" name="email" autocomplete="email" required>
                     </div>
                     <div class="form-group">
                         <label for="message"><span class="it-text">Messaggio</span><span
                                 class="en-text">Message</span></label>
-                        <textarea id="message" rows="5" required></textarea>
+                        <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
+                    <input type="hidden" name="_subject" value="Nuova richiesta dal sito VECT">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input class="hp-field" type="text" name="_honey" tabindex="-1" autocomplete="off">
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <span class="it-text">Invia Richiesta</span>
                         <span class="en-text">Send Request</span>
                     </button>
+                    <p id="form-status" class="form-status" aria-live="polite"></p>
                 </form>
             </div>
         </div>

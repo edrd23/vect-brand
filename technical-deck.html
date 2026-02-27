@@ -1,171 +1,143 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT — Technical Pitch Deck</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <title>VECT — Technical Pitch Deck 2026</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="deck.css">
 </head>
-<body class="deck-mode">
-    <div class="deck-container">
-        
-        <!-- SLIDE 1: COVER -->
-        <section class="slide current" id="slide-1">
-            <div class="logo-area">
-                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z" fill="#FF6B1A"/>
-                    <path d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z" fill="#F5F5F5"/>
-                    <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z" fill="#F5F5F5"/>
-                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5"/>
+
+<body>
+    <!-- SLIDE 1: COVER -->
+    <section class="slide slide-cover">
+        <div class="logo-area">
+            <svg viewBox="0 0 400 100" class="deck-logo">
+                <path d="M20 20 L50 80 L80 20" stroke="#FF6B1A" stroke-width="8" fill="none" />
+                <text x="100" y="70" font-family="JetBrains Mono" font-weight="700" font-size="60"
+                    fill="white">VECT</text>
+            </svg>
+        </div>
+        <div class="deck-title">
+            <h1 class="mono">TECHNICAL OPERATIONS OVERVIEW</h1>
+            <p class="subtitle">Sennheiser Spectera Ecosystem // Specialized RF Services</p>
+        </div>
+        <div class="deck-footer">
+            <span>v1.0.26 // CLASSIFIED TECH</span>
+            <span>2026 MISSION READY</span>
+        </div>
+    </section>
+
+    <!-- SLIDE 2: THE ECOSYSTEM -->
+    <section class="slide">
+        <h2 class="mono"><span class="accent">//</span> THE ECOSYSTEM</h2>
+        <div class="deck-grid">
+            <div class="deck-col">
+                <h3>SENNHEISER SPECTERA</h3>
+                <p>The world's first wideband bidirectional digital wireless system. Exceptional audio quality and
+                    unprecedented channel density.</p>
+                <ul class="deck-list">
+                    <li>Full control over 470-608 MHz range</li>
+                    <li>Low-latency bidirectional audio links</li>
+                    <li>AES-256 Encryption for secure ops</li>
+                    <li>Dual Dante & Parallel MADI support (32x32)</li>
+                </ul>
+            </div>
+            <div class="deck-col visual-col">
+                <svg viewBox="0 0 200 200" class="schematic">
+                    <circle cx="100" cy="100" r="80" stroke="rgba(255,107,26,0.2)" fill="none" stroke-width="1" />
+                    <path d="M100 20 L100 180 M20 100 L180 100" stroke="rgba(255,107,26,0.3)" stroke-width="0.5" />
+                    <circle cx="100" cy="100" r="40" stroke="var(--accent)" fill="none" stroke-width="2" />
+                    <text x="105" y="95" font-size="10" fill="var(--accent)" family="JetBrains Mono">MASTER NODE</text>
                 </svg>
             </div>
-            <div class="headline">
-                <h1>RF SPECIAL OPS</h1>
-                <p class="mono">MISSION: ZERO DROPOUTS // 2026 Q1-Q2</p>
-            </div>
-            <div class="print-instruction">Ready to Print (Ctrl+P)</div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SLIDE 2: THE PROBLEM -->
-        <section class="slide" id="slide-2">
-            <div class="header-bar">
-                <span class="mono">PHASE_01 // ANALYSIS</span>
-            </div>
-            <h2>The Interference Crisis</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <h3 class="mono">CONGESTED SPECTRUM</h3>
-                    <p>5G rollout and shrinking UHF white spaces make traditional wireless coordination a gamble.</p>
-                </div>
-                <div class="card highlighter">
-                    <h3 class="mono">MISSION CRITICAL</h3>
-                    <p>In high-stakes broadcast and corporate environments, a 1-second dropout is a failed mission.</p>
+    <!-- SLIDE 3: SERVICES -->
+    <section class="slide">
+        <h2 class="mono"><span class="accent">//</span> DEPLOYMENT SERVICES</h2>
+        <div class="services-table">
+            <div class="service-row">
+                <div class="s-label mono">RENTAL</div>
+                <div class="s-content">High-tier Sennheiser Spectera kits, RF antennas, and Dante-networked distros.
                 </div>
             </div>
-        </section>
+            <div class="service-row">
+                <div class="s-label mono">COORDINATION</div>
+                <div class="s-content">Spectrum analysis and intermodulation calculations for complex event sites.</div>
+            </div>
+            <div class="service-row">
+                <div class="s-label mono">IO PROTOCOLS</div>
+                <div class="s-content">Native support for Dante, MADI (BNC/Optical), and AES3. Seamless 64-channel
+                    density.</div>
+            </div>
+            <div class="service-row">
+                <div class="s-label mono">DESIGN</div>
+                <div class="s-content">End-to-end RF infrastructure design for tours, festivals, and corporate campus.
+                </div>
+            </div>
+        </div>
+    </section>
 
-        <!-- SLIDE 3: SOLUTION - SPECTERA -->
-        <section class="slide" id="slide-3">
-            <div class="header-bar">
-                <span class="mono">PHASE_02 // SYSTEM DEPLOY</span>
+    <!-- SLIDE 4: TECHNICAL SPECIFICATIONS (NEW) -->
+    <section class="slide">
+        <h2 class="mono"><span class="accent">//</span> ADVANCED SPECIFICATIONS</h2>
+        <div class="deck-grid">
+            <div class="deck-col">
+                <h3>SPECTERA CORE</h3>
+                <ul class="deck-list">
+                    <li><strong>Audio Resolution:</strong> 48 kHz / 24-bit</li>
+                    <li><strong>Dynamic Range:</strong> > 120 dB(A)</li>
+                    <li><strong>Latency:</strong> 0.7 ms (constant)</li>
+                    <li><strong>Encryption:</strong> AES-256 CTR</li>
+                </ul>
+                <h3 style="margin-top: 20px;">RF PERFORMANCE</h3>
+                <ul class="deck-list">
+                    <li><strong>Carrier Type:</strong> Wideband WMAS</li>
+                    <li><strong>Frequency UHF:</strong> 470 – 608 MHz</li>
+                    <li><strong>Frequency 1G4:</strong> 1350 – 1525 MHz</li>
+                    <li><strong>TX Power:</strong> 10mW / 50mW (selectable)</li>
+                </ul>
             </div>
-            <h2>Powered by Spectera</h2>
-            <p class="sub-h">First-of-its-kind WMAS (Wireless Multi-Channel Audio System)</p>
-            <div class="feature-list">
-                <div class="f-item">
-                    <span class="f-num">01</span>
-                    <div class="f-text"><strong>Bidirectional Link:</strong> Bodypacks handle TX and RX (IEM) simultaneously.</div>
-                </div>
-                <div class="f-item">
-                    <span class="f-num">02</span>
-                    <div class="f-text"><strong>Dante Native:</strong> Clean digital signal path from stage to console.</div>
-                </div>
-                <div class="f-item">
-                    <span class="f-num">03</span>
-                    <div class="f-text"><strong>Auto-Coordination:</strong> Real-time AI spectrum management.</div>
+            <div class="deck-col">
+                <div class="spec-box"
+                    style="background: rgba(255,107,26,0.05); border: 1px solid var(--accent); padding: 20px; border-radius: 8px;">
+                    <h4 class="mono" style="color: var(--accent);">WMAS CAPACITY</h4>
+                    <p style="font-size: 14px; margin: 10px 0;">Up to 64 bidirectional channels (32 x 32) in a single 8
+                        MHz carrier.</p>
+                    <div style="height: 4px; background: var(--accent); width: 100%; margin-top: 10px; opacity: 0.5;">
+                    </div>
+                    <p style="font-size: 11px; color: var(--ash); margin-top: 10px;">Equivalent to 40x diversity
+                        resilience compared to narrowband.</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- SLIDE 4: ADVANCED SPECIFICATIONS (NEW) -->
-        <section class="slide" id="slide-4">
-            <div class="header-bar">
-                <span class="mono">PHASE_02B // TECHNICAL SPECS</span>
-            </div>
-            <h2>Spectera: Advanced Specifications</h2>
-            <div class="grid-2">
-                <div class="card">
-                    <h3 class="mono">CORE SPECS</h3>
-                    <ul class="spec-list">
-                        <li><strong>Latency:</strong> 0.7 ms (Fixed)</li>
-                        <li><strong>Audio Quality:</strong> 24-bit / 48 kHz or 96 kHz</li>
-                        <li><strong>RF Bandwidth:</strong> 8 MHz (Single TV Channel)</li>
-                        <li><strong>Capacity:</strong> Up to 64 Audio Channels</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3 class="mono">RF PERFORMANCE</h3>
-                    <ul class="spec-list">
-                        <li><strong>Frequency Range:</strong> 470 – 698 MHz (UHF)</li>
-                        <li><strong>Diversity:</strong> 40x Resilience (WMAS)</li>
-                        <li><strong>Range:</strong> Up to 100m (Line of Sight)</li>
-                        <li><strong>Encryption:</strong> AES-256</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
+    <!-- SLIDE 5: CONTACT & GEO -->
+    <section class="slide slide-contact">
+        <h2 class="mono"><span class="accent">//</span> ESTABLISH UPLINK</h2>
+        <div class="contact-box">
+            <div class="mono">HQ: MILAN, IT</div>
+            <div class="mono accent">OPS@VECT.TECH</div>
+            <div class="mono">PH: +39 XX XXX XXXX</div>
+        </div>
+        <div class="final-visual">
+            <svg viewBox="0 0 400 50" class="sine-wave">
+                <path d="M0 25 Q 25 5 50 25 T 100 25 T 150 25 T 200 25 T 250 25 T 300 25 T 350 25 T 400 25" fill="none"
+                    stroke="var(--accent)" stroke-width="1" />
+            </svg>
+        </div>
+    </section>
 
-        <!-- SLIDE 5: WHY VECT? -->
-        <section class="slide" id="slide-5">
-            <div class="header-bar">
-                <span class="mono">PHASE_03 // STRATEGIC EDGE</span>
-            </div>
-            <h2>Why VECT?</h2>
-            <div class="big-stats">
-                <div class="stat">
-                    <div class="stat-val">100%</div>
-                    <div class="stat-label">UPTIME RECORD</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-val">2x</div>
-                    <div class="stat-label">REDUNDANT PATHS</div>
-                </div>
-                <div class="stat">
-                    <div class="stat-val">< 1ms</div>
-                    <div class="stat-label">LATENCY TARGET</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SLIDE 6: CONTACT -->
-        <section class="slide center" id="slide-6">
-            <h1>READY FOR DEPLOY?</h1>
-            <p class="mono">CONTACT US FOR SITE SURVEY & QUOTES</p>
-            <div class="contact-box">
-                info@vect-rf.com<br>
-                Milan, IT
-            </div>
-        </section>
-
+    <div class="print-cta no-print">
+        <button onclick="window.print()">GENERATE PDF DECK</button>
+        <a href="index.html">RETURN TO SITE</a>
     </div>
-
-    <!-- NAVIGATION CONTROLS (NON-PRINTING) -->
-    <div class="deck-nav">
-        <button onclick="prevSlide()">PREV</button>
-        <button onclick="nextSlide()">NEXT</button>
-        <span class="slide-indicator">1 / 6</span>
-    </div>
-
-    <script>
-        let currentSlide = 1;
-        const totalSlides = 6;
-
-        function updateSlide() {
-            document.querySelectorAll('.slide').forEach(s => s.classList.remove('current'));
-            document.getElementById(`slide-${currentSlide}`).classList.add('current');
-            document.querySelector('.slide-indicator').innerText = `${currentSlide} / ${totalSlides}`;
-        }
-
-        function nextSlide() {
-            if (currentSlide < totalSlides) {
-                currentSlide++;
-                updateSlide();
-            }
-        }
-
-        function prevSlide() {
-            if (currentSlide > 1) {
-                currentSlide--;
-                updateSlide();
-            }
-        }
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
-            if (e.key === 'ArrowLeft') prevSlide();
-        });
-    </script>
 </body>
+
 </html>

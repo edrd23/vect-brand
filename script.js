@@ -1,159 +1,309 @@
-/* ═══════════════════════════════════════════
-   VECT — INTERACTIVE ENGINE
-   ═══════════════════════════════════════════ */
-
 document.addEventListener('DOMContentLoaded', () => {
-
-    // ═══════ CURSOR GRADIENT TRACKING ═══════
-    document.addEventListener('mousemove', e => {
-        const x = e.clientX + 'px';
-        const y = e.clientY + 'px';
-        document.documentElement.style.setProperty('--mouse-x', x);
-        document.documentElement.style.setProperty('--mouse-y', y);
-    });
-
-    // ═══════ DYNAMIC LOCATION SCANNER ═══════
-    const locElement = document.querySelector('[data-dynamic-location]');
-    const locIdElement = document.querySelector('.loc-id');
-
-    async function updateLocation() {
-        try {
-            // Priority 1: High Fidelity IP Geolocation
-            const response = await fetch('https://ipapi.co/json/');
-            const data = await response.json();
-            
-            if (data.city && data.country_code) {
-                const locString = `${data.city}, ${data.country_code}`;
-                locElement.textContent = locString;
-                locIdElement.textContent = data.city.toUpperCase();
-            }
-        } catch (err) {
-            // Failover: Default HQ
-            locElement.textContent = 'Milan, IT';
-            locIdElement.textContent = 'MILAN HQ';
-        }
-    }
-    updateLocation();
-
-    // ═══════ SCROLL REVEAL ENGINE ═══════
-    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
-    
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
-
-    // ═══════ NAV SCROLL EFFECT ═══════
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-
-    // ═══════ TACTICAL METER ANIMATION ═══════
-    const bars = document.querySelectorAll('.meter-bars .bar');
-    const uptimeElement = document.querySelector('.uptime');
-    let startTime = Date.now();
-
-    function updateMeter() {
-        bars.forEach(bar => {
-            const h = Math.floor(Math.random() * 10) + 2;
-            bar.style.height = `${h}px`;
-            // Color shift based on signal strength
-            if (h < 4) bar.style.background = 'var(--vect-error)';
-            else if (h < 7) bar.style.background = 'var(--vect-warning)';
-            else bar.style.background = 'var(--vect-success)';
-        });
-
-        // Update Uptime
-        const diff = Date.now() - startTime;
-        const h = Math.floor(diff / 3600000).toString().padStart(2, '0');
-        const m = Math.floor((diff % 3600000) / 60000).toString().padStart(2, '0');
-        const s = Math.floor((diff % 60000) / 1000).toString().padStart(2, '0');
-        uptimeElement.textContent = `${h}:${m}:${s}`;
-
-        requestAnimationFrame(updateMeter);
-    }
-    updateMeter();
-
-    // ═══════ LANGUAGE SWITCHER ═══════
+    const htmlRoot = document.documentElement;
     const langBtns = document.querySelectorAll('.lang-btn');
-    const body = document.body;
+    const initialLang = localStorage.getItem('vect_lang');
+    const lang = initialLang === 'en' ? 'en' : 'it';
 
-    langBtns.forEach(btn => {
+    const labels = {
+        sending: {
+            it: 'Invio in corso...',
+            en: 'Sending...'
+        },
+        success: {
+            it: 'Richiesta inviata con successo. Ti risponderemo entro 24 ore.',
+            en: 'Request sent successfully. We will reply within 24 hours.'
+        },
+        error: {
+            it: 'Invio non riuscito. Puoi usare il link email qui sotto.',
+            en: 'Submission failed. You can use the email link below.'
+        },
+        fallback: {
+            it: 'Apri email',
+            en: 'Open email'
+        }
+    };
+
+    function currentLang() {
+        return htmlRoot.getAttribute('lang') === 'en' ? 'en' : 'it';
+    }
+
+    function setLang(nextLang) {
+        htmlRoot.setAttribute('lang', nextLang);
+        langBtns.forEach((btn) => {
+            btn.classList.toggle('active', btn.getAttribute('data-lang') === nextLang);
+        });
+        localStorage.setItem('vect_lang', nextLang);
+    }
+
+    setLang(lang);
+
+    langBtns.forEach((btn) => {
         btn.addEventListener('click', () => {
-            const lang = btn.dataset.lang;
-            
-            // UI Toggle
-            langBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
-            // Logic Toggle
-            body.setAttribute('lang', lang);
-            
-            // Persist (Optional)
-            localStorage.setItem('vect_lang', lang);
+            const nextLang = btn.getAttribute('data-lang');
+            setLang(nextLang === 'en' ? 'en' : 'it');
         });
     });
 
-    // Load saved language
-    const savedLang = localStorage.getItem('vect_lang');
-    if (savedLang) {
-        body.setAttribute('lang', savedLang);
-        langBtns.forEach(b => {
-            if (b.dataset.lang === savedLang) b.classList.add('active');
-            else b.classList.remove('active');
-        });
-    } else {
-        body.setAttribute('lang', 'it'); // Default
+    // ═══════ STICKY NAVBAR ═══════
+    const nav = document.querySelector('nav');
+    if (nav) {
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 80);
+        }, { passive: true });
     }
 
-    // ═══════ MOBILE MENU TOGGLE ═══════
+    // ═══════ CURSOR GLOW ═══════
+    window.addEventListener('mousemove', (e) => {
+        htmlRoot.style.setProperty('--mouse-x', `${e.clientX}px`);
+        htmlRoot.style.setProperty('--mouse-y', `${e.clientY}px`);
+    }, { passive: true });
+
+    // ═══════ REVEAL ANIMATIONS ═══════
+    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
+    if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                entry.target.classList.add('active');
+                revealObserver.unobserve(entry.target);
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -20px 0px'
+        });
+
+        revealElements.forEach((el) => revealObserver.observe(el));
+    } else {
+        revealElements.forEach((el) => el.classList.add('active'));
+    }
+
+    // ═══════ TYPEWRITER EFFECT ═══════
+    const typeElements = document.querySelectorAll('.type-tech');
+
+    function typeContent(target, text, speed) {
+        let i = 0;
+        target.textContent = '';
+        function iterate() {
+            if (i >= text.length) {
+                return;
+            }
+            target.textContent += text.charAt(i);
+            i += 1;
+            setTimeout(iterate, speed);
+        }
+        iterate();
+    }
+
+    function startTyping(el) {
+        if (el.classList.contains('typed')) {
+            return;
+        }
+        el.classList.add('typed');
+
+        const activeLang = currentLang();
+        const itSpan = el.querySelector('.it-text');
+        const enSpan = el.querySelector('.en-text');
+
+        if (itSpan && enSpan) {
+            const targetSpan = activeLang === 'it' ? itSpan : enSpan;
+            const content = targetSpan.textContent;
+            targetSpan.textContent = '';
+            setTimeout(() => typeContent(targetSpan, content, 20), 600);
+            return;
+        }
+
+        if (!itSpan) {
+            const content = el.textContent;
+            el.textContent = '';
+            setTimeout(() => typeContent(el, content, 20), 600);
+        }
+    }
+
+    if ('IntersectionObserver' in window) {
+        const typeObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                startTyping(entry.target);
+                typeObserver.unobserve(entry.target);
+            });
+        }, { threshold: 0.1 });
+
+        typeElements.forEach((el) => typeObserver.observe(el));
+    } else {
+        typeElements.forEach(startTyping);
+    }
+
+    // ═══════ MOBILE MENU ═══════
     const menuToggle = document.getElementById('mobile-menu-toggle');
     const navLinks = document.querySelector('.nav-links');
+    const navItems = document.querySelectorAll('.nav-links a');
 
     if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : 'auto';
+            const isActive = menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active', isActive);
+            document.body.style.overflow = isActive ? 'hidden' : '';
         });
 
-        // Close menu on link click
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
+        navItems.forEach((item) => {
+            item.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
                 navLinks.classList.remove('active');
-                body.style.overflow = 'auto';
+                document.body.style.overflow = '';
             });
         });
     }
 
-    // ═══════ FORM HANDLING ═══════
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerHTML;
-            
-            btn.disabled = true;
-            btn.innerHTML = body.getAttribute('lang') === 'it' ? 'INVIO IN CORSO...' : 'SENDING...';
+    // ═══════ TACTICAL METER ANIMATION (STATIC LOCATION) ═══════
+    const meterBars = document.querySelectorAll('.meter-bars .bar');
+    const locId = document.querySelector('.loc-id');
+    const statusLabel = document.querySelector('.status');
+    const dynamicLabels = document.querySelectorAll('[data-dynamic-location]');
 
-            // Simulate send
-            setTimeout(() => {
-                btn.innerHTML = body.getAttribute('lang') === 'it' ? 'RICHIESTA INVIATA ✓' : 'REQUEST SENT ✓';
-                btn.style.background = 'var(--vect-success)';
+    if (dynamicLabels.length > 0) {
+        dynamicLabels.forEach((el) => {
+            el.textContent = 'MILAN, IT';
+            el.style.color = 'var(--vect-accent)';
+        });
+    }
+    if (locId) {
+        locId.textContent = 'MILAN, IT';
+    }
+    if (statusLabel) {
+        statusLabel.textContent = 'LOCAL NODE ACTIVE';
+    }
+
+    let meterIntervalId = null;
+    if (meterBars.length > 0) {
+        meterIntervalId = window.setInterval(() => {
+            meterBars.forEach((bar) => {
+                const height = 60 + Math.floor(Math.random() * 40);
+                bar.style.height = `${height}%`;
+                bar.style.background = 'var(--vect-accent)';
+            });
+        }, 200);
+    }
+
+    // ═══════ MISSION UPTIME ═══════
+    const uptimeEl = document.querySelector('.uptime');
+    if (uptimeEl) {
+        const startedAt = Date.now();
+        window.setInterval(() => {
+            const elapsed = Math.floor((Date.now() - startedAt) / 1000);
+            const hh = String(Math.floor(elapsed / 3600)).padStart(2, '0');
+            const mm = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
+            const ss = String(elapsed % 60).padStart(2, '0');
+            uptimeEl.textContent = `${hh}:${mm}:${ss}`;
+        }, 1000);
+    }
+
+    window.addEventListener('beforeunload', () => {
+        if (meterIntervalId !== null) {
+            window.clearInterval(meterIntervalId);
+        }
+    });
+
+    // ═══════ PWA SERVICE WORKER ═══════
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./sw.js').catch((err) => {
+                console.log('VECT SW registration failed:', err);
+            });
+        });
+    }
+
+    // ═══════ FORM HANDLING (PRODUCTION) ═══════
+    const contactForm = document.getElementById('contactForm');
+    const formStatus = document.getElementById('form-status');
+    const formBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
+    const endpoint = 'https://formsubmit.co/ajax/info@vect-rf.com';
+
+    function text(key) {
+        return labels[key][currentLang()];
+    }
+
+    function setFormStatus(type, message) {
+        if (!formStatus) {
+            return;
+        }
+        formStatus.className = `form-status ${type}`;
+        formStatus.textContent = message;
+    }
+
+    function mailtoFallback(formData) {
+        const subject = encodeURIComponent(`VECT RF Request - ${formData.name}`);
+        const body = encodeURIComponent(
+            `Name/Company: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        );
+        return `mailto:info@vect-rf.com?subject=${subject}&body=${body}`;
+    }
+
+    if (contactForm && formBtn) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            if (!contactForm.checkValidity()) {
+                contactForm.reportValidity();
+                return;
+            }
+
+            const trap = contactForm.querySelector('input[name="_honey"]');
+            if (trap && trap.value.trim() !== '') {
+                return;
+            }
+
+            const formData = {
+                name: String(contactForm.querySelector('#name')?.value || '').trim(),
+                email: String(contactForm.querySelector('#email')?.value || '').trim(),
+                message: String(contactForm.querySelector('#message')?.value || '').trim(),
+                _subject: 'Nuova richiesta dal sito VECT',
+                _captcha: 'false'
+            };
+
+            const originalBtnLabel = formBtn.innerHTML;
+            formBtn.disabled = true;
+            formBtn.textContent = text('sending');
+            setFormStatus('pending', text('sending'));
+
+            try {
+                const response = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        Accept: 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+
+                const result = await response.json().catch(() => ({}));
+                if (result.success === false || result.success === 'false') {
+                    throw new Error('Provider rejected request');
+                }
+
                 contactForm.reset();
-            }, 1500);
+                setFormStatus('success', text('success'));
+            } catch (error) {
+                setFormStatus('error', text('error'));
+                if (formStatus) {
+                    const fallbackLink = document.createElement('a');
+                    fallbackLink.href = mailtoFallback(formData);
+                    fallbackLink.className = 'form-fallback-link';
+                    fallbackLink.textContent = text('fallback');
+                    formStatus.appendChild(document.createTextNode(' '));
+                    formStatus.appendChild(fallbackLink);
+                }
+            } finally {
+                formBtn.disabled = false;
+                formBtn.innerHTML = originalBtnLabel;
+            }
         });
     }
 });

@@ -161,14 +161,21 @@ a {
 .btn-primary {
     background: var(--vect-accent);
     color: var(--vect-black);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary:hover {
     background: var(--vect-accent-bright);
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(255, 107, 26, 0.3);
-    position: relative;
-    overflow: hidden;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
 }
 
 .btn-primary::before {
@@ -669,6 +676,8 @@ section {
     flex-direction: column;
     transform: translateZ(0);
     backface-visibility: hidden;
+    position: relative;
+    overflow: hidden;
 }
 
 .service-card:hover {
@@ -920,6 +929,35 @@ textarea:focus {
     outline: none;
     border-color: var(--vect-accent);
     background: var(--vect-carbon);
+}
+
+.hp-field {
+    display: none !important;
+}
+
+.form-status {
+    min-height: 22px;
+    margin-top: 12px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.5px;
+}
+
+.form-status.pending {
+    color: var(--vect-silver);
+}
+
+.form-status.success {
+    color: var(--vect-success);
+}
+
+.form-status.error {
+    color: var(--vect-error);
+}
+
+.form-fallback-link {
+    color: var(--vect-accent);
+    text-decoration: underline;
 }
 
 /* ═══════ FOOTER ═══════ */
