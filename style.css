@@ -173,7 +173,7 @@ a {
     text-transform: uppercase;
     border-radius: 4px;
     cursor: pointer;
-    transition: all 0.4s ease;
+    transition: background 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
     border: none;
 }
 
@@ -200,6 +200,7 @@ a {
 .btn-primary:active {
     transform: scale(0.96) translateY(0);
     box-shadow: 0 5px 15px rgba(255, 107, 26, 0.2);
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
 }
 
 .btn-primary::before {
@@ -235,17 +236,38 @@ a {
     background: transparent;
     border: 1px solid rgba(255, 107, 26, 0.3);
     color: var(--vect-accent);
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-outline:hover {
     border-color: var(--vect-accent);
     background: var(--vect-accent-glow);
     transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(255, 107, 26, 0.15);
 }
 
 .btn-outline:active {
     transform: scale(0.96) translateY(0);
     background: rgba(255, 107, 26, 0.25);
+    box-shadow: none;
+    transition: transform 0.08s ease, box-shadow 0.08s ease;
+}
+
+.btn-outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255, 107, 26, 0.15), transparent);
+    transform: skewX(-25deg);
+    transition: none;
+}
+
+.btn-outline:hover::before {
+    animation: sheen 0.8s forwards;
 }
 
 .divider {
@@ -432,6 +454,7 @@ section {
     height: 40px;
     border-top: 1px solid var(--vect-graphite);
     padding-top: 15px;
+    overflow: hidden;
 }
 
 .scanning-line {
@@ -587,23 +610,23 @@ section {
 .hero-logo-box::after {
     content: '';
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 120%;
+    top: 0;
+    left: 0;
+    width: 60%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255, 107, 26, 0.05), transparent);
-    transform: translate(-50%, -50%) skewX(-20deg);
+    transform: skewX(-20deg) translateX(-200%);
     animation: logoGlimmer 8s infinite linear;
     pointer-events: none;
 }
 
 @keyframes logoGlimmer {
     0% {
-        left: -100%;
+        transform: skewX(-20deg) translateX(-200%);
     }
 
     100% {
-        left: 200%;
+        transform: skewX(-20deg) translateX(350%);
     }
 }
 
