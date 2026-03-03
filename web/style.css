@@ -486,6 +486,67 @@ section {
     color: var(--vect-accent);
 }
 
+/* ═══════ SPECTERA STAT PILLS ═══════ */
+.spectera-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+}
+
+.stat-pill {
+    background: rgba(255, 107, 26, 0.06);
+    border: 1px solid rgba(255, 107, 26, 0.15);
+    border-radius: 12px;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.stat-pill:hover {
+    border-color: var(--vect-accent);
+    background: rgba(255, 107, 26, 0.1);
+}
+
+.stat-value {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--vect-accent);
+    line-height: 1;
+    letter-spacing: -1px;
+}
+
+.stat-value small {
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0;
+    color: var(--vect-accent-bright);
+    margin-left: 2px;
+}
+
+.stat-pill .stat-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--vect-ash);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+    .spectera-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .spectera-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 /* ═══════ ABOUT ═══════ */
 .about-grid {
     display: grid;
