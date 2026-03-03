@@ -207,93 +207,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ═══════ FORM HANDLING (PRODUCTION) ═══════
+    // FORM HANDLING - FORMSUBMIT native POST
     const contactForm = document.getElementById('contactForm');
-    const formStatus = document.getElementById('form-status');
-    const formBtn = contactForm ? contactForm.querySelector('button[type="submit"]') : null;
-    const endpoint = 'https://formsubmit.co/ajax/info@vect-rf.com';
-
-    function text(key) {
-        return labels[key][currentLang()];
-    }
-
-    function setFormStatus(type, message) {
-        if (!formStatus) {
-            return;
-        }
-        formStatus.className = `form-status ${type}`;
-        formStatus.textContent = message;
-    }
-
-    function mailtoFallback(formData) {
-        const subject = encodeURIComponent(`VECT RF Request - ${formData.name}`);
-        const body = encodeURIComponent(
-            `Name/Company: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-        );
-        return `mailto:info@vect-rf.com?subject=${subject}&body=${body}`;
-    }
-
-    if (contactForm && formBtn) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            if (!contactForm.checkValidity()) {
-                contactForm.reportValidity();
-                return;
-            }
-
-            const trap = contactForm.querySelector('input[name="_honey"]');
-            if (trap && trap.value.trim() !== '') {
-                return;
-            }
-
-            const formData = {
-                name: String(contactForm.querySelector('#name')?.value || '').trim(),
-                email: String(contactForm.querySelector('#email')?.value || '').trim(),
-                message: String(contactForm.querySelector('#message')?.value || '').trim(),
-                _subject: 'Nuova richiesta dal sito VECT',
-                _captcha: 'false'
-            };
-
-            const originalBtnLabel = formBtn.innerHTML;
-            formBtn.disabled = true;
-            formBtn.textContent = text('sending');
-            setFormStatus('pending', text('sending'));
-
-            try {
-                const response = await fetch(endpoint, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        Accept: 'application/json'
-                    },
-                    body: JSON.stringify(formData)
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const result = await response.json().catch(() => ({}));
-                if (result.success === false || result.success === 'false') {
-                    throw new Error('Provider rejected request');
-                }
-
-                contactForm.reset();
-                setFormStatus('success', text('success'));
-            } catch (error) {
-                setFormStatus('error', text('error'));
-                if (formStatus) {
-                    const fallbackLink = document.createElement('a');
-                    fallbackLink.href = mailtoFallback(formData);
-                    fallbackLink.className = 'form-fallback-link';
-                    fallbackLink.textContent = text('fallback');
-                    formStatus.appendChild(document.createTextNode(' '));
-                    formStatus.appendChild(fallbackLink);
-                }
-            } finally {
-                formBtn.disabled = false;
-                formBtn.innerHTML = originalBtnLabel;
+    if (contactForm) {
+        contactForm.addEventListener('submit', () => {
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const lang = document.documentElement.getAttribute('lang') || 'it';
+            if (btn) {
+                btn.innerHTML = lang === 'it' ? 'Invio in corso...' : 'Sending...';
+                btn.disabled = true;
             }
         });
     }
