@@ -357,6 +357,15 @@ section {
     background: var(--vect-accent);
 }
 
+.hero-location {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--vect-ash);
+    letter-spacing: 2px;
+    margin-bottom: 24px !important;
+    margin-top: -8px;
+}
+
 /* ═══════ SERVICES ═══════ */
 .services-grid {
     display: grid;

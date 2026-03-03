@@ -70,22 +70,56 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
-    // ═══════ FORM HANDLING ═══════
+    // ═══════ FORM HANDLING — WEB3FORMS ═══════
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = contactForm.querySelector('button');
+
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const lang = document.documentElement.getAttribute('lang') || 'it';
             const originalHTML = btn.innerHTML;
-            btn.innerHTML = '...';
+
+            btn.innerHTML = lang === 'it' ? 'Invio in corso...' : 'Sending...';
             btn.disabled = true;
 
-            setTimeout(() => {
-                alert('Messaggio inviato! / Message sent!');
-                btn.innerHTML = originalHTML;
-                btn.disabled = false;
-                contactForm.reset();
-            }, 1000);
+            const formData = new FormData(contactForm);
+            const object = Object.fromEntries(formData);
+            const json = JSON.stringify(object);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    btn.innerHTML = lang === 'it' ? '✓ Richiesta inviata' : '✓ Request sent';
+                    btn.style.background = 'var(--vect-success)';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    throw new Error(result.message || 'Server error');
+                }
+            } catch (err) {
+                btn.innerHTML = lang === 'it' ? 'Errore — scrivi a info@vect-rf.com' : 'Error — email info@vect-rf.com';
+                btn.style.background = 'var(--vect-error)';
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 5000);
+            }
         });
     }
 });
