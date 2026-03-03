@@ -76,6 +76,38 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
+    // ═══════ MOBILE HAMBURGER ═══════
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileNavLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && mobileNavLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = mobileNavLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        mobileNavLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNavLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mobileNavLinks.classList.contains('active')) {
+                mobileNavLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                menuToggle.focus();
+            }
+        });
+    }
+
     // ═══════ CURSOR GLOW ═══════
     window.addEventListener('mousemove', (e) => {
         htmlRoot.style.setProperty('--mouse-x', `${e.clientX}px`);
