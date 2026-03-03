@@ -18,11 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
     if (activeBtn) activeBtn.click();
 
-    // ═══════ STICKY NAVBAR ═══════
-    const nav = document.querySelector('nav');
+    // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
+    const sections = document.querySelectorAll('section');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 80);
-    });
+
+        // ScrollSpy logic
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= (sectionTop - 200)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(currentSection)) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
 
     // ═══════ MOBILE HAMBURGER ═══════
     const menuToggle = document.getElementById('mobile-menu-toggle');

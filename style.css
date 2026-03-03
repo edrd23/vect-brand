@@ -58,7 +58,7 @@ body::before {
     z-index: 0;
 }
 
-/* ═══════ CUSTOM SCROLLBAR ═══════ */
+/* ═══════ CUSTOM SCROLLBAR (TECH) ═══════ */
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -69,7 +69,8 @@ body::before {
 
 ::-webkit-scrollbar-thumb {
     background: var(--vect-graphite);
-    border-radius: 3px;
+    border-radius: 0;
+    border: 1px solid var(--vect-carbon);
     transition: background 0.3s ease;
 }
 

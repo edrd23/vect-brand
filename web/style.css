@@ -39,6 +39,26 @@
     --container-width: 1200px;
 }
 
+/* ═══════ CUSTOM SCROLLBAR (TECH) ═══════ */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--vect-black);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--vect-graphite);
+    border-radius: 0;
+    border: 1px solid var(--vect-carbon);
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--vect-accent);
+}
+
 /* ═══════ RESET & BASE ═══════ */
 * {
     margin: 0;
