@@ -1050,3 +1050,97 @@ body.js-ready .reveal.active {
         background: rgba(255, 107, 26, 0.06);
     }
 }
+
+/* ── CSS Grid Overlay ── */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 107, 26, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 107, 26, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+/* ═══════ SVG ANIMATIONS ═══════ */
+.pulse-circle {
+    animation: svgPulse 2s infinite ease-out;
+}
+
+@keyframes svgPulse {
+    0% {
+        r: 2;
+        opacity: 1;
+    }
+
+    100% {
+        r: 15;
+        opacity: 0;
+    }
+}
+
+.flow-line {
+    stroke-dasharray: 100;
+    stroke-dashoffset: 100;
+    animation: flowMove 3s infinite linear;
+}
+
+.tech-card:hover .flow-line {
+    animation-duration: 1s;
+    stroke: var(--vect-cyan);
+}
+
+@keyframes flowMove {
+    0% {
+        stroke-dashoffset: 200;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+.density-pulse {
+    animation: densityAnim 1.5s infinite alternate;
+}
+
+@keyframes densityAnim {
+    0% {
+        transform: scaleY(0.5);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scaleY(1);
+        opacity: 1;
+    }
+}
+
+.tech-card:hover .density-pulse {
+    animation-duration: 0.5s;
+    background: var(--vect-accent-bright);
+}
+
+.diversity-wave {
+    animation: wavePhase 4s infinite linear;
+}
+
+.tech-card:hover .diversity-wave {
+    animation-duration: 1.5s;
+}
+
+@keyframes wavePhase {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-40px);
+    }
+}
