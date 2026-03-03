@@ -712,17 +712,7 @@ body::after {
     z-index: 9999;
 }
 
-/* ═══════ ANIMATIONS ═══════ */
-.reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
+/* Reveal animations moved to responsive section for failsafe logic */
 
 /* ═══════ BILINGUAL HIDING ═══════ */
 [lang="it"] .en-text {
@@ -948,47 +938,55 @@ body::after {
     }
 }
 
-/* ── Small Mobile ── */
+/* ═══════ ANIMATIONS ═══════ */
+.reveal {
+    opacity: 1;
+    /* Visible by default */
+    transform: none;
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Only hide if JS is ready - prevents "black screen" if JS fails/is slow */
+body.js-ready .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+body.js-ready .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Mobile UI Refinement ── */
 @media (max-width: 480px) {
-    .container {
-        padding: 0 18px;
-    }
-
-    nav {
-        padding: 14px 18px;
-    }
-
     .hero h1 {
-        font-size: clamp(28px, 11vw, 40px);
+        font-size: clamp(34px, 12vw, 44px);
+        letter-spacing: -1px;
     }
 
     .hero-btns {
-        display: flex;
         flex-direction: column;
-        gap: 12px;
+        gap: 15px;
     }
 
     .btn {
         width: 100%;
         justify-content: center;
-        padding: 16px 24px;
-        /* Larger tap target on phone */
+        padding: 18px 24px;
     }
 
-    .spectera-stats {
-        grid-template-columns: repeat(2, 1fr);
+    .section-title {
+        font-size: 30px;
     }
 
-    .stat-pill {
-        padding: 14px;
+    .section-label {
+        font-size: 11px;
+        color: var(--vect-white);
+        /* Better contrast for mobile */
     }
 
-    footer {
-        padding: 50px 0;
-    }
-
-    .service-card {
-        padding: 24px;
+    .contact-grid {
+        gap: 40px;
     }
 }
 

@@ -1265,18 +1265,53 @@ footer {
     }
 }
 
+/* ═══════ ANIMATIONS ═══════ */
+.reveal {
+    opacity: 1;
+    /* Visible by default */
+    transform: none;
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Only hide if JS is ready - prevents "black screen" if JS fails/is slow */
+body.js-ready .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+body.js-ready .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ── Mobile UI Refinement ── */
 @media (max-width: 480px) {
-    .container {
-        padding: 0 20px;
+    .hero h1 {
+        font-size: clamp(32px, 12vw, 42px);
+        /* Slightly smaller for mobile SE */
+        letter-spacing: -1px;
     }
 
     .hero-btns {
-        width: 100%;
+        flex-direction: column;
+        /* Stack buttons! */
+        gap: 15px;
     }
 
     .btn {
         width: 100%;
         justify-content: center;
+        padding: 16px 24px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-label {
+        font-size: 10px;
+        color: var(--vect-white);
+        /* Better contrast */
     }
 }
 

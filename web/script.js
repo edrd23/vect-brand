@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-ready');
     // ═══════ LANGUAGE SWITCHER ═══════
     const langBtns = document.querySelectorAll('.lang-btn');
     const htmlRoot = document.documentElement;

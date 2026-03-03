@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-ready');
     const htmlRoot = document.documentElement;
     const langBtns = document.querySelectorAll('.lang-btn');
     const initialLang = localStorage.getItem('vect_lang');
@@ -193,26 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
         typeElements.forEach(startTyping);
     }
 
-    // ═══════ MOBILE MENU ═══════
-    const menuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileNavLinks = document.querySelector('.nav-links');
-    const mobileNavItems = document.querySelectorAll('.nav-links a');
-
-    if (menuToggle && mobileNavLinks) {
-        menuToggle.addEventListener('click', () => {
-            const isActive = menuToggle.classList.toggle('active');
-            mobileNavLinks.classList.toggle('active', isActive);
-            document.body.style.overflow = isActive ? 'hidden' : '';
-        });
-
-        mobileNavItems.forEach((item) => {
-            item.addEventListener('click', () => {
-                menuToggle.classList.remove('active');
-                mobileNavLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-    }
+    // Removed redundant mobile menu block. Already handled above.
 
 
 
