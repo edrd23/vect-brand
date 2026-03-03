@@ -84,8 +84,12 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.innerHTML = lang === 'it' ? 'Invio in corso...' : 'Sending...';
             btn.disabled = true;
 
+            // Robust FormData to JSON conversion
             const formData = new FormData(contactForm);
-            const object = Object.fromEntries(formData);
+            const object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
             const json = JSON.stringify(object);
 
             try {
@@ -110,11 +114,17 @@ document.addEventListener('DOMContentLoaded', () => {
                         btn.disabled = false;
                     }, 4000);
                 } else {
+                    // Show specific error message from API if available
+                    btn.innerHTML = lang === 'it' ? `Errore: ${result.message || 'Server'}` : `Error: ${result.message || 'Server'}`;
+                    btn.style.background = 'var(--vect-error)';
                     throw new Error(result.message || 'Server error');
                 }
             } catch (err) {
-                btn.innerHTML = lang === 'it' ? 'Errore — scrivi a info@vect-rf.com' : 'Error — email info@vect-rf.com';
-                btn.style.background = 'var(--vect-error)';
+                console.error('Submission error:', err);
+                if (!btn.innerHTML.includes('Errore')) {
+                    btn.innerHTML = lang === 'it' ? 'Errore di rete' : 'Network Error';
+                    btn.style.background = 'var(--vect-error)';
+                }
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
                     btn.style.background = '';
