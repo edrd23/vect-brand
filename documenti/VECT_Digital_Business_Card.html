@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VECT | Digital Business Card</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --vect-accent: #FF6B1A;
+            --vect-dark: #0a0a0a;
+            --vect-panel: #141414;
+            --vect-text: #F5F5F5;
+            --vect-graphite: #2a2a2a;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--vect-dark);
+            color: var(--vect-text);
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #0a0a0a 70%);
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 480px;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Top Logo */
+        .logo-container {
+            margin-bottom: 12px;
+            width: 100px;
+        }
+
+        .logo-container svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Profilo Aziendale */
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 16px;
+            width: 100%;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--vect-graphite);
+        }
+
+        .company-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .company-name i {
+            color: var(--vect-accent);
+            width: 18px;
+            height: 18px;
+        }
+
+        .name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--vect-text);
+            margin-bottom: 2px;
+        }
+
+        .title {
+            color: var(--vect-accent);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Griglia Contatti Rapidi */
+        .contact-grid {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .action-btn {
+            flex: 1;
+            background: var(--vect-panel);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 8px;
+            padding: 10px 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            color: var(--vect-text);
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:active {
+            background: #1f1f1f;
+            transform: scale(0.96);
+        }
+
+        .action-btn i {
+            color: var(--vect-accent);
+            width: 14px;
+            height: 14px;
+        }
+
+        .action-btn span {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        /* Lista Link */
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            width: 100%;
+            margin-bottom: 16px;
+        }
+
+        .list-item {
+            background: var(--vect-panel);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 8px;
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: var(--vect-text);
+            transition: all 0.2s;
+        }
+
+        .list-item:active {
+            background: #1f1f1f;
+        }
+
+        .list-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            background: rgba(255, 107, 26, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        .list-icon i {
+            color: var(--vect-accent);
+            width: 14px;
+            height: 14px;
+        }
+
+        .list-content {
+            flex: 1;
+        }
+
+        .list-title {
+            font-weight: 600;
+            font-size: 13px;
+            margin-bottom: 2px;
+        }
+
+        .list-subtitle {
+            font-size: 10px;
+            color: #888;
+            font-family: monospace;
+        }
+
+        .list-arrow {
+            color: #555;
+            width: 14px;
+            height: 14px;
+        }
+
+        /* Pulsanti d'azione primari (Salva / WA) */
+        .actions-wrapper {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .save-btn {
+            background: var(--vect-accent);
+            color: var(--vect-dark);
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .save-btn i {
+            width: 16px;
+            height: 16px;
+        }
+
+        .save-btn:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 16px;
+            text-align: center;
+            font-family: monospace;
+            font-size: 9px;
+            color: #444;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card-container">
+
+        <!-- TOP LOGO VECT -->
+        <div class="logo-container">
+            <svg viewBox="0 0 400 120" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+        </div>
+
+        <!-- CORPORATE PROFILE DATA -->
+        <div class="profile-section">
+            <h1 class="company-name"><i data-lucide="shield-check"></i> VECT RF Special Ops.</h1>
+            <!-- INSERISCI QUI IL TUO NOME E COGNOME -->
+            <p class="name" id="contact-name">Nome Cognome</p>
+            <p class="title">Technical Director</p>
+        </div>
+
+        <!-- ACTION BUTTONS GRID -->
+        <div class="contact-grid">
+            <!-- INSERISCI QUI IL TUO NUMERO (+39 e numero senza spazi) -->
+            <a href="tel:+393330000000" class="action-btn" id="contact-tel">
+                <i data-lucide="phone"></i>
+                <span>Chiama</span>
+            </a>
+            <!-- INSERISCI QUI LA TUA MAIL -->
+            <a href="mailto:info@vect-rf.com" class="action-btn" id="contact-mail">
+                <i data-lucide="mail"></i>
+                <span>Email</span>
+            </a>
+            <a href="https://maps.google.com/?q=Italia" class="action-btn" target="_blank">
+                <i data-lucide="map-pin"></i>
+                <span>HQ</span>
+            </a>
+        </div>
+
+        <!-- EXTENDED LINKS -->
+        <div class="links-list">
+
+            <a href="../index.html" class="list-item">
+                <div class="list-icon"><i data-lucide="globe"></i></div>
+                <div class="list-content">
+                    <div class="list-title">Corporate Website</div>
+                    <div class="list-subtitle">vect-rf.com</div>
+                </div>
+                <i data-lucide="chevron-right" class="list-arrow"></i>
+            </a>
+
+            <!-- INSERISCI QUI IL LINK DEL PROFILO LINKEDIN -->
+            <a href="https://www.linkedin.com/company/vect-rf/" class="list-item" target="_blank">
+                <div class="list-icon"><i data-lucide="linkedin"></i></div>
+                <div class="list-content">
+                    <div class="list-title">LinkedIn Network</div>
+                    <div class="list-subtitle">Professional Page</div>
+                </div>
+                <i data-lucide="chevron-right" class="list-arrow"></i>
+            </a>
+
+            <a href="VECT_Rate_Card_2026.html" class="list-item">
+                <div class="list-icon"><i data-lucide="folder-lock"></i></div>
+                <div class="list-content">
+                    <div class="list-title">Commercial & Legal</div>
+                    <div class="list-subtitle">Rate Card e Contratti</div>
+                </div>
+                <i data-lucide="chevron-right" class="list-arrow"></i>
+            </a>
+
+            <a href="VECT_Technical_Pitch_Deck.html" class="list-item">
+                <div class="list-icon"><i data-lucide="monitor-play"></i></div>
+                <div class="list-content">
+                    <div class="list-title">Corporate Pitch Deck</div>
+                    <div class="list-subtitle">Presentazione Aziendale</div>
+                </div>
+                <i data-lucide="chevron-right" class="list-arrow"></i>
+            </a>
+
+        </div>
+
+        <!-- SAVE CONTACT VCARD & WHATSAPP -->
+        <div class="actions-wrapper">
+            <a href="https://wa.me/393330000000" id="whatsapp-btn" class="save-btn"
+                style="background:#25D366; color:#fff;" target="_blank">
+                <i data-lucide="message-circle"></i> WhatsApp
+            </a>
+            <a href="#" id="save-contact-btn" class="save-btn" style="flex:1;">
+                <i data-lucide="arrow-down-to-line"></i> Salva Contatto
+            </a>
+        </div>
+
+        <!-- FOOTER -->
+        <div class="footer">
+            SYS.OP. VECT // SECURE CHANNEL // V1.2
+        </div>
+
+    </div>
+
+    <!-- Script per rimpiazzare le icone Lucide e generare la VCard -->
+    <script>
+        lucide.createIcons();
+
+        // -------------------------------------------------------------
+        // VCF (V-CARD) GENERATOR: Crea il contatto scaricabile al volo
+        // Estrapola dinamicamente i dati presenti in pagina per la generazione
+        // -------------------------------------------------------------
+        document.getElementById('save-contact-btn').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            const cName = document.getElementById('contact-name').innerText;
+            const cTel = document.getElementById('contact-tel').href.replace('tel:', '');
+            const cMail = document.getElementById('contact-mail').href.replace('mailto:', '');
+
+            // Dati del contatto (profilo aziendale)
+            const contact = {
+                name: cName,
+                org: "VECT RF Special Ops.",
+                title: "Technical Director",
+                tel: cTel,
+                email: cMail,
+                url: "https://vect-rf.com"
+            };
+
+            const vcard = `BEGIN:VCARD\nVERSION:3.0\nFN:${contact.name}\nORG:${contact.org}\nTITLE:${contact.title}\nTEL;TYPE=WORK,VOICE:${contact.tel}\nEMAIL;TYPE=PREF,INTERNET:${contact.email}\nURL:${contact.url}\nEND:VCARD`;
+
+            // Metodo migliore per l'apertura diretta della rubrica sui device mobile:
+            const vcardURI = 'data:text/vcard;charset=utf-8,' + encodeURIComponent(vcard);
+            window.location.href = vcardURI;
+        });
+
+        // Aggiorna dinamicamente anche il link WhatsApp in base all'href inserito nella pagina
+        const waBtn = document.getElementById('whatsapp-btn');
+        const waTel = document.getElementById('contact-tel').href.replace('tel:+', '');
+        waBtn.href = "https://wa.me/" + waTel;
+    </script>
+</body>
+
+</html>

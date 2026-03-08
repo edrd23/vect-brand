@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Presenza Digitale & Setup</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111;
+            --carbon: #181818;
+            --border: #2A2A2A;
+            --ash: #4A4A4A;
+            --silver: #888;
+            --light: #D0D0D0;
+            --white: #F0F0F0;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --blue: #0A66C2;
+            --blue-dim: rgba(10, 102, 194, 0.1);
+            /* LinkedIn Blue */
+            --green: #00CC66;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        /* ── HEADER ─────────────────────── */
+        .header {
+            background: var(--dark);
+            border-bottom: 2px solid var(--accent);
+            padding: 24px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-left svg {
+            width: 80px;
+        }
+
+        .header-tag {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        /* ── LAYOUT ─────────────────────── */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 56px 40px 100px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 48px;
+        }
+
+        /* ── SECTION CARDS ──────────────── */
+        .section-card {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .sc-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .sc-icon {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+
+        .sc-icon.lnk {
+            background: var(--blue-dim);
+            color: var(--blue);
+            border: 1px solid rgba(10, 102, 194, 0.2);
+        }
+
+        .sc-icon.ml {
+            background: rgba(0, 204, 102, 0.1);
+            color: var(--green);
+            border: 1px solid rgba(0, 204, 102, 0.2);
+        }
+
+        .sc-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .sc-body {
+            padding: 32px;
+        }
+
+        /* ── TYPOGRAPHY & BLOCKS ────────── */
+        h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        h3::before {
+            content: '';
+            width: 4px;
+            height: 14px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .box {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 24px;
+        }
+
+        .box-title {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--silver);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .copy-block {
+            background: #151515;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 16px;
+            position: relative;
+            font-size: 14px;
+            color: var(--white);
+            white-space: pre-wrap;
+            font-family: var(--font);
+            margin-bottom: 16px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            color: var(--silver);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-family: var(--mono);
+            font-size: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .copy-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .spec-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .spec-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+            color: var(--light);
+        }
+
+        .spec-list li::before {
+            content: '→';
+            color: var(--accent);
+            font-family: var(--mono);
+        }
+
+        .spec-list b {
+            color: var(--white);
+        }
+
+        /* ── EMAIL SIGNATURE GENERATOR ──── */
+        .sig-preview {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 32px;
+            margin-bottom: 20px;
+            color: #000;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+
+        .input-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .input-group label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--silver);
+            text-transform: uppercase;
+        }
+
+        .input-group input {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            color: var(--white);
+            padding: 10px;
+            border-radius: 4px;
+            font-family: var(--font);
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent);
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="header-left">
+            <svg viewBox="0 0 400 120" fill="none">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div>
+                <div class="header-tag">// Area E</div>
+                <div class="header-title">Presenza Digitale & Setup</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="grid">
+
+            <!-- LINKEDIN SECTION -->
+            <div class="section-card">
+                <div class="sc-header">
+                    <div class="sc-icon lnk">in</div>
+                    <div class="sc-title">Setup Presenza LinkedIn</div>
+                </div>
+                <div class="sc-body">
+                    <h3>Design & Immagini Profilo</h3>
+                    <ul class="spec-list">
+                        <li><b>Foto Profilo:</b> Primo piano professionale su sfondo neutro o scuro. Evitare foto in
+                            controluce o troppo amatoriali.</li>
+                        <li><b>Banner Copertina (1584 x 396 px):</b> Usa un'immagine dark/minimal di un rack con la Base
+                            Station Spectera illuminata, oppure un palco visto dal backstage. Applica un overlay scuro
+                            al 60% e inserisci il logo VECT in alto a destra.</li>
+                        <li><b>Account Type:</b> Crea una "Pagina Aziendale" VECT, e collega il tuo profilo personale
+                            (Edoardo) come dipendente "Lead RF Engineer & Founder".</li>
+                    </ul>
+
+                    <h3>Headline (Sommario sotto il nome)</h3>
+                    <p style="font-size:13px; color:var(--ash); margin-bottom:12px;">Non scrivere solo "Sound Engineer".
+                        Usa l'headline per far capire subito il valore ai Production Manager.</p>
+
+                    <div class="box">
+                        <div class="box-title">Opzione 1 (Focus Tecnologico — Consigliata)</div>
+                        <div class="copy-block" id="copy-hl1">Lead RF Engineer & Founder @ VECT | Pioniere tecnologia
+                            Sennheiser Spectera (WMAS) in Italia | Zero Dropout Wireless per Tour, Festival e Broadcast.
+                            <button class="copy-btn" onclick="copyText('copy-hl1', this)">Copia</button>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="box-title">Opzione 2 (Focus Cliente / Bilingue)</div>
+                        <div class="copy-block" id="copy-hl2">RF Engineer specialist | Mission-critical wireless
+                            coordination for Live Events & Broadcast | VECT Founder.
+                            <button class="copy-btn" onclick="copyText('copy-hl2', this)">Copia</button>
+                        </div>
+                    </div>
+
+                    <h3>Sezione Informazioni (About)</h3>
+                    <div class="box">
+                        <div class="box-title">Copy da incollare nel profilo (Bilingue IT/EN)</div>
+                        <div class="copy-block" id="copy-about">Il wireless non è questione di fortuna, è ingegneria
+                            pura.
+
+                            Con VECT, progetto e gestisco infrastrutture RF per grandi live, tour teatrali e
+                            trasmissioni broadcast. Siamo tra i primi in Italia a portare in tour la tecnologia
+                            rivoluzionaria WMAS (Sennheiser Spectera), garantendo una stabilità e una densità di canali
+                            semplicemente impossibili con i sistemi legacy narrowband.
+
+                            Cosa faccio per le produzioni:
+                            ► RF Spectrum Management & Scansione preventiva
+                            ► Progettazione reti wireless complesse ad alta densità (IEM + Mic sullo stesso canale
+                            broadand)
+                            ► Operatività Live Zero-Dropout (Dry Hire, Wet Hire, Consulenza)
+                            ► Gestione pratiche ministeriali (MIMIT) per licenze di utilizzo frequenze
+
+                            Il mio approccio è clinico, documentato e certificato (Report RF post-evento consegnati al
+                            cliente).
+                            Perché quando lo show inizia, l'ansia delle frequenze deve restare fuori dal palco.
+
+                            📩 eduardo@vect-rf.com (esempio)
+                            🔗 vect-rf.com
+
+                            ---
+                            ENGINEERING THE INVISIBLE.
+                            Lead RF Engineer specializing in mission-critical wireless systems. Early adopter of
+                            Sennheiser Spectera WMAS technology in Italy. Delivering zero-dropout coordination for
+                            festivals, tours, and broadcast.
+                            <button class="copy-btn" onclick="copyText('copy-about', this)">Copia</button>
+                        </div>
+                    </div>
+
+                    <h3>Post di Lancio Ufficiale (Con White Paper)</h3>
+                    <p style="font-size:13px; color:var(--ash); margin-bottom:12px;">Usa questo post per lanciare VECT e
+                        posizionarti subito come esperto WMAS. Allega al post il file
+                        <b>VECT_WhitePaper_WMAS_Festival.pdf</b> che abbiamo creato.</p>
+                    <div class="box">
+                        <div class="box-title">Testo del Post</div>
+                        <div class="copy-block" id="copy-post1">Il wireless negli eventi dal vivo è appena cambiato per
+                            sempre, e l'Italia è pronta.
+
+                            Oggi nasce ufficialmente VECT — il mio nuovo progetto interamente dedicato all'ingegneria
+                            delle radiofrequenze (RF) per grandi tour, festival e broadcast.
+
+                            Ho lavorato per anni in ambienti RF ostili, combattendo contro UHF congestionate, dropout
+                            inspiegabili e intermodulazioni. La verità è che i sistemi legacy analogico/digitali stanno
+                            raggiungendo il loro limite fisico.
+
+                            È per questo che VECT nasce come partner specializzato nel nuovo standard WMAS (Sennheiser
+                            Spectera). IEM e microfoni bidirezionali sulla stessa portante a banda larga. AES-256
+                            nativo. Fino a 32 canali in uno spazio di 8 MHz.
+
+                            Non è un upgrade, è un paradigma completamente nuovo di approcciare il palco. E noi lo
+                            portiamo in tour con un focus maniacale sull'affidabilità: ogni show che curiamo viene
+                            accompagnato da Scan pre-evento e un Certification Report post-evento.
+
+                            Ho appena scritto un White Paper su questo passaggio epocale per chi organizza Festival
+                            Multi-Stage. Lo trovate in allegato qui sotto. Se siete Production Manager, Technical
+                            Director o Sound Engineer, è una lettura che vi consiglio.
+
+                            L'era del "speriamo che non sganci" è finita.
+                            Benvenuti nell'era dell'ingegneria del wireless. VECT è operativa.
+
+                            🌐 vect-rf.com (link in bio)
+
+                            #RFEngineering #SoundEngineer #Sennheiser #Spectera #WMAS #LiveMusic #ProAudio #VECT
+                            #EventProduction
+                            <button class="copy-btn" onclick="copyText('copy-post1', this)">Copia</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- GMAIL & SIGNATURE -->
+            <div class="section-card">
+                <div class="sc-header">
+                    <div class="sc-icon ml">@</div>
+                    <div class="sc-title">Setup Gmail & Firma Email</div>
+                </div>
+                <div class="sc-body">
+                    <h3>Google Workspace Setup</h3>
+                    <ul class="spec-list">
+                        <li>Vai su <b>workspace.google.com</b> e avvia la registrazione per il piano "Business Starter".
+                        </li>
+                        <li>Usa il dominio <b>vect-rf.com</b> (se non è tuo, dovrai registrarlo; se lo hai
+                            Aruba/Register, dovrai aggiornare i record MX seguendo la guida on-screen di Google).</li>
+                        <li>Crea l'account admin: <b>edoardo@vect-rf.com</b>.</li>
+                        <li>Crea un alias gratuito: <b>info@vect-rf.com</b> (tutte le mail a info@ arriveranno a
+                            edoardo@, e potrai scegliere da quale rispondere).</li>
+                    </ul>
+
+                    <h3 style="margin-top:40px;">Generatore Firma Email VECT</h3>
+                    <p style="font-size:13px; color:var(--ash); margin-bottom:20px;">Compila i tuoi dati, clicca il
+                        pulsante e copia il codice. Incollalo direttamente nel box della firma in Gmail (Impostazioni >
+                        Generali > Firma).</p>
+
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Nome Completo</label>
+                            <input type="text" id="sig-name" value="Edoardo [Cognome]">
+                        </div>
+                        <div class="input-group">
+                            <label>Ruolo</label>
+                            <input type="text" id="sig-role" value="Lead RF Engineer & Founder">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Email</label>
+                            <input type="text" id="sig-email" value="edoardo@vect-rf.com">
+                        </div>
+                        <div class="input-group">
+                            <label>Telefono</label>
+                            <input type="text" id="sig-phone" value="+39 3XX 0000000">
+                        </div>
+                    </div>
+
+                    <!-- Anteprima firma renderizzata -->
+                    <div class="sig-preview" id="sig-preview-box">
+                        <!-- Il contenuto HTML sarà iniettato qui via JS e reso visibile/copiabile riccamente -->
+                    </div>
+
+                    <div style="display:flex; justify-content:flex-end; gap:12px;">
+                        <button class="copy-btn"
+                            style="position:relative; width:auto; padding:8px 16px; top:auto; right:auto; border-color:var(--border);"
+                            onclick="copyRawHtml(this)">Copia Codice HTML</button>
+                        <button class="btn-primary" onclick="copyRenderedSignature(this)">Copia Firma
+                            (Rich/Visual)</button>
+                    </div>
+                    <p style="font-size:11px; color:var(--ash); margin-top:12px; text-align:right;">*Usa "Copia Firma" e
+                        fai CTRL+V in Gmail. Se non funziona, usa "Copia Codice HTML" in un gestore firme.</p>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function copyText(elemId, btn) {
+            let text = document.getElementById(elemId).innerText.replace("Copia", "").trim();
+            navigator.clipboard.writeText(text);
+            let orig = btn.innerText;
+            btn.innerText = "Copiato!";
+            btn.style.color = "var(--green)";
+            btn.style.borderColor = "var(--green)";
+            setTimeout(() => { btn.innerText = orig; btn.style.color = ""; btn.style.borderColor = ""; }, 2000);
+        }
+
+        // Email Signature Logic
+        const vLogo = "https://raw.githubusercontent.com/edrd23/vect-brand/main/VECT_Logo_Primary_Orange_Black.png"; // Usa il tuo asset reale
+
+        function generateSigHtml() {
+            const name = document.getElementById('sig-name').value || "Edoardo";
+            const role = document.getElementById('sig-role').value || "Lead RF Engineer";
+            const mail = document.getElementById('sig-email').value || "info@vect-rf.com";
+            const phone = document.getElementById('sig-phone').value || "vect-rf.com";
+
+            return `
+<table cellpadding="0" cellspacing="0" border="0" style="background:none; border:none; margin:0; padding:0; font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+  <tr>
+    <td valign="top" style="padding-right: 20px; border-right: 1px solid #FF6B1A;">
+        <img src="https://i.ibb.co/XZZ4kX7/vect-sig-logo.png" width="90" height="auto" alt="VECT" style="display:block; border:none; max-width:90px;" />
+    </td>
+    <td valign="center" style="padding-left: 20px;">
+      <p style="margin: 0 0 6px 0; font-size: 16px; font-weight: 800; color: #111111; letter-spacing:-0.2px;">${name}</p>
+      <p style="margin: 0 0 10px 0; font-size: 11px; font-weight: 600; text-transform:uppercase; color: #FF6B1A; letter-spacing: 1px;">${role}</p>
+      
+      <p style="margin: 0 0 4px 0; font-size: 12px; color: #444444;">
+        <strong style="color:#111;">E:</strong> <a href="mailto:${mail}" style="color: #0A66C2; text-decoration: none;">${mail}</a>
+      </p>
+      <p style="margin: 0 0 4px 0; font-size: 12px; color: #444444;">
+        <strong style="color:#111;">T:</strong> ${phone}
+      </p>
+      <p style="margin: 0; font-size: 12px; color: #444444;">
+        <strong style="color:#111;">W:</strong> <a href="https://vect-rf.com" style="color: #444444; text-decoration: none;">vect-rf.com</a>
+      </p>
+    </td>
+  </tr>
+  <tr>
+      <td colspan="2" style="padding-top:16px;">
+        <p style="margin: 0; font-size: 10px; color: #999999; line-height: 1.4;">
+          This message is intended solely for the addressee and may contain confidential information. Engineering the invisible.
+        </p>
+      </td>
+  </tr>
+</table>
+        `;
+        }
+
+        function renderSig() {
+            document.getElementById('sig-preview-box').innerHTML = generateSigHtml();
+        }
+
+        document.querySelectorAll('.input-group input').forEach(input => {
+            input.addEventListener('input', renderSig);
+        });
+
+        // Render initially
+        renderSig();
+
+        function copyRenderedSignature(btn) {
+            const sigBox = document.getElementById('sig-preview-box');
+
+            // Use Selection API to copy the rich HTML natively for Gmail paste
+            const range = document.createRange();
+            range.selectNode(sigBox);
+            const windowSelection = window.getSelection();
+            windowSelection.removeAllRanges();
+            windowSelection.addRange(range);
+
+            try {
+                document.execCommand('copy');
+                let orig = btn.innerText;
+                btn.innerText = "Copiato!";
+                btn.style.background = "#00CC66";
+                btn.style.color = "#fff";
+                setTimeout(() => { btn.innerText = orig; btn.style.background = ""; btn.style.color = ""; }, 2500);
+            } catch (err) {
+                alert("Errore durante la copia.");
+            }
+            windowSelection.removeAllRanges();
+        }
+
+        function copyRawHtml(btn) {
+            navigator.clipboard.writeText(generateSigHtml());
+            let orig = btn.innerText;
+            btn.innerText = "Copiato!";
+            setTimeout(() => { btn.innerText = orig; }, 2000);
+        }
+    </script>
+</body>
+
+</html>

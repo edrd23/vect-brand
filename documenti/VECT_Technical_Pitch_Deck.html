@@ -1,0 +1,633 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>VECT — Technical Pitch Deck</title>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --vect-dark: #050505;
+            --vect-panel: #111111;
+            --vect-accent: #FF6B1A;
+            --vect-text: #F5F5F5;
+            --vect-grey: #888888;
+            --vect-border: #222222;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--vect-dark);
+            color: var(--vect-text);
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* ══════ BACKGROUND EFFECTS ══════ */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 26, 0.05) 0%, transparent 60%);
+            top: -100px;
+            left: -100px;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* ══════ ANIMATIONS ══════ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ══════ LAYOUT & SECTIONS ══════ */
+        section {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 24px;
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* ══════ COVER ══════ */
+        .cover-section {
+            align-items: center;
+            text-align: center;
+        }
+
+        .logo-box {
+            width: 180px;
+            margin-bottom: 40px;
+        }
+
+        .logo-box svg {
+            width: 100%;
+            height: auto;
+        }
+
+        .cover-title {
+            font-size: clamp(32px, 6vw, 64px);
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .cover-subtitle {
+            font-size: clamp(16px, 3vw, 24px);
+            color: var(--vect-grey);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 107, 26, 0.1);
+            border: 1px solid var(--vect-accent);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--vect-accent);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--vect-accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 26, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 26, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 26, 0);
+            }
+        }
+
+        /* ══════ CONTENT SECTIONS ══════ */
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-subtitle {
+            color: var(--vect-accent);
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 42px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+        }
+
+        @media (min-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+                align-items: center;
+            }
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: var(--vect-panel);
+            border: 1px solid var(--vect-border);
+            border-radius: 16px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            border-color: rgba(255, 107, 26, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 107, 26, 0.1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--vect-accent);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            color: var(--vect-grey);
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Big Stat Box */
+        .stat-box {
+            text-align: center;
+            padding: 60px 40px;
+            background: linear-gradient(135deg, var(--vect-panel) 0%, #1a0a00 100%);
+            border: 1px solid rgba(255, 107, 26, 0.2);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-number {
+            font-size: 96px;
+            font-weight: 900;
+            line-height: 1;
+            background: -webkit-linear-gradient(#fff, #FF6B1A);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            margin-bottom: 5px;
+        }
+
+        .stat-desc {
+            font-size: 14px;
+            color: var(--vect-grey);
+        }
+
+        /* Technical List */
+        .tech-list {
+            list-style: none;
+        }
+
+        .tech-list li {
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--vect-border);
+        }
+
+        .tech-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tech-icon {
+            color: var(--vect-accent);
+            margin-top: 2px;
+        }
+
+        .tech-info h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .tech-info p {
+            font-size: 14px;
+            color: var(--vect-grey);
+        }
+
+        /* Floating Nav CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 8px;
+            border-radius: 50px;
+            border: 1px solid var(--vect-border);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .btn {
+            padding: 14px 24px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn-primary {
+            background: var(--vect-accent);
+            color: var(--vect-dark);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--vect-text);
+        }
+
+        .btn-secondary:active {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Print overrides */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+
+            .grid-bg,
+            .glow,
+            .floating-cta {
+                display: none !important;
+            }
+
+            section {
+                height: auto;
+                min-height: 0;
+                padding: 40px;
+                page-break-after: always;
+                display: block;
+            }
+
+            .feature-card,
+            .stat-box {
+                border: 1px solid #ccc;
+                background: #fafafa;
+                color: #000;
+                break-inside: avoid;
+            }
+
+            .stat-number {
+                -webkit-text-fill-color: #FF6B1A;
+            }
+
+            .reveal {
+                opacity: 1;
+                transform: none;
+            }
+
+            .vect-white-fill {
+                fill: #000 !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow"></div>
+
+    <!-- MAIN FLOATING ACTIONS -->
+    <div class="floating-cta no-print">
+        <a href="VECT_Digital_Business_Card.html" class="btn btn-secondary">
+            <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Card
+        </a>
+        <button onclick="window.print()" class="btn btn-primary">
+            <i data-lucide="download" style="width:16px;height:16px;"></i> PDF
+        </button>
+    </div>
+
+    <!-- 1. COVER -->
+    <section class="cover-section">
+        <div class="logo-box reveal">
+            <svg viewBox="0 0 400 120">
+                <path class="vect-white-fill"
+                    d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path class="vect-white-fill"
+                    d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path class="vect-white-fill" d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+        </div>
+        <h1 class="cover-title reveal" style="transition-delay: 0.1s;">TECHNICAL<br>PITCH DECK</h1>
+        <p class="cover-subtitle reveal" style="transition-delay: 0.2s;">Sennheiser Spectera Ecosystem & Specialized RF
+            Operations for mission-critical productions.</p>
+        <div class="status-badge reveal mono" style="transition-delay: 0.3s;">
+            <div class="status-dot"></div> MISSION READY
+        </div>
+    </section>
+
+    <!-- 2. WMAS REVOLUTION -->
+    <section>
+        <div class="grid-container">
+            <div class="content-col reveal">
+                <div class="section-header">
+                    <div class="section-subtitle mono"><i data-lucide="radio"></i> The WMAS Revolution</div>
+                    <h2 class="section-title">The world's first bidirectional wideband ecosystem.</h2>
+                </div>
+                <ul class="tech-list" style="margin-bottom: 24px;">
+                    <li>
+                        <i data-lucide="zap" class="tech-icon"></i>
+                        <div class="tech-info">
+                            <h4>Space & Frequency Efficiency</h4>
+                            <p>64 channels of bidirectional audio (32 In / 32 Out) within a single 6/8 MHz TV channel
+                                format. A single 1U Base Station replaces racks of receivers.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i data-lucide="activity" class="tech-icon"></i>
+                        <div class="tech-info">
+                            <h4>Ultra-Low Latency</h4>
+                            <p>Constant, uncompromised 0.7 ms latency across the entire wireless link, crucial for
+                                professional IEM usage.</p>
+                        </div>
+                    </li>
+                    <li>
+                        <i data-lucide="shield-check" class="tech-icon"></i>
+                        <div class="tech-info">
+                            <h4>Secure Ops Architecture</h4>
+                            <p>AES-256 CTR encryption on all parallel links, ensuring maximum confidentiality for
+                                corporate events and broadcasts.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="visual-col reveal" style="transition-delay: 0.2s;">
+                <div class="stat-box">
+                    <div class="stat-number mono">64</div>
+                    <div class="stat-label">Channels / 1U Rack</div>
+                    <div class="stat-desc">Dante + MADI Native Integration</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SERVICES -->
+    <section>
+        <div class="section-header reveal">
+            <div class="section-subtitle mono"><i data-lucide="cpu"></i> Deployment Solutions</div>
+            <h2 class="section-title">How VECT Operates</h2>
+        </div>
+
+        <div class="grid-container" style="gap: 20px;">
+            <div class="feature-card reveal">
+                <div class="feature-icon"><i data-lucide="crosshairs"></i></div>
+                <h3>Zero-Coordination</h3>
+                <p>A single wideband carrier handles the entire production. Frequency coordination errors and
+                    intermodulation products are mathematically eliminated.</p>
+            </div>
+
+            <div class="feature-card reveal" style="transition-delay: 0.1s;">
+                <div class="feature-icon"><i data-lucide="network"></i></div>
+                <h3>I/O Mapping</h3>
+                <p>Native 32x32 Dante infrastructure with parallel MADI redundancy. Integrates seamlessly with Calrec,
+                    DiGiCo, and Yamaha setups in seconds.</p>
+            </div>
+
+            <div class="feature-card reveal" style="transition-delay: 0.2s;">
+                <div class="feature-icon"><i data-lucide="smartphone"></i></div>
+                <h3>SEK Hardware</h3>
+                <p>Bodypacks capable of simultaneous IEM output and Mic/Line input. One pack per talent handles all
+                    communication and monitoring needs with zero weight penalty.</p>
+            </div>
+
+            <div class="feature-card reveal" style="transition-delay: 0.3s;">
+                <div class="feature-icon"><i data-lucide="map"></i></div>
+                <h3>Zone Design</h3>
+                <p>Implementation of multizone Spectera antenna networks (DAD) for large-scale festivals, ensuring zero
+                    dropouts even in the most congested RF environments.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TECH SPECS -->
+    <section>
+        <div class="grid-container">
+            <div class="visual-col reveal">
+                <div class="stat-box" style="padding: 40px; text-align: left;">
+                    <div class="section-subtitle mono" style="font-size: 12px; margin-bottom: 20px;">Transmission
+                        Philosophy</div>
+                    <p style="font-size: 16px; margin-bottom: 20px; line-height: 1.5; color: var(--vect-text);">
+                        Spectera utilizes sophisticated <strong>TDMA/TDD</strong> multicarrier protocols. This generates
+                        a continuous bidirectional uplink and downlink between the Base Station and all connected SEK
+                        bodypacks simultaneously.
+                    </p>
+                    <div style="height: 1px; background: rgba(255,255,255,0.1); margin: 20px 0;"></div>
+                    <p style="font-size: 13px; color: var(--vect-grey);">11 selectable Audio Link Modes (ALM) allow
+                        granular optimization of audio quality versus transmission range based on the mission
+                        requirements.</p>
+                </div>
+            </div>
+
+            <div class="content-col reveal" style="transition-delay: 0.2s;">
+                <div class="section-header" style="margin-bottom: 24px;">
+                    <h2 class="section-title">Advanced Specifications</h2>
+                </div>
+
+                <h3 style="font-size: 16px; color: var(--vect-accent); margin-bottom: 12px; font-weight: 700;">RF
+                    PERFORMANCE</h3>
+                <ul class="tech-list" style="margin-bottom: 30px;">
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Bandwidth:</strong> 470 – 698 MHz (UHF Wideband)</p>
+                    </li>
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>TX Power:</strong> 10mW / 100mW (Selectable)</p>
+                    </li>
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Antenna:</strong> DAD Transceiving (IP54)</p>
+                    </li>
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Frequency Resp:</strong> 20 Hz – 20 kHz (±1 dB)</p>
+                    </li>
+                </ul>
+
+                <h3 style="font-size: 16px; color: var(--vect-accent); margin-bottom: 12px; font-weight: 700;">NETWORK &
+                    DATA</h3>
+                <ul class="tech-list">
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Digital I/O:</strong> Dual Dante / MADI (Opt/BNC)</p>
+                    </li>
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Word Clock:</strong> 48/96 kHz BNC 75 Ω</p>
+                    </li>
+                    <li><i data-lucide="check-circle" class="tech-icon" style="width:16px;"></i>
+                        <p><strong>Power:</strong> Dual Internal Redundant PSUs</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. CONTACT -->
+    <section style="min-height: 60vh; text-align: center; align-items: center;">
+        <div class="reveal">
+            <div class="logo-box" style="margin: 0 auto 30px; width: 80px; opacity: 0.5;">
+                <svg viewBox="0 0 400 120">
+                    <path class="vect-white-fill"
+                        d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#FF6B1A" />
+                    <path class="vect-white-fill"
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path class="vect-white-fill" d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+            <h2 class="mono" style="font-size: 24px; margin-bottom: 20px;">VECT_SYSTEM_READY</h2>
+            <p style="color: var(--vect-grey); margin-bottom: 8px;">INFO@VECT-RF.COM</p>
+            <p style="color: var(--vect-grey); margin-bottom: 40px;">MILAN, IT</p>
+
+            <a href="mailto:info@vect-rf.com" class="btn btn-primary"
+                style="display: inline-flex; width: auto; font-size: 16px;">
+                INITIATE UPLINK
+            </a>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+
+        // Reveal animation on scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+        window.addEventListener("scroll", reveal);
+        // Trigger once on load
+        reveal();
+    </script>
+</body>
+
+</html>

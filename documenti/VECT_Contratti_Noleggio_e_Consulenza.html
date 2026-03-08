@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Legal & Contracts</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --vect-black: #0A0A0A;
+            --vect-dark: #111111;
+            --vect-carbon: #1A1A1A;
+            --vect-steel: #3A3A3A;
+            --vect-ash: #666666;
+            --vect-light: #E0E0E0;
+            --vect-white: #F5F5F5;
+            --vect-accent: #FF6B1A;
+            --vect-error: #FF1744;
+            --font-primary: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--vect-black);
+            color: var(--vect-light);
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid var(--vect-steel);
+            padding-bottom: 30px;
+        }
+
+        .logo svg {
+            width: 150px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            color: var(--vect-white);
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            margin: 0;
+        }
+
+        .subtitle {
+            font-family: var(--font-mono);
+            color: var(--vect-accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .contract-section {
+            background: var(--vect-carbon);
+            border: 1px solid var(--vect-steel);
+            border-left: 4px solid var(--vect-accent);
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+
+        .contract-title {
+            color: var(--vect-white);
+            font-size: 24px;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .contract-desc {
+            color: var(--vect-ash);
+            font-size: 14px;
+            margin-bottom: 30px;
+            font-family: var(--font-mono);
+        }
+
+        h3 {
+            color: var(--vect-accent);
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        p,
+        li {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #CCCCCC;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .highlight-box {
+            background: rgba(255, 107, 26, 0.05);
+            border: 1px dashed var(--vect-accent);
+            padding: 20px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .highlight-box.critical {
+            background: rgba(255, 23, 68, 0.05);
+            border-color: var(--vect-error);
+        }
+
+        .highlight-box h4 {
+            margin: 0 0 10px 0;
+            color: var(--vect-accent);
+        }
+
+        .highlight-box.critical h4 {
+            color: var(--vect-error);
+        }
+
+        /* Recap Sheet */
+        .recap-sheet {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            background: var(--vect-dark);
+            border: 1px solid var(--vect-steel);
+            padding: 20px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+        }
+
+        .recap-item {
+            font-size: 12px;
+            font-family: var(--font-mono);
+        }
+
+        .recap-item span {
+            color: var(--vect-ash);
+            display: block;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .recap-item div {
+            color: var(--vect-white);
+            border-bottom: 1px solid var(--vect-steel);
+            padding-bottom: 4px;
+            min-height: 18px;
+        }
+
+        .signature-block {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px dotted var(--vect-steel);
+        }
+
+        .sig-box {
+            width: 45%;
+        }
+
+        .sig-box p {
+            margin-bottom: 40px;
+            font-weight: 600;
+            color: var(--vect-white);
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--vect-ash);
+            width: 100%;
+        }
+
+        .print-btn {
+            background: var(--vect-accent);
+            color: var(--vect-black);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 12px 24px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: all 0.2s;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+        }
+
+        .print-btn:hover {
+            background: var(--vect-white);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .contract-section {
+                background: #fff;
+                border: 1px solid #ccc;
+                page-break-after: always;
+                border-left: 4px solid #000;
+            }
+
+            .contract-title,
+            h1,
+            p,
+            li {
+                color: #000;
+            }
+
+            .subtitle,
+            h3,
+            .highlight-box h4 {
+                color: #555;
+            }
+
+            .highlight-box {
+                background: #f9f9f9;
+                border: 1px dashed #555;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .logo svg path[fill="#F5F5F5"] {
+                fill: #000;
+            }
+
+            .logo svg path[fill="#FF6B1A"] {
+                fill: #555;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+            <h1>LEGAL & CONTRACT TOOLKIT</h1>
+            <div class="subtitle">Standard Operativi per Noleggio e Servizi Tecnologici</div>
+        </header>
+
+        <!-- ==============================================
+             CONTRATTO 1: DRY HIRE (SOLO NOLEGGIO)
+             ============================================== -->
+        <section class="contract-section">
+            <h2 class="contract-title">I. Contratto "Dry Hire"</h2>
+            <div class="contract-desc">Noleggio a Freddo della sola strumentazione hardware (Sennheiser Spectera)</div>
+
+            <div class="recap-sheet">
+                <div class="recap-item"><span>Progetto / Evento</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Data e Ora Consegna</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Luogo Consegna (Check-Out)</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Data e Ora Riconsegna</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Luogo Riconsegna (Check-In)</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Rif. DDT / Preventivo</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <h3>1. Oggetto del Contratto</h3>
+            <p>VECT concede in noleggio al Locatario i beni strumentali dettagliati nel Documento di Trasporto (DDT)
+                allegato, per l'utilizzo in eventi e produzioni audio/video (ex Art. 1571 s.s. del Codice Civile
+                Italiano).</p>
+
+            <div class="highlight-box critical">
+                <h4>⚠️ 2. Responsabilità del Cliente (PUNTO CHIAVE)</h4>
+                <p>Dal momento in cui il Locatario (o un suo incaricato/corriere) prende in consegna le apparecchiature
+                    fino all'avvenuta riconsegna certificata presso i magazzini VECT, <strong>il Locatario è l'unico
+                        responsabile legale e materiale della custodia dell'hardware</strong>. È responsabilità
+                    esclusiva del Locatario operare con la diligenza del buon padre di famiglia.</p>
+            </div>
+
+            <h3>3. Assicurazione e Danni</h3>
+            <ul>
+                <li>Il Locatario è obbligato a stipulare una polizza assicurativa "All Risks" che copra il valore a
+                    nuovo delle apparecchiature noleggiate contro furto, incendio e danni accidentali.</li>
+                <li>In caso di danneggiamento di trasmettitori (es. bodypack SEK) o antenne sensibili, il Locatario si
+                    impegna a rifondere a VECT il costo per la <strong>riparazione ufficiale presso la casa
+                        madre</strong> o l'acquisto di una nuova unità se non riparabile.</li>
+            </ul>
+
+            <h3>4. Ritardi e Penali</h3>
+            <p>I tempi di resa sono tassativi in quanto il materiale può essere programmato per noleggi successivi.
+                Ritardi non comunicati con almeno 48 ore di anticipo comportano l'addebito di una penale del
+                <strong>150% del canone giornaliero</strong> per ogni giorno di ritardo.
+            </p>
+
+            <h3>5. Digitalizzazione e Comunicazioni</h3>
+            <p>Le parti riconoscono la piena validità legale della Firma Elettronica Avanzata (FEA) o firma digitale
+                apposta sul presente documento. Ai fini dell'Art. 1578 c.c. (denuncia vizi), le comunicazioni via E-mail
+                o WhatsApp al referente VECT sono considerate prova idonea della tempestiva segnalazione.</p>
+
+            <div class="signature-block">
+                <div class="sig-box">
+                    <p>Per VECT:</p>
+                    <div class="sig-line"></div>
+                </div>
+                <div class="sig-box">
+                    <p>Per il Locatario:</p>
+                    <div class="sig-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             CONTRATTO 2: WET HIRE / TACTICAL OPS
+             ============================================== -->
+        <section class="contract-section">
+            <h2 class="contract-title">II. Contratto "Wet Hire / Tactical"</h2>
+            <div class="contract-desc">Noleggio Attrezzatura Avanzata + Tecnico RF (RF Coordination On-Site)</div>
+
+            <div class="recap-sheet">
+                <div class="recap-item"><span>Nome Evento</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Location / Venue</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Allestimento (Data e Ora)</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Show Time / Fine Lavori</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Responsabile Produzione</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Canali Radio Coordinati</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <h3>1. Oggetto del Servizio</h3>
+            <p>VECT fornisce il noleggio della tecnologia RF concordata unitamente all'impiego di personale
+                specializzato responsabile del setup, monitoraggio e coordinamento dello spettro RF (RF Manager).</p>
+
+            <div class="highlight-box">
+                <h4>🛡️ 2. Limitazione di Responsabilità Spettrale (PUNTO CHIAVE)</h4>
+                <p>VECT si impegna a coordinare le frequenze in "Best Effort" basandosi sulle rilevazioni in loco al
+                    momento del setup. <strong>VECT non può per legge, né per la natura della fisica, garantire un
+                        ambiente RF privo di interferenze al 100%.</strong> VECT declina ogni responsabilità (in assenza
+                    di dolo o colpa grave) per interruzioni del segnale causate da:<br>
+                    a) Attivazione non preventivata di dispositivi wireless (es. troupe ENG o radioamatori nelle
+                    vicinanze).<br>
+                    b) Limitazioni governative o uso difforme degli spettri da parte di operatori terzi.<br>
+                    c) Carenze fisiche della location o barriere archiettoniche schermanti.</p>
+            </div>
+
+            <h3>3. Conformità Normativa DUVRI e Sicurezza</h3>
+            <p>VECT e i suoi operatori si impegnano a rispettare il D.Lgs. 81/08 sulla sicurezza sul lavoro. Le
+                attrezzature fornite sono a norma CE e VECT fornirà, su richiesta, apposita Dichiarazione di Conformità
+                (Di.Co). Il Committente s'impegna a redigere e comunicare eventuale Documento Unico Valutazione Rischi
+                Interferenti (DUVRI) in fase pre-allestimento.</p>
+
+            <h3>4. Riservatezza ed NDA Inclusa</h3>
+            <p>Le parti si impegnano alla massima riservatezza (NDA implicito) verso le metodologie operative di VECT, i
+                contenuti artistici, i VIP presenti e i dati archiviati durante l'evento.</p>
+
+            <div class="signature-block">
+                <div class="sig-box">
+                    <p>Per VECT:</p>
+                    <div class="sig-line"></div>
+                </div>
+                <div class="sig-box">
+                    <p>Per il Committente:</p>
+                    <div class="sig-line"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==============================================
+             CONTRATTO 3: CONSULTING / RF DESIGN
+             ============================================== -->
+        <section class="contract-section">
+            <h2 class="contract-title">III. Contratto "Strategic Consulting"</h2>
+            <div class="contract-desc">Servizio di consulenza per ingegneria dei flussi e Frequency Coordination (Senza
+                noleggio)</div>
+
+            <div class="recap-sheet">
+                <div class="recap-item"><span>Progetto Artistico</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Referente Tecnico</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Data Inizio Analisi</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Termine Consegna Report</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Piattaforme Software in Uso</span>
+                    <div></div>
+                </div>
+                <div class="recap-item"><span>Numero Apparati Coordinati</span>
+                    <div></div>
+                </div>
+            </div>
+
+            <h3>1. Oggetto del Contratto</h3>
+            <p>Prestazione di lavoro autonomo/consulenza intellettuale volta all'analisi pre-evento, progettazione del
+                calcolo delle intermodulazioni (Frequency Plot) e gestione su software (es. WSM, IAS o Vantage) di
+                apparati terzi.</p>
+
+            <div class="highlight-box">
+                <h4>🎯 2. Condizione Hardware Analizzato (PUNTO CHIAVE)</h4>
+                <p>Non avendo noleggiato direttamente il materiale in uso, la consulenza di VECT si basa sull'assunto
+                    che tutto il parco macchine (sistemi wireless, antenne attive e cavi coassiali in dotazione al
+                    service fornitore) sia in <strong>perfetto stato di integrità ed efficienza elettronica</strong>.
+                </p>
+            </div>
+
+            <h3>3. Responsabilità per l'Infrastruttura</h3>
+            <p>VECT declina ogni responsabilità per cadute di segnale o malfunzionamenti derivanti da hardware di terze
+                parti danneggiato, obsoleto, cavi coassiali fallati, o modifiche apportate da terzi al cablaggio senza
+                l'approvazione del coordinatore RF VECT.</p>
+
+            <h3>4. Diritti di Proprietà Intellettuale</h3>
+            <p>Il progetto RF finale (Workspace, Liste Frequenze in PDF/CSV) è di proprietà del Committente per il
+                singolo evento, ma i template proprietari e le strategie metodologiche rimangono di esclusiva proprietà
+                intellettuale di VECT.</p>
+
+            <div class="signature-block">
+                <div class="sig-box">
+                    <p>Per VECT Consultant:</p>
+                    <div class="sig-line"></div>
+                </div>
+                <div class="sig-box">
+                    <p>Per la Produzione B2B:</p>
+                    <div class="sig-line"></div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</body>
+
+</html>

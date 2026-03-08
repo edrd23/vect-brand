@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 120" width="100%" height="100%">
+  <!-- BACKGROUND INCLUDED FOR VISIBILITY (Matches website/brand color) -->
+  <rect width="100%" height="100%" fill="#181818" />
+
+  <style>
+    .letter {
+      fill: none;
+      stroke: #FFFFFF;
+      stroke-width: 22;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+    .accent {
+      fill: none;
+      stroke: #FF6B1A;
+      stroke-width: 22;
+      stroke-linecap: square;
+      stroke-linejoin: miter;
+    }
+  </style>
+
+  <g transform="translate(19, 0)">
+    
+    <!-- L E T T E R:  V -->
+    <polyline points="0,21 50,99 100,21" class="letter" stroke-linejoin="bevel" />
+    
+    <!-- L E T T E R:  E -->
+    <path d="M 220,21 L 140,21 L 140,99 L 220,99" class="letter" />
+    
+    <!-- BRAND ACCENT: Middle Neon Orange Stroke -->
+    <line x1="140" y1="60" x2="290" y2="60" class="accent" />
+    
+    <!-- L E T T E R:  C -->
+    <path d="M 410,21 L 369,21 A 39 39 0 0 0 330,60 A 39 39 0 0 0 369,99 L 410,99" class="letter" />
+    
+    <!-- L E T T E R:  T -->
+    <!-- Top bar -->
+    <line x1="450" y1="21" x2="550" y2="21" class="letter" />
+    <!-- Stem -->
+    <line x1="500" y1="32" x2="500" y2="99" class="letter" />
+    
+  </g>
+</svg>

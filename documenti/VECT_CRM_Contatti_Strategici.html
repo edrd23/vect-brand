@@ -1,0 +1,931 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — CRM Contatti Strategici</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111111;
+            --carbon: #1A1A1A;
+            --steel: #2A2A2A;
+            --ash: #555555;
+            --silver: #888888;
+            --light: #E0E0E0;
+            --white: #F5F5F5;
+            --accent: #FF6B1A;
+            --accent-glow: rgba(255, 107, 26, 0.1);
+            --green: #00CC66;
+            --yellow: #FFD600;
+            --red: #FF4444;
+            --cyan: #00C8FF;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        /* ── HEADER ─────────────────────────────── */
+        .topbar {
+            background: var(--dark);
+            border-bottom: 1px solid var(--steel);
+            padding: 16px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .topbar-left svg {
+            width: 90px;
+        }
+
+        .topbar-title {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .topbar-title strong {
+            color: var(--accent);
+        }
+
+        .topbar-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 18px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: all 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--silver);
+            border: 1px solid var(--steel);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        /* ── STATS STRIP ─────────────────────────── */
+        .stats-strip {
+            background: var(--carbon);
+            border-bottom: 1px solid var(--steel);
+            padding: 16px 40px;
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .stat-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .stat-dot.green {
+            background: var(--green);
+        }
+
+        .stat-dot.yellow {
+            background: var(--yellow);
+        }
+
+        .stat-dot.red {
+            background: var(--red);
+        }
+
+        .stat-dot.grey {
+            background: var(--ash);
+        }
+
+        .stat-dot.cyan {
+            background: var(--cyan);
+        }
+
+        .stat-item label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ash);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .stat-item span {
+            font-family: var(--mono);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        /* ── FILTERS ─────────────────────────────── */
+        .filters {
+            padding: 16px 40px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 1px solid var(--steel);
+        }
+
+        .filter-label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ash);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-right: 4px;
+        }
+
+        .filter-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 5px 14px;
+            border-radius: 100px;
+            border: 1px solid var(--steel);
+            background: transparent;
+            color: var(--silver);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .search-box {
+            margin-left: auto;
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-radius: 4px;
+            padding: 7px 14px;
+            color: var(--light);
+            font-family: var(--font);
+            font-size: 13px;
+            width: 220px;
+            outline: none;
+        }
+
+        .search-box:focus {
+            border-color: var(--accent);
+        }
+
+        .search-box::placeholder {
+            color: var(--ash);
+        }
+
+        /* ── TABLE ───────────────────────────────── */
+        .table-wrap {
+            padding: 0 40px 40px;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+
+        thead th {
+            background: var(--dark);
+            border: 1px solid var(--steel);
+            padding: 12px 16px;
+            text-align: left;
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--silver);
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        thead th:hover {
+            color: var(--accent);
+        }
+
+        thead th.sort-asc::after {
+            content: ' ↑';
+            color: var(--accent);
+        }
+
+        thead th.sort-desc::after {
+            content: ' ↓';
+            color: var(--accent);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--steel);
+            transition: background 0.15s;
+            cursor: pointer;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 107, 26, 0.04);
+        }
+
+        tbody td {
+            padding: 14px 16px;
+            vertical-align: middle;
+            color: var(--light);
+        }
+
+        .contact-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .contact-company {
+            font-size: 12px;
+            color: var(--silver);
+            margin-top: 2px;
+        }
+
+        /* ── BADGES ──────────────────────────────── */
+        .badge {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 100px;
+        }
+
+        .badge-attivo {
+            background: rgba(0, 204, 102, 0.12);
+            color: var(--green);
+            border: 1px solid rgba(0, 204, 102, 0.25);
+        }
+
+        .badge-caldo {
+            background: rgba(255, 107, 26, 0.12);
+            color: var(--accent);
+            border: 1px solid rgba(255, 107, 26, 0.25);
+        }
+
+        .badge-prospect {
+            background: rgba(255, 214, 0, 0.08);
+            color: var(--yellow);
+            border: 1px solid rgba(255, 214, 0, 0.2);
+        }
+
+        .badge-inattivo {
+            background: rgba(100, 100, 100, 0.1);
+            color: var(--ash);
+            border: 1px solid var(--steel);
+        }
+
+        .badge-nurturing {
+            background: rgba(0, 200, 255, 0.08);
+            color: var(--cyan);
+            border: 1px solid rgba(0, 200, 255, 0.2);
+        }
+
+        .role-badge {
+            display: inline-block;
+            font-size: 11px;
+            color: var(--silver);
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-radius: 3px;
+            padding: 2px 8px;
+        }
+
+        .priority-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 6px;
+        }
+
+        .p-alta {
+            background: var(--accent);
+            box-shadow: 0 0 6px rgba(255, 107, 26, 0.5);
+        }
+
+        .p-media {
+            background: var(--yellow);
+        }
+
+        .p-bassa {
+            background: var(--ash);
+        }
+
+        .note-cell {
+            font-size: 12px;
+            color: var(--silver);
+            max-width: 220px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* ── MODAL ──────────────────────────────── */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-top: 3px solid var(--accent);
+            width: 600px;
+            max-width: 95vw;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 28px;
+            border-bottom: 1px solid var(--steel);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            color: var(--silver);
+            font-size: 20px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: var(--accent);
+        }
+
+        .modal-body {
+            padding: 28px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group.full {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            font-family: var(--mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            background: var(--dark);
+            border: 1px solid var(--steel);
+            border-radius: 3px;
+            padding: 10px 14px;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .form-group select option {
+            background: var(--dark);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-footer {
+            padding: 16px 28px;
+            border-top: 1px solid var(--steel);
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* ── ADD PANEL ──────────────────────────── */
+        .add-row {
+            display: none;
+            background: rgba(255, 107, 26, 0.04);
+            border: 1px dashed rgba(255, 107, 26, 0.3);
+            border-radius: 4px;
+            padding: 20px;
+            margin: 20px 40px;
+        }
+
+        .add-row.open {
+            display: block;
+        }
+
+        /* ── PRINT ───────────────────────────────── */
+        @media print {
+
+            .topbar-right,
+            .filters,
+            .modal-overlay,
+            .add-row {
+                display: none !important;
+            }
+
+            body,
+            .table-wrap {
+                background: #fff;
+                color: #000;
+            }
+
+            table th,
+            table td {
+                border-color: #ddd;
+                color: #000;
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+    <div class="topbar">
+        <div class="topbar-left">
+            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div class="topbar-title"><strong>CRM</strong> — Contatti B2B Strategici</div>
+        </div>
+        <div class="topbar-right">
+            <button class="btn btn-ghost" onclick="window.print()">Stampa Pipeline</button>
+            <button class="btn btn-primary" onclick="openModal()">+ Aggiungi Contatto</button>
+        </div>
+    </div>
+
+    <!-- STATS STRIP -->
+    <div class="stats-strip" id="stats-strip">
+        <div class="stat-item">
+            <span class="stat-dot green"></span>
+            <div>
+                <label>Attivi</label>
+                <span id="count-attivo">0</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot" style="background:var(--accent)"></span>
+            <div>
+                <label>Caldi</label>
+                <span id="count-caldo">0</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot yellow"></span>
+            <div>
+                <label>Prospect</label>
+                <span id="count-prospect">0</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot cyan"></span>
+            <div>
+                <label>Nurturing</label>
+                <span id="count-nurturing">0</span>
+            </div>
+        </div>
+        <div class="stat-item">
+            <span class="stat-dot grey"></span>
+            <div>
+                <label>Totale</label>
+                <span id="count-total">0</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- FILTERS -->
+    <div class="filters">
+        <span class="filter-label">Filtro:</span>
+        <button class="filter-btn active" data-filter="all">Tutti</button>
+        <button class="filter-btn" data-filter="Attivo">Attivi</button>
+        <button class="filter-btn" data-filter="Caldo">Caldi</button>
+        <button class="filter-btn" data-filter="Prospect">Prospect</button>
+        <button class="filter-btn" data-filter="Nurturing">Nurturing</button>
+        <button class="filter-btn" data-filter="Inattivo">Inattivo</button>
+        <input class="search-box" type="text" id="searchInput" placeholder="Cerca nome, azienda, ruolo…">
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+        <table id="crm-table">
+            <thead>
+                <tr>
+                    <th>Contatto</th>
+                    <th>Ruolo</th>
+                    <th>Agenzia / Produzione</th>
+                    <th>Settore</th>
+                    <th>Status</th>
+                    <th>Priorità</th>
+                    <th>Ultimo Contatto</th>
+                    <th>Note</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="crm-body">
+                <!-- Injected by JS -->
+            </tbody>
+        </table>
+        <p id="no-results"
+            style="display:none; text-align:center; color:var(--ash); padding:40px; font-family:var(--mono); font-size:13px;">
+            Nessun contatto trovato.</p>
+    </div>
+
+    <!-- MODAL ADD/EDIT -->
+    <div class="modal-overlay" id="modal-overlay" onclick="closeModalOutside(event)">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Nuovo Contatto</h3>
+                <button class="modal-close" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Nome</label>
+                        <input type="text" id="f-nome" placeholder="es. Marco Rossi">
+                    </div>
+                    <div class="form-group">
+                        <label>Cognome</label>
+                        <input type="text" id="f-cognome" placeholder="es. Bianchi">
+                    </div>
+                    <div class="form-group">
+                        <label>Ruolo</label>
+                        <select id="f-ruolo">
+                            <option value="Technical Director">Technical Director</option>
+                            <option value="Head of Sound">Head of Sound</option>
+                            <option value="Production Manager">Production Manager</option>
+                            <option value="RF Coordinator">RF Coordinator</option>
+                            <option value="FOH Engineer">FOH Engineer</option>
+                            <option value="Monitor Engineer">Monitor Engineer</option>
+                            <option value="Venue Technical Manager">Venue Technical Manager</option>
+                            <option value="A&R / Label">A&R / Label</option>
+                            <option value="Artist Manager">Artist Manager</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Agenzia / Produzione</label>
+                        <input type="text" id="f-agenzia" placeholder="es. Live Nation IT">
+                    </div>
+                    <div class="form-group">
+                        <label>Settore</label>
+                        <select id="f-settore">
+                            <option value="Festival">Festival</option>
+                            <option value="Touring">Touring</option>
+                            <option value="Corporate">Corporate</option>
+                            <option value="Broadcast / TV">Broadcast / TV</option>
+                            <option value="Teatro / Opera">Teatro / Opera</option>
+                            <option value="Service">Service</option>
+                            <option value="Venue">Venue</option>
+                            <option value="Altro">Altro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Status</label>
+                        <select id="f-status">
+                            <option value="Prospect">Prospect</option>
+                            <option value="Nurturing">Nurturing</option>
+                            <option value="Caldo">Caldo</option>
+                            <option value="Attivo">Attivo</option>
+                            <option value="Inattivo">Inattivo</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Priorità</label>
+                        <select id="f-priorita">
+                            <option value="Alta">Alta</option>
+                            <option value="Media">Media</option>
+                            <option value="Bassa">Bassa</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="f-email" placeholder="contatto@produzione.it">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input type="tel" id="f-tel" placeholder="+39 000 000 0000">
+                    </div>
+                    <div class="form-group">
+                        <label>Ultimo Contatto</label>
+                        <input type="date" id="f-data">
+                    </div>
+                    <div class="form-group full">
+                        <label>Note Interne</label>
+                        <textarea id="f-note"
+                            placeholder="Note sul rapporto, interessi, eventi precedenti, follow-up programmati…"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-ghost" onclick="closeModal()">Annulla</button>
+                <button class="btn btn-primary" onclick="saveContact()">Salva Contatto</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── DATA ──────────────────────────────────────────────────
+        const STORAGE_KEY = 'vect_crm_v1';
+
+        const sampleData = [
+            { id: 1, nome: 'Luca', cognome: 'Ferrari', ruolo: 'Technical Director', agenzia: 'Lucca Summer Festival', settore: 'Festival', status: 'Attivo', priorita: 'Alta', email: 'l.ferrari@lsfest.it', tel: '', data: '2026-03-01', note: 'Referente principale per il main stage. Interesse concreto al noleggio Spectera. Follow-up a maggio.' },
+            { id: 2, nome: 'Giulia', cognome: 'Marchetti', ruolo: 'Production Manager', agenzia: 'D&D Concert', settore: 'Touring', status: 'Caldo', priorita: 'Alta', email: 'g.marchetti@ddconcert.it', tel: '+39 02 1234567', data: '2026-02-20', note: 'Tour estivo 2026 da definire. Ha ricevuto il pitch deck. In attesa di preventivo.' },
+            { id: 3, nome: 'Alessandro', cognome: 'Ricci', ruolo: 'Head of Sound', agenzia: 'Fabrique Milano', settore: 'Venue', status: 'Nurturing', priorita: 'Media', email: 'a.ricci@fabrique.it', tel: '', data: '2026-01-15', note: 'Venue con calendario fitto di date corporate. Interessato a pacchetto wet hire mensile.' },
+            { id: 4, nome: 'Sara', cognome: 'Conti', ruolo: 'FOH Engineer', agenzia: 'Freelance', settore: 'Touring', status: 'Prospect', priorita: 'Media', email: 'sara.conti@gmail.com', tel: '', data: '2026-01-08', note: 'Lavora con artisti pop italiani di secondo tier. Potenziale ambassador del sistema.' },
+            { id: 5, nome: 'Marco', cognome: 'Bianchi', ruolo: 'Venue Technical Manager', agenzia: 'Mediolanum Forum', settore: 'Venue', status: 'Prospect', priorita: 'Alta', email: '', tel: '', data: '', note: 'Contatto da raggiungere. Venue di primo livello per eventi broadcast e concerti internazionali.' },
+            { id: 6, nome: 'Valentina', cognome: 'Romano', ruolo: 'Production Manager', agenzia: 'MTV Italia (Paramount)', settore: 'Broadcast / TV', status: 'Caldo', priorita: 'Alta', email: 'v.romano@mtv.it', tel: '', data: '2026-03-03', note: 'Produzione TV live. Specifico interesse per gestione frequenze in ambienti densi (set con pubblico). WP inviato.' },
+            { id: 7, nome: 'Davide', cognome: 'Esposito', ruolo: 'RF Coordinator', agenzia: 'STS Group', settore: 'Service', status: 'Inattivo', priorita: 'Bassa', email: 'd.esposito@stsgroup.it', tel: '', data: '2025-11-01', note: 'Competitor indiretto. Rapporto neutro. Monitorare in caso di partnership su eventi di grande formato.' },
+            { id: 8, nome: 'Chiara', cognome: 'De Luca', ruolo: 'A&R / Label', agenzia: 'Warner Music Italy', settore: 'Touring', status: 'Nurturing', priorita: 'Media', email: 'c.deluca@warnermusic.com', tel: '', data: '2026-02-10', note: 'Gestisce artisti con tour UE. Il team tecnico decide in autonomia, ma lei può fare la referral giusta.' },
+        ];
+
+        function loadData() {
+            try {
+                const d = localStorage.getItem(STORAGE_KEY);
+                return d ? JSON.parse(d) : sampleData;
+            } catch { return sampleData; }
+        }
+
+        function saveData(data) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        }
+
+        let contacts = loadData();
+        let editingId = null;
+        let currentFilter = 'all';
+        let currentSearch = '';
+        let sortCol = null;
+        let sortDir = 1;
+
+        // ── RENDER ───────────────────────────────────────────────
+        function statusBadge(s) {
+            const map = { Attivo: 'badge-attivo', Caldo: 'badge-caldo', Prospect: 'badge-prospect', Inattivo: 'badge-inattivo', Nurturing: 'badge-nurturing' };
+            return `<span class="badge ${map[s] || 'badge-inattivo'}">${s}</span>`;
+        }
+
+        function priorityDot(p) {
+            const map = { Alta: 'p-alta', Media: 'p-media', Bassa: 'p-bassa' };
+            return `<span class="priority-dot ${map[p] || 'p-bassa'}"></span>${p}`;
+        }
+
+        function render() {
+            const tbody = document.getElementById('crm-body');
+            let data = [...contacts];
+
+            // filter
+            if (currentFilter !== 'all') data = data.filter(c => c.status === currentFilter);
+            if (currentSearch) {
+                const q = currentSearch.toLowerCase();
+                data = data.filter(c =>
+                    (c.nome + ' ' + c.cognome + ' ' + c.agenzia + ' ' + c.ruolo).toLowerCase().includes(q)
+                );
+            }
+
+            // sort
+            if (sortCol) data.sort((a, b) => {
+                const av = (a[sortCol] || '').toString().toLowerCase();
+                const bv = (b[sortCol] || '').toString().toLowerCase();
+                return av < bv ? -sortDir : av > bv ? sortDir : 0;
+            });
+
+            document.getElementById('no-results').style.display = data.length === 0 ? 'block' : 'none';
+
+            tbody.innerHTML = data.map(c => `
+            <tr onclick="openModal(${c.id})">
+                <td>
+                    <div class="contact-name">${c.nome} ${c.cognome}</div>
+                    ${c.email ? `<div class="contact-company">${c.email}</div>` : ''}
+                </td>
+                <td><span class="role-badge">${c.ruolo}</span></td>
+                <td>${c.agenzia || '<span style="color:var(--ash)">—</span>'}</td>
+                <td style="color:var(--silver); font-size:13px;">${c.settore}</td>
+                <td>${statusBadge(c.status)}</td>
+                <td style="font-size:13px;">${priorityDot(c.priorita)}</td>
+                <td style="font-size:12px; color:var(--silver); font-family:var(--mono);">${c.data || '—'}</td>
+                <td class="note-cell" title="${c.note}">${c.note || '—'}</td>
+                <td onclick="event.stopPropagation()">
+                    <button class="btn btn-ghost" style="padding:4px 10px; font-size:10px;" onclick="deleteContact(${c.id})">✕</button>
+                </td>
+            </tr>
+        `).join('');
+
+            updateStats();
+        }
+
+        function updateStats() {
+            const counts = { attivo: 0, caldo: 0, prospect: 0, nurturing: 0, total: contacts.length };
+            contacts.forEach(c => {
+                if (c.status === 'Attivo') counts.attivo++;
+                else if (c.status === 'Caldo') counts.caldo++;
+                else if (c.status === 'Prospect') counts.prospect++;
+                else if (c.status === 'Nurturing') counts.nurturing++;
+            });
+            document.getElementById('count-attivo').textContent = counts.attivo;
+            document.getElementById('count-caldo').textContent = counts.caldo;
+            document.getElementById('count-prospect').textContent = counts.prospect;
+            document.getElementById('count-nurturing').textContent = counts.nurturing;
+            document.getElementById('count-total').textContent = counts.total;
+        }
+
+        // ── MODAL ────────────────────────────────────────────────
+        function openModal(id) {
+            editingId = id || null;
+            document.getElementById('modal-title').textContent = id ? 'Modifica Contatto' : 'Nuovo Contatto';
+
+            if (id) {
+                const c = contacts.find(x => x.id === id);
+                if (!c) return;
+                document.getElementById('f-nome').value = c.nome;
+                document.getElementById('f-cognome').value = c.cognome;
+                document.getElementById('f-ruolo').value = c.ruolo;
+                document.getElementById('f-agenzia').value = c.agenzia;
+                document.getElementById('f-settore').value = c.settore;
+                document.getElementById('f-status').value = c.status;
+                document.getElementById('f-priorita').value = c.priorita;
+                document.getElementById('f-email').value = c.email;
+                document.getElementById('f-tel').value = c.tel;
+                document.getElementById('f-data').value = c.data;
+                document.getElementById('f-note').value = c.note;
+            } else {
+                ['f-nome', 'f-cognome', 'f-agenzia', 'f-email', 'f-tel', 'f-data', 'f-note'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('f-ruolo').value = 'Technical Director';
+                document.getElementById('f-settore').value = 'Festival';
+                document.getElementById('f-status').value = 'Prospect';
+                document.getElementById('f-priorita').value = 'Media';
+            }
+            document.getElementById('modal-overlay').classList.add('open');
+        }
+
+        function closeModal() {
+            document.getElementById('modal-overlay').classList.remove('open');
+            editingId = null;
+        }
+
+        function closeModalOutside(e) {
+            if (e.target === document.getElementById('modal-overlay')) closeModal();
+        }
+
+        function saveContact() {
+            const c = {
+                id: editingId || Date.now(),
+                nome: document.getElementById('f-nome').value.trim(),
+                cognome: document.getElementById('f-cognome').value.trim(),
+                ruolo: document.getElementById('f-ruolo').value,
+                agenzia: document.getElementById('f-agenzia').value.trim(),
+                settore: document.getElementById('f-settore').value,
+                status: document.getElementById('f-status').value,
+                priorita: document.getElementById('f-priorita').value,
+                email: document.getElementById('f-email').value.trim(),
+                tel: document.getElementById('f-tel').value.trim(),
+                data: document.getElementById('f-data').value,
+                note: document.getElementById('f-note').value.trim(),
+            };
+
+            if (!c.nome) { alert('Inserisci almeno il nome.'); return; }
+
+            if (editingId) {
+                contacts = contacts.map(x => x.id === editingId ? c : x);
+            } else {
+                contacts.push(c);
+            }
+
+            saveData(contacts);
+            closeModal();
+            render();
+        }
+
+        function deleteContact(id) {
+            if (!confirm('Rimuovere questo contatto dal CRM?')) return;
+            contacts = contacts.filter(c => c.id !== id);
+            saveData(contacts);
+            render();
+        }
+
+        // ── FILTERS & SEARCH ─────────────────────────────────────
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+                render();
+            });
+        });
+
+        document.getElementById('searchInput').addEventListener('input', e => {
+            currentSearch = e.target.value;
+            render();
+        });
+
+        // ── INIT ─────────────────────────────────────────────────
+        render();
+    </script>
+
+</body>
+
+</html>

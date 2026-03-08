@@ -1,0 +1,1150 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Playbook Commerciale</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111111;
+            --carbon: #1A1A1A;
+            --steel: #252525;
+            --border: #2E2E2E;
+            --ash: #555;
+            --silver: #888;
+            --light: #D8D8D8;
+            --white: #F2F2F2;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --green: #00CC66;
+            --yellow: #FFD600;
+            --cyan: #00C8FF;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── SIDEBAR ────────────────────── */
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: var(--dark);
+            border-right: 1px solid var(--border);
+            padding: 28px 0;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        .sidebar-logo {
+            padding: 0 24px 28px;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 24px;
+        }
+
+        .sidebar-logo svg {
+            width: 80px;
+        }
+
+        .sidebar-label {
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--ash);
+            padding: 0 24px;
+            margin-bottom: 12px;
+        }
+
+        .nav-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.15s;
+            border-left: 2px solid transparent;
+        }
+
+        .nav-item:hover {
+            background: var(--accent-dim);
+            border-left-color: var(--accent);
+        }
+
+        .nav-item.active {
+            background: var(--accent-dim);
+            border-left-color: var(--accent);
+        }
+
+        .nav-num {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 10px;
+            font-weight: 700;
+            flex-shrink: 0;
+            border: 1px solid var(--border);
+            color: var(--silver);
+        }
+
+        .nav-item.active .nav-num,
+        .nav-item:hover .nav-num {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .nav-text {
+            font-size: 13px;
+            color: var(--silver);
+            font-weight: 500;
+        }
+
+        .nav-item.active .nav-text,
+        .nav-item:hover .nav-text {
+            color: var(--white);
+        }
+
+        .sidebar-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 16px 24px;
+        }
+
+        .sidebar-tag {
+            margin: 0 24px;
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ash);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ── MAIN ───────────────────────── */
+        .main {
+            flex: 1;
+            overflow-x: hidden;
+        }
+
+        /* ── TOP BAR ─────────────────────── */
+        .topbar {
+            padding: 16px 48px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--dark);
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .topbar-title {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .topbar-title strong {
+            color: var(--accent);
+        }
+
+        .btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 8px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+        }
+
+        /* ── STEP BLOCKS ─────────────────── */
+        .step-section {
+            padding: 60px 48px;
+            border-bottom: 1px solid var(--border);
+            max-width: 900px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+
+        .step-num-big {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #000;
+            font-family: var(--mono);
+            font-size: 22px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .step-meta {}
+
+        .step-eyebrow {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .step-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.2;
+        }
+
+        .step-body p {
+            font-size: 15px;
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 16px;
+            max-width: 720px;
+        }
+
+        /* ── INFO BOX ────────────────────── */
+        .info-box {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 4px 4px 0;
+            margin: 24px 0;
+        }
+
+        .info-box h4 {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .info-box p {
+            font-size: 14px;
+            color: var(--light);
+            margin: 0;
+            max-width: none;
+        }
+
+        /* ── TEMPLATE BOX ────────────────── */
+        .template-box {
+            background: #0D1117;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin: 24px 0;
+            overflow: hidden;
+        }
+
+        .template-header {
+            padding: 12px 20px;
+            background: var(--carbon);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .template-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .template-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .td-red {
+            background: #FF5F57;
+        }
+
+        .td-yellow {
+            background: #FFBD2E;
+        }
+
+        .td-green {
+            background: #28CA42;
+        }
+
+        .template-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--silver);
+            letter-spacing: 1px;
+        }
+
+        .copy-btn {
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 5px 12px;
+            background: var(--steel);
+            color: var(--silver);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+            color: #000;
+            border-color: var(--green);
+        }
+
+        .template-content {
+            padding: 24px;
+            font-family: var(--font);
+            font-size: 14px;
+            line-height: 1.9;
+            color: var(--light);
+            white-space: pre-wrap;
+        }
+
+        .t-label {
+            display: inline-block;
+            background: rgba(255, 107, 26, 0.15);
+            color: var(--accent);
+            border-radius: 3px;
+            padding: 0 4px;
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+
+        /* ── PLATFORM TABS ───────────────── */
+        .tabs {
+            display: flex;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0;
+        }
+
+        .tab {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 10px 20px;
+            cursor: pointer;
+            color: var(--ash);
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            transition: all 0.15s;
+        }
+
+        .tab.active {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+
+        .tab:hover {
+            color: var(--light);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* ── CHECKLIST ───────────────────── */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 24px 0;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 14px 18px;
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .check-item:hover {
+            border-color: var(--accent);
+        }
+
+        .check-item input[type="checkbox"] {
+            width: 16px;
+            height: 16px;
+            margin-top: 2px;
+            accent-color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .check-item label {
+            font-size: 14px;
+            color: var(--light);
+            cursor: pointer;
+            line-height: 1.5;
+        }
+
+        .check-item label span {
+            display: block;
+            font-size: 12px;
+            color: var(--silver);
+            margin-top: 3px;
+        }
+
+        /* ── OBJECTIONS ─────────────────── */
+        .obj-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 24px 0;
+        }
+
+        .obj-card {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .obj-question {
+            padding: 16px 20px;
+            background: rgba(255, 50, 50, 0.04);
+            border-bottom: 1px solid var(--border);
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+        }
+
+        .obj-answer {
+            padding: 16px 20px;
+            font-size: 14px;
+            color: var(--light);
+            line-height: 1.7;
+            display: none;
+        }
+
+        .obj-card.open .obj-answer {
+            display: block;
+        }
+
+        .obj-q-ico {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ── TIMELINE STEP ───────────────── */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 24px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+
+        .tl-item {
+            position: relative;
+            padding: 0 0 28px 24px;
+        }
+
+        .tl-item::before {
+            content: '';
+            position: absolute;
+            left: -22px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--black);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+
+        .tl-day {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .tl-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .tl-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+
+        /* ── TAG BADGES ─────────────────── */
+        .tag {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 100px;
+            border: 1px solid;
+            margin: 2px;
+        }
+
+        .tag-green {
+            color: var(--green);
+            border-color: rgba(0, 204, 102, 0.3);
+            background: rgba(0, 204, 102, 0.06);
+        }
+
+        .tag-yellow {
+            color: var(--yellow);
+            border-color: rgba(255, 214, 0, 0.3);
+            background: rgba(255, 214, 0, 0.06);
+        }
+
+        .tag-red {
+            color: #FF6666;
+            border-color: rgba(255, 80, 80, 0.3);
+            background: rgba(255, 80, 80, 0.06);
+        }
+
+        @media print {
+
+            .sidebar,
+            .topbar {
+                display: none !important;
+            }
+
+            .main {
+                width: 100%;
+            }
+
+            .step-section {
+                padding: 30px;
+            }
+
+            body {
+                color: #000;
+                background: #fff;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+        </div>
+        <div class="sidebar-label">Playbook Commerciale</div>
+        <a href="#step1" class="nav-item"><span class="nav-num">1</span><span class="nav-text">Prospecting</span></a>
+        <a href="#step2" class="nav-item"><span class="nav-num">2</span><span class="nav-text">Email a Freddo</span></a>
+        <a href="#step3" class="nav-item"><span class="nav-num">3</span><span class="nav-text">LinkedIn
+                Outreach</span></a>
+        <a href="#step4" class="nav-item"><span class="nav-num">4</span><span class="nav-text">Follow-up</span></a>
+        <a href="#step5" class="nav-item"><span class="nav-num">5</span><span class="nav-text">Prima Call</span></a>
+        <a href="#step6" class="nav-item"><span class="nav-num">6</span><span class="nav-text">Proposta &
+                Chiusura</span></a>
+        <div class="sidebar-divider"></div>
+        <div class="sidebar-tag">Timeline: ~3–6 settimane</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+        <div class="topbar">
+            <div class="topbar-title"><strong>Playbook</strong> — Flusso Commerciale VECT</div>
+            <button class="btn btn-primary" onclick="window.print()">Stampa / PDF</button>
+        </div>
+
+        <!-- ══ STEP 1: PROSPECTING ══ -->
+        <div class="step-section" id="step1">
+            <div class="step-header">
+                <div class="step-num-big">1</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Giorno 1 — Prima di tutto</div>
+                    <h2 class="step-title">Prospecting: chi contattare</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Prima di scrivere qualsiasi email, costruisci una lista di <strong style="color:var(--white)">10-15
+                        contatti mirati</strong> e inseriscili nel CRM. Qualità > quantità: un Technical Director di
+                    Live Nation vale 50 contatti casuali.</p>
+
+                <div class="info-box">
+                    <h4>// Target Primari — Alta Priorità</h4>
+                    <p>🎯 <strong style="color:var(--white)">Technical Director / Production Manager</strong> di: Live
+                        Nation IT, DNA Concerti, Trident Music, Shining Production, Friends & Partners, Vivo Concerti,
+                        Vertigo.<br><br>
+                        🎯 <strong style="color:var(--white)">Head of Sound / RF Coordinator</strong> freelance con
+                        touring credits documentati (ricerca su LinkedIn: "Sound Engineer Italy touring").<br><br>
+                        🎯 <strong style="color:var(--white)">Venue Technical Manager</strong> di: Mediolanum Forum,
+                        Unipol Arena, Palazzo dello Sport Roma, DatchForum, Fabrique Milano.</p>
+                </div>
+
+                <p><strong style="color:var(--white)">Come trovare i contatti:</strong></p>
+
+                <div class="checklist" id="checklist-prospect">
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>LinkedIn Sales
+                            Navigator (o ricerca manuale)<span>Cerca: "Technical Director" + azienda di produzione
+                                target. Guarda le connessioni in comune.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Analisi dei
+                            credits sui siti delle produzioni<span>Nei comunicati stampa dei grandi concerti, il nome
+                                del Technical Manager è quasi sempre citato.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Industry events:
+                            Prolight+Sound, IBC, BIT Milano<span>Le fiere di settore sono il posto più rapido per
+                                raccogliere biglietti da visita e partire con un warm contact.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Profiling su
+                            Musixmatch / Wikipedia dei grandi tour 2026<span>Cerca il crew del tour, poi trova il
+                                responsabile tecnico su LinkedIn.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Hai già 10
+                            contatti inseriti nel CRM?<span>Obiettivo minimo prima di procedere al Step
+                                2.</span></label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STEP 2: EMAIL A FREDDO ══ -->
+        <div class="step-section" id="step2">
+            <div class="step-header">
+                <div class="step-num-big">2</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Giorno 2-3 — Primo Contatto</div>
+                    <h2 class="step-title">Email a Freddo<br>+ White Paper</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Questa è la tua prima impressione. L'obiettivo <strong style="color:var(--white)">NON è
+                        vendere</strong> subito. L'obiettivo è ricevere una risposta. Tieni l'email breve,
+                    personalizzata e orientata al problema del destinatario, non ai tuoi servizi.</p>
+
+                <div class="info-box">
+                    <h4>// Regola d'oro</h4>
+                    <p>Oggetto e prima riga sono il 70% del successo. Se l'oggetto è generico ("Presentazione servizi
+                        VECT") finisci in archivio. Se parla di un problema reale che lui ha risolto — o che ancora non
+                        ha risolto — si ferma a leggere.</p>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">EMAIL — Oggetto 1 · Per festival / multi-stage</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t1')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t1">OGGETTO: RF multi-stage: come 64 link wireless sono entrati in
+                        6 MHz
+
+                        Ciao [Nome],
+
+                        ho visto il lineup del [Nome Festival] — una produzione di quel livello su più palchi simultanei
+                        è esattamente l'ambiente in cui la gestione RF diventa il fattore critico tra un set perfetto e
+                        un disastro.
+
+                        Opero come specialista RF esclusivamente su sistemi Sennheiser Spectera (WMAS): tecnologia che
+                        permette di gestire 32+ link IEM e microfoni in una finestra spettrale di 6-8 MHz, eliminando di
+                        fatto il problema dell'intermodulazione.
+
+                        Ti allego un White Paper tecnico di 5 pagine che spiega perché questa tecnologia sta diventando
+                        lo standard operativo nei festival europei di alto livello.
+
+                        Hai 20 minuti per una call esplorativa nei prossimi 2 settimane?
+
+                        Edoardo Micheli — VECT
+                        RF Engineering · Milano
+                        info@vect-rf.com | vect-rf.com</div>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">EMAIL — Oggetto 2 · Per touring / artisti in tour</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t2')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t2">OGGETTO: Latenza 0.7ms, AES-256, e zero frequency planning:
+                        serve parlare?
+
+                        Ciao [Nome],
+
+                        sto seguendo il tour di [Artista] con interesse — configurazioni come queste, con monitor in-ear
+                        su palchi da 1.500+ mq, sono il terreno in cui un sistema RF mal coordinato si sente.
+
+                        Con Sennheiser Spectera gestiamo IEM + microfono dallo stesso bodypack bidirezionale, senza
+                        dedicare 4 MHz per link. Il risultato è meno rack, meno cavi, zero interferenze intermodulazione
+                        e setup completo in 20 minuti.
+
+                        Ho preparato un documento tecnico sintetico che confronta questo approccio con i sistemi legacy
+                        — te lo giro se può essere utile per pianificare la prossima leg.
+
+                        Disponibile per una call veloce?
+
+                        Edoardo Micheli — VECT
+                        RF Engineering · Milano
+                        info@vect-rf.com | vect-rf.com</div>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">EMAIL — Oggetto 3 · Per eventi Corporate / Broadcast</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t3')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t3">OGGETTO: Frequenze wireless criptate AES-256 per eventi
+                        classificati
+
+                        Ciao [Nome],
+
+                        per produzioni corporate o broadcast di livello enterprise — dove la riservatezza del segnale
+                        audio è un requisito non negoziabile — il mercato sta convergendo su un solo approccio: WMAS con
+                        crittografia AES-256 end-to-end.
+
+                        VECT fornisce questo servizio a Milano e nel resto d'Italia su tecnologia Sennheiser Spectera:
+                        zero piano frequenze, latenza costante 0.7ms, link bidirezionali, integrazione Dante nativa.
+
+                        Ho un documento tecnico di cinque pagine che spiega come funziona e perché elimina i rischi RF
+                        tipici degli ambienti densi (sale congressi, studi TV, arene multi-sponsor).
+
+                        Ha senso approfondire per il prossimo progetto?
+
+                        Edoardo Micheli — VECT
+                        RF Engineering · Milano
+                        info@vect-rf.com | vect-rf.com</div>
+                </div>
+
+                <div class="info-box">
+                    <h4>// Note operative</h4>
+                    <p>
+                        ✉️ Allega sempre il White Paper in PDF (salvalo da Chrome → Stampa → Salva come PDF).<br><br>
+                        📅 Invia tra le <strong style="color:var(--white)">martedì e giovedì, ore 9-11</strong>. Sono le
+                        fasce con il tasso di apertura più alto nel B2B.<br><br>
+                        🔢 Non mandare più di <strong style="color:var(--white)">5 email al giorno</strong> per evitare
+                        di finire in spam. Usa lo stesso indirizzo di firma del sito.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STEP 3: LINKEDIN ══ -->
+        <div class="step-section" id="step3">
+            <div class="step-header">
+                <div class="step-num-big">3</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Giorno 3-4 — Canale Alternativo</div>
+                    <h2 class="step-title">LinkedIn Outreach</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Se non hai l'email diretta (o vuoi riscaldare il contatto prima di scrivere), LinkedIn è il canale
+                    più efficace per i professionisti dell'audio industry. Tieni il messaggio sotto le 5 righe: su
+                    mobile, quello che non entra nella preview viene ignorato.</p>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">LINKEDIN — Connessione (nota di invito)</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t4')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t4">Ciao [Nome], ho visto il tuo lavoro su [Evento/Tour]. Opero
+                        come specialista RF su Sennheiser Spectera — ho un white paper tecnico su WMAS nei festival
+                        multi-stage che potrebbe interessarti. Resto in contatto volentieri.</div>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">LINKEDIN — Messaggio dopo connessione accettata</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t5')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t5">Ciao [Nome], grazie per la connessione.
+
+                        Ho realizzato un documento tecnico di 5 pagine sul perché il WMAS (Sennheiser Spectera) sta
+                        diventando lo standard per i main stage europei — in particolare per la gestione
+                        dell'intermodulazione in ambienti con più fornitori attivi.
+
+                        Te lo giro se può avere senso per le tue produzioni: sarebbe utile sapere con che setup lavori
+                        tipicamente?</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STEP 4: FOLLOW-UP ══ -->
+        <div class="step-section" id="step4">
+            <div class="step-header">
+                <div class="step-num-big">4</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Giorno 7-10 — Nessuna risposta?</div>
+                    <h2 class="step-title">Follow-up Strategico</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Il 70% delle trattative B2B si chiude dopo il secondo o terzo contatto. <strong
+                        style="color:var(--white)">Non seguire = lasciare soldi sul tavolo.</strong> Il follow-up non è
+                    insistenza: è professionalità. L'obiettivo è aggiungere valore, non chiedere di nuovo la stessa
+                    cosa.</p>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">FOLLOW-UP 1 — Dopo 5-7 giorni (aggiungi valore)</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t6')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t6">OGGETTO: Re: [oggetto precedente]
+
+                        Ciao [Nome],
+
+                        volevo solo recuperare il filo, nel caso la mia email precedente fosse stata sepolta.
+
+                        Nel frattempo ho aggiunto al documento alcune specifiche tecniche sull'integrazione Dante 32×32
+                        che potrebbe interessarti se lavori in ambienti con workflow digitale consolidato.
+
+                        Anche solo 15 minuti di call sarebbe sufficiente per capire se c'è un'utilità concreta per le
+                        vostre produzioni.
+
+                        Edoardo · VECT</div>
+                </div>
+
+                <div class="template-box">
+                    <div class="template-header">
+                        <div class="template-header-left">
+                            <span class="template-dot td-red"></span>
+                            <span class="template-dot td-yellow"></span>
+                            <span class="template-dot td-green"></span>
+                            <span class="template-label">FOLLOW-UP 2 — Dopo 14 giorni (la porta aperta)</span>
+                        </div>
+                        <button class="copy-btn" onclick="copyTemplate('t7')">Copia</button>
+                    </div>
+                    <div class="template-content" id="t7">OGGETTO: Ultima mail — poi chiudo il file per ora
+
+                        Ciao [Nome],
+
+                        non voglio essere invasivo: se non è il momento giusto, non c'è problema — capisco benissimo i
+                        ritmi del settore pre-stagione estiva.
+
+                        Lascio i contatti qui sotto, e se nei prossimi mesi dovesse esserci un'esigenza RF per cui vale
+                        la pena approfondire, sono disponibile.
+
+                        Buona stagione lavorativa.
+
+                        Edoardo Micheli — VECT
+                        info@vect-rf.com | vect-rf.com | +39 [tuo numero]</div>
+                </div>
+
+                <div class="info-box">
+                    <h4>// CRM: cosa aggiornare dopo ogni tentativo</h4>
+                    <p>
+                        📌 Cambia lo <strong style="color:var(--white)">Status</strong>: se non risponde dopo 2
+                        follow-up → "Inattivo".<br>
+                        📌 Annota nelle <strong style="color:var(--white)">Note</strong>: data contatto, template usato,
+                        motivo di non risposta (se noto).<br>
+                        📌 Non cancellare mai il contatto: potrebbe tornare utile tra 6 mesi per la stagione successiva.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STEP 5: PRIMA CALL ══ -->
+        <div class="step-section" id="step5">
+            <div class="step-header">
+                <div class="step-num-big">5</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Giorno 10-21 — Ha risposto!</div>
+                    <h2 class="step-title">Struttura della Prima Call</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Hai 20-30 minuti. L'obiettivo della call è <strong style="color:var(--white)">capire il loro problema
+                        specifico</strong> e capire se VECT può risolverlo. Non partire a presentare: prima ascolta. Le
+                    informazioni che raccogli qui sono oro per il preventivo.</p>
+
+                <div class="checklist" id="checklist-call">
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Apertura (2 min):
+                            Presentati e contestualizza<span>"Ciao [Nome], grazie per il tempo. Ho visto [X produzione]:
+                                mi ha incuriosito la sfida RF con più fornitori contemporanei. Vuoi dirmi come la
+                                gestite tipicamente?"</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Discovery (10
+                            min): Le tue 5 domande chiave<span>Vedi le domande qui sotto.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Soluzione (8 min):
+                            Spiega come VECT risolve i loro problemi specifici<span>Non tutte le feature. Solo quelle
+                                rilevanti per quello che hai capito.</span></label></div>
+                    <div class="check-item" onclick="toggleCheck(this)"><input type="checkbox"><label>Chiusura (3 min):
+                            Definire il prossimo passo concreto<span>"Posso mandarti un preventivo indicativo per la
+                                data X entro venerdì?"</span></label></div>
+                </div>
+
+                <p><strong style="color:var(--white)">Le 5 domande da fare in discovery:</strong></p>
+
+                <div class="obj-grid">
+                    <div class="obj-card open">
+                        <div class="obj-question" onclick="toggleObj(this)"><span class="obj-q-ico">❓</span> Quanti link
+                            wireless attivi tipicamente in un vostro main stage?</div>
+                        <div class="obj-answer">La risposta ti dice subito la complessità. Sopra i 20 link, il WMAS
+                            diventa vantaggioso in modo evidente. Sotto i 12, devi qualificare meglio il contesto.</div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="obj-question" onclick="toggleObj(this)"><span class="obj-q-ico">❓</span> Con quanti
+                            altri fornitori RF siete tipicamente in coesistenza?</div>
+                        <div class="obj-answer">Se ci sono altri 3-4 service con wireless attivi, il problema
+                            dell'intermodulazione è reale e attuale. Questa è la tua apertura più forte per il Spectera.
+                        </div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="obj-question" onclick="toggleObj(this)"><span class="obj-q-ico">❓</span> Usate
+                            integrazione Dante o lavorate ancora in analogico?</div>
+                        <div class="obj-answer">Se hanno già Dante in produzione, l'integrazione nativa di Spectera
+                            (32×32 Dante) è un vantaggio immediato che non devono pagare extra. Metti in evidenza
+                            questo.</div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="obj-question" onclick="toggleObj(this)"><span class="obj-q-ico">❓</span> Avete avuto
+                            problemi di interferenze RF nelle ultime stagioni?</div>
+                        <div class="obj-answer">La risposta onesta è quasi sempre "sì". Non premere sulla piaga, ma usa
+                            la risposta per costruire il "prima e dopo": com'era con i sistemi legacy, com'è con
+                            Spectera.</div>
+                    </div>
+                    <div class="obj-card">
+                        <div class="obj-question" onclick="toggleObj(this)"><span class="obj-q-ico">❓</span> C'è già un
+                            budget allocato per la parte RF del progetto o siamo in fase esplorativa?</div>
+                        <div class="obj-answer">Questa è la domanda di qualifica finanziaria. Se il budget non c'è
+                            ancora, sei in fase di educazione del mercato (utile per il lungo termine, non per il mese
+                            prossimo). Pianifica di conseguenza.</div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4>// Obiezioni più comuni e come risponderle</h4>
+                    <p>
+                        <strong style="color:var(--white)">«Abbiamo già un service RF di fiducia.»</strong><br>
+                        → "Capisco. Non sono qui a sostituire nessuno per forza — mi chiedevo se in certi eventi
+                        particolarmente complessi avesse senso affiancare uno specialista WMAS. Posso ragionare insieme
+                        al vostro service."<br><br>
+                        <strong style="color:var(--white)">«Il Spectera è costoso.»</strong><br>
+                        → "Il costo giornaliero del Spectera è ampiamente giustificato dal risparmio in ore di
+                        coordinamento frequenze, in cavi e rack di distribuzione eliminati, e in termini di rischio
+                        operativo ridotto. Posso costruirci un confronto economico."<br><br>
+                        <strong style="color:var(--white)">«Non conosco questa tecnologia.»</strong><br>
+                        → "È normale, è piuttosto recente nel mercato italiano. Ecco perché il White Paper che ti ho
+                        mandato parte dal basso — è pensato per chi non l'ha ancora incontrata."
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- ══ STEP 6: PROPOSTA & CHIUSURA ══ -->
+        <div class="step-section" id="step6">
+            <div class="step-header">
+                <div class="step-num-big">6</div>
+                <div class="step-meta">
+                    <div class="step-eyebrow">// Settimana 3-6 — Chiusura</div>
+                    <h2 class="step-title">Proposta Tecnica<br>& Firma Contratto</h2>
+                </div>
+            </div>
+            <div class="step-body">
+                <p>Dopo la call, hai 48 ore per inviare la proposta mentre il contesto è ancora fresco. La proposta non
+                    è un listino prezzi: è un documento che parla del <strong style="color:var(--white)">loro evento
+                        specifico</strong> e di come VECT lo risolve.</p>
+
+                <div class="info-box">
+                    <h4>// Struttura della Proposta Tecnica (email o PDF)</h4>
+                    <p>
+                        1. <strong style="color:var(--white)">Recap del problema</strong> — ripeti cosa hai capito nella
+                        call (dimostra che hai ascoltato)<br>
+                        2. <strong style="color:var(--white)">Soluzione proposta</strong> — numero di link,
+                        configurazione rack, flusso segnale<br>
+                        3. <strong style="color:var(--white)">Deliverable operativi</strong> — cosa include il servizio
+                        (setup, coordinamento spettro, smontaggio)<br>
+                        4. <strong style="color:var(--white)">Investimento</strong> — tariffa giornaliera o flat fee per
+                        l'evento<br>
+                        5. <strong style="color:var(--white)">Prossimo passo</strong> — "Se sei d'accordo, posso
+                        inviarti il contratto entro [data]"
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="tl-item">
+                        <div class="tl-day">// Entro 48h dalla call</div>
+                        <div class="tl-title">Invia la proposta tecnica via email</div>
+                        <div class="tl-desc">Usa lo storico della call. Aggiungi uno schema tecnico semplice se il setup
+                            è complesso.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-day">// Dopo 3 giorni senza risposta</div>
+                        <div class="tl-title">Follow-up breve: "Tutto ok con la proposta?"</div>
+                        <div class="tl-desc">Un messaggio di 2 righe. Non aggiungere pressione, solo verifica che sia
+                            arrivata.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-day">// Dopo approvazione</div>
+                        <div class="tl-title">Invia il contratto VECT pre-compilato</div>
+                        <div class="tl-desc">Usa il modello Dry/Wet/Consulting già pronto in questa cartella. Compila:
+                            data evento, location, numero link, importo, scadenza pagamento.</div>
+                    </div>
+                    <div class="tl-item">
+                        <div class="tl-day">// Firma ricevuta</div>
+                        <div class="tl-title">Aggiorna il CRM → Status: Attivo</div>
+                        <div class="tl-desc">Aggiungi una nota con la data dell'evento e i dettagli del setup
+                            confermato. Imposta un reminder per il pre-production RF check.</div>
+                    </div>
+                    <div class="tl-item" style="padding-bottom:0">
+                        <div class="tl-day">// Post-evento</div>
+                        <div class="tl-title">Invia il Verbale di Consegna firmato</div>
+                        <div class="tl-desc">Usa il modello `VECT_Verbale_Consegna_Hardware.html`. Chiedi una
+                            testimonianza o un credits per il tuo portfolio.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /main -->
+
+    <script>
+        function copyTemplate(id) {
+            const el = document.getElementById(id);
+            const text = el.innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = el.closest('.template-box').querySelector('.copy-btn');
+                const orig = btn.textContent;
+                btn.textContent = '✓ Copiato';
+                btn.classList.add('copied');
+                setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
+            });
+        }
+
+        function toggleCheck(el) {
+            const cb = el.querySelector('input[type="checkbox"]');
+            cb.checked = !cb.checked;
+        }
+
+        function toggleObj(el) {
+            el.parentElement.classList.toggle('open');
+        }
+
+        // Active nav on scroll
+        const sections = document.querySelectorAll('.step-section');
+        const navItems = document.querySelectorAll('.nav-item');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 120) current = s.id;
+            });
+            navItems.forEach(item => {
+                item.classList.toggle('active', item.getAttribute('href') === '#' + current);
+            });
+        });
+    </script>
+
+</body>
+
+</html>

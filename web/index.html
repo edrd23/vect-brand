@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -50,9 +50,7 @@
       }
     }
     </script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
@@ -64,10 +62,10 @@
             <a href="#">
                 <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
-                        fill="#FF6B1A" />
+                        fill="#F5F5F5" />
                     <path
                         d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
-                        fill="#F5F5F5" />
+                        fill="#FF6B1A" />
                     <path
                         d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
                         fill="#F5F5F5" />
@@ -125,10 +123,10 @@
                 <div class="hero-logo-box">
                     <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
-                            fill="#FF6B1A" />
+                            fill="#F5F5F5" />
                         <path
                             d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
-                            fill="#F5F5F5" />
+                            fill="#FF6B1A" />
                         <path
                             d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
                             fill="#F5F5F5" />
@@ -523,6 +521,20 @@
                         <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
+                    <div class="form-group checkbox-group"
+                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px;">
+                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required
+                            style="margin-top: 4px; width: auto; height: auto;">
+                        <label for="privacyConsent"
+                            style="font-size: 12px; font-weight: 400; color: var(--vect-silver); text-transform: none; letter-spacing: normal; cursor: pointer;">
+                            <span class="it-text">Ho letto la <a href="privacy.html" target="_blank"
+                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a> e
+                                acconsento al trattamento dei dati per la gestione di questa richiesta.</span>
+                            <span class="en-text">I have read the <a href="privacy.html" target="_blank"
+                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a>
+                                and consent to data processing for managing this request.</span>
+                        </label>
+                    </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <span class="it-text">Invia Richiesta</span>
                         <span class="en-text">Send Request</span>
@@ -538,17 +550,19 @@
             <div class="footer-logo">
                 <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
-                        fill="#FF6B1A" />
+                        fill="#F5F5F5" />
                     <path
                         d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
-                        fill="#F5F5F5" />
+                        fill="#FF6B1A" />
                     <path
                         d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
                         fill="#F5F5F5" />
                     <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
                 </svg>
             </div>
-            <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved.</p>
+            <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved. <span
+                    style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="privacy.html"
+                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Privacy Policy</a></p>
         </div>
     </footer>
 

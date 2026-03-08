@@ -1,0 +1,1164 @@
+﻿<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — SOP Manuale Operativo</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111;
+            --carbon: #181818;
+            --border: #282828;
+            --ash: #4A4A4A;
+            --silver: #888;
+            --light: #D0D0D0;
+            --white: #F0F0F0;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --green: #00CC66;
+            --cyan: #00C8FF;
+            --yellow: #FFB800;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* ── SIDEBAR ─────────────────────── */
+        .sidebar {
+            width: 260px;
+            flex-shrink: 0;
+            background: var(--dark);
+            border-right: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            padding-bottom: 32px;
+        }
+
+        .sidebar-logo {
+            padding: 22px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-logo svg {
+            width: 70px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-tag {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+
+        .sidebar-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            margin-top: 4px;
+        }
+
+        .nav-section {
+            padding: 20px 24px 8px;
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--ash);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 9px 24px;
+            font-size: 13px;
+            color: var(--silver);
+            text-decoration: none;
+            transition: all 0.15s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .nav-link:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-link.active {
+            color: var(--accent);
+            background: var(--accent-dim);
+            border-right: 2px solid var(--accent);
+        }
+
+        .nav-link .num {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ash);
+            width: 18px;
+            flex-shrink: 0;
+        }
+
+        .nav-link.active .num {
+            color: var(--accent);
+        }
+
+        /* ── CONTENT ─────────────────────── */
+        .content {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        /* ── HEADER ─────────────────────── */
+        .doc-header {
+            background: var(--dark);
+            border-bottom: 2px solid var(--accent);
+            padding: 24px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .doc-tag {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .doc-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .version-badge {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--silver);
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 4px 12px;
+        }
+
+        /* ── SOP BODY ────────────────────── */
+        .sop-body {
+            max-width: 800px;
+            padding: 48px;
+        }
+
+        .sop-section {
+            margin-bottom: 60px;
+            scroll-margin-top: 80px;
+        }
+
+        .sop-section-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent);
+            padding: 18px 24px;
+            margin-bottom: 28px;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .sop-num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(255, 107, 26, 0.25);
+            border-radius: 3px;
+            padding: 3px 10px;
+        }
+
+        .sop-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .sop-time {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--silver);
+            margin-left: auto;
+        }
+
+        /* STEPS */
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 0;
+            border-left: 2px solid var(--border);
+            margin-left: 16px;
+            padding-bottom: 24px;
+            position: relative;
+        }
+
+        .step-item:last-child {
+            padding-bottom: 0;
+            border-left: 2px solid transparent;
+        }
+
+        .step-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            background: var(--carbon);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--silver);
+            margin-left: -15px;
+            margin-right: 20px;
+            flex-shrink: 0;
+            transition: all 0.2s;
+            cursor: pointer;
+            user-select: none;
+            margin-top: -2px;
+        }
+
+        .step-item.done .step-dot {
+            background: var(--green);
+            border-color: var(--green);
+            color: #000;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .step-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.7;
+        }
+
+        .step-note {
+            margin-top: 8px;
+            padding: 8px 14px;
+            background: var(--accent-dim);
+            border: 1px solid rgba(255, 107, 26, 0.2);
+            border-radius: 3px;
+            font-size: 12px;
+            color: var(--light);
+            font-style: italic;
+        }
+
+        .step-warn {
+            margin-top: 8px;
+            padding: 8px 14px;
+            background: rgba(255, 184, 0, 0.08);
+            border: 1px solid rgba(255, 184, 0, 0.2);
+            border-radius: 3px;
+            font-size: 12px;
+            color: var(--yellow);
+        }
+
+        /* CHECKLIST */
+        .cl {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .cl li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--light);
+        }
+
+        .cl li input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--accent);
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        /* SPEC TABLE */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        .spec-table th {
+            background: var(--carbon);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--silver);
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .spec-table td {
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .spec-table tr:nth-child(odd) td {
+            background: rgba(0, 0, 0, 0.15);
+        }
+
+        .spec-table .v-accent {
+            font-family: var(--mono);
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* ALERT */
+        .alert {
+            padding: 14px 18px;
+            border-radius: 4px;
+            margin: 16px 0;
+            font-size: 13px;
+            line-height: 1.6;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .alert-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .alert.danger {
+            background: rgba(255, 68, 68, 0.08);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: #ff8888;
+        }
+
+        .alert.info {
+            background: rgba(0, 200, 255, 0.08);
+            border: 1px solid rgba(0, 200, 255, 0.25);
+            color: var(--cyan);
+        }
+
+        .alert.tip {
+            background: rgba(0, 204, 102, 0.08);
+            border: 1px solid rgba(0, 204, 102, 0.25);
+            color: var(--green);
+        }
+
+        /* PROGRESS BADGE */
+        .progress-bar {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 16px 20px;
+            margin-bottom: 32px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .pb-label {
+            font-size: 13px;
+            color: var(--silver);
+        }
+
+        .pb-val {
+            font-family: var(--mono);
+            font-size: 14px;
+            color: var(--accent);
+            font-weight: 700;
+            margin-left: auto;
+        }
+
+        .pb-track {
+            flex: 1;
+            height: 4px;
+            background: var(--border);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .pb-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 100px;
+            transition: width 0.5s ease;
+        }
+
+        .print-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 7px 16px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--silver);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            border-color: var(--silver);
+            color: var(--white);
+        }
+
+        @media print {
+
+            .sidebar,
+            .doc-header,
+            .print-btn {
+                display: none;
+            }
+
+            .content {
+                margin: 0;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .sop-section-header,
+            .progress-bar {
+                background: #f5f5f5;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        <div class="sidebar-logo">
+            <svg viewBox="0 0 400 120" fill="none">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div class="sidebar-tag">// SOP v1.0</div>
+            <div class="sidebar-title">Manuale Operativo</div>
+        </div>
+        <div class="nav-section">Procedure</div>
+        <button class="nav-link active" onclick="scrollTo('sop-01','this')"><span class="num">01</span>Setup Sistema
+            Spectera</button>
+        <button class="nav-link" onclick="scrollTo('sop-02','this')"><span class="num">02</span>Scan & Coordinamento
+            RF</button>
+        <button class="nav-link" onclick="scrollTo('sop-03','this')"><span class="num">03</span>Pre-Show
+            Checklist</button>
+        <button class="nav-link" onclick="scrollTo('sop-04','this')"><span class="num">04</span>Gestione Show
+            Live</button>
+        <button class="nav-link" onclick="scrollTo('sop-05','this')"><span class="num">05</span>Post-Show &
+            Smontaggio</button>
+        <button class="nav-link" onclick="scrollTo('sop-06','this')"><span class="num">06</span>Incident
+            Response</button>
+        <button class="nav-link" onclick="scrollTo('sop-07','this')"><span class="num">07</span>Manutenzione
+            Hardware</button>
+        <button class="nav-link" onclick="scrollTo('sop-08','this')"><span class="num">08</span>Onboarding
+            Collaboratori</button>
+        <div class="nav-section" style="margin-top:16px;">Riferimenti Tecnici</div>
+        <button class="nav-link" onclick="scrollTo('ref-spec','this')"><span class="num">→</span>Parametri
+            Spectera</button>
+        <button class="nav-link" onclick="scrollTo('ref-freq','this')"><span class="num">→</span>Bande Frequenza UHF
+            IT</button>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="doc-header">
+            <div>
+                <div class="doc-tag">// Area D · Standard Operating Procedures</div>
+                <div class="doc-title">SOP — Manuale Operativo VECT</div>
+            </div>
+            <div style="display:flex;gap:10px;align-items:center;">
+                <span class="version-badge">v1.0 · 2026</span>
+                <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+            </div>
+        </div>
+
+        <div class="sop-body">
+
+            <!-- PROGRESS -->
+            <div class="progress-bar">
+                <span class="pb-label">Progresso sessione (checklist completate)</span>
+                <div class="pb-track">
+                    <div class="pb-fill" id="progress-fill" style="width:0%"></div>
+                </div>
+                <span class="pb-val" id="progress-text">0%</span>
+            </div>
+
+            <!-- SOP 01 -->
+            <div class="sop-section" id="sop-01">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 01</span>
+                    <span class="sop-title">Setup Sistema Spectera BSS</span>
+                    <span class="sop-time">⏱ 45–90 min</span>
+                </div>
+                <div class="alert info"><span class="alert-icon">ℹ️</span><span>Eseguire questo SOP
+                        <strong>prima</strong> dello scan RF. Il sistema deve essere completamente configurato prima di
+                        avviare la scansione delle frequenze.</span></div>
+                <div class="step-list">
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Posizionamento fisico Base Station (BSS)</div>
+                            <div class="step-desc">Installare la BSS nel rack — consigliato Stage Right o posizione
+                                centrale rispetto ai palchi. Verificare ventilazione laterale libera (min. 5cm). Rack a
+                                terra o su carrello, mai a oltre 1m dal punto di connessione Dante.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Posizionamento antenne DAD</div>
+                            <div class="step-desc">Montare le antenne DAD con line-of-sight ottimale verso il palco.
+                                Altezza ideale: 3–5m. Evitare tralicci metallici in mezzo. Cablaggio coassiale BNC da
+                                BSS ad antenne — verificare perdita attesa su lunghezza cavo (&lt;6 dB per 30m RG-8X).
+                            </div>
+                            <div class="step-note">💡 Regola pratica: se puoi vedere l'area di movimento dei performer
+                                dall'antenna, la posizione è corretta.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Connessione rete Dante</div>
+                            <div class="step-desc">Collegare BSS alla rete Dante tramite porta ETH dedicata. Verificare
+                                indirizzo IP nello stesso subnet della console (es. 192.168.0.x). Aprire Dante
+                                Controller per confermare presenza BSS sulla rete. Impostare sample rate a 48kHz.</div>
+                            <div class="step-warn">⚠️ Non usare switch non-managed per reti audio Dante ad alta densità.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Accensione e inizializzazione BSS</div>
+                            <div class="step-desc">Accendere BSS. Attendere boot completo (circa 90 secondi). Verificare
+                                che tutti i canali siano in stato "Ready" nel software Spectera Manager.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Pairing SEK bodypack</div>
+                            <div class="step-desc">Avvicinare ogni SEK alla BSS per il pairing NFC. Procedura: tenere
+                                premuto il tasto pairing sul SEK > LED bianco fisso = pairing ok. Etichettare ogni
+                                bodypack con il numero di canale assegnato (nastro gaffer + marker permanente).</div>
+                            <div class="step-note">💡 Fare il pairing nell'ordine definitivo: il primo SEK diventa CH01,
+                                il secondo CH02, ecc. Questo evita confusione durante lo show.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">6</div>
+                        <div class="step-content">
+                            <div class="step-title">Attivazione AES-256 e impostazioni globali</div>
+                            <div class="step-desc">In Spectera Manager: Settings → Security → Enable Encryption →
+                                AES-256. Verificare che la crittografia sia attiva su tutti i canali. Impostare la
+                                latenza target: 0.7ms (modalità Low Latency). Abilitare il monitoraggio RSSI in tempo
+                                reale.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">7</div>
+                        <div class="step-content">
+                            <div class="step-title">Routing Dante verso console</div>
+                            <div class="step-desc">In Dante Controller: collegare le uscite BSS agli ingressi della
+                                console (es. VECT CH01 → FOH IN 17, VECT CH02 → FOH IN 18…). Confermare routing con il
+                                soundcheck engineer FOH. Verificare assenza di loop e clipping digitale su tutti i
+                                canali.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP 02 -->
+            <div class="sop-section" id="sop-02">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 02</span>
+                    <span class="sop-title">Scan Spettro & Coordinamento RF</span>
+                    <span class="sop-time">⏱ 30–60 min</span>
+                </div>
+                <div class="alert danger"><span class="alert-icon">🚨</span><span><strong>Priorità assoluta:</strong> Il
+                        coordinamento RF deve avvenire PRIMA che qualsiasi altro sistema wireless attivi i
+                        trasmettitori. Organizza una riunione RF con tutti i fornitori wireless appena possibile dopo
+                        l'arrivo in venue.</span></div>
+                <div class="step-list">
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Scan iniziale spettro</div>
+                            <div class="step-desc">Con tutti i sistemi SPENTI: eseguire full scan UHF 470–694MHz con lo
+                                scanner integrato Spectera o con analyzer esterno. Identificare e documentare: segnali
+                                persistenti (broadcaster, LTE, altro), picchi di disturbo, bande pulite disponibili.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Raccolta dati altri fornitori</div>
+                            <div class="step-desc">Contattare tutti i service RF presenti: chiedere lista
+                                frequenze/bande utilizzate, numero di link, sistema in uso. Completare la tabella nel
+                                Pre-Production Log. Identificare le bande libere per VECT/Spectera.</div>
+                            <div class="step-note">💡 Approccio collaborativo: offri di condividere anche le tue
+                                frequenze. La cooperazione riduce i problemi per tutti.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Selezione banda operativa Spectera</div>
+                            <div class="step-desc">Identificare una finestra di almeno 8MHz contigui e puliti per
+                                l'operatività Spectera. Evitare adiacenza a segnali LTE 800MHz (>20MHz di guardia).
+                                Documentare la banda selezionata nel RF Coordination Report. Configurare i parametri di
+                                banda su Spectera Manager.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Verifica e conferma</div>
+                            <div class="step-desc">Eseguire test completo di tutti i link attivi nella banda
+                                selezionata. Verificare assenza di intermodulazione e dropout. Comunicare la banda
+                                Spectera agli altri service RF prima dell'accensione generale dei sistemi.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP 03 -->
+            <div class="sop-section" id="sop-03">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 03</span>
+                    <span class="sop-title">Pre-Show Checklist</span>
+                    <span class="sop-time">⏱ 15–20 min · Prima del soundcheck</span>
+                </div>
+                <ul class="cl">
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Tutti i SEK bodypack caricati
+                            (batteria > 80%) e assegnati al performer corretto</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>RSSI medio su tutti i canali
+                            verificato in Spectera Manager (target: > −75 dBm)</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Latenza confermata ≤ 0.7ms su tutti i
+                            canali attivi</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Crittografia AES-256 attiva —
+                            indicatore verde su tutti i link</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Routing Dante verificato: tutti i
+                            canali arrivano alle console FOH e Monitor</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Scan RF rapido eseguito — nessuna
+                            nuova interferenza nella banda Spectera</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Walk-test eseguito: camminare sul
+                            palco con SEK attivi — zero dropout</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Backup frequenza identificata e
+                            configurata (pronta ma non attiva)</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Contatto diretto sound engineer FOH
+                            confermato (canale radio o cellulare)</label></li>
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Pre-Production Log completato e
+                            firmato</label></li>
+                </ul>
+            </div>
+
+            <!-- SOP 04 -->
+            <div class="sop-section" id="sop-04">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 04</span>
+                    <span class="sop-title">Gestione Show Live</span>
+                    <span class="sop-time">⏱ Durata evento</span>
+                </div>
+                <div class="step-list">
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Monitoraggio continuo RSSI e qualità link</div>
+                            <div class="step-desc">Tenere Spectera Manager visibile durante tutta la durata dello show.
+                                Monitorare in particolare: RSSI (non deve scendere sotto −80 dBm per più di 2 secondi),
+                                packet loss (target: 0%), latenza (target: stabile a 0.7ms).</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Posizione operatore durante lo show</div>
+                            <div class="step-desc">Stare in posizione con visuale sia sul palco che sul monitor
+                                Spectera. Se operatore separato da FOH: mantenere canale radio aperto con la produzione.
+                                Non allontanarsi dal sistema durante i brani — essere sempre pronto ad intervenire entro
+                                10 secondi.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Cambio batterie durante set</div>
+                            <div class="step-desc">Per show > 2h, pianificare cambio batterie SEK durante pause o cambi
+                                costume. Procedura: spegnere SEK → rimuovere batteria → inserire carica → riaccendere →
+                                confermare re-link prima di rimettere al performer. Tempo target: &lt;90 secondi.</div>
+                            <div class="step-note">💡 Usare un timer per tracciare il tempo rimanente di ogni batteria.
+                                Notare l'orario di accensione di ogni SEK.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Documentazione real-time</div>
+                            <div class="step-desc">Annotare su carta o app qualsiasi anomalia: orario, canale, tipo di
+                                problema, durata, azione correttiva. Questi dati alimentano l'Incident Log nel RF
+                                Coordination Report post-show.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP 05 -->
+            <div class="sop-section" id="sop-05">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 05</span>
+                    <span class="sop-title">Post-Show & Smontaggio</span>
+                    <span class="sop-time">⏱ 30–60 min</span>
+                </div>
+                <div class="step-list">
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Raccolta e inventario SEK</div>
+                            <div class="step-desc">Raccogliere tutti i SEK bodypack dal team performer. Contare e
+                                verificare contro lista: <strong>nessun bodypack allo spettacolo</strong>. Verificare
+                                stato fisico di ogni pezzo. Aggiornare Asset Tracking con ultimo evento.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Carica batterie SEK</div>
+                            <div class="step-desc">Inserire tutti i SEK in carica immediatamente dopo la raccolta. Non
+                                lasciare batterie scariche oltre 12h. Usare caricatore ufficiale Sennheiser — non terze
+                                parti.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Smontaggio cablaggio e antenne</div>
+                            <div class="step-desc">Scollegare antenne DAD dal cablaggio coassiale. Avvolgere i cavi in
+                                anelli larghi (non piegare a 90°). Proteggere connettori BNC/TNC con tappi copripolvere.
+                                Inserire antenne DAD nel case dedicato.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Inventario e firma Verbale Consegna</div>
+                            <div class="step-desc">Se Dry Hire: compilare il Verbale di Consegna con il responsabile del
+                                cliente. Verificare ogni pezzo — stato vs. stato di check-out. Far firmare entrambe le
+                                parti. Fotografare eventuale danno prima di consegnare.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">5</div>
+                        <div class="step-content">
+                            <div class="step-title">RF Coordination Report</div>
+                            <div class="step-desc">Compilare il RF Coordination Report con le metriche dell'evento (link
+                                attivi, latenza, dropout, note). Selezionare l'esito certificazione. Inviare al cliente
+                                entro 24h dall'evento come documento ufficiale VECT.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP 06 -->
+            <div class="sop-section" id="sop-06">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 06</span>
+                    <span class="sop-title">Incident Response — Gestione Emergenze RF</span>
+                    <span class="sop-time">⏱ Variabile</span>
+                </div>
+                <div class="alert danger"><span class="alert-icon">🚨</span><span>Mantenere la calma. La maggior parte
+                        dei problemi RF si risolve in 30–90 secondi se si segue la procedura corretta.</span></div>
+                <div style="margin-top:16px;">
+                    <p
+                        style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
+                        /// Dropout Singolo Canale</p>
+                    <div class="step-list">
+                        <div class="step-item" onclick="toggleStep(this)">
+                            <div class="step-dot">→</div>
+                            <div class="step-content">
+                                <div class="step-title">Verifica RSSI canale coinvolto</div>
+                                <div class="step-desc">Se RSSI &lt; −85 dBm: problema di distanza/ostruzione → chiedere
+                                    al performer di spostarsi verso il palco o verso l'antenna. Se RSSI nella norma →
+                                    possibile interferenza locale.</div>
+                            </div>
+                        </div>
+                        <div class="step-item" onclick="toggleStep(this)">
+                            <div class="step-dot">→</div>
+                            <div class="step-content">
+                                <div class="step-title">Cambio frequenza d'emergenza</div>
+                                <div class="step-desc">Se il problema persiste: in Spectera Manager, spostare il canale
+                                    sulla frequenza di backup pre-configurata (SOP 03, step 8). L'operazione richiede
+                                    &lt;10 secondi e non interrompe gli altri link.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p
+                        style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin:20px 0 14px;">
+                        /// Dropout Multipli Simultanei</p>
+                    <div class="step-list">
+                        <div class="step-item" onclick="toggleStep(this)">
+                            <div class="step-dot">→</div>
+                            <div class="step-content">
+                                <div class="step-title">Interferenza di banda — verifica scan in tempo reale</div>
+                                <div class="step-desc">Aprire analyzer spettrale. Cercare la sorgente interferente: se è
+                                    impulsiva (burst brevi), probabilmente è un dispositivo LTE in movimento. Se è
+                                    continua, è un sistema fisso. Note al FOH che il problema è in analisi.</div>
+                            </div>
+                        </div>
+                        <div class="step-item" onclick="toggleStep(this)">
+                            <div class="step-dot">→</div>
+                            <div class="step-content">
+                                <div class="step-title">Spostamento di banda completo</div>
+                                <div class="step-desc">Come ultima risorsa: spostare tutto il sistema Spectera a una
+                                    banda alternativa identificata durante lo scan iniziale (SOP 02). Procedura:
+                                    Spectera Manager → Global Settings → Band → nuova banda → Apply. Tutti i link si
+                                    ricollegano in circa 20 secondi.</div>
+                                <div class="step-warn">⚠️ Comunicare al FOH prima di eseguire — sarà udibile un breve
+                                    silenzio sui canali durante il riallinemento.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOP 07 -->
+            <div class="sop-section" id="sop-07">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 07</span>
+                    <span class="sop-title">Manutenzione Hardware — Calendario</span>
+                    <span class="sop-time">⏱ Periodica</span>
+                </div>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Intervento</th>
+                            <th>Frequenza</th>
+                            <th>Eseguito da</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Backup configurazione BSS (Spectera Manager export)</td>
+                            <td class="v-accent">Dopo ogni evento</td>
+                            <td>Operatore VECT</td>
+                            <td>Salvare su cartella locale + cloud</td>
+                        </tr>
+                        <tr>
+                            <td>Pulizia connettori BNC/TNC cavi RF</td>
+                            <td class="v-accent">Ogni 5 eventi</td>
+                            <td>Operatore VECT</td>
+                            <td>Alcool isopropilico 99%</td>
+                        </tr>
+                        <tr>
+                            <td>Verifica attenuazione cavi coassiali</td>
+                            <td class="v-accent">Mensile</td>
+                            <td>Operatore VECT</td>
+                            <td>Misurare con cable tester. Soglia: &lt;6 dB per 30m RG-8X</td>
+                        </tr>
+                        <tr>
+                            <td>Aggiornamento firmware BSS e SEK</td>
+                            <td class="v-accent">Ogni release Sennheiser</td>
+                            <td>Operatore VECT</td>
+                            <td>Leggere note release prima di installare</td>
+                        </tr>
+                        <tr>
+                            <td>Sostituzione batterie ricaricabili SEK</td>
+                            <td class="v-accent">Ogni 12 mesi o 200 cicli</td>
+                            <td>Operatore VECT</td>
+                            <td>Usare solo batterie Sennheiser originali</td>
+                        </tr>
+                        <tr>
+                            <td>Ispezione fisica antenne DAD</td>
+                            <td class="v-accent">Ogni 10 eventi</td>
+                            <td>Operatore VECT</td>
+                            <td>Verificare connettori, guaina, supporti</td>
+                        </tr>
+                        <tr>
+                            <td>Revisione completa sistema in laboratorio</td>
+                            <td class="v-accent">Annuale</td>
+                            <td>Centro autorizzato Sennheiser</td>
+                            <td>Pianificare a fine stagione</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- SOP 08 -->
+            <div class="sop-section" id="sop-08">
+                <div class="sop-section-header">
+                    <span class="sop-num">SOP 08</span>
+                    <span class="sop-title">Onboarding Collaboratori</span>
+                    <span class="sop-time">⏱ Prima uscita con VECT</span>
+                </div>
+                <div class="alert tip"><span class="alert-icon">✅</span><span>Un collaboratore è operativo in autonomia
+                        dopo 2 eventi affiancati. Non mandare mai un collaboratore in autonomia prima di questo
+                        percorso.</span></div>
+                <div class="step-list">
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">1</div>
+                        <div class="step-content">
+                            <div class="step-title">Studio pre-uscita</div>
+                            <div class="step-desc">Il collaboratore deve leggere i SOP 01–06 prima dell'primo evento.
+                                Fornire accesso a questo documento e al White Paper WMAS. Verificare conoscenza di base:
+                                Dante, UHF coordination, Sennheiser Spectera.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">2</div>
+                        <div class="step-content">
+                            <div class="step-title">Evento 1 — Solo affiancamento</div>
+                            <div class="step-desc">Il collaboratore osserva e assiste. Non opera il sistema in
+                                autonomia. Alla fine dell'evento: briefing di 15 minuti con feedback. Il collaboratore
+                                compila il Pre-Show Checklist in autonomia come esercizio.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">3</div>
+                        <div class="step-content">
+                            <div class="step-title">Evento 2 — Operatività Assistita</div>
+                            <div class="step-desc">Il collaboratore esegue il setup e gestisce lo show. VECT
+                                supervisiona senza intervenire se non necessario. Debriefing finale: punti di forza,
+                                lacune, aree su cui lavorare.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">4</div>
+                        <div class="step-content">
+                            <div class="step-title">Autorizzazione autonomia</div>
+                            <div class="step-desc">Se la performance è soddisfacente: il collaboratore può operare in
+                                autonomia su eventi di complessità media (≤24 link, venue indoor standard). Per eventi
+                                complessi (festival multi-stage, broadcast) è sempre presente un senior VECT.</div>
+                        </div>
+                    </div>
+                    <div class="step-item" onclick="toggleStep(this)">
+                        <div class="step-dot">5</div>
+                        <div class="step-content">
+                            <div class="step-title">Documenti obbligatori per ogni uscita</div>
+                            <div class="step-desc">Prima di ogni evento il collaboratore deve avere: Pre-Production Log
+                                compilato, RF Coordination Report (template), NDA firmato con VECT, numero di telefono
+                                del referente VECT senior (sempre raggiungibile).</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- REF TABLES -->
+            <div class="sop-section" id="ref-spec">
+                <div class="sop-section-header">
+                    <span class="sop-num">REF</span>
+                    <span class="sop-title">Parametri Tecnici — Sennheiser Spectera BSS</span>
+                </div>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Parametro</th>
+                            <th>Valore</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Tecnologia</td>
+                            <td class="v-accent">WMAS (Wideband Multibeam Antenna System) — ETSI TS 103 745</td>
+                        </tr>
+                        <tr>
+                            <td>Banda operativa</td>
+                            <td class="v-accent">470–694 MHz (UHF)</td>
+                        </tr>
+                        <tr>
+                            <td>Larghezza di banda necessaria</td>
+                            <td class="v-accent">8 MHz per fino a 32 link bidirezionali</td>
+                        </tr>
+                        <tr>
+                            <td>Link massimi simultanei</td>
+                            <td class="v-accent">32 (BSS singola) · scalabile multi-BSS</td>
+                        </tr>
+                        <tr>
+                            <td>Latenza</td>
+                            <td class="v-accent">0.7 ms (modalità Low Latency)</td>
+                        </tr>
+                        <tr>
+                            <td>Crittografia</td>
+                            <td class="v-accent">AES-256 (attivabile canale per canale)</td>
+                        </tr>
+                        <tr>
+                            <td>Integrazione digitale</td>
+                            <td class="v-accent">Dante (AES67) · MADI · AES3</td>
+                        </tr>
+                        <tr>
+                            <td>Potenza trasmettitore SEK</td>
+                            <td class="v-accent">50 mW (adattiva in base a RSSI)</td>
+                        </tr>
+                        <tr>
+                            <td>Autonomia batteria SEK</td>
+                            <td class="v-accent">~8h (batteria Li-Ion standard)</td>
+                        </tr>
+                        <tr>
+                            <td>Frequenza di campionamento</td>
+                            <td class="v-accent">48 kHz (24-bit)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="sop-section" id="ref-freq">
+                <div class="sop-section-header">
+                    <span class="sop-num">REF</span>
+                    <span class="sop-title">Bande UHF — Panoramica Italia 2026</span>
+                </div>
+                <table class="spec-table">
+                    <thead>
+                        <tr>
+                            <th>Banda (MHz)</th>
+                            <th>Disponibilità</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="v-accent">470–694</td>
+                            <td>✅ Disponibile PMSE</td>
+                            <td>Banda principale per sistemi wireless professionali. Licenza necessaria sopra 25mW.</td>
+                        </tr>
+                        <tr>
+                            <td>694–790</td>
+                            <td>⚠️ Protetta / Limitata</td>
+                            <td>Banda 700 — assegnata a LTE mobile. Evitare assolutamente.</td>
+                        </tr>
+                        <tr>
+                            <td>790–862</td>
+                            <td>🚫 Vietata</td>
+                            <td>Banda 800 — LTE. Interferisce fortemente.</td>
+                        </tr>
+                        <tr>
+                            <td>863–865</td>
+                            <td>✅ ISM · 25mW</td>
+                            <td>Libera senza licenza fino a 25mW. Congestionata in grandi venue.</td>
+                        </tr>
+                        <tr>
+                            <td>1880–1900</td>
+                            <td>✅ DECT</td>
+                            <td>Sistema DECT 6.0. Non compatibile con Spectera.</td>
+                        </tr>
+                        <tr>
+                            <td>2400–2484</td>
+                            <td>⚠️ WiFi / BLE congestionata</td>
+                            <td>Evitare per sistemi professionali. Latenza non accettabile.</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="alert info" style="margin-top:16px;"><span class="alert-icon">ℹ️</span><span>Per l'utilizzo
+                        professionale in Italia (potenza &gt;25mW), è necessaria una licenza temporanea o permanente
+                        rilasciata da AGCOM/MIMIT. VECT gestisce la documentazione per ogni evento.</span></div>
+            </div>
+
+        </div><!-- /sop-body -->
+    </div><!-- /content -->
+
+    <script>
+        function toggleStep(el) { el.classList.toggle('done'); updateProgress(); }
+        function scrollTo(id, btn) {
+            document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            document.querySelectorAll('.nav-link').forEach(b => b.classList.remove('active'));
+        }
+        function updateProgress() {
+            const all = document.querySelectorAll('input[type="checkbox"], .step-dot');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const checked = document.querySelectorAll('input[type="checkbox"]:checked').length;
+            const doneSteps = document.querySelectorAll('.step-item.done').length;
+            const totalSteps = document.querySelectorAll('.step-item').length;
+            const total = checkboxes.length + totalSteps;
+            const done = checked + doneSteps;
+            const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+            document.getElementById('progress-fill').style.width = pct + '%';
+            document.getElementById('progress-text').textContent = pct + '%';
+        }
+
+        // Sidebar active highlighting on scroll
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    const id = e.target.id;
+                    document.querySelectorAll('.nav-link').forEach(link => {
+                        const matches = link.getAttribute('onclick')?.includes(id);
+                        link.classList.toggle('active', !!matches);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px' });
+
+        document.querySelectorAll('.sop-section').forEach(s => observer.observe(s));
+    </script>
+</body>
+
+</html>
