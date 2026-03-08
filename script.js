@@ -1,106 +1,74 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-ready');
-    const htmlRoot = document.documentElement;
+    // ═══════ LANGUAGE SWITCHER ═══════
     const langBtns = document.querySelectorAll('.lang-btn');
-    const initialLang = localStorage.getItem('vect_lang');
-    const lang = initialLang === 'en' ? 'en' : 'it';
+    const htmlRoot = document.documentElement;
 
-    const labels = {
-        sending: {
-            it: 'Invio in corso...',
-            en: 'Sending...'
-        },
-        success: {
-            it: 'Richiesta inviata con successo. Ti risponderemo entro 24 ore.',
-            en: 'Request sent successfully. We will reply within 24 hours.'
-        },
-        error: {
-            it: 'Invio non riuscito. Puoi usare il link email qui sotto.',
-            en: 'Submission failed. You can use the email link below.'
-        },
-        fallback: {
-            it: 'Apri email',
-            en: 'Open email'
-        }
-    };
-
-    function currentLang() {
-        return htmlRoot.getAttribute('lang') === 'en' ? 'en' : 'it';
-    }
-
-    function setLang(nextLang) {
-        htmlRoot.setAttribute('lang', nextLang);
-        langBtns.forEach((btn) => {
-            btn.classList.toggle('active', btn.getAttribute('data-lang') === nextLang);
-        });
-        localStorage.setItem('vect_lang', nextLang);
-    }
-
-    setLang(lang);
-
-    langBtns.forEach((btn) => {
+    langBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            const nextLang = btn.getAttribute('data-lang');
-            setLang(nextLang === 'en' ? 'en' : 'it');
+            const lang = btn.getAttribute('data-lang');
+            htmlRoot.setAttribute('lang', lang);
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            localStorage.setItem('vect_lang', lang);
         });
-    })
+    });
 
-
+    const currentLang = localStorage.getItem('vect_lang') || 'it';
+    const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+    if (activeBtn) activeBtn.click();
 
     // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
-    const nav = document.querySelector('nav');
     const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinksList = document.querySelectorAll('.nav-links a');
 
-    if (nav) {
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.scrollY;
-            nav.classList.toggle('scrolled', currentScroll > 80);
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
 
-            // ScrollSpy logic
-            let currentSection = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (currentScroll >= (sectionTop - 200)) { // Offset for navbar
-                    currentSection = section.getAttribute('id');
-                }
-            });
+        // ScrollSpy logic
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= (sectionTop - 200)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').includes(currentSection)) {
-                    link.classList.add('active');
-                }
-            });
-
-        }, { passive: true });
-    }
+        navLinksList.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(currentSection)) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
 
     // ═══════ MOBILE HAMBURGER ═══════
     const menuToggle = document.getElementById('mobile-menu-toggle');
-    const mobileNavLinks = document.querySelector('.nav-links');
+    const navLinks = document.querySelector('.nav-links');
 
-    if (menuToggle && mobileNavLinks) {
+    if (menuToggle && navLinks) {
         menuToggle.addEventListener('click', () => {
-            const isOpen = mobileNavLinks.classList.toggle('active');
+            const isOpen = navLinks.classList.toggle('open');
             menuToggle.classList.toggle('active', isOpen);
             menuToggle.setAttribute('aria-expanded', String(isOpen));
+            // Prevent body scroll when menu is open
             document.body.style.overflow = isOpen ? 'hidden' : '';
         });
 
-        mobileNavLinks.querySelectorAll('a').forEach(link => {
+        // Close menu when a nav link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
-                mobileNavLinks.classList.remove('active');
+                navLinks.classList.remove('open');
                 menuToggle.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
             });
         });
 
+        // Close on Escape
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && mobileNavLinks.classList.contains('active')) {
-                mobileNavLinks.classList.remove('active');
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                navLinks.classList.remove('open');
                 menuToggle.classList.remove('active');
                 menuToggle.setAttribute('aria-expanded', 'false');
                 document.body.style.overflow = '';
@@ -109,109 +77,61 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ═══════ CURSOR GLOW ═══════
-    window.addEventListener('mousemove', (e) => {
-        htmlRoot.style.setProperty('--mouse-x', `${e.clientX}px`);
-        htmlRoot.style.setProperty('--mouse-y', `${e.clientY}px`);
-    }, { passive: true });
-
     // ═══════ REVEAL ANIMATIONS ═══════
-    const revealElements = document.querySelectorAll('.reveal, .reveal-stagger');
-    if ('IntersectionObserver' in window) {
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) {
-                    return;
-                }
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
                 entry.target.classList.add('active');
-                revealObserver.unobserve(entry.target);
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -20px 0px'
-        });
-
-        revealElements.forEach((el) => revealObserver.observe(el));
-    } else {
-        revealElements.forEach((el) => el.classList.add('active'));
-    }
-
-    // ═══════ TYPEWRITER EFFECT ═══════
-    const typeElements = document.querySelectorAll('.type-tech');
-
-    function typeContent(target, text, speed) {
-        let i = 0;
-        target.textContent = '';
-        function iterate() {
-            if (i >= text.length) {
-                return;
             }
-            target.textContent += text.charAt(i);
-            i += 1;
-            setTimeout(iterate, speed);
-        }
-        iterate();
-    }
-
-    function startTyping(el) {
-        if (el.classList.contains('typed')) {
-            return;
-        }
-        el.classList.add('typed');
-
-        const activeLang = currentLang();
-        const itSpan = el.querySelector('.it-text');
-        const enSpan = el.querySelector('.en-text');
-
-        if (itSpan && enSpan) {
-            const targetSpan = activeLang === 'it' ? itSpan : enSpan;
-            const content = targetSpan.textContent;
-            targetSpan.textContent = '';
-            setTimeout(() => typeContent(targetSpan, content, 20), 600);
-            return;
-        }
-
-        if (!itSpan) {
-            const content = el.textContent;
-            el.textContent = '';
-            setTimeout(() => typeContent(el, content, 20), 600);
-        }
-    }
-
-    if ('IntersectionObserver' in window) {
-        const typeObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry) => {
-                if (!entry.isIntersecting) {
-                    return;
-                }
-                startTyping(entry.target);
-                typeObserver.unobserve(entry.target);
-            });
-        }, { threshold: 0.1 });
-
-        typeElements.forEach((el) => typeObserver.observe(el));
-    } else {
-        typeElements.forEach(startTyping);
-    }
-
-    // Removed redundant mobile menu block. Already handled above.
-
-
-
-    // ═══════ PWA SERVICE WORKER ═══════
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('./sw.js').catch((err) => {
-                console.log('VECT SW registration failed:', err);
-            });
         });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ═══════ RF SCANNER LOGIC ═══════
+    const liveFreqLabel = document.getElementById('live-freq');
+    const scannerLog = document.getElementById('scanner-log');
+    
+    if (liveFreqLabel && scannerLog) {
+        // Generatore veloce di valori RF finti tra 470.000 e 694.000 MHz
+        setInterval(() => {
+            const randomFreq = (Math.random() * (694 - 470) + 470).toFixed(3);
+            liveFreqLabel.innerHTML = `${randomFreq} <span class="mhz">MHz</span>`;
+        }, 80);
+
+        const logMessages = [
+            "> ANALYZING SPECTRUM...",
+            "> NOISE FLOOR: -98dBm",
+            "> TX DETECTED",
+            "> CALCULATING IMD...",
+            "> INTERMOD PROFILE: PASS",
+            "> LINK QUALITY: 100%",
+            "> SYNCING BACKUP FREQS...",
+            "> SWEEPING BAND..."
+        ];
+        
+        let currentLogs = [
+            "> SYSTEM OK",
+            "> AWAITING TELEMETRY",
+            "> SCANNING ACTIVE"
+        ];
+        
+        // Ciclo log di sistema rolling lento
+        setInterval(() => {
+            currentLogs.shift();
+            const nextLog = logMessages[Math.floor(Math.random() * logMessages.length)];
+            currentLogs.push(nextLog);
+            scannerLog.innerHTML = currentLogs.join("<br>");
+        }, 1200);
     }
 
-    // FORM HANDLING - WEB3FORMS async POST
+    // ═══════ FORM HANDLING — WEB3FORMS ═══════
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+
             const btn = contactForm.querySelector('button[type="submit"]');
             const lang = document.documentElement.getAttribute('lang') || 'it';
             const originalHTML = btn.innerHTML;

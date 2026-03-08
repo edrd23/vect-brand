@@ -4,21 +4,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>VECT — RF Special Ops | Sennheiser Spectera Rental</title>
+
+    <!-- ═══════ SEO ═══════ -->
+    <title>VECT — RF Special Ops | Noleggio Sennheiser Spectera & RF Engineering</title>
     <meta name="description"
-        content="VECT — RF Special Ops. Wireless rental, spectrum coordination and RF engineering powered by Sennheiser Spectera.">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="stylesheet" href="style.css">
-    <link rel="manifest" href="manifest.json">
-    <meta name="theme-color" content="#FF6B1A">
+        content="VECT è il servizio di noleggio RF boutique per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze, ingegneria dello spettro. Zero dropouts.">
+    <meta name="keywords"
+        content="noleggio RF, Sennheiser Spectera, WMAS, wireless audio, coordinamento frequenze, RF engineering, IEM, bodypack, tour, broadcast, worldwide">
+    <meta name="author" content="VECT RF Special Ops">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://vect-brand.vercel.app/">
+
+    <!-- ═══════ OPEN GRAPH (WhatsApp, LinkedIn, Facebook) ═══════ -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vect-brand.vercel.app/">
+    <meta property="og:title" content="VECT — RF Special Ops | Sennheiser Spectera Rental">
+    <meta property="og:description"
+        content="Servizio RF boutique per produzioni mission-critical. Noleggio Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro. Zero dropouts. Maximum uptime.">
+    <meta property="og:image" content="https://vect-brand.vercel.app/og-image.png">
+    <meta property="og:locale" content="it_IT">
+    <meta property="og:locale:alternate" content="en_GB">
+    <meta property="og:site_name" content="VECT RF Special Ops">
+
+    <!-- ═══════ TWITTER CARD ═══════ -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="VECT — RF Special Ops | Sennheiser Spectera Rental">
+    <meta name="twitter:description"
+        content="Servizio RF boutique per produzioni mission-critical. Noleggio Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro.">
+    <meta name="twitter:image" content="https://vect-brand.vercel.app/og-image.png">
+
+    <!-- ═══════ STRUCTURED DATA (Google) ═══════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "VECT RF Special Ops",
+      "description": "Servizio di noleggio RF boutique specializzato per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro.",
+      "url": "https://vect-brand.vercel.app/",
+      "email": "info@vect-rf.com",
+      "areaServed": "Worldwide",
+      "serviceType": ["RF Rental", "Spectrum Coordination", "RF Engineering", "Wireless Audio"],
+      "brand": {
+        "@type": "Brand",
+        "name": "VECT"
+      }
+    }
+    </script>
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="style.css?v=1.1">
 </head>
 
-<body id="top">
-    <!-- ═══════ OVERLAYS ═══════ -->
-    <div id="scanline"></div>
+<body>
 
     <!-- ═══════ NAVIGATION ═══════ -->
     <nav>
@@ -51,8 +87,7 @@
                 <span class="lang-btn active" data-lang="it">IT</span>
                 <span class="lang-btn" data-lang="en">EN</span>
             </div>
-            <!-- MOBILE BURGER TOGGLE -->
-            <button id="mobile-menu-toggle" aria-label="Toggle Menu">
+            <button id="mobile-menu-toggle" aria-label="Toggle Menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -84,7 +119,7 @@
         </div>
 
         <div class="container hero-container">
-            <div class="hero-content">
+            <div class="hero-content reveal">
                 <div class="hero-logo-box">
                     <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
@@ -107,8 +142,8 @@
                     <span class="en-text">Zero Dropouts. Maximum Uptime.</span>
                 </p>
                 <p class="hero-location">
-                    <span class="it-text">Operativi su tutto il territorio italiano</span>
-                    <span class="en-text">Operating across all of Italy</span>
+                    <span class="it-text">🌍 Operativi a livello globale</span>
+                    <span class="en-text">🌍 Worldwide Operations</span>
                 </p>
                 <p>
                     <span class="it-text">Service di radiofrequenza boutique specializzato per produzioni
@@ -123,9 +158,6 @@
                         <span class="it-text">Inizia Progetto</span>
                         <span class="en-text">Start Project</span>
                     </a>
-                    <a href="technical-deck.html" class="btn btn-outline" target="_blank" rel="noopener noreferrer">
-                        <span class="mono">TECHNICAL DECK</span>
-                    </a>
                 </div>
             </div>
         </div>
@@ -136,7 +168,7 @@
     <!-- ═══════ SERVICES ═══════ -->
     <section id="services" class="container">
         <div class="reveal">
-            <span class="section-label type-tech">01 — <span class="it-text">Servizi</span><span
+            <span class="section-label">01 — <span class="it-text">Servizi</span><span
                     class="en-text">Services</span></span>
             <h2 class="section-title">
                 <span class="it-text">Soluzioni Radiofrequenza B2B</span>
@@ -249,8 +281,8 @@
             </div>
         </div>
 
-        <div class="services-grid reveal-stagger">
-            <div class="service-card">
+        <div class="services-grid">
+            <div class="service-card reveal">
                 <div class="service-icon">📦</div>
                 <h3 class="service-title">Smart Rental</h3>
                 <p class="service-desc">
@@ -260,7 +292,7 @@
                         immediate deployment in tours and broadcast.</span>
                 </p>
             </div>
-            <div class="service-card" style="border-color: var(--vect-accent);">
+            <div class="service-card reveal" style="border-color: var(--vect-accent);">
                 <div class="service-icon">⚡</div>
                 <h3 class="service-title">Tactical Ops</h3>
                 <p class="service-desc">
@@ -270,7 +302,7 @@
                         coordination, and real-time spectrum monitoring.</span>
                 </p>
             </div>
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="service-icon">📡</div>
                 <h3 class="service-title">Strategic Planning</h3>
                 <p class="service-desc">
@@ -284,8 +316,8 @@
 
         <!-- THE ADVANTAGE SECTION (NEW) -->
         <div class="advantage-section reveal">
-            <h3 class="mono-label type-tech">SPECIFICATIONS // THE VECT ADVANTAGE</h3>
-            <div class="advantage-grid reveal-stagger">
+            <h3 class="mono-label">SPECIFICATIONS // THE VECT ADVANTAGE</h3>
+            <div class="advantage-grid">
                 <div class="advantage-item">
                     <h4 class="mono">WMAS POWER</h4>
                     <p><span class="it-text">Fino a 64 canali audio bidirezionali in un singolo canale TV da
@@ -305,179 +337,10 @@
                             redundancy as standard.</span></p>
                 </div>
                 <div class="advantage-item">
-                    <h4 class="mono">MADI INTEGRATION</h4>
-                    <p class="it-text">Integrazione nativa con ecosistemi Dante e MADI (via BNC/Optical) per
-                        massimizzare la compatibilità.</p>
-                    <p class="en-text">Native integration with Dante and MADI ecosystems (via BNC/Optical) for maximum
-                        compatibility.</p>
-                </div>
-                <div class="advantage-item">
                     <h4 class="mono">EU COMPLIANCE</h4>
                     <p><span class="it-text">Ingegneri esperti nelle normative spettrali italiane ed
                             europee.</span><span class="en-text">Expert engineers in Italian and European spectral
                             regulations.</span></p>
-                </div>
-            </div>
-
-            <!-- DANTE TELEMETRY VISUAL (NEW) -->
-            <div class="dante-telemetry reveal">
-                <div class="telemetry-header">
-                    <span class="mono">NETWORK STATUS // DANTE PRIMARY / SECONDARY</span>
-                    <span class="blink-dot"></span>
-                </div>
-                <div class="telemetry-grid">
-                    <div class="node active">NODE_01: MASTER</div>
-                    <div class="node active">NODE_02: SPECTERA_A</div>
-                    <div class="node active">NODE_03: SPECTERA_B</div>
-                    <div class="node pulse">SYNC: 48kHz / 24bit</div>
-                </div>
-                <div class="telemetry-viz">
-                    <svg viewBox="0 0 400 40" class="mini-graph">
-                        <path d="M0 20 Q 50 10 100 25 T 200 15 T 300 30 T 400 20" fill="none"
-                            stroke="var(--vect-accent)" stroke-width="1" opacity="0.5" />
-                        <path class="scanning-line" d="M0 0 L 0 40" stroke="rgba(255,107,26,0.3)" stroke-width="2" />
-                    </svg>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="divider"></div>
-
-    <!-- ═══════ TECHNICAL COLLECTION (NEW) ═══════ -->
-    <section id="tech-collection" class="container tech-collection">
-        <div class="reveal">
-            <span class="section-label type-tech">01B — <span class="it-text">Collezione Tecnica</span><span
-                    class="en-text">Technical Collection</span></span>
-            <h2 class="section-title">
-                <span class="it-text">Specifiche Spectera & WMAS</span>
-                <span class="en-text">Spectera & WMAS Specifications</span>
-            </h2>
-            <p class="section-desc">
-                <span class="it-text">Analisi approfondita della tecnologia che sta ridefinendo gli standard del pro
-                    audio wireless.</span>
-                <span class="en-text">In-depth analysis of the technology redefining wireless pro audio
-                    standards.</span>
-            </p>
-        </div>
-
-        <div class="tech-grid reveal-stagger">
-            <!-- VIZ 1: DENSITY -->
-            <div class="tech-card">
-                <div class="tech-viz">
-                    <svg viewBox="0 0 300 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                        <text x="50%" y="20" text-anchor="middle" fill="var(--vect-ash)" font-family="JetBrains Mono"
-                            font-size="8">8MHz TV SLOT DENSITY</text>
-                        <rect x="20" y="40" width="260" height="40" fill="none" stroke="var(--vect-graphite)"
-                            stroke-width="1" stroke-dasharray="4" />
-                        <g class="density-nodes">
-                            <!-- Generate series of pulsing bars -->
-                            <rect x="40" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.1s" />
-                            <rect x="50" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.3s" />
-                            <rect x="60" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.2s" />
-                            <rect x="70" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.5s" />
-                            <rect x="80" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.4s" />
-                            <rect x="220" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.2s" />
-                            <rect x="230" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.6s" />
-                            <rect x="240" y="45" width="2" height="30" fill="var(--vect-accent)" class="density-pulse"
-                                style="animation-delay: 0.1s" />
-                            <path d="M100 60 L 200 60" stroke="var(--vect-accent)" stroke-width="0.5"
-                                stroke-dasharray="2" opacity="0.4" />
-                        </g>
-                    </svg>
-                </div>
-                <h3>
-                    <span class="it-text">Massima Densità</span>
-                    <span class="en-text">Maximum Density</span>
-                </h3>
-                <p>
-                    <span class="it-text">Sfrutta la tecnologia WMAS per alloggiare fino a 64 canali audio bidirezionali
-                        in un singolo intervallo da 8MHz.</span>
-                    <span class="en-text">Leverages WMAS technology to house up to 64 bidirectional audio channels in a
-                        single 8MHz slot.</span>
-                </p>
-                <div class="tech-specs">
-                    <span class="spec-tag">64 Channels</span>
-                    <span class="spec-tag">8MHz BW</span>
-                    <span class="spec-tag">UHF/1G4</span>
-                </div>
-            </div>
-
-            <!-- VIZ 2: BIDIRECTIONAL -->
-            <div class="tech-card">
-                <div class="tech-viz">
-                    <svg viewBox="0 0 300 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="150" cy="60" r="30" fill="none" stroke="var(--vect-accent)" stroke-width="1"
-                            opacity="0.3" />
-                        <path d="M100 60 Q 150 20 200 60" fill="none" stroke="var(--vect-accent)" stroke-width="2"
-                            class="flow-line" />
-                        <path d="M200 60 Q 150 100 100 60" fill="none" stroke="var(--vect-cyan)" stroke-width="2"
-                            class="flow-line" />
-                        <text x="150" y="65" text-anchor="middle" fill="var(--vect-white)" font-family="JetBrains Mono"
-                            font-size="10" font-weight="bold">SEK</text>
-                        <text x="50" y="65" text-anchor="middle" fill="var(--vect-ash)" font-family="JetBrains Mono"
-                            font-size="8">TX</text>
-                        <text x="250" y="65" text-anchor="middle" fill="var(--vect-ash)" font-family="JetBrains Mono"
-                            font-size="8">RX</text>
-                    </svg>
-                </div>
-                <h3>
-                    <span class="it-text">Audio Bidirezionale</span>
-                    <span class="en-text">Bidirectional Audio</span>
-                </h3>
-                <p>
-                    <span class="it-text">Il bodypack SEK gestisce simultaneamente segnali microfono/linea e
-                        monitoraggio IEM con una latenza fissa di 0.7ms.</span>
-                    <span class="en-text">The SEK bodypack simultaneously manages mic/line signals and IEM monitoring
-                        with a fixed 0.7ms latency.</span>
-                </p>
-                <div class="tech-specs">
-                    <span class="spec-tag">0.7ms Latency</span>
-                    <span class="spec-tag">TX/RX Link</span>
-                    <span class="spec-tag">Full Remote</span>
-                </div>
-            </div>
-
-            <!-- VIZ 3: RESILIENCE -->
-            <div class="tech-card">
-                <div class="tech-viz">
-                    <svg viewBox="0 0 300 120" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="waveMask">
-                            <rect x="0" y="0" width="300" height="120" fill="white" />
-                        </mask>
-                        <g class="diversity-wave" mask="url(#waveMask)">
-                            <path
-                                d="M0 60 C 20 40 40 80 60 60 C 80 40 100 80 120 60 C 140 40 160 80 180 60 C 200 40 220 80 240 60 C 260 40 280 80 300 60"
-                                fill="none" stroke="var(--vect-accent)" stroke-width="3" opacity="0.8" />
-                            <path d="M40 60 C 60 40 80 80 100 60 C 120 40 140 80 160 60" fill="none"
-                                stroke="var(--vect-cyan)" stroke-width="1" opacity="0.4" />
-                        </g>
-                        <circle cx="50" cy="60" r="4" fill="var(--vect-accent)" class="pulse-circle" />
-                        <text x="20" y="110" fill="var(--vect-ash)" font-family="JetBrains Mono" font-size="8">WMAS 40x
-                            DIVERSITY RESILIENCE</text>
-                    </svg>
-                </div>
-                <h3>
-                    <span class="it-text">Resilienza al Dropout</span>
-                    <span class="en-text">Dropout Resilience</span>
-                </h3>
-                <p>
-                    <span class="it-text">Fino a 40 volte più resistente al fading RF rispetto ai sistemi narrowband
-                        tradizionali, garantendo stabilità mission-critical.</span>
-                    <span class="en-text">Up to 40 times more resistant to RF fading than traditional narrowband
-                        systems, ensuring mission-critical stability.</span>
-                </p>
-                <div class="tech-specs">
-                    <span class="spec-tag">Anti-Fading</span>
-                    <span class="spec-tag">High Reliability</span>
-                    <span class="spec-tag">Mission Focus</span>
                 </div>
             </div>
         </div>
@@ -489,7 +352,7 @@
     <section id="about" class="container">
         <div class="about-grid">
             <div class="reveal">
-                <span class="section-label type-tech">02 — <span class="it-text">Chi Siamo</span><span
+                <span class="section-label">02 — <span class="it-text">Chi Siamo</span><span
                         class="en-text">About</span></span>
                 <h2 class="section-title">
                     <span class="it-text">Precisione in ogni Hertz.</span>
@@ -511,27 +374,48 @@
                     </p>
                 </div>
             </div>
-            <div class="about-visual reveal">
-                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <mask id="gridMask">
-                            <radialGradient id="maskGrad" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="white" stop-opacity="0.8" />
-                                <stop offset="100%" stop-color="white" stop-opacity="0" />
-                            </radialGradient>
-                        </mask>
-                    </defs>
-                    <g class="rf-grid" mask="url(#gridMask)">
-                        <path d="M0 250 L 500 250 M 250 0 L 250 500" stroke="var(--vect-graphite)" stroke-width="1" />
-                        <path class="peak" d="M100 250 L 120 180 L 140 250" fill="var(--vect-accent)" opacity="0.4" />
-                        <path class="peak" d="M300 250 L 320 120 L 340 250" fill="var(--vect-accent)" opacity="0.6" />
-                        <path class="peak" d="M400 250 L 415 210 L 430 250" fill="var(--vect-accent)" opacity="0.3" />
-                        <rect x="0" y="0" width="500" height="500" fill="none" stroke="var(--vect-graphite)"
-                            stroke-width="0.5" stroke-dasharray="10,10" />
-                    </g>
-                    <text x="20" y="480" class="mono" fill="var(--vect-ash)" font-size="10">SCANNING SPECTRUM... 100%
-                        OK</text>
-                </svg>
+            <!-- SCANNIGN UI DINAMICA -->
+            <div class="about-visual reveal rf-scanner-ui">
+                <div class="scanner-header mono">
+                    <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">SCANSIONE
+                            ATTIVA</span><span class="en-text">LIVE SCAN</span></div>
+                    <div class="scanner-main-freq" id="live-freq">470.000 <span class="mhz">MHz</span></div>
+                </div>
+
+                <div class="scanner-display">
+                    <div class="scanner-grid">
+                        <div class="grid-line-h"></div>
+                        <div class="grid-line-h" style="top: 25%"></div>
+                        <div class="grid-line-h" style="top: 50%"></div>
+                        <div class="grid-line-h" style="top: 75%"></div>
+                        <div class="grid-line-v"></div>
+                        <div class="grid-line-v" style="left: 25%"></div>
+                        <div class="grid-line-v" style="left: 50%"></div>
+                        <div class="grid-line-v" style="left: 75%"></div>
+                    </div>
+
+                    <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="peakGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="var(--vect-accent)" stop-opacity="0.8" />
+                                <stop offset="100%" stop-color="var(--vect-accent)" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d="M0 300 L 150 300 L 200 150 L 250 300 L 400 300 L 450 80 L 500 300 L 700 300 L 750 200 L 800 300 L 850 300 L 880 120 L 910 300 L 1000 300"
+                            fill="url(#peakGrad)" stroke="var(--vect-accent)" stroke-width="2"
+                            vector-effect="non-scaling-stroke" />
+                    </svg>
+                    <div class="scanner-sweep"></div>
+                </div>
+
+                <div class="scanner-footer mono">
+                    <div class="scanner-log" id="scanner-log">
+                        > INITIALIZING WSM LINK... [OK]<br>
+                        > NOISE FLOOR: -95dBm<br>
+                        > INTERMOD ANALYSIS: ACTIVE
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -541,7 +425,7 @@
     <!-- ═══════ REFERENCES ═══════ -->
     <section id="references" class="container">
         <div class="reveal">
-            <span class="section-label type-tech">03 — <span class="it-text">Referenze</span><span
+            <span class="section-label">03 — <span class="it-text">Referenze</span><span
                     class="en-text">References</span></span>
             <h2 class="section-title">
                 <span class="it-text">Mission Logs // Operazioni Recenti</span>
@@ -549,8 +433,8 @@
             </h2>
         </div>
 
-        <div class="services-grid reveal-stagger" style="margin-top: 40px;">
-            <div class="service-card">
+        <div class="services-grid" style="margin-top: 40px;">
+            <div class="service-card reveal">
                 <div class="mission-telemetry">
                     <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
                         <rect x="0" y="4" width="20" height="12" fill="var(--vect-accent)" opacity="0.2" />
@@ -567,7 +451,7 @@
                         pax).</span>
                 </p>
             </div>
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="mission-telemetry">
                     <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
                         <rect x="0" y="4" width="40" height="2" fill="var(--vect-accent)" />
@@ -582,7 +466,7 @@
                     <span class="en-text">Full Spectera setup for prime-time TV production.</span>
                 </p>
             </div>
-            <div class="service-card">
+            <div class="service-card reveal">
                 <div class="mission-telemetry">
                     <svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="10" cy="15" r="5" fill="var(--vect-accent)" />
@@ -620,7 +504,7 @@
                         within 24 hours.</span>
                 </p>
 
-                <ul class="contact-info-list" id="contact-info-list">
+                <ul class="contact-info-list">
                     <li class="contact-info-item">
                         <div class="info-label">Email</div>
                         <div class="info-value"><a href="mailto:info@vect-rf.com">info@vect-rf.com</a></div>
@@ -631,7 +515,7 @@
                         <div class="info-value">+39 349 532 9494</div>
                     </li>
                     <li class="contact-info-item">
-                        <div class="info-label"><span class="it-text">Operativita</span><span
+                        <div class="info-label"><span class="it-text">Operatività</span><span
                                 class="en-text">Coverage</span></div>
                         <div class="info-value"><span class="it-text">Tutta Italia</span><span class="en-text">All of
                                 Italy</span></div>
@@ -642,28 +526,40 @@
             <div class="reveal">
                 <form id="contactForm">
                     <input type="hidden" name="access_key" value="4cc1583d-1036-49ee-ba64-38637fbb21b9">
-                    <input type="hidden" name="subject" value="Nuova richiesta da VECT [ROOT]">
+                    <input type="hidden" name="subject" value="Nuova richiesta da VECT [WEB]">
                     <input type="hidden" name="from_name" value="VECT Website">
                     <input type="checkbox" name="botcheck" class="hidden" style="display:none">
                     <div class="form-group">
                         <label for="name"><span class="it-text">Nome / Società</span><span class="en-text">Name /
                                 Company</span></label>
-                        <input type="text" id="name" name="name" autocomplete="name organization" required>
+                        <input type="text" id="name" name="name" required>
                     </div>
                     <div class="form-group">
-                        <label for="email"><span class="it-text">Email</span><span class="en-text">Email</span></label>
-                        <input type="email" id="email" name="email" autocomplete="email" required>
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="message"><span class="it-text">Messaggio</span><span
-                                class="en-text">Message</span></label>
+                        <label for="message">Message</label>
                         <textarea id="message" name="message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-group checkbox-group"
+                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px;">
+                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required
+                            style="margin-top: 4px; width: auto; height: auto;">
+                        <label for="privacyConsent"
+                            style="font-size: 12px; font-weight: 400; color: var(--vect-silver); text-transform: none; letter-spacing: normal; cursor: pointer;">
+                            <span class="it-text">Ho letto la <a href="privacy.html" target="_blank"
+                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a> e
+                                acconsento al trattamento dei dati per la gestione di questa richiesta.</span>
+                            <span class="en-text">I have read the <a href="privacy.html" target="_blank"
+                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a>
+                                and consent to data processing for managing this request.</span>
+                        </label>
                     </div>
                     <button type="submit" class="btn btn-primary" style="width: 100%;">
                         <span class="it-text">Invia Richiesta</span>
                         <span class="en-text">Send Request</span>
                     </button>
-                    <p id="form-status" class="form-status" aria-live="polite"></p>
                 </form>
             </div>
         </div>
@@ -685,7 +581,9 @@
                     <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
                 </svg>
             </div>
-            <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved.</p>
+            <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved. <span
+                    style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="privacy.html"
+                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Privacy Policy</a></p>
         </div>
     </footer>
 
