@@ -89,6 +89,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => revealObserver.observe(el));
 
+    // ═══════ RF SCANNER LOGIC ═══════
+    const liveFreqLabel = document.getElementById('live-freq');
+    const scannerLog = document.getElementById('scanner-log');
+    
+    if (liveFreqLabel && scannerLog) {
+        // Generatore veloce di valori RF finti tra 470.000 e 694.000 MHz
+        setInterval(() => {
+            const randomFreq = (Math.random() * (694 - 470) + 470).toFixed(3);
+            liveFreqLabel.innerHTML = `${randomFreq} <span class="mhz">MHz</span>`;
+        }, 80);
+
+        const logMessages = [
+            "> ANALYZING SPECTRUM...",
+            "> NOISE FLOOR: -98dBm",
+            "> TX DETECTED",
+            "> CALCULATING IMD...",
+            "> INTERMOD PROFILE: PASS",
+            "> LINK QUALITY: 100%",
+            "> SYNCING BACKUP FREQS...",
+            "> SWEEPING BAND..."
+        ];
+        
+        let currentLogs = [
+            "> SYSTEM OK",
+            "> AWAITING TELEMETRY",
+            "> SCANNING ACTIVE"
+        ];
+        
+        // Ciclo log di sistema rolling lento
+        setInterval(() => {
+            currentLogs.shift();
+            const nextLog = logMessages[Math.floor(Math.random() * logMessages.length)];
+            currentLogs.push(nextLog);
+            scannerLog.innerHTML = currentLogs.join("<br>");
+        }, 1200);
+    }
+
     // ═══════ FORM HANDLING — WEB3FORMS ═══════
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {

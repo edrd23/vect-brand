@@ -10,7 +10,7 @@
     <meta name="description"
         content="VECT è il servizio di noleggio RF boutique per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze, ingegneria dello spettro. Zero dropouts.">
     <meta name="keywords"
-        content="noleggio RF, Sennheiser Spectera, WMAS, wireless audio, coordinamento frequenze, RF engineering, IEM, bodypack, tour, broadcast, Italia">
+        content="noleggio RF, Sennheiser Spectera, WMAS, wireless audio, coordinamento frequenze, RF engineering, IEM, bodypack, tour, broadcast, worldwide">
     <meta name="author" content="VECT RF Special Ops">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://vect-brand.vercel.app/">
@@ -42,7 +42,7 @@
       "description": "Servizio di noleggio RF boutique specializzato per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro.",
       "url": "https://vect-brand.vercel.app/",
       "email": "info@vect-rf.com",
-      "areaServed": "IT",
+      "areaServed": "Worldwide",
       "serviceType": ["RF Rental", "Spectrum Coordination", "RF Engineering", "Wireless Audio"],
       "brand": {
         "@type": "Brand",
@@ -142,8 +142,8 @@
                     <span class="en-text">Zero Dropouts. Maximum Uptime.</span>
                 </p>
                 <p class="hero-location">
-                    <span class="it-text">📡 Operativi su tutto il territorio italiano</span>
-                    <span class="en-text">📡 Operating across all of Italy</span>
+                    <span class="it-text">🌍 Operativi a livello globale</span>
+                    <span class="en-text">🌍 Worldwide Operations</span>
                 </p>
                 <p>
                     <span class="it-text">Service di radiofrequenza boutique specializzato per produzioni
@@ -374,27 +374,48 @@
                     </p>
                 </div>
             </div>
-            <div class="about-visual reveal">
-                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <mask id="gridMask">
-                            <radialGradient id="maskGrad" cx="50%" cy="50%" r="50%">
-                                <stop offset="0%" stop-color="white" stop-opacity="0.8" />
-                                <stop offset="100%" stop-color="white" stop-opacity="0" />
-                            </radialGradient>
-                        </mask>
-                    </defs>
-                    <g class="rf-grid" mask="url(#gridMask)">
-                        <path d="M0 250 L 500 250 M 250 0 L 250 500" stroke="var(--vect-graphite)" stroke-width="1" />
-                        <path class="peak" d="M100 250 L 120 180 L 140 250" fill="var(--vect-accent)" opacity="0.4" />
-                        <path class="peak" d="M300 250 L 320 120 L 340 250" fill="var(--vect-accent)" opacity="0.6" />
-                        <path class="peak" d="M400 250 L 415 210 L 430 250" fill="var(--vect-accent)" opacity="0.3" />
-                        <rect x="0" y="0" width="500" height="500" fill="none" stroke="var(--vect-graphite)"
-                            stroke-width="0.5" stroke-dasharray="10,10" />
-                    </g>
-                    <text x="20" y="480" class="mono" fill="var(--vect-ash)" font-size="10">SCANNING SPECTRUM... 100%
-                        OK</text>
-                </svg>
+            <!-- SCANNIGN UI DINAMICA -->
+            <div class="about-visual reveal rf-scanner-ui">
+                <div class="scanner-header mono">
+                    <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">SCANSIONE
+                            ATTIVA</span><span class="en-text">LIVE SCAN</span></div>
+                    <div class="scanner-main-freq" id="live-freq">470.000 <span class="mhz">MHz</span></div>
+                </div>
+
+                <div class="scanner-display">
+                    <div class="scanner-grid">
+                        <div class="grid-line-h"></div>
+                        <div class="grid-line-h" style="top: 25%"></div>
+                        <div class="grid-line-h" style="top: 50%"></div>
+                        <div class="grid-line-h" style="top: 75%"></div>
+                        <div class="grid-line-v"></div>
+                        <div class="grid-line-v" style="left: 25%"></div>
+                        <div class="grid-line-v" style="left: 50%"></div>
+                        <div class="grid-line-v" style="left: 75%"></div>
+                    </div>
+
+                    <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none">
+                        <defs>
+                            <linearGradient id="peakGrad" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="var(--vect-accent)" stop-opacity="0.8" />
+                                <stop offset="100%" stop-color="var(--vect-accent)" stop-opacity="0" />
+                            </linearGradient>
+                        </defs>
+                        <path
+                            d="M0 300 L 150 300 L 200 150 L 250 300 L 400 300 L 450 80 L 500 300 L 700 300 L 750 200 L 800 300 L 850 300 L 880 120 L 910 300 L 1000 300"
+                            fill="url(#peakGrad)" stroke="var(--vect-accent)" stroke-width="2"
+                            vector-effect="non-scaling-stroke" />
+                    </svg>
+                    <div class="scanner-sweep"></div>
+                </div>
+
+                <div class="scanner-footer mono">
+                    <div class="scanner-log" id="scanner-log">
+                        > INITIALIZING WSM LINK... [OK]<br>
+                        > NOISE FLOOR: -95dBm<br>
+                        > INTERMOD ANALYSIS: ACTIVE
+                    </div>
+                </div>
             </div>
         </div>
     </section>

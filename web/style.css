@@ -584,44 +584,137 @@ section {
     align-items: center;
 }
 
-.about-visual {
+.rf-scanner-ui {
     position: relative;
     height: 500px;
-    background: var(--vect-dark);
+    background: #050505;
     border-radius: 20px;
     border: 1px solid var(--vect-graphite);
     overflow: hidden;
     display: flex;
+    flex-direction: column;
+    padding: 24px;
+    box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+
+.scanner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    z-index: 10;
+}
+
+.scanner-status {
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--vect-accent);
+    display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 20px;
+    gap: 8px;
 }
 
-.peak {
-    animation: peakPulse 4s infinite ease-in-out;
-    transform-origin: bottom;
+.status-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--vect-accent);
+    border-radius: 50%;
+    animation: blink 1s infinite alternate;
 }
 
-.peak:nth-child(2) {
-    animation-delay: 1s;
+@keyframes blink {
+    0% { opacity: 0.3; }
+    100% { opacity: 1; box-shadow: 0 0 5px var(--vect-accent); }
 }
 
-.peak:nth-child(3) {
-    animation-delay: 2s;
+.scanner-main-freq {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--vect-white);
+    line-height: 1;
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
-@keyframes peakPulse {
+.scanner-main-freq .mhz {
+    font-size: 14px;
+    color: var(--vect-ash);
+}
 
-    0%,
-    100% {
-        transform: scaleY(1);
-        opacity: 0.3;
-    }
+.scanner-display {
+    flex: 1;
+    position: relative;
+    margin: 20px 0;
+    border: 1px solid rgba(255, 107, 26, 0.15);
+    background: rgba(10, 10, 10, 0.5);
+    overflow: hidden;
+    border-radius: 8px;
+}
 
-    50% {
-        transform: scaleY(1.3);
-        opacity: 0.7;
-    }
+.scanner-grid {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+}
+
+.grid-line-h {
+    position: absolute;
+    left: 0; right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.grid-line-v {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.scanner-peaks {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 2;
+    opacity: 0.8;
+}
+
+.scanner-sweep {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: var(--vect-accent);
+    box-shadow: 0 0 15px 2px var(--vect-accent);
+    z-index: 3;
+    animation: sweep 3s infinite linear;
+}
+
+.scanner-sweep::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    right: 2px;
+    width: 100px;
+    background: linear-gradient(to right, transparent, rgba(255, 107, 26, 0.2));
+    pointer-events: none;
+}
+
+@keyframes sweep {
+    0% { left: 0%; opacity: 0; }
+    5% { opacity: 1; }
+    95% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+}
+
+.scanner-footer {
+    font-size: 11px;
+    color: var(--vect-ash);
+    line-height: 1.6;
+    height: 48px;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+}
+
+.scanner-log {
+    position: absolute;
+    bottom: 0;
 }
 
 .mission-telemetry {
