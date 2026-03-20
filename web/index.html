@@ -38,17 +38,22 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "ProfessionalService",
       "name": "VECT RF Special Ops",
-      "description": "Servizio di noleggio RF boutique specializzato per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro.",
+      "description": "Servizio di noleggio RF boutique specializzato per produzioni mission-critical. Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro RF ad alta precisione.",
       "url": "https://www.vect-rf.it/",
       "email": "info@vect-rf.com",
+      "telephone": "+393495329494",
       "areaServed": "Worldwide",
-      "serviceType": ["RF Rental", "Spectrum Coordination", "RF Engineering", "Wireless Audio"],
+      "inLanguage": ["it", "en"],
+      "serviceType": ["RF Rental", "Spectrum Coordination", "RF Engineering", "Wireless Audio", "Sennheiser Spectera", "WMAS"],
       "brand": {
         "@type": "Brand",
         "name": "VECT"
-      }
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/vect-rf"
+      ]
     }
     </script>
     <link rel="stylesheet" href="fonts/fonts.css">
@@ -589,6 +594,41 @@
     </footer>
 
     <script src="script.js"></script>
+
+    <!-- ═══════ GDPR PRIVACY NOTICE ═══════ -->
+    <div id="privacy-notice" role="complementary" aria-label="Informativa privacy" style="
+        position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+        background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(255,107,26,0.2);
+        padding: 16px 24px; display: flex; align-items: center;
+        justify-content: space-between; gap: 20px; flex-wrap: wrap;
+        font-size: 13px; color: #999; font-family: inherit;
+        transform: translateY(100%); transition: transform 0.4s ease;
+    ">
+        <p style="margin:0; max-width: 700px; line-height: 1.6;">
+            Questo sito utilizza <strong style="color:#eee">localStorage tecnico</strong> esclusivamente per ricordare la tua preferenza di lingua. Nessun cookie di tracciamento. Nessun dato di profilazione.
+            <a href="privacy.html" style="color:#FF6B1A; text-decoration:underline; margin-left:6px;">Privacy Policy completa &rarr;</a>
+        </p>
+        <button id="privacy-notice-close" style="
+            flex-shrink:0; background: #FF6B1A; color: #000; border: none;
+            padding: 10px 22px; font-size: 12px; font-weight: 700;
+            letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
+            border-radius: 3px; white-space: nowrap;
+        " aria-label="Chiudi avviso privacy">OK, capito</button>
+    </div>
+    <script>
+    (function() {
+        var notice = document.getElementById('privacy-notice');
+        if (!localStorage.getItem('vect_privacy_ack')) {
+            setTimeout(function() { notice.style.transform = 'translateY(0)'; }, 600);
+        }
+        document.getElementById('privacy-notice-close').addEventListener('click', function() {
+            notice.style.transform = 'translateY(100%)';
+            localStorage.setItem('vect_privacy_ack', '1');
+        });
+    })();
+    </script>
+
 </body>
 
 </html>
