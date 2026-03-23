@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="it">
 
 <head>
@@ -76,7 +76,6 @@
             overflow: hidden;
             /* Scaliamo leggermente in base alla finestra per preview */
             transform-origin: top center;
-            transform: scale(Math.min(1, (window.innerWidth - 80) / 1584));
         }
 
         .banner-preview {
@@ -258,12 +257,7 @@
             text-shadow: 0 0 8px rgba(255, 107, 26, 0.3);
         }
 
-        letter-spacing: 1px;
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        align-items: flex-end;
-        }
+
 
         /* Safe Zone Profile Overlay (Solo per check visivo, viene nascosto in export) */
         .safe-zone {
@@ -347,7 +341,9 @@
             // Prendiamo lo screenshot con HTML2Canvas
             html2canvas(document.getElementById('export-target'), {
                 scale: 3, // SCALA A 3X (4752x1188) per massima nitidezza anti-sgranamento su LinkedIn
-                backgroundColor: "#0A0A0A" // match col dark mode
+                backgroundColor: "#0A0A0A", // match col dark mode
+                useCORS: true, // Risolve problemi di download con risorse esterne (es. font)
+                allowTaint: false
             }).then(canvas => {
                 let a = document.createElement('a');
                 a.href = canvas.toDataURL("image/png");
