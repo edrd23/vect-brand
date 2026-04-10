@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Non-Disclosure Agreement (Standalone)</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --vect-black: #0A0A0A;
+            --vect-dark: #111111;
+            --vect-carbon: #1A1A1A;
+            --vect-steel: #3A3A3A;
+            --vect-ash: #666666;
+            --vect-light: #E0E0E0;
+            --vect-white: #F5F5F5;
+            --vect-accent: #FF6B1A;
+            --font-primary: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--vect-black);
+            color: var(--vect-light);
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--vect-carbon);
+            border: 1px solid var(--vect-steel);
+            padding: 50px;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo svg {
+            width: 120px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--vect-white);
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin: 0;
+            text-transform: uppercase;
+        }
+
+        .subtitle {
+            font-family: var(--font-mono);
+            color: var(--vect-accent);
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-top: 5px;
+        }
+
+        .parties-box {
+            background: var(--vect-dark);
+            border: 1px solid var(--vect-steel);
+            padding: 20px;
+            margin: 30px 0;
+            font-size: 14px;
+        }
+
+        .parties-box p {
+            margin: 5px 0;
+        }
+
+        .parties-box span {
+            color: var(--vect-ash);
+            font-family: var(--font-mono);
+            font-size: 11px;
+            display: inline-block;
+            width: 80px;
+        }
+
+        h3 {
+            color: var(--vect-accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 30px;
+            border-bottom: 1px solid var(--vect-steel);
+            padding-bottom: 5px;
+        }
+
+        p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #CCCCCC;
+            text-align: justify;
+        }
+
+        .signature-section {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+        }
+
+        .sig-block {
+            width: 45%;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--vect-steel);
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .sig-label {
+            font-size: 11px;
+            color: var(--vect-ash);
+            font-family: var(--font-mono);
+            text-transform: uppercase;
+        }
+
+        .footer-note {
+            margin-top: 40px;
+            font-size: 10px;
+            color: var(--vect-ash);
+            text-align: center;
+            font-family: var(--font-mono);
+        }
+
+        .print-btn {
+            background: var(--vect-accent);
+            color: var(--vect-black);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 12px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            border-radius: 4px;
+            z-index: 100;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .container {
+                border: none;
+                padding: 0;
+                background: white;
+                color: black;
+            }
+
+            h1,
+            p,
+            .parties-box p {
+                color: black;
+            }
+
+            .parties-box {
+                background: #f5f5f5;
+                border: 1px solid #ccc;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .logo svg path[fill="#F5F5F5"] {
+                fill: #000;
+            }
+
+            .logo svg path[fill="#FF6B1A"] {
+                fill: #FF6B1A;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+            <h1>Non-Disclosure Agreement</h1>
+            <div class="subtitle">Accordo di Riservatezza Professionale</div>
+        </header>
+
+        <div class="parties-box">
+            <p><span>TRA:</span> <strong>Carmine Eduardo De Vita</strong> (P.IVA: 15343601009 - Via Santa Maria di Loreto 37)</p>
+            <p><span>E:</span> <strong>__________________________________________</strong> (Il "Ricevente")</p>
+            <p><span>DATA:</span> <strong>____ / ____ / 202____</strong></p>
+        </div>
+
+        <h3>1. Oggetto dell'Informativa</h3>
+        <p>Le Parti desiderano scambiarsi informazioni riservate nell'ambito di una possibile collaborazione tecnica
+            (produzione eventi, consulenza RF, noleggio Spectera). Le informazioni includono, a titolo esemplificativo:
+            listini prezzi, configurazioni hardware proprietarie, architetture di rete spettrale, dettagli logistici e
+            contenuti artistici (VIP, rider, show-flow).</p>
+
+        <h3>2. Obbligo di Segretezza</h3>
+        <p>Il Ricevente si impegna a: (a) non divulgare a terzi le Informazioni Riservate senza il previo consenso
+            scritto di VECT; (b) utilizzare tali informazioni esclusivamente per valutare o eseguire la collaborazione
+            proposta; (c) adottare misure di sicurezza adeguate a prevenire fughe di dati involontarie.</p>
+
+        <h3>3. Know-How Tecnico</h3>
+        <p>In particolare, il Ricevente riconosce che le architetture RF e i metodi di implementazione del network
+            WMAS/Spectera forniti da VECT costituiscono segreto industriale. È vietata qualsiasi attività di
+            reverse-engineering o duplicazione delle metodologie progettuali per finalità diverse da quelle pattuite.
+        </p>
+
+        <h3>4. Durata e Penali</h3>
+        <p>Il presente vincolo di riservatezza rimarrà valido per un periodo di **3 (tre) anni** dalla data della firma.
+            In caso di violazione accertata, VECT si riserva il diritto di richiedere il risarcimento del danno
+            emergente e del lucro cessante.</p>
+
+        <div class="signature-section">
+            <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Per VECT</div>
+            </div>
+            <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">Per il Ricevente</div>
+            </div>
+        </div>
+
+        <div class="footer-note">VECT — Technologies for High-End Events | Legal Asset ID: NDA-ST-2026</div>
+    </div>
+</body>
+
+</html>

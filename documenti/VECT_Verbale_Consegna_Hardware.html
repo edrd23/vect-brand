@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Verbale di Consegna & Riconsegna</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --vect-black: #0A0A0A;
+            --vect-dark: #111111;
+            --vect-carbon: #1A1A1A;
+            --vect-steel: #3A3A3A;
+            --vect-ash: #666666;
+            --vect-light: #E0E0E0;
+            --vect-white: #F5F5F5;
+            --vect-accent: #FF6B1A;
+            --font-primary: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        body {
+            background-color: var(--vect-black);
+            color: var(--vect-light);
+            font-family: var(--font-primary);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--vect-accent);
+            padding-bottom: 10px;
+        }
+
+        .logo svg {
+            width: 100px;
+            height: auto;
+        }
+
+        .doc-title {
+            text-align: right;
+        }
+
+        h1 {
+            color: var(--vect-white);
+            font-size: 18px;
+            font-weight: 700;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .subtitle {
+            font-family: var(--font-mono);
+            color: var(--vect-ash);
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .info-box {
+            background: var(--vect-carbon);
+            border: 1px solid var(--vect-steel);
+            padding: 8px 12px;
+            border-radius: 4px;
+        }
+
+        .label {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--vect-accent);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+            display: block;
+        }
+
+        .value {
+            font-size: 12px;
+            color: var(--vect-white);
+            border-bottom: 1px solid var(--vect-steel);
+            min-height: 16px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background: var(--vect-carbon);
+        }
+
+        th {
+            background: var(--vect-dark);
+            color: var(--vect-accent);
+            font-family: var(--font-mono);
+            font-size: 10px;
+            text-transform: uppercase;
+            text-align: left;
+            padding: 8px;
+            border: 1px solid var(--vect-steel);
+        }
+
+        td {
+            padding: 6px 8px;
+            border: 1px solid var(--vect-steel);
+            font-size: 12px;
+        }
+
+        .sn-cell {
+            font-family: var(--font-mono);
+            color: var(--vect-white);
+            width: 180px;
+        }
+
+        .status-cell {
+            text-align: center;
+            width: 60px;
+        }
+
+        .check-circle {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 1px solid var(--vect-ash);
+            border-radius: 50%;
+        }
+
+        .legal-footer {
+            background: rgba(255, 107, 26, 0.05);
+            border: 1px dashed var(--vect-steel);
+            padding: 12px;
+            font-size: 11px;
+            line-height: 1.4;
+            color: var(--vect-ash);
+            margin-bottom: 20px;
+        }
+
+        .signatures {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .sig-block {
+            text-align: center;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid var(--vect-steel);
+            margin-bottom: 6px;
+            height: 30px;
+        }
+
+        .sig-label {
+            font-size: 10px;
+            color: var(--vect-ash);
+            text-transform: uppercase;
+        }
+
+        .print-btn {
+            background: var(--vect-accent);
+            color: var(--vect-black);
+            font-family: var(--font-mono);
+            font-weight: 700;
+            padding: 8px 16px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            font-size: 11px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+                padding: 0;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .info-box,
+            table,
+            .legal-footer {
+                border-color: #ddd;
+                background: white;
+            }
+
+            .value {
+                border-bottom-color: #000;
+                color: black;
+            }
+
+            th {
+                border-color: #ddd;
+                background: #f0f0f0;
+                color: black;
+            }
+
+            td {
+                color: black;
+            }
+
+            .sn-cell {
+                color: black;
+            }
+
+            .label,
+            .sig-label,
+            .subtitle {
+                color: #555;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .header {
+                border-bottom-color: #000;
+            }
+
+            svg path[fill="#F5F5F5"] {
+                fill: #000;
+            }
+
+            svg path[fill="#FF6B1A"] {
+                fill: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                        fill="#F5F5F5" />
+                    <path
+                        d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                        fill="#FF6B1A" />
+                    <path
+                        d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                        fill="#F5F5F5" />
+                    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+                </svg>
+            </div>
+            <div class="doc-title">
+                <h1>Verbale di Consegna</h1>
+                <div class="subtitle">Hardware Checkout & Safety ID</div>
+            </div>
+        </header>
+
+        <div class="info-grid">
+            <div class="info-box"><span class="label">Progetto</span>
+                <div class="value"></div>
+            </div>
+            <div class="info-box"><span class="label">Produzione</span>
+                <div class="value"></div>
+            </div>
+            <div class="info-box"><span class="label">Data</span>
+                <div class="value"></div>
+            </div>
+            <div class="info-box"><span class="label">Location</span>
+                <div class="value"></div>
+            </div>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Descrizione Apparato / Accessorio</th>
+                    <th>Serial Number / ID</th>
+                    <th class="status-cell">Stato</th>
+                    <th>Note / Danni Esistenti</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hardware Core -->
+                <tr style="background: rgba(255,107,26,0.03)">
+                    <td><strong>Spectera Base Station</strong></td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #1</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #2</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #3</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #4</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #5</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #6</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #7</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera SEK Bodypack #8</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <!-- RF System -->
+                <tr style="background: rgba(255,107,26,0.03)">
+                    <td><strong>Spectera DAD Antenna #1</strong></td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Spectera DAD Antenna #2</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Antenne SEK (Lotto Bodypack)</td>
+                    <td class="sn-cell">---</td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Cavi Rete Cat 5e/6 Rugged 50m</td>
+                    <td class="sn-cell">---</td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+
+                <!-- Spare / Add-ons -->
+                <tr style="background: rgba(255,107,26,0.03)">
+                    <td><strong>Varie / Altro</strong></td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Alimentatore Base Station</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Case Rigido Trasporto</td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td class="sn-cell"></td>
+                    <td class="status-cell">
+                        <div class="check-circle"></div>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="legal-footer">
+            <strong>Dichiarazione:</strong> Il Cliente dichiara di aver ricevuto l'attrezzatura in perfetto stato e ne
+            assume la custodia (Art. 1588 c.c.).
+        </div>
+
+        <div class="signatures">
+            <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">VECT (OUT)</div>
+            </div>
+            <div class="sig-block">
+                <div class="sig-line"></div>
+                <div class="sig-label">CLIENTE (IN)</div>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px; border-top: 1px dashed var(--vect-steel); padding-top: 15px;">
+            <h1 style="color: var(--vect-ash); font-size: 14px;">Riconsegna (Check-in)</h1>
+            <div class="info-grid" style="margin-top: 10px;">
+                <div class="info-box"><span class="label">Data Ritorno</span>
+                    <div class="value"></div>
+                </div>
+                <div class="info-box" style="grid-column: span 3"><span class="label">Esito / Note Danni</span>
+                    <div class="value"></div>
+                </div>
+            </div>
+            <div class="signatures">
+                <div class="sig-block">
+                    <div class="sig-line"></div>
+                    <div class="sig-label">VECT (CHECK)</div>
+                </div>
+                <div class="sig-block">
+                    <div class="sig-line"></div>
+                    <div class="sig-label">CLIENTE (RECON)</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

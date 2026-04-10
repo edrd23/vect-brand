@@ -1,0 +1,2468 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — RF Special Ops | Brand Guide</title>
+    <meta name="description"
+        content="Brand identity guide for VECT, RF Special Ops — Wireless rental, frequency management and spectrum coordination.">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ═══════════════════════════════════════════
+           VECT BRAND GUIDE — DESIGN SYSTEM
+           ═══════════════════════════════════════════ */
+
+        :root {
+            /* Core Colors */
+            --vect-black: #0A0A0A;
+            --vect-dark: #111111;
+            --vect-carbon: #1A1A1A;
+            --vect-graphite: #2A2A2A;
+            --vect-steel: #3A3A3A;
+            --vect-ash: #666666;
+            --vect-silver: #999999;
+            --vect-light: #E0E0E0;
+            --vect-white: #F5F5F5;
+
+            /* Accent — The "Signal" Color */
+            --vect-accent: #FF6B1A;
+            --vect-accent-glow: rgba(255, 107, 26, 0.15);
+            --vect-accent-bright: #FF8A4C;
+            --vect-accent-deep: #E55A00;
+
+            /* Secondary Accent */
+            --vect-cyan: #00D4FF;
+            --vect-cyan-glow: rgba(0, 212, 255, 0.1);
+
+            /* Functional */
+            --vect-success: #00C853;
+            --vect-warning: #FFD600;
+            --vect-error: #FF1744;
+
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+            /* Spacing */
+            --section-padding: 120px 0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--vect-black);
+            color: var(--vect-light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ═══════ NAVIGATION ═══════ */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 107, 26, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 14px 60px;
+            background: rgba(10, 10, 10, 0.95);
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: var(--vect-white);
+        }
+
+        .nav-logo span {
+            color: var(--vect-accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--vect-silver);
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--vect-accent);
+        }
+
+        /* ═══════ HERO SECTION ═══════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--vect-accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+            animation: heroPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes heroPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .hero-badge {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            margin-bottom: 40px;
+            padding: 8px 24px;
+            border: 1px solid rgba(255, 107, 26, 0.3);
+            border-radius: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-logo {
+            font-family: var(--font-mono);
+            font-size: clamp(80px, 15vw, 180px);
+            font-weight: 900;
+            letter-spacing: 20px;
+            color: var(--vect-white);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 8px;
+        }
+
+        .hero-logo .accent-letter {
+            color: var(--vect-accent);
+            text-shadow: 0 0 60px rgba(255, 107, 26, 0.4);
+        }
+
+        .hero-tagline {
+            font-family: var(--font-mono);
+            font-size: clamp(14px, 2vw, 18px);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: var(--vect-silver);
+            position: relative;
+            z-index: 1;
+            margin-bottom: 60px;
+        }
+
+        .hero-divider {
+            width: 60px;
+            height: 2px;
+            background: var(--vect-accent);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-subtitle {
+            font-size: 14px;
+            color: var(--vect-ash);
+            letter-spacing: 1px;
+            max-width: 500px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ═══════ SECTION LAYOUT ═══════ */
+        section {
+            padding: var(--section-padding);
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .section-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            color: var(--vect-white);
+            margin-bottom: 24px;
+            line-height: 1.1;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--vect-silver);
+            max-width: 600px;
+            margin-bottom: 60px;
+            line-height: 1.8;
+        }
+
+        .divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--vect-graphite), transparent);
+        }
+
+        /* ═══════ BRAND STORY ═══════ */
+        .brand-story {
+            background: var(--vect-dark);
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .story-text h3 {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--vect-white);
+            margin-bottom: 20px;
+        }
+
+        .story-text p {
+            color: var(--vect-silver);
+            margin-bottom: 16px;
+            font-size: 15px;
+        }
+
+        .story-visual {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .story-stat {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 24px;
+            background: var(--vect-carbon);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .story-stat:hover {
+            border-color: var(--vect-accent);
+            transform: translateX(8px);
+        }
+
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--vect-accent-glow);
+            border-radius: 10px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .stat-text h4 {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--vect-white);
+            margin-bottom: 4px;
+        }
+
+        .stat-text p {
+            font-size: 13px;
+            color: var(--vect-ash);
+        }
+
+        /* ═══════ COLOR PALETTE ═══════ */
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .color-card {
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--vect-graphite);
+            transition: all 0.3s ease;
+        }
+
+        .color-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        }
+
+        .color-swatch {
+            height: 140px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 16px;
+        }
+
+        .color-info {
+            padding: 20px;
+            background: var(--vect-carbon);
+        }
+
+        .color-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--vect-white);
+            margin-bottom: 4px;
+        }
+
+        .color-hex {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--vect-ash);
+        }
+
+        .color-role {
+            font-size: 12px;
+            color: var(--vect-silver);
+            margin-top: 8px;
+        }
+
+        /* ═══════ TYPOGRAPHY ═══════ */
+        .type-showcase {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .type-item {
+            padding: 40px;
+            background: var(--vect-dark);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .type-item:hover {
+            border-color: rgba(255, 107, 26, 0.2);
+        }
+
+        .type-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            margin-bottom: 20px;
+        }
+
+        .type-sample-display {
+            font-family: var(--font-primary);
+            font-size: 48px;
+            font-weight: 800;
+            color: var(--vect-white);
+            margin-bottom: 16px;
+        }
+
+        .type-sample-mono {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--vect-white);
+            letter-spacing: 8px;
+            margin-bottom: 16px;
+        }
+
+        .type-specs {
+            display: flex;
+            gap: 32px;
+            flex-wrap: wrap;
+        }
+
+        .type-spec {
+            font-size: 12px;
+            color: var(--vect-ash);
+        }
+
+        .type-spec strong {
+            color: var(--vect-silver);
+        }
+
+        /* ═══════ LOGO CONCEPTS ═══════ */
+        .logo-concepts {
+            background: var(--vect-dark);
+        }
+
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 32px;
+        }
+
+        .logo-card {
+            padding: 60px 40px;
+            background: var(--vect-black);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--vect-accent), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .logo-card:hover {
+            border-color: rgba(255, 107, 26, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .logo-card:hover::after {
+            opacity: 1;
+        }
+
+        .logo-render {
+            font-family: var(--font-mono);
+            font-size: 64px;
+            font-weight: 900;
+            letter-spacing: 12px;
+            margin-bottom: 8px;
+            color: var(--vect-white);
+        }
+
+        .logo-render .v-accent {
+            color: var(--vect-accent);
+            text-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
+        }
+
+        .logo-render .e-accent {
+            color: var(--vect-accent);
+            text-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
+        }
+
+        .logo-render .c-accent {
+            color: var(--vect-accent);
+            text-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
+        }
+
+        .logo-render .t-accent {
+            color: var(--vect-accent);
+            text-shadow: 0 0 40px rgba(255, 107, 26, 0.3);
+        }
+
+        .logo-render-cyan .v-accent {
+            color: var(--vect-cyan);
+            text-shadow: 0 0 40px rgba(0, 212, 255, 0.3);
+        }
+
+        .logo-payoff {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-bottom: 30px;
+        }
+
+        .logo-description {
+            font-size: 13px;
+            color: var(--vect-silver);
+            line-height: 1.6;
+        }
+
+        .logo-variant-label {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            margin-bottom: 24px;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 107, 26, 0.2);
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* ═══════ SERVICES ═══════ */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .service-card {
+            padding: 40px 32px;
+            background: var(--vect-dark);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 16px;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 32px;
+            right: 32px;
+            height: 1px;
+            background: var(--vect-accent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            border-color: rgba(255, 107, 26, 0.2);
+            transform: translateY(-6px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-icon {
+            font-size: 28px;
+            margin-bottom: 24px;
+        }
+
+        .service-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--vect-white);
+            margin-bottom: 12px;
+        }
+
+        .service-desc {
+            font-size: 14px;
+            color: var(--vect-silver);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .service-tag {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--vect-accent);
+            padding: 6px 14px;
+            background: var(--vect-accent-glow);
+            border-radius: 6px;
+            display: inline-block;
+        }
+
+        /* ═══════ TONE OF VOICE ═══════ */
+        .tone-section {
+            background: var(--vect-dark);
+        }
+
+        .tone-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .tone-card {
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--vect-graphite);
+            background: var(--vect-carbon);
+        }
+
+        .tone-card.do {
+            border-color: rgba(0, 200, 83, 0.2);
+        }
+
+        .tone-card.dont {
+            border-color: rgba(255, 23, 68, 0.15);
+        }
+
+        .tone-header {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 24px;
+        }
+
+        .tone-card.do .tone-header {
+            color: var(--vect-success);
+        }
+
+        .tone-card.dont .tone-header {
+            color: var(--vect-error);
+        }
+
+        .tone-example {
+            padding: 16px 20px;
+            background: var(--vect-dark);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            font-size: 14px;
+            color: var(--vect-light);
+            border-left: 3px solid transparent;
+        }
+
+        .tone-card.do .tone-example {
+            border-left-color: var(--vect-success);
+        }
+
+        .tone-card.dont .tone-example {
+            border-left-color: var(--vect-error);
+        }
+
+        /* ═══════ BRAND SUMMARY ═══════ */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .summary-card {
+            padding: 40px;
+            background: var(--vect-dark);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            border-color: var(--vect-accent);
+        }
+
+        .summary-value {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--vect-accent);
+            margin-bottom: 12px;
+        }
+
+        .summary-label {
+            font-size: 13px;
+            color: var(--vect-silver);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        /* ═══════ FOOTER ═══════ */
+        footer {
+            padding: 60px;
+            text-align: center;
+            border-top: 1px solid var(--vect-graphite);
+        }
+
+        .footer-logo {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: var(--vect-white);
+            margin-bottom: 8px;
+        }
+
+        .footer-logo span {
+            color: var(--vect-accent);
+        }
+
+        .footer-tagline {
+            font-family: var(--font-mono);
+            font-size: 10px;
+            letter-spacing: 4px;
+            color: var(--vect-ash);
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .footer-copy {
+            font-size: 12px;
+            color: var(--vect-steel);
+        }
+
+        /* ═══════ ANIMATIONS ═══════ */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 24px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            section {
+                padding: 80px 24px;
+            }
+
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .tone-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .logo-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 0 24px;
+            }
+
+            .hero-logo {
+                letter-spacing: 10px;
+            }
+
+            .mockup-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .biz-card-inner {
+                flex-direction: column;
+            }
+
+            .van-body {
+                min-width: unset;
+            }
+        }
+
+        /* ═══════ SCROLLBAR ═══════ */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--vect-black);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--vect-graphite);
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--vect-accent);
+        }
+
+        /* ═══════ MOCKUPS ═══════ */
+        .mockups-section {
+            background: var(--vect-dark);
+        }
+
+        .mockup-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .mockup-item {
+            background: var(--vect-carbon);
+            border: 1px solid var(--vect-graphite);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .mockup-item:hover {
+            border-color: rgba(255, 107, 26, 0.25);
+            transform: translateY(-6px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+        }
+
+        .mockup-render {
+            padding: 50px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 320px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mockup-info {
+            padding: 24px 32px;
+            border-top: 1px solid var(--vect-graphite);
+        }
+
+        .mockup-info h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--vect-white);
+            margin-bottom: 6px;
+        }
+
+        .mockup-info p {
+            font-size: 13px;
+            color: var(--vect-ash);
+            line-height: 1.5;
+        }
+
+        /* ── Flight Case ── */
+        .flightcase {
+            width: 280px;
+            height: 200px;
+            background: linear-gradient(145deg, #1a1a1a 0%, #0e0e0e 100%);
+            border-radius: 8px;
+            border: 2px solid #333;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+        }
+
+        .flightcase::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 1px solid #222;
+            border-radius: 4px;
+        }
+
+        .flightcase-corner {
+            position: absolute;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #444;
+            border-radius: 3px;
+            background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+        }
+
+        .flightcase-corner.tl {
+            top: -2px;
+            left: -2px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .flightcase-corner.tr {
+            top: -2px;
+            right: -2px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .flightcase-corner.bl {
+            bottom: -2px;
+            left: -2px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .flightcase-corner.br {
+            bottom: -2px;
+            right: -2px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .flightcase-handle {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 80px;
+            height: 14px;
+            background: linear-gradient(to bottom, #555, #333);
+            border-radius: 3px;
+            border: 1px solid #444;
+        }
+
+        .flightcase-handle.left {
+            left: -10px;
+        }
+
+        .flightcase-handle.right {
+            right: -10px;
+        }
+
+        .flightcase-latch {
+            position: absolute;
+            width: 24px;
+            height: 10px;
+            background: linear-gradient(to bottom, #666, #444);
+            border-radius: 2px;
+            border: 1px solid #555;
+        }
+
+        .flightcase-latch.top {
+            top: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flightcase-latch.bottom {
+            bottom: -1px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .flightcase-logo {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .flightcase-logo .fc-name {
+            font-family: var(--font-mono);
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: var(--vect-white);
+        }
+
+        .flightcase-logo .fc-name .fc-v {
+            color: var(--vect-accent);
+        }
+
+        .flightcase-logo .fc-payoff {
+            font-family: var(--font-mono);
+            font-size: 7px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-top: 4px;
+        }
+
+        .flightcase-label {
+            position: absolute;
+            bottom: 18px;
+            right: 20px;
+            font-family: var(--font-mono);
+            font-size: 8px;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        /* ── T-Shirt ── */
+        .tshirt {
+            width: 220px;
+            position: relative;
+        }
+
+        .tshirt-body {
+            width: 220px;
+            height: 260px;
+            background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+            border-radius: 4px 4px 8px 8px;
+            position: relative;
+            clip-path: polygon(30% 0%, 70% 0%, 72% 6%, 100% 14%, 100% 100%, 0% 100%, 0% 14%, 28% 6%);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .tshirt-collar {
+            position: absolute;
+            top: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 20px;
+            border-radius: 0 0 30px 30px;
+            border: 2px solid #222;
+            border-top: none;
+            background: #0d0d0d;
+        }
+
+        .tshirt-sleeve-l {
+            position: absolute;
+            top: 14%;
+            left: -30px;
+            width: 40px;
+            height: 70px;
+            background: linear-gradient(90deg, #0a0a0a, #111);
+            clip-path: polygon(100% 0%, 100% 100%, 20% 90%, 0% 30%, 60% 0%);
+        }
+
+        .tshirt-sleeve-r {
+            position: absolute;
+            top: 14%;
+            right: -30px;
+            width: 40px;
+            height: 70px;
+            background: linear-gradient(-90deg, #0a0a0a, #111);
+            clip-path: polygon(0% 0%, 0% 100%, 80% 90%, 100% 30%, 40% 0%);
+        }
+
+        .tshirt-logo {
+            position: absolute;
+            top: 34%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .tshirt-logo .ts-name {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--vect-white);
+        }
+
+        .tshirt-logo .ts-name .ts-v {
+            color: var(--vect-accent);
+        }
+
+        .tshirt-logo .ts-payoff {
+            font-family: var(--font-mono);
+            font-size: 6px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-top: 3px;
+        }
+
+        .tshirt-back-label {
+            position: absolute;
+            bottom: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #333;
+        }
+
+        /* ── Business Card ── */
+        .biz-card {
+            width: 320px;
+            height: 190px;
+            background: linear-gradient(135deg, #0d0d0d 0%, #111 50%, #0a0a0a 100%);
+            border-radius: 10px;
+            padding: 28px;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.04);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .biz-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 28px;
+            right: 28px;
+            height: 2px;
+            background: linear-gradient(to right, var(--vect-accent), transparent);
+            border-radius: 0 0 10px 10px;
+        }
+
+        .biz-card-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .biz-card .bc-logo {
+            font-family: var(--font-mono);
+            font-size: 24px;
+            font-weight: 900;
+            letter-spacing: 5px;
+            color: var(--vect-white);
+        }
+
+        .biz-card .bc-logo .bc-v {
+            color: var(--vect-accent);
+        }
+
+        .biz-card .bc-payoff {
+            font-family: var(--font-mono);
+            font-size: 7px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-top: 4px;
+        }
+
+        .biz-card .bc-contact {
+            text-align: right;
+        }
+
+        .biz-card .bc-contact div {
+            font-family: var(--font-mono);
+            font-size: 8px;
+            color: #555;
+            margin-bottom: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        .biz-card .bc-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .biz-card .bc-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--vect-white);
+        }
+
+        .biz-card .bc-role {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: var(--vect-accent);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .biz-card .bc-site {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            color: #444;
+            letter-spacing: 1px;
+        }
+
+        /* ── Crew Badge ── */
+        .crew-badge {
+            width: 200px;
+            position: relative;
+        }
+
+        .badge-lanyard {
+            width: 24px;
+            height: 60px;
+            background: linear-gradient(to bottom, var(--vect-accent), var(--vect-accent-deep));
+            margin: 0 auto;
+            border-radius: 2px 2px 0 0;
+            position: relative;
+        }
+
+        .badge-lanyard::before {
+            content: 'VECT';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-90deg);
+            font-family: var(--font-mono);
+            font-size: 7px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: rgba(0, 0, 0, 0.3);
+            white-space: nowrap;
+        }
+
+        .badge-clip {
+            width: 32px;
+            height: 8px;
+            background: linear-gradient(to bottom, #666, #444);
+            margin: 0 auto;
+            border-radius: 0 0 4px 4px;
+            border: 1px solid #555;
+            border-top: none;
+        }
+
+        .badge-card {
+            width: 200px;
+            height: 280px;
+            background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            margin-top: 2px;
+            padding: 24px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .badge-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--vect-accent);
+        }
+
+        .badge-top {
+            text-align: center;
+            width: 100%;
+        }
+
+        .badge-top .bdg-name {
+            font-family: var(--font-mono);
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: 6px;
+            color: var(--vect-white);
+        }
+
+        .badge-top .bdg-name .bdg-v {
+            color: var(--vect-accent);
+        }
+
+        .badge-top .bdg-payoff {
+            font-family: var(--font-mono);
+            font-size: 7px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-top: 4px;
+        }
+
+        .badge-photo {
+            width: 80px;
+            height: 80px;
+            background: var(--vect-graphite);
+            border-radius: 50%;
+            border: 2px solid #333;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #444;
+        }
+
+        .badge-person {
+            text-align: center;
+            width: 100%;
+        }
+
+        .badge-person .bdg-person-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--vect-white);
+        }
+
+        .badge-person .bdg-person-role {
+            font-family: var(--font-mono);
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: var(--vect-accent);
+            margin-top: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-access {
+            width: 100%;
+            text-align: center;
+            padding: 8px;
+            background: var(--vect-accent);
+            border-radius: 6px;
+            font-family: var(--font-mono);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--vect-black);
+        }
+
+        /* ── Van ── */
+        .van-mockup {
+            width: 100%;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .van-body {
+            width: 100%;
+            min-width: 360px;
+            height: 160px;
+            background: linear-gradient(180deg, #111 0%, #0d0d0d 100%);
+            border-radius: 8px 8px 0 0;
+            position: relative;
+            border: 1px solid #222;
+            border-bottom: none;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .van-cabin {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 30%;
+            height: 100%;
+            background: linear-gradient(180deg, #0e0e0e 0%, #090909 100%);
+            border-left: 1px solid #1a1a1a;
+            border-radius: 0 8px 0 0;
+        }
+
+        .van-windshield {
+            position: absolute;
+            top: 10px;
+            right: 8px;
+            width: calc(100% - 16px);
+            height: 50px;
+            background: linear-gradient(180deg, #1a2a3a 0%, #0d1a2a 100%);
+            border-radius: 4px;
+            border: 1px solid #2a2a2a;
+        }
+
+        .van-cargo-logo {
+            position: absolute;
+            top: 50%;
+            left: 35%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .van-cargo-logo .van-name {
+            font-family: var(--font-mono);
+            font-size: 36px;
+            font-weight: 900;
+            letter-spacing: 8px;
+            color: var(--vect-white);
+        }
+
+        .van-cargo-logo .van-name .van-v {
+            color: var(--vect-accent);
+        }
+
+        .van-cargo-logo .van-payoff {
+            font-family: var(--font-mono);
+            font-size: 7px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--vect-ash);
+            margin-top: 3px;
+        }
+
+        .van-stripe {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 30%;
+            height: 2px;
+            background: linear-gradient(to right, var(--vect-accent), transparent);
+        }
+
+        .van-undercarriage {
+            width: 100%;
+            height: 20px;
+            background: #0a0a0a;
+            border-radius: 0 0 4px 4px;
+            border: 1px solid #1a1a1a;
+            border-top: none;
+            position: relative;
+        }
+
+        .van-wheel {
+            position: absolute;
+            bottom: -14px;
+            width: 36px;
+            height: 36px;
+            background: radial-gradient(circle at 50% 50%, #333 30%, #1a1a1a 32%, #222 60%, #111 100%);
+            border-radius: 50%;
+            border: 3px solid #444;
+        }
+
+        .van-wheel::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 10px;
+            height: 10px;
+            background: #555;
+            border-radius: 50%;
+        }
+
+        .van-wheel.front {
+            right: 14%;
+        }
+
+        .van-wheel.rear {
+            left: 12%;
+        }
+
+        .van-url {
+            position: absolute;
+            bottom: 6px;
+            left: 10px;
+            font-family: var(--font-mono);
+            font-size: 7px;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        /* ── Rack Unit ── */
+        .rack-unit {
+            width: 300px;
+            background: linear-gradient(180deg, #0e0e0e 0%, #080808 100%);
+            border-radius: 6px;
+            border: 2px solid #2a2a2a;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        .rack-ear {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 10px;
+            background: #151515;
+            border-bottom: 1px solid #222;
+        }
+
+        .rack-ear:last-child {
+            border-bottom: none;
+            border-top: 1px solid #222;
+        }
+
+        .rack-screw {
+            width: 8px;
+            height: 8px;
+            background: radial-gradient(circle, #555, #333);
+            border-radius: 50%;
+            border: 1px solid #444;
+        }
+
+        .rack-ear-label {
+            font-family: var(--font-mono);
+            font-size: 6px;
+            color: #333;
+            letter-spacing: 1px;
+        }
+
+        .rack-panel {
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 70px;
+        }
+
+        .rack-panel-logo {
+            text-align: left;
+        }
+
+        .rack-panel-logo .rp-name {
+            font-family: var(--font-mono);
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--vect-white);
+        }
+
+        .rack-panel-logo .rp-name .rp-v {
+            color: var(--vect-accent);
+        }
+
+        .rack-panel-logo .rp-model {
+            font-family: var(--font-mono);
+            font-size: 8px;
+            color: #444;
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .rack-leds {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .rack-led {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #333;
+            border: 1px solid #444;
+        }
+
+        .rack-led.on {
+            background: var(--vect-accent);
+            box-shadow: 0 0 8px rgba(255, 107, 26, 0.5);
+        }
+
+        .rack-led.green {
+            background: var(--vect-success);
+            box-shadow: 0 0 8px rgba(0, 200, 83, 0.4);
+        }
+
+        .rack-display {
+            width: 80px;
+            height: 28px;
+            background: #001a00;
+            border-radius: 3px;
+            border: 1px solid #1a3a1a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            color: #00cc44;
+            letter-spacing: 2px;
+            text-shadow: 0 0 6px rgba(0, 204, 68, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ═══════ NAVIGATION ═══════ -->
+    <nav id="navbar">
+        <div class="nav-logo"><span>V</span>ECT</div>
+        <ul class="nav-links">
+            <li><a href="#brand">Brand</a></li>
+            <li><a href="#colors">Colori</a></li>
+            <li><a href="#typography">Font</a></li>
+            <li><a href="#logo">Logo</a></li>
+            <li><a href="#mockups">Mockup</a></li>
+            <li><a href="#services">Servizi</a></li>
+            <li><a href="#voice">Voce</a></li>
+        </ul>
+    </nav>
+
+    <!-- ═══════ HERO ═══════ -->
+    <section class="hero">
+        <div class="hero-badge">Brand Identity Guide — 2026</div>
+        <div class="hero-logo"><span class="accent-letter">V</span>ECT</div>
+        <div class="hero-tagline">RF Special Ops</div>
+        <div class="hero-divider"></div>
+        <p class="hero-subtitle">Noleggio radiofrequenze specializzato per lo spettacolo. Con e senza operatore.
+            Precisione, direzione, potenza.</p>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ BRAND STORY ═══════ -->
+    <section class="brand-story" id="brand">
+        <div class="fade-in">
+            <span class="section-label">01 — Brand Identity</span>
+            <h2 class="section-title">Chi è VECT</h2>
+            <p class="section-desc">Un vettore ha direzione, verso e intensità. VECT è l'unità specializzata che porta
+                il segnale RF esattamente dove serve, con la potenza giusta, senza interferenze.</p>
+        </div>
+
+        <div class="story-grid fade-in">
+            <div class="story-text">
+                <h3>Il Concetto</h3>
+                <p>In fisica, il <strong>vettore</strong> è la rappresentazione perfetta di un segnale che viaggia nello
+                    spazio: ha un punto di partenza, una direzione e un'intensità.</p>
+                <p>VECT gestisce l'invisibile con precisione chirurgica. Ogni evento, ogni segnale, ogni frequenza è un
+                    vettore che deve arrivare a destinazione — perfetto, puntuale, pulito.</p>
+                <p>Il nome comunica immediatamente competenza tecnica e azione operativa. Non è un semplice noleggio: è
+                    una <strong>missione RF</strong>.</p>
+            </div>
+            <div class="story-visual">
+                <div class="story-stat">
+                    <div class="stat-icon">📡</div>
+                    <div class="stat-text">
+                        <h4>Direzione</h4>
+                        <p>Il segnale ha un obiettivo. Noi lo portiamo a destinazione.</p>
+                    </div>
+                </div>
+                <div class="story-stat">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-text">
+                        <h4>Potenza</h4>
+                        <p>L'intensità giusta per ogni scenario, senza compromessi.</p>
+                    </div>
+                </div>
+                <div class="story-stat">
+                    <div class="stat-icon">🎯</div>
+                    <div class="stat-text">
+                        <h4>Precisione</h4>
+                        <p>Zero interferenze. Zero sorprese. Solo segnale pulito.</p>
+                    </div>
+                </div>
+                <div class="story-stat">
+                    <div class="stat-icon">🛡️</div>
+                    <div class="stat-text">
+                        <h4>Special Ops</h4>
+                        <p>Unità operativa specializzata per sfide RF complesse.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ COLORS ═══════ -->
+    <section id="colors">
+        <div class="fade-in">
+            <span class="section-label">02 — Palette Colori</span>
+            <h2 class="section-title">Dark Tech Minimal</h2>
+            <p class="section-desc">Una palette costruita sull'oscurità del backstage e illuminata da un unico colore
+                acceso: l'Arancio Segnale, il colore dei connettori professionali e dell'attrezzatura da stage.</p>
+        </div>
+
+        <h3 style="color: var(--vect-white); font-size: 16px; margin-bottom: 24px; font-weight: 600;">Colore Primario —
+            Accent</h3>
+        <div class="palette-grid fade-in">
+            <div class="color-card">
+                <div class="color-swatch" style="background: #FF6B1A;"></div>
+                <div class="color-info">
+                    <div class="color-name">Signal Orange</div>
+                    <div class="color-hex">#FF6B1A</div>
+                    <div class="color-role">Accent principale — CTA, dettagli logo, elementi attivi</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #FF8A4C;"></div>
+                <div class="color-info">
+                    <div class="color-name">Signal Orange Bright</div>
+                    <div class="color-hex">#FF8A4C</div>
+                    <div class="color-role">Hover states, evidenziazioni</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #E55A00;"></div>
+                <div class="color-info">
+                    <div class="color-name">Signal Orange Deep</div>
+                    <div class="color-hex">#E55A00</div>
+                    <div class="color-role">Gradienti, ombre del colore primario</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color: var(--vect-white); font-size: 16px; margin-bottom: 24px; font-weight: 600;">Scala di Grigi —
+            Base</h3>
+        <div class="palette-grid fade-in">
+            <div class="color-card">
+                <div class="color-swatch" style="background: #0A0A0A;">
+                    <span style="color: #333; font-family: var(--font-mono); font-size: 11px;">Bg primario</span>
+                </div>
+                <div class="color-info">
+                    <div class="color-name">VECT Black</div>
+                    <div class="color-hex">#0A0A0A</div>
+                    <div class="color-role">Background principale</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #111111;">
+                    <span style="color: #444; font-family: var(--font-mono); font-size: 11px;">Bg secondario</span>
+                </div>
+                <div class="color-info">
+                    <div class="color-name">VECT Dark</div>
+                    <div class="color-hex">#111111</div>
+                    <div class="color-role">Sezioni alternate, cards</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #1A1A1A;">
+                    <span style="color: #555; font-family: var(--font-mono); font-size: 11px;">Superfici</span>
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Carbon</div>
+                    <div class="color-hex">#1A1A1A</div>
+                    <div class="color-role">Card, pannelli, componenti</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #2A2A2A;">
+                    <span style="color: #666; font-family: var(--font-mono); font-size: 11px;">Bordi</span>
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Graphite</div>
+                    <div class="color-hex">#2A2A2A</div>
+                    <div class="color-role">Bordi, separatori, line</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #999999;"></div>
+                <div class="color-info">
+                    <div class="color-name">Silver</div>
+                    <div class="color-hex">#999999</div>
+                    <div class="color-role">Testo secondario, descrizioni</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-swatch" style="background: #F5F5F5;"></div>
+                <div class="color-info">
+                    <div class="color-name">VECT White</div>
+                    <div class="color-hex">#F5F5F5</div>
+                    <div class="color-role">Titoli, testo primario</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color: var(--vect-white); font-size: 16px; margin-bottom: 24px; font-weight: 600;">Accento Secondario
+        </h3>
+        <div class="palette-grid fade-in" style="max-width: 240px;">
+            <div class="color-card">
+                <div class="color-swatch" style="background: #00D4FF;"></div>
+                <div class="color-info">
+                    <div class="color-name">Digital Cyan</div>
+                    <div class="color-hex">#00D4FF</div>
+                    <div class="color-role">Uso limitato: dati tecnici, grafici, badge</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ TYPOGRAPHY ═══════ -->
+    <section id="typography">
+        <div class="fade-in">
+            <span class="section-label">03 — Tipografia</span>
+            <h2 class="section-title">Due font, zero compromessi</h2>
+            <p class="section-desc">Inter per la comunicazione chiara e professionale. JetBrains Mono per l'identità
+                tecnica e il logo. Insieme creano il contrasto perfetto tra human e machine.</p>
+        </div>
+
+        <div class="type-showcase fade-in">
+            <div class="type-item">
+                <div class="type-label">Font Primario — Comunicazione</div>
+                <div class="type-sample-display">Inter</div>
+                <div class="type-specs">
+                    <span class="type-spec"><strong>Heading:</strong> Inter 800</span>
+                    <span class="type-spec"><strong>Body:</strong> Inter 400</span>
+                    <span class="type-spec"><strong>Caption:</strong> Inter 500</span>
+                    <span class="type-spec"><strong>Uso:</strong> Sito, brochure, presentazioni, email</span>
+                </div>
+            </div>
+
+            <div class="type-item">
+                <div class="type-label">Font Tecnico — Brand Identity</div>
+                <div class="type-sample-mono">VECT</div>
+                <div class="type-specs">
+                    <span class="type-spec"><strong>Font:</strong> JetBrains Mono</span>
+                    <span class="type-spec"><strong>Weight:</strong> 700–900</span>
+                    <span class="type-spec"><strong>Spacing:</strong> 6–12px letter-spacing</span>
+                    <span class="type-spec"><strong>Uso:</strong> Logo, label, codici, badge tecnici</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ LOGO CONCEPTS ═══════ -->
+    <section class="logo-concepts" id="logo">
+        <div class="fade-in">
+            <span class="section-label">04 — Logo Concepts</span>
+            <h2 class="section-title">Il Marchio</h2>
+            <p class="section-desc">Quattro declinazioni del logo VECT, tutte basate sullo stesso principio: minimalismo
+                estremo con un unico dettaglio colorato.</p>
+        </div>
+
+        <div class="logo-grid fade-in">
+            <div class="logo-card">
+                <div class="logo-variant-label">Concept A — V Accent</div>
+                <div class="logo-render"><span class="v-accent">V</span>ECT</div>
+                <div class="logo-payoff">RF Special Ops</div>
+                <p class="logo-description">La V iniziale in Signal Orange. Il vettore parte da lì: il punto d'origine
+                    del segnale. Il più elegante e versatile.</p>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-variant-label">Concept B — E Signal</div>
+                <div class="logo-render">V<span class="e-accent">E</span>CT</div>
+                <div class="logo-payoff">RF Special Ops</div>
+                <p class="logo-description">La E accesa come il segnale nel cuore del nome. Le tre linee orizzontali
+                    della E ricordano le barre di un segnale RF.</p>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-variant-label">Concept C — T Base</div>
+                <div class="logo-render">VEC<span class="t-accent">T</span></div>
+                <div class="logo-payoff">RF Special Ops</div>
+                <p class="logo-description">La T finale accesa. Il punto d'arrivo del vettore. Rappresenta la
+                    destinazione raggiunta con successo.</p>
+            </div>
+
+            <div class="logo-card">
+                <div class="logo-variant-label">Concept D — Cyan Alt</div>
+                <div class="logo-render logo-render-cyan"><span class="v-accent">V</span>ECT</div>
+                <div class="logo-payoff">RF Special Ops</div>
+                <p class="logo-description">Variante Digital Cyan — per usi tecnici, documentazione, presentazioni
+                    specialistiche e contesti digitali.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ SERVICES ═══════ -->
+    <section id="services">
+        <div class="fade-in">
+            <span class="section-label">05 — Servizi</span>
+            <h2 class="section-title">Pacchetti Operativi</h2>
+            <p class="section-desc">Piattaforma Sennheiser Spectera WMAS. Dalla singola unità bidirezionale al
+                coordinamento completo dello spettro RF per grandi produzioni multi-stage. Ogni pacchetto è modulare,
+                scalabile e pensato per il professionista.</p>
+        </div>
+
+        <!-- SPECTERA PLATFORM BANNER -->
+        <div class="fade-in"
+            style="margin-bottom: 48px; padding: 32px 40px; background: linear-gradient(135deg, rgba(255,107,26,0.06) 0%, rgba(0,212,255,0.04) 100%); border: 1px solid rgba(255,107,26,0.15); border-radius: 16px;">
+            <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 16px;">
+                <span
+                    style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--vect-cyan); padding: 4px 12px; border: 1px solid rgba(0,212,255,0.2); border-radius: 4px;">Powered
+                    by</span>
+                <span
+                    style="font-family: var(--font-mono); font-size: 20px; font-weight: 700; letter-spacing: 4px; color: var(--vect-white);">SENNHEISER
+                    SPECTERA</span>
+            </div>
+            <p
+                style="font-size: 14px; color: var(--vect-silver); max-width: 800px; line-height: 1.7; margin-bottom: 20px;">
+                Ecosistema digitale bidirezionale WMAS (Wireless Multichannel Audio Systems). Un unico bodypack SEK
+                gestisce simultaneamente trasmissione microfonica/linea <strong
+                    style="color: var(--vect-accent);">e</strong> ricezione IEM. Base Station 1RU con 64 canali audio,
+                latenza sub-millisecondo, copertura equivalente a 40× diversity.</p>
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--vect-accent); box-shadow: 0 0 6px rgba(255,107,26,0.5);"></span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--vect-ash);">470–698 MHz
+                        UHF</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--vect-cyan); box-shadow: 0 0 6px rgba(0,212,255,0.4);"></span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--vect-ash);">Latenza: 0.7–1
+                        ms mono</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--vect-success); box-shadow: 0 0 6px rgba(0,200,83,0.4);"></span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--vect-ash);">LEMO 3-pin +
+                        Dante Redundant</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span
+                        style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--vect-white);"></span>
+                    <span style="font-family: var(--font-mono); font-size: 11px; color: var(--vect-ash);">Fino a 128
+                        bodypack per canale RF</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-grid fade-in" style="grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));">
+
+            <!-- PACK 1: ESSENTIAL -->
+            <div class="service-card" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <span class="service-tag">Dry Hire</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">VECT-ESS</span>
+                </div>
+                <div class="service-name" style="font-size: 22px;">Essential RF Kit</div>
+                <p class="service-desc">Noleggio di unità Spectera bidirezionali pronte al deploy. Kit pre-configurato
+                    con coordinamento frequenze incluso. Ideale per produzioni TV, corporate e touring di media scala.
+                </p>
+
+                <div style="flex-grow: 1;"></div>
+
+                <div
+                    style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-top: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vect-accent); margin-bottom: 12px;">
+                        Cosa include</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Spectera SEK Bodypack
+                            bidirezionali (TX + IEM)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Base Station 1RU — 32IN /
+                            32OUT su Dante
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Antenne DAD bidirezionali
+                            + cablaggio CAT5e
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Batterie BA 70 +
+                            caricabatterie rack
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Flight case brandizzato
+                            VECT
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">CONSEGNA
+                        / SPEDIZIONE</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: var(--vect-accent); letter-spacing: 1px;">QUOTE
+                        SU RICHIESTA</span>
+                </div>
+            </div>
+
+            <!-- PACK 2: OPS + KIT -->
+            <div class="service-card"
+                style="display: flex; flex-direction: column; border-color: rgba(255,107,26,0.2);">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <span class="service-tag"
+                        style="background: var(--vect-accent); color: var(--vect-black); font-weight: 700;">Wet
+                        Hire</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">VECT-OPS</span>
+                </div>
+                <div class="service-name" style="font-size: 22px;">Ops + Kit <span
+                        style="color: var(--vect-accent);">★</span></div>
+                <p class="service-desc">Kit Spectera completo con RF Operator specializzato on-site. Gestione
+                    end-to-end: dalla pre-produzione al tear-down. Il pacchetto più richiesto per live events e
+                    broadcast.</p>
+
+                <div style="flex-grow: 1;"></div>
+
+                <div
+                    style="padding: 20px; background: rgba(255,107,26,0.04); border-radius: 10px; margin-top: 16px; border: 1px solid rgba(255,107,26,0.1);">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vect-accent); margin-bottom: 12px;">
+                        Tutto incluso</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Tutto il kit Essential RF
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-light); font-weight: 500;">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> RF Operator VECT on-site
+                            (load-in → load-out)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Scan spettro +
+                            coordinamento frequenze pre-show
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Monitoring real-time via
+                            LinkDesk (RF health, battery, levels)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Report tecnico
+                            post-evento + frequency log
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Backup units + scorta
+                            batterie hot-swap
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,107,26,0.15); display: flex; justify-content: space-between; align-items: center;">
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">DAILY
+                        / WEEKLY RATE</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: var(--vect-accent); letter-spacing: 1px;">QUOTE
+                        SU RICHIESTA</span>
+                </div>
+            </div>
+
+            <!-- PACK 3: SPECTRUM COORDINATION -->
+            <div class="service-card" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <span class="service-tag">Consulenza</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">VECT-FREQ</span>
+                </div>
+                <div class="service-name" style="font-size: 22px;">Spectrum Coordination</div>
+                <p class="service-desc">Coordinamento spettro per produzioni multi-stage, festival e venue complesse.
+                    Analisi delle intermodulazioni, mappatura RF del sito e assegnazione canali ottimizzata per
+                    coesistenza tra sistemi eterogenei.</p>
+
+                <div style="flex-grow: 1;"></div>
+
+                <div
+                    style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-top: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vect-accent); margin-bottom: 12px;">
+                        Deliverable</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-cyan); font-size: 10px;">▸</span> Scan RF on-site pre-evento
+                            (470–698 MHz)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-cyan); font-size: 10px;">▸</span> Calcolo intermodulazione
+                            multi-vendor
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-cyan); font-size: 10px;">▸</span> Frequency plan condiviso
+                            (Shure, Sennheiser, Wisycom, ecc.)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-cyan); font-size: 10px;">▸</span> Coordinamento con altri RF
+                            techs sul sito
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-cyan); font-size: 10px;">▸</span> Report PDF con mappa
+                            frequenze e note operative
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">REMOTO
+                        / ON-SITE</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: var(--vect-cyan); letter-spacing: 1px;">QUOTE
+                        SU RICHIESTA</span>
+                </div>
+            </div>
+
+            <!-- PACK 4: SYSTEM DESIGN -->
+            <div class="service-card" style="display: flex; flex-direction: column;">
+                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+                    <span class="service-tag">Engineering</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">VECT-ENG</span>
+                </div>
+                <div class="service-name" style="font-size: 22px;">System Design</div>
+                <p class="service-desc">Progettazione di architetture wireless su misura per venue permanenti, touring e
+                    broadcast. Dimensionamento hardware Spectera, posizionamento antenne DAD e ottimizzazione della
+                    copertura RF.</p>
+
+                <div style="flex-grow: 1;"></div>
+
+                <div
+                    style="padding: 20px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-top: 16px; border: 1px solid rgba(255,255,255,0.04);">
+                    <div
+                        style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vect-accent); margin-bottom: 12px;">
+                        Scope of Work</div>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Site survey RF + analisi
+                            ambiente EM
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Dimensionamento Base
+                            Station + canali (WMAS)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Piano antenne DAD
+                            (positioning, splitter, CAT5e runs)
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Integrazione rete Dante /
+                            MADI per audio routing
+                        </div>
+                        <div
+                            style="display: flex; align-items: center; gap: 10px; font-size: 12px; color: var(--vect-silver);">
+                            <span style="color: var(--vect-accent); font-size: 10px;">▸</span> Documentazione tecnica
+                            completa + hand-off al crew
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; justify-content: space-between; align-items: center;">
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: #444; letter-spacing: 1px;">PROGETTO
+                        / CONSULENZA</span>
+                    <span
+                        style="font-family: var(--font-mono); font-size: 10px; color: var(--vect-accent); letter-spacing: 1px;">QUOTE
+                        SU RICHIESTA</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- B2B BOTTOM NOTE -->
+        <div class="fade-in"
+            style="margin-top: 48px; padding: 24px 32px; background: var(--vect-carbon); border: 1px solid var(--vect-graphite); border-radius: 12px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 20px;">
+            <div>
+                <div
+                    style="font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--vect-ash); margin-bottom: 6px;">
+                    Solo per professionisti</div>
+                <p style="font-size: 13px; color: var(--vect-silver); max-width: 600px; line-height: 1.6;">Tutti i
+                    pacchetti sono configurabili in base alla scala dell'evento. Tutti i prezzi sono B2B — IVA esclusa.
+                    Contattaci con i dettagli della produzione per un preventivo personalizzato.</p>
+            </div>
+            <div
+                style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--vect-accent); padding: 10px 24px; border: 1px solid rgba(255,107,26,0.3); border-radius: 8px; white-space: nowrap; text-transform: uppercase;">
+                info@vect-rf.it</div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ MOCKUPS ═══════ -->
+    <section class="mockups-section" id="mockups">
+        <div class="fade-in">
+            <span class="section-label">06 — Applicazioni</span>
+            <h2 class="section-title">Il Brand in Azione</h2>
+            <p class="section-desc">Come appare VECT nel mondo reale: sugli strumenti di lavoro, sull'abbigliamento crew
+                e sui mezzi operativi. Ogni applicazione mantiene il DNA dark-tech minimal.</p>
+        </div>
+
+        <div class="mockup-grid fade-in">
+
+            <!-- FLIGHT CASE -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="flightcase">
+                        <div class="flightcase-corner tl"></div>
+                        <div class="flightcase-corner tr"></div>
+                        <div class="flightcase-corner bl"></div>
+                        <div class="flightcase-corner br"></div>
+                        <div class="flightcase-handle left"></div>
+                        <div class="flightcase-handle right"></div>
+                        <div class="flightcase-latch top"></div>
+                        <div class="flightcase-latch bottom"></div>
+                        <div class="flightcase-logo">
+                            <div class="fc-name"><span class="fc-v">V</span>ECT</div>
+                            <div class="fc-payoff">RF Special Ops</div>
+                        </div>
+                        <div class="flightcase-label">UNIT 01 / RF</div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Flight Case</h4>
+                    <p>Logo serigrafato su flight case nero opaco. Ogni unità è numerata e identificata con etichetta
+                        tecnica.</p>
+                </div>
+            </div>
+
+            <!-- T-SHIRT -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="tshirt">
+                        <div class="tshirt-sleeve-l"></div>
+                        <div class="tshirt-sleeve-r"></div>
+                        <div class="tshirt-body">
+                            <div class="tshirt-collar"></div>
+                            <div class="tshirt-logo">
+                                <div class="ts-name"><span class="ts-v">V</span>ECT</div>
+                                <div class="ts-payoff">RF Special Ops</div>
+                            </div>
+                            <div class="tshirt-back-label">CREW</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Crew T-Shirt</h4>
+                    <p>T-shirt tecnica nera con logo sul petto e scritta CREW sul retro. Tessuto traspirante per il
+                        lavoro on-stage.</p>
+                </div>
+            </div>
+
+            <!-- BUSINESS CARD -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="biz-card">
+                        <div class="biz-card-inner">
+                            <div>
+                                <div class="bc-logo"><span class="bc-v">V</span>ECT</div>
+                                <div class="bc-payoff">RF Special Ops</div>
+                            </div>
+                            <div class="bc-contact">
+                                <div>info@vect-rf.it</div>
+                                <div>+39 XXX XXX XXXX</div>
+                            </div>
+                        </div>
+                        <div class="bc-bottom">
+                            <div>
+                                <div class="bc-name">Nome Cognome</div>
+                                <div class="bc-role">RF Specialist & Operator</div>
+                            </div>
+                            <div class="bc-site">vect-rf.it</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Biglietto da Visita</h4>
+                    <p>Design premium su carta nera opaca soft-touch. Linea accent arancio in basso e tipografia tecnica
+                        mono.</p>
+                </div>
+            </div>
+
+            <!-- CREW BADGE -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="crew-badge">
+                        <div class="badge-lanyard"></div>
+                        <div class="badge-clip"></div>
+                        <div class="badge-card">
+                            <div class="badge-top">
+                                <div class="bdg-name"><span class="bdg-v">V</span>ECT</div>
+                                <div class="bdg-payoff">RF Special Ops</div>
+                            </div>
+                            <div class="badge-photo">👤</div>
+                            <div class="badge-person">
+                                <div class="bdg-person-name">Nome Cognome</div>
+                                <div class="bdg-person-role">RF Operator</div>
+                            </div>
+                            <div class="badge-access">ALL ACCESS</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Backstage Badge</h4>
+                    <p>Badge crew con lanyard arancio brandizzato. Design coerente per identificazione rapida sul campo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VAN -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="van-mockup">
+                        <div class="van-body">
+                            <div class="van-cabin">
+                                <div class="van-windshield"></div>
+                            </div>
+                            <div class="van-cargo-logo">
+                                <div class="van-name"><span class="van-v">V</span>ECT</div>
+                                <div class="van-payoff">RF Special Ops</div>
+                            </div>
+                            <div class="van-stripe"></div>
+                            <div class="van-url">vect-rf.it</div>
+                        </div>
+                        <div class="van-undercarriage">
+                            <div class="van-wheel front"></div>
+                            <div class="van-wheel rear"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Van Wrap</h4>
+                    <p>Wrapping nero opaco con logo bianco, striscia accent arancio e URL. Riconoscibilità immediata in
+                        loading area.</p>
+                </div>
+            </div>
+
+            <!-- RACK UNIT -->
+            <div class="mockup-item">
+                <div class="mockup-render">
+                    <div class="rack-unit">
+                        <div class="rack-ear">
+                            <div class="rack-screw"></div>
+                            <div class="rack-ear-label">1U — VECT RF PANEL</div>
+                            <div class="rack-screw"></div>
+                        </div>
+                        <div class="rack-panel">
+                            <div class="rack-panel-logo">
+                                <div class="rp-name"><span class="rp-v">V</span>ECT</div>
+                                <div class="rp-model">RF-DIST-4CH // v2.1</div>
+                            </div>
+                            <div class="rack-leds">
+                                <div class="rack-led on"></div>
+                                <div class="rack-led green"></div>
+                                <div class="rack-led green"></div>
+                                <div class="rack-led green"></div>
+                            </div>
+                            <div class="rack-display">470.2</div>
+                        </div>
+                        <div class="rack-ear">
+                            <div class="rack-screw"></div>
+                            <div class="rack-ear-label">SIGNAL LOCK</div>
+                            <div class="rack-screw"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mockup-info">
+                    <h4>Rack Panel 1U</h4>
+                    <p>Pannello rack 19" brandizzato con LED di stato, display frequenza e identificazione modello.
+                        Pro-grade.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ TONE OF VOICE ═══════ -->
+    <section class="tone-section" id="voice">
+        <div class="fade-in">
+            <span class="section-label">07 — Tone of Voice</span>
+            <h2 class="section-title">Come parla VECT</h2>
+            <p class="section-desc">Tecnico ma accessibile. Diretto ma mai arrogante. VECT comunica come un operatore
+                esperto che parla con un collega: preciso, asciutto, orientato alla soluzione.</p>
+        </div>
+
+        <div class="tone-grid fade-in">
+            <div class="tone-card do">
+                <div class="tone-header">✓ Così sì</div>
+                <div class="tone-example">"Gestiamo 48 canali wireless su 3 palchi senza conflitti di frequenza."</div>
+                <div class="tone-example">"Il coordinamento RF non è un optional. È la differenza tra un evento
+                    professionale e un disastro."</div>
+                <div class="tone-example">"Setup completo in 90 minuti. Smontaggio in 45."</div>
+                <div class="tone-example">"Il tuo show ha bisogno di segnale pulito? Parliamone."</div>
+            </div>
+
+            <div class="tone-card dont">
+                <div class="tone-header">✗ Così no</div>
+                <div class="tone-example">"Siamo i migliori nel noleggio audio per i tuoi eventi! 🎉"</div>
+                <div class="tone-example">"Offriamo soluzioni innovative e all'avanguardia per le tue esigenze."</div>
+                <div class="tone-example">"Contattaci per un preventivo senza impegno!!!"</div>
+                <div class="tone-example">"La nostra passione è la tecnologia wireless."</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ═══════ BRAND SUMMARY ═══════ -->
+    <section>
+        <div class="fade-in">
+            <span class="section-label">08 — Riepilogo</span>
+            <h2 class="section-title">DNA del Brand</h2>
+        </div>
+
+        <div class="summary-grid fade-in">
+            <div class="summary-card">
+                <div class="summary-value">VECT</div>
+                <div class="summary-label">Nome</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="font-size: 20px;">RF Special Ops</div>
+                <div class="summary-label">Payoff</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="font-size: 20px;">Dark Tech Minimal</div>
+                <div class="summary-label">Stile Visivo</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="color: #FF6B1A;">●</div>
+                <div class="summary-label">Signal Orange</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="font-size: 20px;">B2B Pro</div>
+                <div class="summary-label">Target Primario</div>
+            </div>
+            <div class="summary-card">
+                <div class="summary-value" style="font-size: 20px;">Tecnico / Diretto</div>
+                <div class="summary-label">Tone of Voice</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ FOOTER ═══════ -->
+    <footer>
+        <div class="footer-logo"><span>V</span>ECT</div>
+        <div class="footer-tagline">RF Special Ops</div>
+        <p class="footer-copy">Brand Guide — Febbraio 2026 — Tutti i diritti riservati</p>
+    </footer>
+
+    <!-- ═══════ SCRIPTS ═══════ -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Fade-in on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    </script>
+
+</body>
+
+</html>

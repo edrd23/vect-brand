@@ -1,0 +1,3 @@
+Data,Cliente,Descrizione,Imponibile,IVA,Totale,Stato,Scadenza
+2026-03-01,Cliente Esempio S.r.l.,Consulenza Software,1500.00,330.00,1830.00,Pagato,2026-03-31
+2026-03-15,Brand Network,Noleggio Attrezzatura Audio,800.00,176.00,976.00,In Attesa,2026-04-15

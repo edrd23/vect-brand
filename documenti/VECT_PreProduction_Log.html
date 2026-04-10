@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Pre-Production RF Log</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111;
+            --carbon: #1A1A1A;
+            --steel: #2A2A2A;
+            --border: #2E2E2E;
+            --ash: #555;
+            --silver: #888;
+            --light: #D8D8D8;
+            --white: #F2F2F2;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --green: #00CC66;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+        }
+
+        /* HEADER */
+        .doc-header {
+            background: var(--dark);
+            border-bottom: 2px solid var(--accent);
+            padding: 32px 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+        }
+
+        .header-left svg {
+            width: 90px;
+        }
+
+        .header-titles {}
+
+        .doc-tag {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .doc-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .header-right {
+            text-align: right;
+        }
+
+        .doc-id {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .doc-version {
+            font-family: var(--mono);
+            font-size: 13px;
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        /* BODY */
+        .doc-body {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 48px 56px 80px;
+        }
+
+        /* EVENT META */
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .meta-field {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 14px 16px;
+        }
+
+        .meta-field label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        .meta-field input,
+        .meta-field select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--border);
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 14px;
+            padding-bottom: 4px;
+            outline: none;
+        }
+
+        .meta-field input::placeholder {
+            color: var(--ash);
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            padding: 14px 20px;
+            margin-bottom: 0;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .section-num {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(255, 107, 26, 0.25);
+            border-radius: 2px;
+            padding: 2px 8px;
+        }
+
+        .section-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            flex: 1;
+        }
+
+        .section-toggle {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--silver);
+            transition: transform 0.2s;
+        }
+
+        .section-body {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-top: none;
+            padding: 24px 20px;
+        }
+
+        /* ROWS */
+        .field-row {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 0;
+            border-bottom: 1px solid var(--border);
+            align-items: stretch;
+        }
+
+        .field-row:last-child {
+            border-bottom: none;
+        }
+
+        .field-label {
+            background: var(--carbon);
+            padding: 12px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--light);
+            border-right: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+        }
+
+        .field-value {
+            padding: 10px 14px;
+        }
+
+        .field-value input,
+        .field-value textarea,
+        .field-value select {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 13px;
+            outline: none;
+            resize: vertical;
+        }
+
+        .field-value textarea {
+            min-height: 54px;
+        }
+
+        .field-value input::placeholder,
+        .field-value textarea::placeholder {
+            color: var(--ash);
+        }
+
+        /* FREQ TABLE */
+        .freq-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .freq-table th {
+            background: var(--carbon);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 10px 14px;
+            border: 1px solid var(--border);
+            text-align: left;
+        }
+
+        .freq-table td {
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+        }
+
+        .freq-table td input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-family: var(--mono);
+            font-size: 13px;
+            outline: none;
+        }
+
+        .freq-table tr:nth-child(odd) td {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .add-row-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px dashed rgba(255, 107, 26, 0.4);
+            padding: 8px 20px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .add-row-btn:hover {
+            background: rgba(255, 107, 26, 0.15);
+        }
+
+        /* CHECKLIST */
+        .checklist {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+
+        .cl-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 11px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cl-item:last-child {
+            border-bottom: none;
+        }
+
+        .cl-item input[type="checkbox"] {
+            width: 15px;
+            height: 15px;
+            accent-color: var(--accent);
+            flex-shrink: 0;
+        }
+
+        .cl-item label {
+            font-size: 13px;
+            color: var(--light);
+            cursor: pointer;
+        }
+
+        /* SIGN BLOCK */
+        .sign-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .sign-box {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            padding: 24px;
+        }
+
+        .sign-box label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .sign-line {
+            border-bottom: 1px solid var(--silver);
+            height: 40px;
+            margin-bottom: 8px;
+        }
+
+        .sign-name {
+            font-size: 12px;
+            color: var(--ash);
+        }
+
+        .print-btn {
+            background: var(--accent);
+            color: #000;
+            font-family: var(--mono);
+            font-weight: 700;
+            padding: 10px 24px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            border-radius: 3px;
+        }
+
+        .print-btn:hover {
+            background: var(--white);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .doc-header {
+                background: #fff;
+                border-bottom: 2px solid #000;
+                padding: 20px;
+            }
+
+            .doc-title,
+            .section-title,
+            .field-label {
+                color: #000;
+            }
+
+            .meta-field,
+            .section-header,
+            .field-label {
+                background: #f5f5f5;
+            }
+
+            .section-body,
+            .section-header {
+                border-color: #ddd;
+            }
+
+            .print-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+
+    <!-- HEADER -->
+    <div class="doc-header">
+        <div class="header-left">
+            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div class="header-titles">
+                <div class="doc-tag">// Documento Operativo — Pre-Produzione</div>
+                <div class="doc-title">Pre-Production RF Log</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="doc-id">DOC-PPL-<span id="doc-num">001</span></div>
+            <div class="doc-version">v1.0 · 2026</div>
+        </div>
+    </div>
+
+    <div class="doc-body">
+
+        <!-- META -->
+        <div class="meta-grid">
+            <div class="meta-field">
+                <label>Evento / Produzione</label>
+                <input type="text" placeholder="es. Summer Arena Tour 2026">
+            </div>
+            <div class="meta-field">
+                <label>Data Evento</label>
+                <input type="date">
+            </div>
+            <div class="meta-field">
+                <label>Location</label>
+                <input type="text" placeholder="es. Mediolanum Forum, Milano">
+            </div>
+            <div class="meta-field">
+                <label>Cliente / Production Co.</label>
+                <input type="text" placeholder="es. Live Nation Italy">
+            </div>
+            <div class="meta-field">
+                <label>Referente Tecnico Cliente</label>
+                <input type="text" placeholder="Nome + ruolo">
+            </div>
+            <div class="meta-field">
+                <label>Operatore VECT</label>
+                <input type="text" placeholder="Carmine Eduardo De Vita" value="Carmine Eduardo De Vita">
+            </div>
+        </div>
+
+        <!-- SECTION 1: VENUE -->
+        <div class="section">
+            <div class="section-header" onclick="toggle(this)">
+                <span class="section-num">01</span>
+                <span class="section-title">Informazioni Venue & Palco</span>
+                <span class="section-toggle">?</span>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field-label">Tipo venue</div>
+                    <div class="field-value"><select>
+                            <option value="">— Seleziona —</option>
+                            <option>Arena Indoor</option>
+                            <option>Teatro</option>
+                            <option>Spazio Outdoor</option>
+                            <option>Festival</option>
+                            <option>Club / Locale</option>
+                            <option>Location corporate</option>
+                            <option>Studio broadcast</option>
+                        </select></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Capienza (PAX)</div>
+                    <div class="field-value"><input type="number" placeholder="es. 12000"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Dimensioni palco (m)</div>
+                    <div class="field-value"><input type="text" placeholder="es. 30m larghezza × 18m profondità"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">N° palchi simultanei</div>
+                    <div class="field-value"><input type="number" placeholder="es. 1"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Presenza strutture metalliche rilevanti</div>
+                    <div class="field-value"><input type="text"
+                            placeholder="tralicci, capriate, rivestimenti metallici…"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Note aggiuntive venue</div>
+                    <div class="field-value"><textarea
+                            placeholder="Piani, balconate, aree multipath, ostacoli RF…"></textarea></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 2: RF ENV -->
+        <div class="section">
+            <div class="section-header" onclick="toggle(this)">
+                <span class="section-num">02</span>
+                <span class="section-title">Ambiente RF — Altri Fornitori & Frequenze Note</span>
+                <span class="section-toggle">?</span>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field-label">N° altri fornitori wireless attivi</div>
+                    <div class="field-value"><input type="number" placeholder="es. 3"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">N° link wireless totali sul campo (stima)</div>
+                    <div class="field-value"><input type="number" placeholder="es. 60"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Presenza broadcast / SNG van</div>
+                    <div class="field-value"><select>
+                            <option value="">— Seleziona —</option>
+                            <option>Sì — ENG/SNG attivi</option>
+                            <option>Sì — IFB/PL broadcast</option>
+                            <option>No</option>
+                            <option>Non confermato</option>
+                        </select></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Bande bloccate / protette da licenza</div>
+                    <div class="field-value"><input type="text" placeholder="es. 790–862 MHz (LTE 800)"></div>
+                </div>
+
+                <br>
+                <p
+                    style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">
+                    // Frequenze già assegnate ad altri fornitori</p>
+                <table class="freq-table" id="freq-table">
+                    <thead>
+                        <tr>
+                            <th>Fornitore / Sistema</th>
+                            <th>Banda (MHz)</th>
+                            <th>N° Link</th>
+                            <th>Note</th>
+                        </tr>
+                    </thead>
+                    <tbody id="freq-tbody">
+                        <tr>
+                            <td><input placeholder="es. Service A — Shure Axient"></td>
+                            <td><input placeholder="606–614"></td>
+                            <td><input type="number" placeholder="8"></td>
+                            <td><input placeholder="IEM + Mic"></td>
+                        </tr>
+                        <tr>
+                            <td><input placeholder="es. Broadcast RAI"></td>
+                            <td><input placeholder="694–710"></td>
+                            <td><input type="number" placeholder="4"></td>
+                            <td><input placeholder="ENG cameras"></td>
+                        </tr>
+                        <tr>
+                            <td><input placeholder=""></td>
+                            <td><input placeholder=""></td>
+                            <td><input type="number" placeholder=""></td>
+                            <td><input placeholder=""></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="add-row-btn" onclick="addFreqRow()">+ Aggiungi fornitore</button>
+
+                <div class="field-row" style="margin-top:16px;">
+                    <div class="field-label">Banda disponibile proposta per VECT/Spectera</div>
+                    <div class="field-value"><input type="text" placeholder="es. 570–578 MHz (8 MHz puliti)"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 3: SYSTEM CONFIG -->
+        <div class="section">
+            <div class="section-header" onclick="toggle(this)">
+                <span class="section-num">03</span>
+                <span class="section-title">Configurazione Sistema Richiesta</span>
+                <span class="section-toggle">?</span>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field-label">N° link IEM richiesti</div>
+                    <div class="field-value"><input type="number" placeholder="es. 16"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">N° link microfono / strumento</div>
+                    <div class="field-value"><input type="number" placeholder="es. 12"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Link bidirezionali (IEM+Mic stesso SEK)</div>
+                    <div class="field-value"><input type="number" placeholder="es. 8 bodypack dual-mode"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Integrazione digitale richiesta</div>
+                    <div class="field-value"><select>
+                            <option>Dante (AES67)</option>
+                            <option>MADI</option>
+                            <option>AES3</option>
+                            <option>Analogico</option>
+                            <option>Dante + MADI parallelo</option>
+                        </select></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Console FOH</div>
+                    <div class="field-value"><input type="text" placeholder="es. DiGiCo SD12, Avid S6L"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Console Monitor</div>
+                    <div class="field-value"><input type="text" placeholder="es. Yamaha CL5, DiGiCo SD7"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Posizione rack Spectera (BSS)</div>
+                    <div class="field-value"><input type="text" placeholder="es. Stage Right, FOH, FLY pack"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Posizione antenne DAD</div>
+                    <div class="field-value"><input type="text"
+                            placeholder="es. Front of stage, ambo i lati, 4m dal suolo"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Richiesta punto di collegamento RF</div>
+                    <div class="field-value"><input type="text"
+                            placeholder="es. BNC diretti, TNC-F passacavo, cavo RG-8X"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Note configurazione</div>
+                    <div class="field-value"><textarea
+                            placeholder="Richieste specifiche del cliente, limiti fisici, esigenze particolari degli artisti…"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 4: LOGISTICA -->
+        <div class="section">
+            <div class="section-header" onclick="toggle(this)">
+                <span class="section-num">04</span>
+                <span class="section-title">Logistica & Accesso</span>
+                <span class="section-toggle">?</span>
+            </div>
+            <div class="section-body">
+                <div class="field-row">
+                    <div class="field-label">Orario accredito tecnico</div>
+                    <div class="field-value"><input type="time"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Orario soundcheck</div>
+                    <div class="field-value"><input type="time"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Orario show</div>
+                    <div class="field-value"><input type="time"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Parcheggio / carico scarico</div>
+                    <div class="field-value"><input type="text"
+                            placeholder="es. Gate B, zona tecnica, contattare [nome] per varco"></div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Hotel / trasferta</div>
+                    <div class="field-value"><input type="text" placeholder="se trasferta: hotel, rimborso km, altro">
+                    </div>
+                </div>
+                <div class="field-row">
+                    <div class="field-label">Richieste catering / ryder tecnico</div>
+                    <div class="field-value"><textarea placeholder=""></textarea></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SECTION 5: PRE-SHOW CHECKLIST -->
+        <div class="section">
+            <div class="section-header" onclick="toggle(this)">
+                <span class="section-num">05</span>
+                <span class="section-title">Checklist Pre-Show</span>
+                <span class="section-toggle">?</span>
+            </div>
+            <div class="section-body">
+                <div class="checklist">
+                    <div class="cl-item"><input type="checkbox"><label>Scan spettrale venue completato (Spectrum Expert
+                            / Spectera)</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Banda Spectera confermata libera — nessuna
+                            interferenza persistente</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>BSS Base Station accesa e sincronizzata con tutti
+                            i SEK bodypack</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Antenne DAD posizionate e travi coassiali
+                            verificate (perdita &lt;6dB)</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Integrazione Dante confermata — routing
+                            verificato in rete</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Latenza verificata (target: 0.7 ms) su tutti i
+                            link attivi</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>AES-256 encryption attiva su tutti i link
+                            critici</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Coordinamento frequenze confermato con tutti gli
+                            altri fornitori presenti</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Verbale di Consegna Hardware compilato e
+                            firmato</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Backup piano frequenze cartaceo disponibile
+                            on-site</label></div>
+                    <div class="cl-item"><input type="checkbox"><label>Contatto diretto del tecnico cliente salvato su
+                            telefono operatore</label></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SIGN -->
+        <div class="sign-grid">
+            <div class="sign-box">
+                <label>Compilato da — VECT</label>
+                <div class="sign-line"></div>
+                <div class="sign-name">Carmine Eduardo De Vita · Operatore RF VECT · Data: ___/___/______</div>
+            </div>
+            <div class="sign-box">
+                <label>Approvato da — Cliente</label>
+                <div class="sign-line"></div>
+                <div class="sign-name">Nome · Ruolo · Data: ___/___/______</div>
+            </div>
+        </div>
+
+    </div><!-- /doc-body -->
+
+    <script>
+        function toggle(header) {
+            const body = header.nextElementSibling;
+            const toggle = header.querySelector('.section-toggle');
+            if (body.style.display === 'none') {
+                body.style.display = 'block';
+                toggle.style.transform = 'rotate(0deg)';
+            } else {
+                body.style.display = 'none';
+                toggle.style.transform = 'rotate(-90deg)';
+            }
+        }
+
+        function addFreqRow() {
+            const tbody = document.getElementById('freq-tbody');
+            const tr = document.createElement('tr');
+            tr.innerHTML = `<td><input placeholder=""></td><td><input placeholder=""></td><td><input type="number" placeholder=""></td><td><input placeholder=""></td>`;
+            tbody.appendChild(tr);
+        }
+
+        // Auto-generate doc number from date
+        const now = new Date();
+        document.getElementById('doc-num').textContent =
+            String(now.getFullYear()).slice(2) + String(now.getMonth() + 1).padStart(2, '0') + String(now.getDate()).padStart(2, '0');
+    </script>
+</body>
+
+</html>

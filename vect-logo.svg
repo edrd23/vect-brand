@@ -1,0 +1,25 @@
+<svg width="400" height="120" viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- VECT Logo — High Fidelity JetBrains Mono Bold Reconstruction -->
+  <g clip-path="url(#clip0)">
+    <!-- V (Orange Accent -> NOW WHITE) -->
+    <!-- Slot: 40-110, Center: 75 -->
+    <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z" fill="#F5F5F5" />
+    
+    <!-- E (NOW ORANGE ACCENT) -->
+    <!-- Slot: 130-190 -->
+    <path d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z" fill="#FF6B1A" />
+    
+    <!-- C (Perfectly Coherent with E) -->
+    <!-- Slot: 215-275 -->
+    <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z" fill="#F5F5F5" />
+    
+    <!-- T -->
+    <!-- Slot: 300-360 -->
+    <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+  </g>
+  <defs>
+    <clipPath id="clip0">
+      <rect width="400" height="120" fill="white"/>
+    </clipPath>
+  </defs>
+</svg>

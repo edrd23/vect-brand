@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Asset Tracking</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111;
+            --carbon: #181818;
+            --border: #282828;
+            --ash: #4A4A4A;
+            --silver: #888;
+            --light: #D0D0D0;
+            --white: #F0F0F0;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --green: #00CC66;
+            --red: #FF4444;
+            --yellow: #FFB800;
+            --cyan: #00C8FF;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        /* -- HEADER ----------------------- */
+        .header {
+            background: var(--dark);
+            border-bottom: 2px solid var(--accent);
+            padding: 22px 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .header-left svg {
+            width: 80px;
+        }
+
+        .header-tag {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .header-right {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* -- TOOLBAR ---------------------- */
+        .toolbar {
+            background: var(--carbon);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 48px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 8px 14px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-box input {
+            background: transparent;
+            border: none;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 14px;
+            outline: none;
+            width: 100%;
+        }
+
+        .search-box input::placeholder {
+            color: var(--ash);
+        }
+
+        .filter-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--silver);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--accent);
+            color: var(--accent);
+            background: var(--accent-dim);
+        }
+
+        .btn-primary {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 8px 18px;
+            background: var(--accent);
+            color: #000;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.15s;
+            white-space: nowrap;
+            margin-left: auto;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+        }
+
+        /* -- SUMMARY BAR ------------------- */
+        .summary-bar {
+            background: var(--carbon);
+            border-bottom: 1px solid var(--border);
+            padding: 12px 48px;
+            display: flex;
+            gap: 32px;
+        }
+
+        .sum-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sum-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .sum-dot.green {
+            background: var(--green);
+        }
+
+        .sum-dot.yellow {
+            background: var(--yellow);
+        }
+
+        .sum-dot.red {
+            background: var(--red);
+        }
+
+        .sum-dot.cyan {
+            background: var(--cyan);
+        }
+
+        .sum-label {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--silver);
+        }
+
+        .sum-val {
+            font-family: var(--mono);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .sum-val.green {
+            color: var(--green);
+        }
+
+        .sum-val.yellow {
+            color: var(--yellow);
+        }
+
+        .sum-val.red {
+            color: var(--red);
+        }
+
+        .sum-val.cyan {
+            color: var(--cyan);
+        }
+
+        /* -- TABLE ------------------------ */
+        .table-wrap {
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        thead th {
+            background: var(--carbon);
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--silver);
+            padding: 12px 20px;
+            border-bottom: 1px solid var(--border);
+            text-align: left;
+            white-space: nowrap;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        thead th:hover {
+            color: var(--accent);
+        }
+
+        tbody tr {
+            border-bottom: 1px solid var(--border);
+            transition: background 0.1s;
+        }
+
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        tbody td {
+            padding: 13px 20px;
+            font-size: 13px;
+            vertical-align: middle;
+        }
+
+        .td-mono {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--silver);
+        }
+
+        .td-name {
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .td-model {
+            font-size: 12px;
+            color: var(--silver);
+        }
+
+        /* STATUS */
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 100px;
+            padding: 3px 10px;
+            white-space: nowrap;
+        }
+
+        .status::before {
+            content: '?';
+            font-size: 7px;
+        }
+
+        .s-disponibile {
+            background: rgba(0, 204, 102, 0.1);
+            border: 1px solid rgba(0, 204, 102, 0.3);
+            color: var(--green);
+        }
+
+        .s-in-uso {
+            background: rgba(255, 184, 0, 0.1);
+            border: 1px solid rgba(255, 184, 0, 0.3);
+            color: var(--yellow);
+        }
+
+        .s-manutenzione {
+            background: rgba(0, 200, 255, 0.1);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            color: var(--cyan);
+        }
+
+        .s-fuoriuso {
+            background: rgba(255, 68, 68, 0.1);
+            border: 1px solid rgba(255, 68, 68, 0.3);
+            color: var(--red);
+        }
+
+        /* CATEGORY PILL */
+        .cat-pill {
+            display: inline-block;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 2px 9px;
+            color: var(--silver);
+            white-space: nowrap;
+        }
+
+        /* ACTIONS */
+        .actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .act-btn {
+            font-family: var(--mono);
+            font-size: 10px;
+            padding: 4px 10px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--silver);
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .act-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .act-btn.del:hover {
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        /* -- MODAL ------------------------ */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(6px);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 32px;
+            width: 100%;
+            max-width: 560px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-field.full {
+            grid-column: 1/-1;
+        }
+
+        .form-field label {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .form-field input,
+        .form-field select,
+        .form-field textarea {
+            background: var(--dark);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--white);
+            font-family: var(--font);
+            font-size: 14px;
+            padding: 10px 12px;
+            outline: none;
+            transition: border-color 0.15s;
+        }
+
+        .form-field input:focus,
+        .form-field select:focus,
+        .form-field textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .form-field textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .btn-cancel {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 9px 18px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--silver);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-cancel:hover {
+            border-color: var(--silver);
+        }
+
+        /* -- EMPTY STATE ------------------- */
+        .empty-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--ash);
+        }
+
+        .empty-state .icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .empty-state p {
+            font-size: 14px;
+        }
+
+        /* -- PRINT ------------------------- */
+        .print-btn {
+            font-family: var(--mono);
+            font-size: 11px;
+            padding: 8px 16px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--silver);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .print-btn:hover {
+            border-color: var(--silver);
+            color: var(--white);
+        }
+
+        @media print {
+
+            .toolbar,
+            .header-right,
+            .actions,
+            .print-btn,
+            .btn-primary {
+                display: none;
+            }
+
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            thead th {
+                background: #f0f0f0;
+                color: #000;
+            }
+
+            .td-name {
+                color: #000;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="header-left">
+            <svg viewBox="0 0 400 120" fill="none">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div>
+                <div class="header-tag">// Area D · Asset Management</div>
+                <div class="header-title">Inventario Hardware</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+        </div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="summary-bar" id="summary-bar">
+        <div class="sum-item">
+            <div class="sum-dot green"></div>
+            <div class="sum-label">Disponibile:</div>
+            <div class="sum-val green" id="cnt-disp">0</div>
+        </div>
+        <div class="sum-item">
+            <div class="sum-dot yellow"></div>
+            <div class="sum-label">In uso:</div>
+            <div class="sum-val yellow" id="cnt-uso">0</div>
+        </div>
+        <div class="sum-item">
+            <div class="sum-dot cyan"></div>
+            <div class="sum-label">Manutenzione:</div>
+            <div class="sum-val cyan" id="cnt-man">0</div>
+        </div>
+        <div class="sum-item">
+            <div class="sum-dot red"></div>
+            <div class="sum-label">Fuori uso:</div>
+            <div class="sum-val red" id="cnt-ko">0</div>
+        </div>
+    </div>
+
+    <!-- TOOLBAR -->
+    <div class="toolbar">
+        <div class="search-box">
+            <span style="color:var(--ash)">??</span>
+            <input type="text" id="search" placeholder="Cerca per nome, seriale, categoria…" oninput="renderTable()">
+        </div>
+        <button class="filter-btn active" onclick="setFilter('tutti', this)">Tutti</button>
+        <button class="filter-btn" onclick="setFilter('Disponibile', this)">Disponibile</button>
+        <button class="filter-btn" onclick="setFilter('In uso', this)">In uso</button>
+        <button class="filter-btn" onclick="setFilter('Manutenzione', this)">Manutenzione</button>
+        <button class="filter-btn" onclick="setFilter('Fuori uso', this)">Fuori uso</button>
+        <button class="btn-primary" onclick="openModal()">+ Aggiungi asset</button>
+    </div>
+
+    <!-- TABLE -->
+    <div class="table-wrap">
+        <table id="asset-table">
+            <thead>
+                <tr>
+                    <th onclick="sortBy('id')">#</th>
+                    <th onclick="sortBy('name')">Asset</th>
+                    <th onclick="sortBy('category')">Categoria</th>
+                    <th onclick="sortBy('serial')">Seriale</th>
+                    <th onclick="sortBy('status')">Stato</th>
+                    <th onclick="sortBy('event')">Ultimo Evento</th>
+                    <th>Note</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modal">
+        <div class="modal">
+            <div class="modal-title" id="modal-title">Aggiungi Asset</div>
+            <div class="form-grid">
+                <input type="hidden" id="edit-id">
+                <div class="form-field">
+                    <label>Nome Asset</label>
+                    <input type="text" id="f-name" placeholder="es. SEK 6 Bodypack">
+                </div>
+                <div class="form-field">
+                    <label>Categoria</label>
+                    <select id="f-category">
+                        <option>Base Station (BSS)</option>
+                        <option>Bodypack Tx (SEK)</option>
+                        <option>Antenna (DAD)</option>
+                        <option>Ricevitore (SKM)</option>
+                        <option>Cablaggio RF</option>
+                        <option>Alimentazione</option>
+                        <option>Accessorio</option>
+                        <option>Case / Rack</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Numero Seriale</label>
+                    <input type="text" id="f-serial" placeholder="es. SN-2024-001">
+                </div>
+                <div class="form-field">
+                    <label>Asset Tag</label>
+                    <input type="text" id="f-tag" placeholder="es. VECT-SEK-01">
+                </div>
+                <div class="form-field">
+                    <label>Stato</label>
+                    <select id="f-status">
+                        <option>Disponibile</option>
+                        <option>In uso</option>
+                        <option>Manutenzione</option>
+                        <option>Fuori uso</option>
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>Ultimo Evento</label>
+                    <input type="text" id="f-event" placeholder="es. Estate Festival 2026">
+                </div>
+                <div class="form-field">
+                    <label>Data Acquisto</label>
+                    <input type="date" id="f-date">
+                </div>
+                <div class="form-field">
+                    <label>Valore (€)</label>
+                    <input type="number" id="f-value" placeholder="es. 850">
+                </div>
+                <div class="form-field full">
+                    <label>Note</label>
+                    <textarea id="f-notes"
+                        placeholder="Condizioni, riparazioni effettuate, accessori abbinati…"></textarea>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-cancel" onclick="closeModal()">Annulla</button>
+                <button class="btn-primary" onclick="saveAsset()">Salva</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const STORAGE_KEY = 'vect_assets_v1';
+        let assets = [];
+        let currentFilter = 'tutti';
+        let sortKey = 'id';
+        let sortDir = 1;
+
+        const DEFAULT_ASSETS = [
+            { id: 1, name: 'BSS Base Station Spectera', category: 'Base Station (BSS)', serial: 'BSS-26-001', tag: 'VECT-BSS-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 8500, notes: 'Sistema principale. Aggiornamento firmware: febbraio 2026.' },
+            { id: 2, name: 'SEK Bodypack #1', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-001', tag: 'VECT-SEK-01', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-02-01', value: 850, notes: 'Dual mode IEM + Mic. AES-256 attivo.' },
+            { id: 3, name: 'SEK Bodypack #2', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-002', tag: 'VECT-SEK-02', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-02-01', value: 850, notes: '' },
+            { id: 4, name: 'SEK Bodypack #3', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-003', tag: 'VECT-SEK-03', status: 'Disponibile', event: '—', date: '2024-02-01', value: 850, notes: '' },
+            { id: 5, name: 'SEK Bodypack #4', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-004', tag: 'VECT-SEK-04', status: 'Disponibile', event: '—', date: '2024-02-01', value: 850, notes: '' },
+            { id: 6, name: 'SEK Bodypack #5', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-005', tag: 'VECT-SEK-05', status: 'Manutenzione', event: 'Estate Festival', date: '2024-02-01', value: 850, notes: 'Contatto batteria intermittente. In revisione.' },
+            { id: 7, name: 'SEK Bodypack #6', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-006', tag: 'VECT-SEK-06', status: 'Disponibile', event: '—', date: '2024-03-10', value: 850, notes: '' },
+            { id: 8, name: 'DAD Antenna Attiva #1', category: 'Antenna (DAD)', serial: 'DAD-26-001', tag: 'VECT-DAD-01', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-01-20', value: 1200, notes: 'Stage Right. TNC-F, cavo RG-8X 10m.' },
+            { id: 9, name: 'DAD Antenna Attiva #2', category: 'Antenna (DAD)', serial: 'DAD-26-002', tag: 'VECT-DAD-02', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-01-20', value: 1200, notes: 'Stage Left.' },
+            { id: 10, name: 'Flight Case Spectera', category: 'Case / Rack', serial: 'FC-26-001', tag: 'VECT-CASE-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 650, notes: 'SKB case 12U. BSS + 8 SEK + 2 DAD.' },
+            { id: 11, name: 'Cavo RG-8X 10m', category: 'Cablaggio RF', serial: '—', tag: 'VECT-CAB-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 80, notes: 'BNC-BNC. Perdita attesa: ~3dB.' },
+            { id: 12, name: 'Alimentatore rack EQ-PSU', category: 'Alimentazione', serial: 'PSU-26-001', tag: 'VECT-PSU-01', status: 'Disponibile', event: '—', date: '2024-03-01', value: 220, notes: '' },
+        ];
+
+        function load() {
+            const raw = localStorage.getItem(STORAGE_KEY);
+            if (raw) { assets = JSON.parse(raw); }
+            else { assets = DEFAULT_ASSETS; save(); }
+        }
+        function save() { localStorage.setItem(STORAGE_KEY, JSON.stringify(assets)); }
+
+        function statusClass(s) {
+            if (s === 'Disponibile') return 's-disponibile';
+            if (s === 'In uso') return 's-in-uso';
+            if (s === 'Manutenzione') return 's-manutenzione';
+            return 's-fuoriuso';
+        }
+
+        function renderTable() {
+            const q = document.getElementById('search').value.toLowerCase();
+            let list = assets.filter(a => {
+                if (currentFilter !== 'tutti' && a.status !== currentFilter) return false;
+                if (q && !`${a.name} ${a.serial} ${a.tag} ${a.category} ${a.event}`.toLowerCase().includes(q)) return false;
+                return true;
+            });
+            list.sort((a, b) => {
+                const av = String(a[sortKey] || '').toLowerCase();
+                const bv = String(b[sortKey] || '').toLowerCase();
+                return av < bv ? -sortDir : av > bv ? sortDir : 0;
+            });
+
+            // Summary counts
+            document.getElementById('cnt-disp').textContent = assets.filter(a => a.status === 'Disponibile').length;
+            document.getElementById('cnt-uso').textContent = assets.filter(a => a.status === 'In uso').length;
+            document.getElementById('cnt-man').textContent = assets.filter(a => a.status === 'Manutenzione').length;
+            document.getElementById('cnt-ko').textContent = assets.filter(a => a.status === 'Fuori uso').length;
+
+            const tbody = document.getElementById('table-body');
+            if (!list.length) {
+                tbody.innerHTML = `<tr><td colspan="8"><div class="empty-state"><div class="icon">??</div><p>Nessun asset trovato.</p></div></td></tr>`;
+                return;
+            }
+            tbody.innerHTML = list.map(a => `
+        <tr>
+            <td class="td-mono">${String(a.id).padStart(3, '0')}</td>
+            <td>
+                <div class="td-name">${a.name}</div>
+                <div class="td-mono">${a.tag}</div>
+            </td>
+            <td><span class="cat-pill">${a.category}</span></td>
+            <td class="td-mono">${a.serial}</td>
+            <td><span class="status ${statusClass(a.status)}">${a.status}</span></td>
+            <td style="font-size:12px;color:var(--silver)">${a.event}</td>
+            <td style="font-size:12px;color:var(--ash);max-width:200px;">${a.notes || '—'}</td>
+            <td>
+                <div class="actions">
+                    <button class="act-btn" onclick="editAsset(${a.id})">Modifica</button>
+                    <button class="act-btn del" onclick="deleteAsset(${a.id})">?</button>
+                </div>
+            </td>
+        </tr>
+    `).join('');
+        }
+
+        function setFilter(f, btn) {
+            currentFilter = f;
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderTable();
+        }
+
+        function sortBy(k) {
+            if (sortKey === k) sortDir *= -1; else { sortKey = k; sortDir = 1; }
+            renderTable();
+        }
+
+        function openModal(id) {
+            document.getElementById('edit-id').value = '';
+            document.getElementById('modal-title').textContent = 'Aggiungi Asset';
+            ['name', 'serial', 'tag', 'event', 'notes'].forEach(f => document.getElementById('f-' + f).value = '');
+            document.getElementById('f-category').value = 'Bodypack Tx (SEK)';
+            document.getElementById('f-status').value = 'Disponibile';
+            document.getElementById('f-date').value = '';
+            document.getElementById('f-value').value = '';
+            document.getElementById('modal').classList.add('open');
+        }
+
+        function editAsset(id) {
+            const a = assets.find(x => x.id === id);
+            if (!a) return;
+            document.getElementById('edit-id').value = id;
+            document.getElementById('modal-title').textContent = 'Modifica Asset';
+            document.getElementById('f-name').value = a.name;
+            document.getElementById('f-category').value = a.category;
+            document.getElementById('f-serial').value = a.serial;
+            document.getElementById('f-tag').value = a.tag;
+            document.getElementById('f-status').value = a.status;
+            document.getElementById('f-event').value = a.event;
+            document.getElementById('f-date').value = a.date || '';
+            document.getElementById('f-value').value = a.value || '';
+            document.getElementById('f-notes').value = a.notes || '';
+            document.getElementById('modal').classList.add('open');
+        }
+
+        function closeModal() { document.getElementById('modal').classList.remove('open'); }
+
+        function saveAsset() {
+            const name = document.getElementById('f-name').value.trim();
+            if (!name) { alert('Inserisci il nome asset.'); return; }
+            const editId = document.getElementById('edit-id').value;
+            const obj = {
+                name, category: document.getElementById('f-category').value,
+                serial: document.getElementById('f-serial').value.trim() || '—',
+                tag: document.getElementById('f-tag').value.trim() || '—',
+                status: document.getElementById('f-status').value,
+                event: document.getElementById('f-event').value.trim() || '—',
+                date: document.getElementById('f-date').value,
+                value: parseFloat(document.getElementById('f-value').value) || 0,
+                notes: document.getElementById('f-notes').value.trim(),
+            };
+            if (editId) {
+                const idx = assets.findIndex(a => a.id === parseInt(editId));
+                if (idx > -1) assets[idx] = { ...assets[idx], ...obj };
+            } else {
+                obj.id = assets.length ? Math.max(...assets.map(a => a.id)) + 1 : 1;
+                assets.push(obj);
+            }
+            save(); closeModal(); renderTable();
+        }
+
+        function deleteAsset(id) {
+            if (!confirm('Eliminare questo asset dall\'inventario?')) return;
+            assets = assets.filter(a => a.id !== id);
+            save(); renderTable();
+        }
+
+        document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+        load(); renderTable();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — Project Index</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111;
+            --carbon: #181818;
+            --steel: #242424;
+            --border: #2A2A2A;
+            --ash: #4A4A4A;
+            --silver: #888;
+            --light: #D0D0D0;
+            --white: #F0F0F0;
+            --accent: #FF6B1A;
+            --accent-dim: rgba(255, 107, 26, 0.08);
+            --accent-glow: rgba(255, 107, 26, 0.18);
+            --green: #00CC66;
+            --cyan: #00C8FF;
+            --purple: #9B6BFF;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            min-height: 100vh;
+        }
+
+        /* -- NAV ------------------------------- */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(10, 10, 10, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 48px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .nav-logo svg {
+            width: 72px;
+        }
+
+        .nav-badge {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--accent);
+            background: var(--accent-dim);
+            border: 1px solid rgba(255, 107, 26, 0.25);
+            border-radius: 100px;
+            padding: 3px 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-meta {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+        }
+
+        .nav-meta span {
+            color: var(--silver);
+        }
+
+        /* -- HERO ------------------------------ */
+        .hero {
+            background: linear-gradient(160deg, #141414 0%, #0D0D0D 60%, #111111 100%);
+            border-bottom: 1px solid var(--border);
+            padding: 64px 56px 56px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: 'VECT';
+            position: absolute;
+            right: -30px;
+            top: -40px;
+            font-family: var(--mono);
+            font-size: 200px;
+            font-weight: 900;
+            color: rgba(255, 107, 26, 0.04);
+            line-height: 1;
+            pointer-events: none;
+            user-select: none;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--accent);
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero-title {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 12px;
+        }
+
+        .hero-title span {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 15px;
+            color: var(--silver);
+            font-weight: 300;
+            max-width: 560px;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 36px;
+            margin-top: 36px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+        }
+
+
+
+        .stat-val {
+            font-family: var(--mono);
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: var(--silver);
+            margin-top: 4px;
+        }
+
+        /* -- BODY ------------------------------ */
+        .body {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 52px 40px 100px;
+        }
+
+        /* -- SECTION --------------------------- */
+        .section {
+            margin-bottom: 52px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .section-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            flex-shrink: 0;
+        }
+
+
+
+        .section-tag {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .section-count {
+            margin-left: auto;
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 3px 12px;
+        }
+
+        /* -- DOC GRID -------------------------- */
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 14px;
+        }
+
+        /* -- DOC CARD -------------------------- */
+        .doc-card {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 20px 22px;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .doc-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(255, 107, 26, 0.12);
+        }
+
+        .doc-card::after {
+            content: '?';
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-family: var(--mono);
+            font-size: 16px;
+            color: var(--ash);
+            transition: color 0.2s, right 0.2s;
+        }
+
+        .doc-card:hover::after {
+            color: var(--accent);
+            right: 14px;
+        }
+
+        .card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .card-emoji {
+            font-size: 22px;
+            line-height: 1;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+
+
+        .card-type {
+            font-family: var(--mono);
+            font-size: 9px;
+            color: var(--silver);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .card-name {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            line-height: 1.3;
+            padding-right: 24px;
+        }
+
+        .card-desc {
+            font-size: 12px;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-bottom: 14px;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-family: var(--mono);
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 100px;
+            padding: 3px 9px;
+        }
+
+        .status-badge::before {
+            content: '?';
+            font-size: 7px;
+        }
+
+        .s-ready {
+            background: rgba(0, 204, 102, 0.1);
+            border: 1px solid rgba(0, 204, 102, 0.3);
+            color: var(--green);
+        }
+
+        .s-template {
+            background: rgba(0, 200, 255, 0.1);
+            border: 1px solid rgba(0, 200, 255, 0.3);
+            color: var(--cyan);
+        }
+
+        .s-internal {
+            background: rgba(155, 107, 255, 0.1);
+            border: 1px solid rgba(155, 107, 255, 0.3);
+            color: var(--purple);
+        }
+
+        /* -- PROGRESS BAR ---------------------- */
+        .progress-section {
+            margin-bottom: 52px;
+        }
+
+        .progress-card {
+            background: var(--carbon);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 28px 32px;
+        }
+
+        .progress-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .progress-row {
+            margin-bottom: 16px;
+        }
+
+        .progress-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .progress-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .progress-label {
+            font-size: 13px;
+            color: var(--light);
+        }
+
+        .progress-pct {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--accent);
+        }
+
+        .progress-track {
+            height: 5px;
+            background: var(--ash);
+            border-radius: 100px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), #FF9A5C);
+            border-radius: 100px;
+            transition: width 1s ease;
+        }
+
+        /* -- FOOTER ---------------------------- */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 28px;
+            border-top: 1px solid var(--border);
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+        }
+
+        .footer span {
+            color: var(--accent);
+        }
+
+
+
+        @media (max-width: 768px) {
+            .hero {
+                padding: 40px 24px;
+            }
+
+            .body {
+                padding: 32px 20px 80px;
+            }
+
+            nav {
+                padding: 0 20px;
+            }
+
+            .doc-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAV -->
+    <nav>
+        <div class="nav-logo">
+            <svg viewBox="0 0 400 120" fill="none">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+            <div class="nav-badge">Project Index</div>
+        </div>
+        <div class="nav-meta">Ultimo aggiornamento: <span id="last-update">—</span></div>
+    </nav>
+
+    <!-- HERO -->
+    <div class="hero">
+        <div class="hero-eyebrow">// VECT RF Engineering · Kartella Documenti</div>
+        <div class="hero-title">Project <span>Hub</span></div>
+        <div class="hero-sub">Tutti i documenti operativi, commerciali e legali di VECT raccolti in un unico punto di
+            accesso.</div>
+        <div class="hero-stats">
+            <div class="stat">
+                <div class="stat-val">14</div>
+                <div class="stat-label">Documenti attivi</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">5</div>
+                <div class="stat-label">Aree strategiche</div>
+            </div>
+            <div class="stat">
+                <div class="stat-val">100%</div>
+                <div class="stat-label">Printable / PDF-ready</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="body">
+
+        <!-- PROGRESS -->
+        <div class="progress-section">
+            <div class="progress-card">
+                <div class="progress-title">Stato avanzamento strategia aziendale VECT</div>
+                <div class="progress-row">
+                    <div class="progress-meta"><span class="progress-label">A · Legal Shield (Contratti,
+                            NDA)</span><span class="progress-pct">100%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <div class="progress-meta"><span class="progress-label">B · Technical Workflow (Report, Log,
+                            Checklist)</span><span class="progress-pct">100%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <div class="progress-meta"><span class="progress-label">C · Marketing Tecnico (White Paper, CRM,
+                            Playbook, Rate Card)</span><span class="progress-pct">100%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <div class="progress-meta"><span class="progress-label">D · Asset Management &
+                            Inventario</span><span class="progress-pct">100%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:100%"></div>
+                    </div>
+                </div>
+                <div class="progress-row">
+                    <div class="progress-meta"><span class="progress-label">E · Presenza Digitale (LinkedIn, Gmail,
+                            Contenuti)</span><span class="progress-pct">100%</span></div>
+                    <div class="progress-track">
+                        <div class="progress-fill" style="width:100%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- AREA A: BRAND -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(155,107,255,0.1); border:1px solid rgba(155,107,255,0.2);">
+                ??</div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Identità</div>
+                <div class="section-title">Brand & Presentazione</div>
+            </div>
+            <div class="section-count">2 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_Brand_Identity_Guide.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Brand System</div>
+                        <div class="card-name">Brand Identity Guide</div>
+                    </div>
+                </div>
+                <div class="card-desc">Palette colori, tipografia, logo usage rules, tono di voce e linee guida per
+                    tutti i materiali VECT.</div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+            <a class="doc-card" href="VECT_Technical_Pitch_Deck.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Presentazione</div>
+                        <div class="card-name">Technical Pitch Deck</div>
+                    </div>
+                </div>
+                <div class="card-desc">Slide deck tecnico stampabile/PDF. Panoramica VECT, servizi, sistema
+                    Spectera, vantaggi competitivi.</div>
+                <div class="card-footer"><span class="status-badge s-ready">Pronto cliente</span></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AREA B: LEGALE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.2);">??
+            </div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Area A</div>
+                <div class="section-title">Legal Shield — Contrattualistica</div>
+            </div>
+            <div class="section-count">3 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_Contratti_Noleggio_e_Consulenza.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Contrattualistica</div>
+                        <div class="card-name">Contratti Noleggio & Consulenza</div>
+                    </div>
+                </div>
+                <div class="card-desc">3 modelli: Dry Hire, Wet Hire, Consulting. Include clausole D.Lgs 81/08,
+                    spettro RF, doppia firma art. 1341 c.c. e NDA integrata.</div>
+                <div class="card-footer"><span class="status-badge s-ready">Pronto cliente</span></div>
+            </a>
+            <a class="doc-card" href="VECT_NDA_Accordo_Riservatezza.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Legal</div>
+                        <div class="card-name">NDA — Accordo Riservatezza</div>
+                    </div>
+                </div>
+                <div class="card-desc">Non-Disclosure Agreement standalone da firmare in fase pre-contrattuale.
+                    Copre tutte le informazioni tecniche e commerciali condivise.</div>
+                <div class="card-footer"><span class="status-badge s-ready">Pronto cliente</span></div>
+            </a>
+            <a class="doc-card" href="VECT_Verbale_Consegna_Hardware.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Operativo</div>
+                        <div class="card-name">Verbale di Consegna Hardware</div>
+                    </div>
+                </div>
+                <div class="card-desc">Modulo check-out/check-in attrezzatura con tabella inventario, stato di ogni
+                    pezzo, firma cliente e operatore VECT.</div>
+                <div class="card-footer"><span class="status-badge s-template">Template</span></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AREA C: WORKFLOW TECNICO -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(255,107,26,0.08); border:1px solid rgba(255,107,26,0.2);">
+                ??</div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Area B</div>
+                <div class="section-title">Technical Workflow — Operatività</div>
+            </div>
+            <div class="section-count">2 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_PreProduction_Log.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Pre-show</div>
+                        <div class="card-name">Pre-Production RF Log</div>
+                    </div>
+                </div>
+                <div class="card-desc">Questionario tecnico interattivo da inviare al Production Manager. Raccoglie
+                    dati su venue, ambiente RF, configurazione richiesta e logistica.</div>
+                <div class="card-footer"><span class="status-badge s-template">Template</span></div>
+            </a>
+            <a class="doc-card" href="VECT_RF_Coordination_Report.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">???</div>
+                    <div class="card-titles">
+                        <div class="card-type">Post-show · VECT Certified</div>
+                        <div class="card-name">RF Coordination Report</div>
+                    </div>
+                </div>
+                <div class="card-desc">Documento certificato da consegnare al cliente post-evento. Include metriche
+                    operative, mappa spettro UHF, parametri confermati, incident log e doppia firma.</div>
+                <div class="card-footer"><span class="status-badge s-ready">Pronto cliente</span></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AREA D: MARKETING -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(0,204,102,0.08); border:1px solid rgba(0,204,102,0.2);">??
+            </div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Area C</div>
+                <div class="section-title">Marketing Tecnico & Commerciale</div>
+            </div>
+            <div class="section-count">4 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_Rate_Card_2026.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Commerciale · B2B Riservato</div>
+                        <div class="card-name">Rate Card 2026</div>
+                    </div>
+                </div>
+                <div class="card-desc">Tariffario ufficiale con 3 pacchetti (Dry Hire / Wet Hire / Consulting), voci
+                    aggiuntive, politica sconti (fino a -20%) e condizioni commerciali.</div>
+                <div class="card-footer"><span class="status-badge s-internal">B2B Riservato</span></div>
+            </a>
+            <a class="doc-card" href="VECT_Playbook_Commerciale.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Sales</div>
+                        <div class="card-name">Playbook Commerciale</div>
+                    </div>
+                </div>
+                <div class="card-desc">Flusso vendita 6 step dal prospecting alla firma. Include 7 template email
+                    copia-incolla, outreach LinkedIn, gestione obiezioni e struttura prima call.</div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+            <a class="doc-card" href="VECT_WhitePaper_WMAS_Festival.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Thought Leadership</div>
+                        <div class="card-name">White Paper — WMAS Festival</div>
+                    </div>
+                </div>
+                <div class="card-desc">Documento tecnico in 5 sezioni sui vantaggi del WMAS Spectera nei festival
+                    multi-stage vs. sistemi legacy. Da inviare a Technical Director e Production Manager.</div>
+                <div class="card-footer"><span class="status-badge s-ready">Pronto cliente</span></div>
+            </a>
+            <a class="doc-card" href="VECT_CRM_Contatti_Strategici.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">CRM · Offline</div>
+                        <div class="card-name">CRM Contatti Strategici</div>
+                    </div>
+                </div>
+                <div class="card-desc">Database B2B interattivo con filtri per stato, ricerca live, note per
+                    contatto e persistenza locale (localStorage). Ottimizzato per gestire pipeline commerciale.
+                </div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AREA D: ASSET MANAGEMENT -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon" style="background:rgba(0,200,255,0.08); border:1px solid rgba(0,200,255,0.2);">??
+            </div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Area D</div>
+                <div class="section-title">Asset Management & SOP</div>
+            </div>
+            <div class="section-count">2 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_Asset_Tracking.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Inventario · Offline</div>
+                        <div class="card-name">Asset Tracking Hardware</div>
+                    </div>
+                </div>
+                <div class="card-desc">Registro interattivo di tutto l'hardware Spectera (BSS, SEK, DAD, case, cavi)
+                    con stato, numero seriale, ultimo evento e note. Persistenza localStorage.</div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+            <a class="doc-card" href="VECT_SOP_Manuale_Operativo.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Procedure Standard</div>
+                        <div class="card-name">SOP — Manuale Operativo</div>
+                    </div>
+                </div>
+                <div class="card-desc">8 procedure operative: setup Spectera, scan RF, pre-show checklist, gestione
+                    live, smontaggio, incident response, manutenzione e onboarding collaboratori.</div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+        </div>
+    </div>
+
+    <!-- AREA E: PRESENZA DIGITALE -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon"
+                style="background:rgba(255,107,255,0.08); border:1px solid rgba(255,107,255,0.2);">??
+            </div>
+            <div class="section-title-wrap">
+                <div class="section-tag">// Area E</div>
+                <div class="section-title">Presenza Digitale & Setup</div>
+            </div>
+            <div class="section-count">1 doc</div>
+        </div>
+        <div class="doc-grid">
+            <a class="doc-card" href="VECT_Presenza_Digitale.html" target="_blank">
+                <div class="card-top">
+                    <div class="card-emoji">??</div>
+                    <div class="card-titles">
+                        <div class="card-type">Digital Assets · Interno</div>
+                        <div class="card-name">Presenza Digitale & Setup</div>
+                    </div>
+                </div>
+                <div class="card-desc">Dashboard unificata: Generatore Email Signature interattivo, specifiche
+                    banner LinkedIn, copy ottimizzati per Profilo (Headline, About) e template per Post di Lancio
+                    aziendale.</div>
+                <div class="card-footer"><span class="status-badge s-internal">Interno</span></div>
+            </a>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="footer">
+        VECT Project Index · <span>vect-rf.it</span> · Aggiornato il <span id="footer-date">—</span>
+    </div>
+
+    <script>
+        const now = new Date();
+        const fmt = d => `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${d.getFullYear()}`;
+        document.getElementById('last-update').textContent = fmt(now);
+        document.getElementById('footer-date').textContent = fmt(now);
+    </script>
+</body>
+
+</html>

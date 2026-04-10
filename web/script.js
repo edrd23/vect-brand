@@ -1,0 +1,191 @@
+document.addEventListener('DOMContentLoaded', () => {
+    document.body.classList.add('js-ready');
+    // ═══════ LANGUAGE SWITCHER ═══════
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const htmlRoot = document.documentElement;
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            htmlRoot.setAttribute('lang', lang);
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            localStorage.setItem('vect_lang', lang);
+        });
+    });
+
+    const currentLang = localStorage.getItem('vect_lang') || 'it';
+    const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+    if (activeBtn) activeBtn.click();
+
+    // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
+    const sections = document.querySelectorAll('section');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+
+        // ScrollSpy logic
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= (sectionTop - 200)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(currentSection)) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
+
+    // ═══════ MOBILE HAMBURGER ═══════
+    const menuToggle = document.getElementById('mobile-menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            menuToggle.classList.toggle('active', isOpen);
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        });
+
+        // Close menu when a nav link is clicked
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navLinks.classList.contains('open')) {
+                navLinks.classList.remove('open');
+                menuToggle.classList.remove('active');
+                menuToggle.setAttribute('aria-expanded', 'false');
+                document.body.style.overflow = '';
+                menuToggle.focus();
+            }
+        });
+    }
+
+    // ═══════ REVEAL ANIMATIONS ═══════
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, { threshold: 0.12 });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // ═══════ RF SCANNER LOGIC ═══════
+    const liveFreqLabel = document.getElementById('live-freq');
+    const scannerLog = document.getElementById('scanner-log');
+    
+    if (liveFreqLabel && scannerLog) {
+        // Generatore veloce di valori RF finti tra 470.000 e 694.000 MHz
+        setInterval(() => {
+            const randomFreq = (Math.random() * (694 - 470) + 470).toFixed(3);
+            liveFreqLabel.innerHTML = `${randomFreq} <span class="mhz">MHz</span>`;
+        }, 80);
+
+        const logMessages = [
+            "> ANALYZING SPECTRUM...",
+            "> NOISE FLOOR: -98dBm",
+            "> TX DETECTED",
+            "> CALCULATING IMD...",
+            "> INTERMOD PROFILE: PASS",
+            "> LINK QUALITY: 100%",
+            "> SYNCING BACKUP FREQS...",
+            "> SWEEPING BAND..."
+        ];
+        
+        let currentLogs = [
+            "> SYSTEM OK",
+            "> AWAITING TELEMETRY",
+            "> SCANNING ACTIVE"
+        ];
+        
+        // Ciclo log di sistema rolling lento
+        setInterval(() => {
+            currentLogs.shift();
+            const nextLog = logMessages[Math.floor(Math.random() * logMessages.length)];
+            currentLogs.push(nextLog);
+            scannerLog.innerHTML = currentLogs.join("<br>");
+        }, 1200);
+    }
+
+    // ═══════ FORM HANDLING — WEB3FORMS ═══════
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const lang = document.documentElement.getAttribute('lang') || 'it';
+            const originalHTML = btn.innerHTML;
+
+            btn.innerHTML = lang === 'it' ? 'Invio in corso...' : 'Sending...';
+            btn.disabled = true;
+
+            // Robust FormData to JSON conversion
+            const formData = new FormData(contactForm);
+            const object = {};
+            formData.forEach((value, key) => {
+                object[key] = value;
+            });
+            const json = JSON.stringify(object);
+
+            try {
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: json
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    btn.innerHTML = lang === 'it' ? '✓ Richiesta inviata' : '✓ Request sent';
+                    btn.style.background = 'var(--vect-success)';
+                    contactForm.reset();
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 4000);
+                } else {
+                    // Show specific error message from API if available
+                    btn.innerHTML = lang === 'it' ? `Errore: ${result.message || 'Server'}` : `Error: ${result.message || 'Server'}`;
+                    btn.style.background = 'var(--vect-error)';
+                    throw new Error(result.message || 'Server error');
+                }
+            } catch (err) {
+                console.error('Submission error:', err);
+                if (!btn.innerHTML.includes('Errore')) {
+                    btn.innerHTML = lang === 'it' ? 'Errore di rete' : 'Network Error';
+                    btn.style.background = 'var(--vect-error)';
+                }
+                setTimeout(() => {
+                    btn.innerHTML = originalHTML;
+                    btn.style.background = '';
+                    btn.disabled = false;
+                }, 5000);
+            }
+        });
+    }
+});
