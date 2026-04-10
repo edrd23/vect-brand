@@ -89,8 +89,8 @@
             <ul class="nav-links">
                 <li><a href="#services"><span class="it-text">Servizi</span><span class="en-text">Services</span></a>
                 </li>
-                <li><a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a></li>
                 <li><a href="#radar"><span class="it-text">Radar</span><span class="en-text">Radar</span></a></li>
+                <li><a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a></li>
                 <li><a href="#contact"><span class="it-text">Contatti</span><span class="en-text">Contact</span></a>
                 </li>
             </ul>
@@ -358,6 +358,149 @@
     </section>
 
     <div class="divider"></div>
+
+    <!-- ═══════ GLOBAL RF REGULATORY RADAR ═══════ -->
+    <section id="radar" class="radar-section reveal">
+        <div class="radar-section-bg">
+            <div class="radar-glow-orb radar-orb-1"></div>
+            <div class="radar-glow-orb radar-orb-2"></div>
+        </div>
+        <div class="container">
+            <!-- Header -->
+            <div class="radar-header">
+                <div class="radar-header-left">
+                    <span class="section-label">05 — <span class="it-text">Radar Normativo</span><span class="en-text">Regulatory Radar</span></span>
+                    <h2 class="section-title">
+                        <span class="it-text">Spettro Globale.<br>Sotto Controllo.</span>
+                        <span class="en-text">Global Spectrum.<br>Under Control.</span>
+                    </h2>
+                    <p class="section-desc" style="max-width:480px;">
+                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
+                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography. Select a region to view frequency data.</span>
+                    </p>
+                </div>
+                <div class="radar-live-stats">
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value">6</span>
+                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span class="en-text">Regions Monitored</span></span>
+                    </div>
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value">24/7</span>
+                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span class="en-text">System Uptime</span></span>
+                    </div>
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value" id="radar-live-clock">--:--:--</span>
+                        <span class="radar-stat-label">UTC LIVE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Grid: Scanner + Region Panel -->
+            <div class="radar-main-grid">
+                <!-- Left: Radar Scanner -->
+                <div class="radar-scanner-wrap">
+                    <div class="radar-scanner-frame">
+                        <div class="rframe-corner rframe-tl"></div>
+                        <div class="rframe-corner rframe-tr"></div>
+                        <div class="rframe-corner rframe-bl"></div>
+                        <div class="rframe-corner rframe-br"></div>
+                        <div class="radar-scanner-inner">
+                            <div class="radar-rings">
+                                <div class="radar-ring" style="width:28%;height:28%;"></div>
+                                <div class="radar-ring" style="width:54%;height:54%;"></div>
+                                <div class="radar-ring" style="width:80%;height:80%;"></div>
+                            </div>
+                            <div class="radar-crosshairs">
+                                <div class="radar-ch-h"></div>
+                                <div class="radar-ch-v"></div>
+                            </div>
+                            <div class="radar-sweep-arm"></div>
+                            <button class="radar-hotspot rh-na" data-region="NA">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">NA</span>
+                            </button>
+                            <button class="radar-hotspot rh-eu" data-region="EU">
+                                <span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl rh-lbl-active">EU</span>
+                            </button>
+                            <button class="radar-hotspot rh-as" data-region="AS">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">AS</span>
+                            </button>
+                            <button class="radar-hotspot rh-me" data-region="ME">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">ME</span>
+                            </button>
+                            <button class="radar-hotspot rh-sa" data-region="SA">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">SA</span>
+                            </button>
+                            <button class="radar-hotspot rh-au" data-region="AU">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">AU</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="spectrum-bar-wrap">
+                        <span class="mono spectrum-freq-label">470 MHz</span>
+                        <div class="spectrum-waterfall"><canvas id="spectrumCanvas"></canvas></div>
+                        <span class="mono spectrum-freq-label">694 MHz</span>
+                    </div>
+                    <div class="radar-status-row">
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
+                    </div>
+                </div>
+
+                <!-- Right: Region Info Panel -->
+                <div class="radar-info-panel">
+                    <div class="rip-header">
+                        <div>
+                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS · SPECTERA DATA</div>
+                            <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
+                        </div>
+                        <div class="rip-status-chip">
+                            <span class="rsb-dot rsb-live"></span>
+                            <span class="mono" id="rip-status-text">IDLE</span>
+                        </div>
+                    </div>
+                    <div class="rip-body" id="rip-body">
+                        <div class="rip-idle">
+                            <div class="rip-idle-icon">&#9678;</div>
+                            <p class="mono rip-idle-msg">
+                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
+                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rip-bars" id="rip-bars" style="display:none;">
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
+                            <span class="rip-bar-val mono" id="val-compliance">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
+                            <span class="rip-bar-val mono" id="val-quality">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
+                            <span class="rip-bar-val mono" id="val-congestion">-</span>
+                        </div>
+                    </div>
+                    <div class="rip-footer">
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
 
     <!-- ═══════ ABOUT ═══════ -->
     <section id="about" class="container">
@@ -648,147 +791,6 @@
         details summary::-webkit-details-marker { display: none; }
     </style>
 
-    <!-- ═══════ GLOBAL RF REGULATORY RADAR ═══════ -->
-    <section id="radar" class="radar-section reveal">
-        <div class="radar-section-bg">
-            <div class="radar-glow-orb radar-orb-1"></div>
-            <div class="radar-glow-orb radar-orb-2"></div>
-        </div>
-        <div class="container">
-            <!-- Header -->
-            <div class="radar-header">
-                <div class="radar-header-left">
-                    <span class="section-label">05 — <span class="it-text">Radar Normativo</span><span class="en-text">Regulatory Radar</span></span>
-                    <h2 class="section-title">
-                        <span class="it-text">Spettro Globale.<br>Sotto Controllo.</span>
-                        <span class="en-text">Global Spectrum.<br>Under Control.</span>
-                    </h2>
-                    <p class="section-desc" style="max-width:480px;">
-                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
-                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography. Select a region to view frequency data.</span>
-                    </p>
-                </div>
-                <div class="radar-live-stats">
-                    <div class="radar-stat-block">
-                        <span class="radar-stat-value">6</span>
-                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span class="en-text">Regions Monitored</span></span>
-                    </div>
-                    <div class="radar-stat-block">
-                        <span class="radar-stat-value">24/7</span>
-                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span class="en-text">System Uptime</span></span>
-                    </div>
-                    <div class="radar-stat-block">
-                        <span class="radar-stat-value" id="radar-live-clock">--:--:--</span>
-                        <span class="radar-stat-label">UTC LIVE</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Main Grid: Scanner + Region Panel -->
-            <div class="radar-main-grid">
-                <!-- Left: Radar Scanner -->
-                <div class="radar-scanner-wrap">
-                    <div class="radar-scanner-frame">
-                        <div class="rframe-corner rframe-tl"></div>
-                        <div class="rframe-corner rframe-tr"></div>
-                        <div class="rframe-corner rframe-bl"></div>
-                        <div class="rframe-corner rframe-br"></div>
-                        <div class="radar-scanner-inner">
-                            <div class="radar-rings">
-                                <div class="radar-ring" style="width:28%;height:28%;"></div>
-                                <div class="radar-ring" style="width:54%;height:54%;"></div>
-                                <div class="radar-ring" style="width:80%;height:80%;"></div>
-                            </div>
-                            <div class="radar-crosshairs">
-                                <div class="radar-ch-h"></div>
-                                <div class="radar-ch-v"></div>
-                            </div>
-                            <div class="radar-sweep-arm"></div>
-                            <button class="radar-hotspot rh-na" data-region="NA">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">NA</span>
-                            </button>
-                            <button class="radar-hotspot rh-eu" data-region="EU">
-                                <span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl rh-lbl-active">EU</span>
-                            </button>
-                            <button class="radar-hotspot rh-as" data-region="AS">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">AS</span>
-                            </button>
-                            <button class="radar-hotspot rh-me" data-region="ME">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">ME</span>
-                            </button>
-                            <button class="radar-hotspot rh-sa" data-region="SA">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">SA</span>
-                            </button>
-                            <button class="radar-hotspot rh-au" data-region="AU">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">AU</span>
-                            </button>
-                        </div>
-                    </div>
-                    <div class="spectrum-bar-wrap">
-                        <span class="mono spectrum-freq-label">470 MHz</span>
-                        <div class="spectrum-waterfall"><canvas id="spectrumCanvas"></canvas></div>
-                        <span class="mono spectrum-freq-label">694 MHz</span>
-                    </div>
-                    <div class="radar-status-row">
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
-                    </div>
-                </div>
-
-                <!-- Right: Region Info Panel -->
-                <div class="radar-info-panel">
-                    <div class="rip-header">
-                        <div>
-                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS · SPECTERA DATA</div>
-                            <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
-                        </div>
-                        <div class="rip-status-chip">
-                            <span class="rsb-dot rsb-live"></span>
-                            <span class="mono" id="rip-status-text">IDLE</span>
-                        </div>
-                    </div>
-                    <div class="rip-body" id="rip-body">
-                        <div class="rip-idle">
-                            <div class="rip-idle-icon">&#9678;</div>
-                            <p class="mono rip-idle-msg">
-                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
-                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="rip-bars" id="rip-bars" style="display:none;">
-                        <div class="rip-bar-row">
-                            <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
-                            <span class="rip-bar-val mono" id="val-compliance">-</span>
-                        </div>
-                        <div class="rip-bar-row">
-                            <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
-                            <span class="rip-bar-val mono" id="val-quality">-</span>
-                        </div>
-                        <div class="rip-bar-row">
-                            <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
-                            <span class="rip-bar-val mono" id="val-congestion">-</span>
-                        </div>
-                    </div>
-                    <div class="rip-footer">
-                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <footer>
         <div class="container">
