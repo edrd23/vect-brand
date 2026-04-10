@@ -180,73 +180,73 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(drawSpectrum, 80);
     }
 
-    // ═══════ RADAR — REGION DATA ═══════
+    // ═══════ RADAR — REGION DATA (WMAS / SPECTERA FOCUS) ═══════
     const RADAR_REGIONS = {
         'NA': {
             label: 'NA-USA',
             name: { it: 'Nord America', en: 'North America' },
-            standard: 'FCC Part 74 / PART 15',
-            bands: '470–608 MHz\n653–663 MHz',
-            body: 'FCC · Office of Engineering',
-            intermod: { it: 'BASSO', en: 'LOW' },
+            standard: 'FCC Part 74H — WMAS Licensed',
+            bands: '470–608 MHz\n653–663 MHz (WMAS authorized)',
+            body: 'FCC · Sennheiser Spectera Certified',
+            intermod: { it: 'BASSO — WMAS attivo', en: 'LOW — WMAS active' },
             statusClass: 'ok',
-            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
-            compliance: 97, quality: 94, congestion: 38
+            statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
+            compliance: 98, quality: 96, congestion: 34
         },
         'EU': {
             label: 'EU-ETSI',
             name: { it: 'Unione Europea', en: 'European Union' },
-            standard: 'ETSI EN 300 422 / ERC 70-03',
-            bands: '470–694 MHz\n823–832 MHz',
-            body: 'OFCOM · Agence Nationale · AGCom',
-            intermod: { it: 'BASSO', en: 'LOW' },
+            standard: 'ETSI EN 303 978 — WMAS Standard',
+            bands: '470–694 MHz (WMAS native)\n8 MHz TV channel carrier',
+            body: 'ETSI · CE Mark · AGCom-IT · OFCOM',
+            intermod: { it: 'BASSO — WMAS elimina intermod', en: 'LOW — WMAS eliminates intermod' },
             statusClass: 'ok',
-            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
-            compliance: 100, quality: 96, congestion: 52
+            statusText: { it: 'SPECTERA NATIVO', en: 'SPECTERA NATIVE' },
+            compliance: 100, quality: 98, congestion: 40
         },
         'AS': {
             label: 'AS-JPKR',
             name: { it: 'Asia Pacifico', en: 'Asia Pacific' },
-            standard: 'MIC Ordinance 35 / KCC',
-            bands: '806–810 MHz\n1240 MHz (selected)',
-            body: 'MIC Radio Bureau · KCC Korea',
-            intermod: { it: 'MEDIO-ALTO', en: 'MEDIUM-HIGH' },
+            standard: 'MIC Ordinance 35 — WMAS Parziale',
+            bands: '806–810 MHz (limitato)\nLicenza WMAS locale richiesta',
+            body: 'MIC Japan · KCC Korea · IMDA Singapore',
+            intermod: { it: 'MEDIO — coordinamento richiesto', en: 'MEDIUM — coordination required' },
             statusClass: 'warn',
-            statusText: { it: 'ATTENZIONE', en: 'CAUTION' },
-            compliance: 78, quality: 82, congestion: 74
+            statusText: { it: 'LICENZA RICHIESTA', en: 'LICENSE REQUIRED' },
+            compliance: 72, quality: 80, congestion: 68
         },
         'ME': {
             label: 'ME-UAE',
             name: { it: 'Medio Oriente', en: 'Middle East' },
-            standard: 'TRA UAE / CITC Saudi',
-            bands: '470–790 MHz\n(licenza locale obbligatoria)',
-            body: 'TRA · CITC · NTRA Egypt',
-            intermod: { it: 'MEDIO', en: 'MEDIUM' },
+            standard: 'TRA UAE / CITC — WMAS Approvato',
+            bands: '470–790 MHz\nAutorizzazione WMAS per evento',
+            body: 'TRA UAE · CITC Saudi · VECT Consulting',
+            intermod: { it: 'BASSO con WMAS', en: 'LOW with WMAS' },
             statusClass: 'ok',
-            statusText: { it: 'NOMINALE', en: 'NOMINAL' },
-            compliance: 88, quality: 85, congestion: 55
+            statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
+            compliance: 86, quality: 88, congestion: 48
         },
         'SA': {
             label: 'SA-BRA',
             name: { it: 'Sud America', en: 'South America' },
-            standard: 'ANATEL Res. 680 / Subtel Chile',
-            bands: '470–698 MHz',
-            body: 'Anatel · Subtel · ARCOTEL',
-            intermod: { it: 'BASSO', en: 'LOW' },
+            standard: 'ANATEL Res. 680 — WMAS Approvato',
+            bands: '470–698 MHz (WMAS operativo)\nDante 1Gbps ridondante',
+            body: 'Anatel Brazil · Subtel Chile · ARCOTEL',
+            intermod: { it: 'BASSO — WMAS carrier unico', en: 'LOW — single WMAS carrier' },
             statusClass: 'ok',
-            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
-            compliance: 92, quality: 89, congestion: 42
+            statusText: { it: 'SPECTERA CONFORME', en: 'SPECTERA COMPLIANT' },
+            compliance: 91, quality: 90, congestion: 38
         },
         'AU': {
             label: 'AU-ACMA',
             name: { it: 'Australia / Oceania', en: 'Australia / Oceania' },
-            standard: 'ACMA Radiocommunications Act',
-            bands: '520–820 MHz\n(canali licenziati)',
-            body: 'ACMA · Australian Communications',
-            intermod: { it: 'BASSO', en: 'LOW' },
+            standard: 'ACMA LIPD Class — WMAS Registrato',
+            bands: '520–694 MHz (WMAS band)\nCanale da 8 MHz autorizzato',
+            body: 'ACMA · Sennheiser AU Partner Certified',
+            intermod: { it: 'BASSO — spettro libero', en: 'LOW — clear spectrum' },
             statusClass: 'ok',
-            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
-            compliance: 95, quality: 91, congestion: 30
+            statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
+            compliance: 95, quality: 93, congestion: 28
         }
     };
 
@@ -279,11 +279,12 @@ document.addEventListener('DOMContentLoaded', () => {
         ripStatusText.textContent = data.statusText[lang];
 
         // Build data rows
-        const bandLabel = lang === 'it' ? 'BANDE OPERATIVE' : 'OPERATIONAL BANDS';
-        const stdLabel = lang === 'it' ? 'NORMATIVA' : 'STANDARD';
-        const bodyLabel = lang === 'it' ? 'ENTE REGOLATORE' : 'REGULATORY BODY';
-        const intermodLabel = 'INTERMOD RISK';
+        const bandLabel = lang === 'it' ? 'BANDE WMAS' : 'WMAS BANDS';
+        const stdLabel = lang === 'it' ? 'NORMATIVA WMAS' : 'WMAS STANDARD';
+        const bodyLabel = lang === 'it' ? 'ENTE CERTIFICANTE' : 'CERTIFYING BODY';
+        const intermodLabel = lang === 'it' ? 'RISCHIO INTERMOD WMAS' : 'WMAS INTERMOD RISK';
         const regionLabel = lang === 'it' ? 'REGIONE' : 'REGION';
+
 
         const statusClass = data.statusClass === 'ok' ? 'ok' : 'warn';
 
