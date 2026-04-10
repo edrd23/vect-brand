@@ -650,81 +650,146 @@
 
     <!-- ═══════ GLOBAL RF REGULATORY RADAR ═══════ -->
     <section id="radar" class="radar-section reveal">
+        <div class="radar-section-bg">
+            <div class="radar-glow-orb radar-orb-1"></div>
+            <div class="radar-glow-orb radar-orb-2"></div>
+        </div>
         <div class="container">
-            <span class="section-label">Tactical Visualization</span>
-            <h2 class="section-title">Regulatory Radar</h2>
-            <p class="section-desc">
-                <span class="it-text">Monitoraggio globale dello spettro e conformità normativa in tempo reale.</span>
-                <span class="en-text">Global spectrum monitoring and real-time regulatory compliance visualization.</span>
-            </p>
-
-            <div class="radar-hud-grid">
-                <!-- Left Panel: System Status -->
-                <div class="hud-panel hud-left">
-                    <div class="panel-header">
-                        <span class="mono">SYSTEM_STATUS</span>
-                        <div class="status-indicator active"></div>
+            <!-- Header -->
+            <div class="radar-header">
+                <div class="radar-header-left">
+                    <span class="section-label">05 — <span class="it-text">Radar Normativo</span><span class="en-text">Regulatory Radar</span></span>
+                    <h2 class="section-title">
+                        <span class="it-text">Spettro Globale.<br>Sotto Controllo.</span>
+                        <span class="en-text">Global Spectrum.<br>Under Control.</span>
+                    </h2>
+                    <p class="section-desc" style="max-width:480px;">
+                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
+                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography. Select a region to view frequency data.</span>
+                    </p>
+                </div>
+                <div class="radar-live-stats">
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value">6</span>
+                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span class="en-text">Regions Monitored</span></span>
                     </div>
-                    <div class="panel-content">
-                        <div class="telemetry-bar">
-                            <label>SIGNAL_INTEGRITY</label>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 94%;"></div></div>
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value">24/7</span>
+                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span class="en-text">System Uptime</span></span>
+                    </div>
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value" id="radar-live-clock">--:--:--</span>
+                        <span class="radar-stat-label">UTC LIVE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Grid: Scanner + Region Panel -->
+            <div class="radar-main-grid">
+                <!-- Left: Radar Scanner -->
+                <div class="radar-scanner-wrap">
+                    <div class="radar-scanner-frame">
+                        <div class="rframe-corner rframe-tl"></div>
+                        <div class="rframe-corner rframe-tr"></div>
+                        <div class="rframe-corner rframe-bl"></div>
+                        <div class="rframe-corner rframe-br"></div>
+                        <div class="radar-scanner-inner">
+                            <div class="radar-rings">
+                                <div class="radar-ring" style="width:28%;height:28%;"></div>
+                                <div class="radar-ring" style="width:54%;height:54%;"></div>
+                                <div class="radar-ring" style="width:80%;height:80%;"></div>
+                            </div>
+                            <div class="radar-crosshairs">
+                                <div class="radar-ch-h"></div>
+                                <div class="radar-ch-v"></div>
+                            </div>
+                            <div class="radar-sweep-arm"></div>
+                            <button class="radar-hotspot rh-na" data-region="NA">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">NA</span>
+                            </button>
+                            <button class="radar-hotspot rh-eu" data-region="EU">
+                                <span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl rh-lbl-active">EU</span>
+                            </button>
+                            <button class="radar-hotspot rh-as" data-region="AS">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">AS</span>
+                            </button>
+                            <button class="radar-hotspot rh-me" data-region="ME">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">ME</span>
+                            </button>
+                            <button class="radar-hotspot rh-sa" data-region="SA">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">SA</span>
+                            </button>
+                            <button class="radar-hotspot rh-au" data-region="AU">
+                                <span class="rh-dot"></span><span class="rh-ping"></span>
+                                <span class="rh-lbl">AU</span>
+                            </button>
                         </div>
-                        <div class="telemetry-bar">
-                            <label>COMPLIANCE_SYNC</label>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 100%;"></div></div>
-                        </div>
-                        <div class="telemetry-bar">
-                            <label>DECRYPTION_RATE</label>
-                            <div class="bar-bg"><div class="bar-fill" style="width: 82%;"></div></div>
-                        </div>
-                        <div class="active-sweeps">
-                            <div class="sweep-item"><span class="mono">FCC-UWB</span> <span class="status">OK</span></div>
-                            <div class="sweep-item"><span class="mono">ETSI-EN</span> <span class="status">OK</span></div>
-                            <div class="sweep-item pulse-text"><span class="mono">MIC-JPN</span> <span class="status">LIVE</span></div>
-                        </div>
+                    </div>
+                    <div class="spectrum-bar-wrap">
+                        <span class="mono spectrum-freq-label">470 MHz</span>
+                        <div class="spectrum-waterfall"><canvas id="spectrumCanvas"></canvas></div>
+                        <span class="mono spectrum-freq-label">694 MHz</span>
+                    </div>
+                    <div class="radar-status-row">
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
                     </div>
                 </div>
 
-                <!-- Center: Radar Scanner -->
-                <div class="radar-scanner-container">
-                    <div class="radar-scanner">
-                        <div class="radar-grid"></div>
-                        <div class="radar-sweep"></div>
-                        <svg class="world-map-svg" viewBox="0 0 1000 500" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Stylized simplified world map path -->
-                            <path d="M150,150 Q200,100 250,150 T350,150 Q400,200 450,150 T550,150 Q600,100 650,150 T750,150 Q800,200 850,150" fill="none" stroke="rgba(255,107,26,0.1)" stroke-width="1" />
-                            <!-- Hotspots -->
-                            <g class="hotspots">
-                                <circle cx="250" cy="180" r="8" class="hotspot" data-region="NA" stroke="var(--vect-accent)" fill="none" />
-                                <circle cx="500" cy="160" r="8" class="hotspot" data-region="EU" stroke="var(--vect-accent)" fill="none" />
-                                <circle cx="780" cy="220" r="8" class="hotspot" data-region="AS" stroke="var(--vect-accent)" fill="none" />
-                                <circle cx="550" cy="350" r="8" class="hotspot" data-region="AF" stroke="var(--vect-accent)" fill="none" />
-                                <circle cx="350" cy="380" r="8" class="hotspot" data-region="SA" stroke="var(--vect-accent)" fill="none" />
-                            </g>
-                        </svg>
-                    </div>
-                </div>
-
-                <!-- Right Panel: Data Telemetry -->
-                <div class="hud-panel hud-right">
-                    <div class="panel-header">
-                        <span class="mono">REGULATORY_DATA</span>
-                        <span class="region-id mono" id="hud-region-id">GLBL</span>
-                    </div>
-                    <div class="panel-content hud-telemetry-screen">
-                        <div id="hud-data-output" class="mono">
-                            > SYSTEM IDLE<br>
-                            > AWAITING SECTOR SELECTION...<br>
-                            > SCANNING FREQUENCIES...
+                <!-- Right: Region Info Panel -->
+                <div class="radar-info-panel">
+                    <div class="rip-header">
+                        <div>
+                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">REGULATORY DATA</div>
+                            <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
+                        </div>
+                        <div class="rip-status-chip">
+                            <span class="rsb-dot rsb-live"></span>
+                            <span class="mono" id="rip-status-text">IDLE</span>
                         </div>
                     </div>
-                    <div class="panel-footer">
-                        <span class="mono">ENCRYPTION: AES-256</span>
+                    <div class="rip-body" id="rip-body">
+                        <div class="rip-idle">
+                            <div class="rip-idle-icon">&#9678;</div>
+                            <p class="mono rip-idle-msg">
+                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI NORMATIVI RF</span>
+                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR RF REGULATORY DATA</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rip-bars" id="rip-bars" style="display:none;">
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">COMPLIANCE</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
+                            <span class="rip-bar-val mono" id="val-compliance">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">SIGNAL QUALITY</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
+                            <span class="rip-bar-val mono" id="val-quality">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">BAND USAGE</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
+                            <span class="rip-bar-val mono" id="val-congestion">-</span>
+                        </div>
+                    </div>
+                    <div class="rip-footer">
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">AES-256 ENCRYPTED &#183; VECT RF INTEL v2.4</span>
                     </div>
                 </div>
             </div>
         </div>
+    </section>
+
     <footer>
         <div class="container">
             <div class="footer-logo">

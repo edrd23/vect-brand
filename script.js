@@ -127,150 +127,219 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 1200);
     }
 
-    // ═══════ GLOBAL RADAR HUD LOGIC ═══════
-    const radarHotspots = document.querySelectorAll('.hotspot');
-    const hudRegionId = document.getElementById('hud-region-id');
-    const hudDataOutput = document.getElementById('hud-data-output');
+    // ═══════ RADAR — UTC LIVE CLOCK ═══════
+    const radarClock = document.getElementById('radar-live-clock');
+    if (radarClock) {
+        const tick = () => {
+            const now = new Date();
+            const h = String(now.getUTCHours()).padStart(2,'0');
+            const m = String(now.getUTCMinutes()).padStart(2,'0');
+            const s = String(now.getUTCSeconds()).padStart(2,'0');
+            radarClock.textContent = `${h}:${m}:${s}`;
+        };
+        tick();
+        setInterval(tick, 1000);
+    }
 
-    const RADAR_DATA = {
+    // ═══════ RADAR — SPECTRUM CANVAS ═══════
+    const specCanvas = document.getElementById('spectrumCanvas');
+    if (specCanvas) {
+        const ctx2 = specCanvas.getContext('2d');
+        let bins = [];
+        const NUM_BINS = 80;
+        for (let i = 0; i < NUM_BINS; i++) bins.push(Math.random() * 0.3);
+
+        const drawSpectrum = () => {
+            const W = specCanvas.offsetWidth;
+            const H = specCanvas.offsetHeight;
+            if (specCanvas.width !== W) specCanvas.width = W;
+            if (specCanvas.height !== H) specCanvas.height = H;
+
+            // Shift left (waterfall)
+            ctx2.clearRect(0, 0, W, H);
+            ctx2.fillStyle = 'rgba(8,8,8,0.9)';
+            ctx2.fillRect(0, 0, W, H);
+
+            for (let i = 0; i < NUM_BINS; i++) {
+                bins[i] += (Math.random() - 0.48) * 0.15;
+                bins[i] = Math.max(0.02, Math.min(1, bins[i]));
+                // Occasional spikes
+                if (Math.random() > 0.995) bins[i] = 0.7 + Math.random() * 0.3;
+            }
+
+            const binW = W / NUM_BINS;
+            bins.forEach((v, i) => {
+                const barH = v * H;
+                const alpha = 0.4 + v * 0.6;
+                const r = Math.floor(255 * v);
+                const g = Math.floor(107 * (1 - v));
+                ctx2.fillStyle = `rgba(${r},${g},26,${alpha})`;
+                ctx2.fillRect(i * binW, H - barH, binW - 1, barH);
+            });
+        };
+        setInterval(drawSpectrum, 80);
+    }
+
+    // ═══════ RADAR — REGION DATA ═══════
+    const RADAR_REGIONS = {
         'NA': {
-            id: 'NA-USA',
+            label: 'NA-USA',
             name: { it: 'Nord America', en: 'North America' },
-            standard: 'FCC Part 15 / 74',
-            bands: '470-608 MHz / 653-663 MHz',
-            status: { it: 'PROTETTO', en: 'SECURE' },
-            regulatory: 'FCC Office of Engineering'
+            standard: 'FCC Part 74 / PART 15',
+            bands: '470–608 MHz\n653–663 MHz',
+            body: 'FCC · Office of Engineering',
+            intermod: { it: 'BASSO', en: 'LOW' },
+            statusClass: 'ok',
+            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
+            compliance: 97, quality: 94, congestion: 38
         },
         'EU': {
-            id: 'EU-UK',
+            label: 'EU-ETSI',
             name: { it: 'Unione Europea', en: 'European Union' },
-            standard: 'ETSI EN 300 422',
-            bands: '470-694 MHz / 823-832 MHz',
-            status: { it: 'PROTETTO', en: 'SECURE' },
-            regulatory: 'OFCOM / Agence Nationale'
+            standard: 'ETSI EN 300 422 / ERC 70-03',
+            bands: '470–694 MHz\n823–832 MHz',
+            body: 'OFCOM · Agence Nationale · AGCom',
+            intermod: { it: 'BASSO', en: 'LOW' },
+            statusClass: 'ok',
+            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
+            compliance: 100, quality: 96, congestion: 52
         },
         'AS': {
-            id: 'AS-JPN',
+            label: 'AS-JPKR',
             name: { it: 'Asia Pacifico', en: 'Asia Pacific' },
-            standard: 'MIC Ordinance 35',
-            bands: '806-810 MHz / 1240 MHz',
-            status: { it: 'ATTENZIONE: INTERMOD', en: 'CAUTION: INTERMOD' },
-            regulatory: 'MIC Radio Bureau'
+            standard: 'MIC Ordinance 35 / KCC',
+            bands: '806–810 MHz\n1240 MHz (selected)',
+            body: 'MIC Radio Bureau · KCC Korea',
+            intermod: { it: 'MEDIO-ALTO', en: 'MEDIUM-HIGH' },
+            statusClass: 'warn',
+            statusText: { it: 'ATTENZIONE', en: 'CAUTION' },
+            compliance: 78, quality: 82, congestion: 74
         },
-        'AF': {
-            id: 'AF-MDS',
-            name: { it: 'Africa', en: 'Africa' },
-            standard: 'ITU Region 1',
-            bands: '470-790 MHz',
-            status: { it: 'NOMINALE', en: 'NOMINAL' },
-            regulatory: 'ATRA Regulatory'
+        'ME': {
+            label: 'ME-UAE',
+            name: { it: 'Medio Oriente', en: 'Middle East' },
+            standard: 'TRA UAE / CITC Saudi',
+            bands: '470–790 MHz\n(licenza locale obbligatoria)',
+            body: 'TRA · CITC · NTRA Egypt',
+            intermod: { it: 'MEDIO', en: 'MEDIUM' },
+            statusClass: 'ok',
+            statusText: { it: 'NOMINALE', en: 'NOMINAL' },
+            compliance: 88, quality: 85, congestion: 55
         },
         'SA': {
-            id: 'SA-BR',
+            label: 'SA-BRA',
             name: { it: 'Sud America', en: 'South America' },
-            standard: 'ANATEL Res 680',
-            bands: '470-698 MHz',
-            status: { it: 'PROTETTO', en: 'SECURE' },
-            regulatory: 'Anatel Compliance'
+            standard: 'ANATEL Res. 680 / Subtel Chile',
+            bands: '470–698 MHz',
+            body: 'Anatel · Subtel · ARCOTEL',
+            intermod: { it: 'BASSO', en: 'LOW' },
+            statusClass: 'ok',
+            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
+            compliance: 92, quality: 89, congestion: 42
+        },
+        'AU': {
+            label: 'AU-ACMA',
+            name: { it: 'Australia / Oceania', en: 'Australia / Oceania' },
+            standard: 'ACMA Radiocommunications Act',
+            bands: '520–820 MHz\n(canali licenziati)',
+            body: 'ACMA · Australian Communications',
+            intermod: { it: 'BASSO', en: 'LOW' },
+            statusClass: 'ok',
+            statusText: { it: 'CONFORME', en: 'COMPLIANT' },
+            compliance: 95, quality: 91, congestion: 30
         }
     };
 
-    let typingTimer = null;
+    const ripRegionId = document.getElementById('rip-region-id');
+    const ripStatusText = document.getElementById('rip-status-text');
+    const ripBody = document.getElementById('rip-body');
+    const ripBars = document.getElementById('rip-bars');
+    const barCompliance = document.getElementById('bar-compliance');
+    const barQuality = document.getElementById('bar-quality');
+    const barCongestion = document.getElementById('bar-congestion');
+    const valCompliance = document.getElementById('val-compliance');
+    const valQuality = document.getElementById('val-quality');
+    const valCongestion = document.getElementById('val-congestion');
 
-    function typewriter(element, text) {
-        let i = 0;
-        element.innerHTML = '';
-        if (typingTimer) clearInterval(typingTimer);
-        
-        // Split text into an array of chunks (either tag or character)
-        const chunks = [];
-        let tempI = 0;
-        while (tempI < text.length) {
-            if (text.charAt(tempI) === '<') {
-                const tagEnd = text.indexOf('>', tempI);
-                if (tagEnd !== -1) {
-                    chunks.push(text.substring(tempI, tagEnd + 1));
-                    tempI = tagEnd + 1;
-                } else {
-                    chunks.push(text.charAt(tempI));
-                    tempI++;
-                }
-            } else {
-                chunks.push(text.charAt(tempI));
-                tempI++;
-            }
+    const radarHotspots = document.querySelectorAll('.radar-hotspot');
+
+    function showRegionData(regionKey) {
+        const data = RADAR_REGIONS[regionKey];
+        if (!data || !ripRegionId) return;
+
+        const lang = document.documentElement.getAttribute('lang') || 'it';
+
+        // Deselect all, select clicked
+        radarHotspots.forEach(h => h.classList.remove('selected'));
+        const btn = document.querySelector(`.radar-hotspot[data-region="${regionKey}"]`);
+        if (btn) btn.classList.add('selected');
+
+        // Update header
+        ripRegionId.textContent = data.label;
+        ripStatusText.textContent = data.statusText[lang];
+
+        // Build data rows
+        const bandLabel = lang === 'it' ? 'BANDE OPERATIVE' : 'OPERATIONAL BANDS';
+        const stdLabel = lang === 'it' ? 'NORMATIVA' : 'STANDARD';
+        const bodyLabel = lang === 'it' ? 'ENTE REGOLATORE' : 'REGULATORY BODY';
+        const intermodLabel = 'INTERMOD RISK';
+        const regionLabel = lang === 'it' ? 'REGIONE' : 'REGION';
+
+        const statusClass = data.statusClass === 'ok' ? 'ok' : 'warn';
+
+        ripBody.innerHTML = `
+            <div class="rip-data">
+                <div class="rip-data-row">
+                    <span class="rip-data-label">${regionLabel}</span>
+                    <span class="rip-data-value">${data.name[lang]}</span>
+                </div>
+                <div class="rip-data-row">
+                    <span class="rip-data-label">${stdLabel}</span>
+                    <span class="rip-data-value accent">${data.standard}</span>
+                </div>
+                <div class="rip-data-row">
+                    <span class="rip-data-label">${bandLabel}</span>
+                    <span class="rip-data-value" style="white-space:pre-line">${data.bands}</span>
+                </div>
+                <div class="rip-data-row">
+                    <span class="rip-data-label">${bodyLabel}</span>
+                    <span class="rip-data-value" style="font-size:10px">${data.body}</span>
+                </div>
+                <div class="rip-data-row">
+                    <span class="rip-data-label">${intermodLabel}</span>
+                    <span class="rip-data-value ${statusClass}">${data.intermod[lang]}</span>
+                </div>
+            </div>`;
+
+        // Show and animate bars
+        if (ripBars) {
+            ripBars.style.display = 'flex';
+            // Reset first
+            barCompliance.style.width = '0%';
+            barQuality.style.width = '0%';
+            barCongestion.style.width = '0%';
+            valCompliance.textContent = '-';
+            valQuality.textContent = '-';
+            valCongestion.textContent = '-';
+
+            // Animate after paint
+            requestAnimationFrame(() => {
+                setTimeout(() => {
+                    barCompliance.style.width = data.compliance + '%';
+                    barQuality.style.width = data.quality + '%';
+                    barCongestion.style.width = data.congestion + '%';
+                    valCompliance.textContent = data.compliance + '%';
+                    valQuality.textContent = data.quality + '%';
+                    valCongestion.textContent = data.congestion + '%';
+                }, 80);
+            });
         }
-
-        typingTimer = setInterval(() => {
-            if (i < chunks.length) {
-                const chunk = chunks[i];
-                const isTag = chunk.startsWith('<');
-                
-                element.innerHTML += chunk;
-                i++;
-
-                // Decryption effect (only for non-tag, non-space characters)
-                if (!isTag && chunk !== ' ' && Math.random() > 0.8) {
-                    const currentHTML = element.innerHTML;
-                    element.innerHTML = currentHTML.slice(0, -1) + '_';
-                    setTimeout(() => {
-                        // Restore only if the last char is still '_'
-                        if (element.innerHTML.endsWith('_')) {
-                            element.innerHTML = element.innerHTML.slice(0, -1) + chunk;
-                        } else {
-                            // If more text was added, we need to find and replace the specific '_'
-                            // But for simplicity in this HUD style, we'll just skip restoration if it's too late
-                            // or use a more precise replacement:
-                            element.innerHTML = element.innerHTML.replace(/_$/, chunk);
-                        }
-                    }, 40);
-                }
-            } else {
-                clearInterval(typingTimer);
-            }
-        }, 15);
     }
 
-    radarHotspots.forEach(hotspot => {
-        hotspot.addEventListener('mouseenter', () => {
-            const region = hotspot.getAttribute('data-region');
-            const data = RADAR_DATA[region];
-            const lang = document.documentElement.getAttribute('lang') || 'it';
-            
-            if (data) {
-                hudRegionId.innerText = data.id;
-                const labels = {
-                    region: lang === 'it' ? 'REGIONE' : 'REGION',
-                    standard: lang === 'it' ? 'NORMATIVA' : 'STANDARD',
-                    bands: lang === 'it' ? 'BANDE' : 'BANDS',
-                    status: lang === 'it' ? 'STATO' : 'STATUS',
-                    body: lang === 'it' ? 'ENTE' : 'BODY',
-                    sync: lang === 'it' ? 'SINCRONIA' : 'SYNC'
-                };
-
-                const message = `> ${labels.region}: ${data.name[lang]}\n` +
-                                `> ${labels.standard}: ${data.standard}\n` +
-                                `> ${labels.bands}: ${data.bands}\n` +
-                                `> ${labels.status}: ${data.status[lang]}\n` +
-                                `> ${labels.body}: ${data.regulatory}\n` +
-                                `> ${labels.sync}: 100%`;
-                
-                typewriter(hudDataOutput, message.replace(/\n/g, '<br>'));
-            }
-        });
-
-        hotspot.addEventListener('mouseleave', () => {
-            const lang = document.documentElement.getAttribute('lang') || 'it';
-            hudRegionId.innerText = 'GLBL';
-            const idleMessage = lang === 'it' ? 
-                '> SISTEMA IDLE<br>> IN ATTESA DI SELEZIONE SETTORE...<br>> SCANSIONE FREQUENZE...' :
-                '> SYSTEM IDLE<br>> AWAITING SECTOR SELECTION...<br>> SCANNING FREQUENCIES...';
-            
-            if (typingTimer) {
-                clearInterval(typingTimer);
-                typingTimer = null;
-            }
-            hudDataOutput.innerHTML = idleMessage;
+    radarHotspots.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const region = btn.getAttribute('data-region');
+            showRegionData(region);
         });
     });
 
@@ -317,7 +386,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         btn.disabled = false;
                     }, 4000);
                 } else {
-                    // Show specific error message from API if available
                     btn.innerHTML = lang === 'it' ? `Errore: ${result.message || 'Server'}` : `Error: ${result.message || 'Server'}`;
                     btn.style.background = 'var(--vect-error)';
                     throw new Error(result.message || 'Server error');
