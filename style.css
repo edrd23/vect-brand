@@ -10,8 +10,8 @@
     --vect-carbon: #1A1A1A;
     --vect-graphite: #2A2A2A;
     --vect-steel: #3A3A3A;
-    --vect-ash: #666666;
-    --vect-silver: #999999;
+    --vect-ash: #808080;
+    --vect-silver: #B3B3B3;
     --vect-light: #E0E0E0;
     --vect-white: #F5F5F5;
 
@@ -47,8 +47,8 @@
     /* Typography — Refined for Mission Critical */
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    --letter-spacing-tight: -0.02em;
-    --letter-spacing-mono: 0.1em;
+    --letter-spacing-tight: -0.03em;
+    --letter-spacing-mono: 0.12em;
 
     /* Spacing */
     --section-padding: 120px 0;
@@ -168,20 +168,43 @@ a {
 }
 
 /* ═══════ KINETIC UTILITIES ═══════ */
-.surface-lowest { background-color: var(--surface-lowest); }
-.surface-main { background-color: var(--surface-main); }
-.surface-container { background-color: var(--surface-container); border: 1px solid var(--surface-highest); }
+.surface-lowest {
+    background-color: var(--surface-lowest);
+}
 
-.glow-ledger { box-shadow: var(--glow-ledger); }
-.glow-primary { box-shadow: var(--glow-primary); }
+.surface-main {
+    background-color: var(--surface-main);
+}
+
+.surface-container {
+    background-color: var(--surface-container);
+    border: 1px solid var(--surface-highest);
+}
+
+.glow-ledger {
+    box-shadow: var(--glow-ledger);
+}
+
+.glow-primary {
+    box-shadow: var(--glow-primary);
+}
 
 .kinetic-pulse {
     animation: kineticPulse 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
 @keyframes kineticPulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: .7; transform: scale(1.05); }
+
+    0%,
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: .7;
+        transform: scale(1.05);
+    }
 }
 
 .text-gradient {
@@ -440,10 +463,12 @@ section {
 }
 
 .service-card {
-    background: var(--surface-container);
+    background: rgba(18, 18, 18, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     padding: 40px;
-    border: 1px solid var(--surface-highest);
-    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     height: 100%;
     display: flex;
@@ -452,10 +477,10 @@ section {
 }
 
 .service-card:hover {
-    border-color: var(--primary-ledger);
+    border-color: rgba(255, 107, 26, 0.4);
     transform: translateY(-8px);
-    box-shadow: var(--glow-ledger), 0 20px 50px rgba(0, 0, 0, 0.4);
-    background: var(--surface-highest);
+    box-shadow: var(--glow-ledger), 0 20px 50px rgba(0, 0, 0, 0.5);
+    background: rgba(26, 26, 26, 0.7);
 }
 
 .service-icon {
@@ -494,28 +519,70 @@ section {
 
 .advantage-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+}
+
+.advantage-item {
+    background: rgba(18, 18, 18, 0.4);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    padding: 32px;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.advantage-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 107, 26, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.advantage-item:hover {
+    transform: translateY(-5px);
+    background: rgba(26, 26, 26, 0.6);
+    border-color: rgba(255, 107, 26, 0.2);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), var(--glow-ledger);
+}
+
+.advantage-item:hover::before {
+    opacity: 1;
 }
 
 .advantage-item h4 {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--vect-accent);
-    margin-bottom: 12px;
-    letter-spacing: 1px;
+    margin-bottom: 16px;
+    letter-spacing: 1.5px;
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 12px;
+    background: rgba(255, 107, 26, 0.08);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 107, 26, 0.15);
 }
 
 .advantage-item p {
-    font-size: 13px;
+    font-size: 14px;
     color: var(--vect-silver);
-    line-height: 1.6;
+    line-height: 1.7;
+    margin: 0;
 }
 
 /* ═══════ SPECTERA BANNER ═══════ */
 .spectera-banner {
-    background: var(--surface-container);
-    border: 1px solid var(--surface-highest);
-    border-radius: 20px;
+    background: linear-gradient(145deg, rgba(18, 18, 18, 0.6) 0%, rgba(10, 10, 10, 0.8) 100%);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     padding: 60px;
     margin-bottom: 80px;
     display: flex;
@@ -523,7 +590,7 @@ section {
     align-items: center;
     position: relative;
     overflow: hidden;
-    box-shadow: var(--glow-ledger);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
 }
 
 .spectera-banner::after {
@@ -652,14 +719,22 @@ section {
 .rf-scanner-ui {
     position: relative;
     height: 500px;
-    background: var(--surface-lowest);
-    border-radius: 12px;
-    border: 1px solid var(--surface-highest);
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.6) 0%, rgba(5, 5, 5, 0.9) 100%);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
     overflow: hidden;
     display: flex;
     flex-direction: column;
     padding: 24px;
-    box-shadow: inset 0 0 80px rgba(0,0,0,0.9), var(--glow-ledger);
+    box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.9), 0 20px 40px rgba(0,0,0,0.5);
+    transform: perspective(1000px) rotateX(3deg) rotateY(-8deg);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.rf-scanner-ui:hover {
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg);
 }
 
 .scanner-header {
@@ -687,8 +762,14 @@ section {
 }
 
 @keyframes blink {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; box-shadow: 0 0 5px var(--vect-accent); }
+    0% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+        box-shadow: 0 0 5px var(--vect-accent);
+    }
 }
 
 .scanner-main-freq {
@@ -696,7 +777,7 @@ section {
     font-weight: 700;
     color: var(--vect-white);
     line-height: 1;
-    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
 }
 
 .scanner-main-freq .mhz {
@@ -716,33 +797,42 @@ section {
 
 .scanner-grid {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 
 .grid-line-h {
     position: absolute;
-    left: 0; right: 0;
+    left: 0;
+    right: 0;
     height: 1px;
     background: rgba(255, 255, 255, 0.05);
 }
 
 .grid-line-v {
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     width: 1px;
     background: rgba(255, 255, 255, 0.05);
 }
 
 .scanner-peaks {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     z-index: 2;
     opacity: 0.8;
 }
 
 .scanner-sweep {
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     width: 2px;
     background: var(--vect-accent);
     box-shadow: 0 0 15px 2px var(--vect-accent);
@@ -753,7 +843,8 @@ section {
 .scanner-sweep::after {
     content: '';
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     right: 2px;
     width: 100px;
     background: linear-gradient(to right, transparent, rgba(255, 107, 26, 0.2));
@@ -761,10 +852,23 @@ section {
 }
 
 @keyframes sweep {
-    0% { left: 0%; opacity: 0; }
-    5% { opacity: 1; }
-    95% { opacity: 1; }
-    100% { left: 100%; opacity: 0; }
+    0% {
+        left: 0%;
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 1;
+    }
+
+    95% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 100%;
+        opacity: 0;
+    }
 }
 
 .scanner-footer {
@@ -876,6 +980,40 @@ footer {
     font-size: 11px;
     color: var(--vect-ash);
     letter-spacing: 1px;
+}
+
+/* ═══════ TURNSTILE CAPTCHA ═══════ */
+.cf-turnstile {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.cf-turnstile iframe {
+    border-radius: 6px;
+}
+
+/* ═══════ SPINNER (Form Loading) ═══════ */
+@keyframes spinnerRotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.vect-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spinnerRotate 0.8s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
 }
 
 /* ═══════ SCANLINE EFFECT ═══════ */
@@ -1431,18 +1569,41 @@ body::after {
     z-index: 5;
 }
 
-.rframe-tl { top: 0; left: 0;    border-top: 2px solid var(--vect-accent); border-left: 2px solid var(--vect-accent); }
-.rframe-tr { top: 0; right: 0;   border-top: 2px solid var(--vect-accent); border-right: 2px solid var(--vect-accent); }
-.rframe-bl { bottom: 0; left: 0; border-bottom: 2px solid var(--vect-accent); border-left: 2px solid var(--vect-accent); }
-.rframe-br { bottom: 0; right: 0;border-bottom: 2px solid var(--vect-accent); border-right: 2px solid var(--vect-accent); }
+.rframe-tl {
+    top: 0;
+    left: 0;
+    border-top: 2px solid var(--vect-accent);
+    border-left: 2px solid var(--vect-accent);
+}
+
+.rframe-tr {
+    top: 0;
+    right: 0;
+    border-top: 2px solid var(--vect-accent);
+    border-right: 2px solid var(--vect-accent);
+}
+
+.rframe-bl {
+    bottom: 0;
+    left: 0;
+    border-bottom: 2px solid var(--vect-accent);
+    border-left: 2px solid var(--vect-accent);
+}
+
+.rframe-br {
+    bottom: 0;
+    right: 0;
+    border-bottom: 2px solid var(--vect-accent);
+    border-right: 2px solid var(--vect-accent);
+}
 
 /* ── Inner Radar Circle ── */
 .radar-scanner-inner {
     position: absolute;
     inset: 14px;
     border-radius: 50%;
-    background: radial-gradient(circle at 50% 50%, rgba(255,107,26,0.06) 0%, rgba(0,0,0,0.8) 70%);
-    border: 1px solid rgba(255,107,26,0.2);
+    background: radial-gradient(circle at 50% 50%, rgba(255, 107, 26, 0.06) 0%, rgba(0, 0, 0, 0.8) 70%);
+    border: 1px solid rgba(255, 107, 26, 0.2);
     overflow: hidden;
 }
 
@@ -1467,14 +1628,18 @@ body::after {
 
 .radar-ch-h {
     position: absolute;
-    top: 50%; left: 0; right: 0;
+    top: 50%;
+    left: 0;
+    right: 0;
     height: 1px;
     background: rgba(255, 107, 26, 0.08);
 }
 
 .radar-ch-v {
     position: absolute;
-    left: 50%; top: 0; bottom: 0;
+    left: 50%;
+    top: 0;
+    bottom: 0;
     width: 1px;
     background: rgba(255, 107, 26, 0.08);
 }
@@ -1487,7 +1652,7 @@ body::after {
     width: 50%;
     height: 2px;
     transform-origin: 0% 50%;
-    background: linear-gradient(to right, rgba(255,107,26,0.9), transparent);
+    background: linear-gradient(to right, rgba(255, 107, 26, 0.9), transparent);
     box-shadow: 0 0 12px var(--vect-accent);
     animation: radarRotate 4s linear infinite;
     z-index: 3;
@@ -1504,8 +1669,13 @@ body::after {
 }
 
 @keyframes radarRotate {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 /* ── Hotspots ── */
@@ -1523,25 +1693,50 @@ body::after {
     z-index: 4;
 }
 
-.rh-na { top: 36%; left: 22%; }
-.rh-eu { top: 30%; left: 50%; }
-.rh-as { top: 38%; left: 75%; }
-.rh-me { top: 43%; left: 61%; }
-.rh-sa { top: 64%; left: 32%; }
-.rh-au { top: 67%; left: 78%; }
+.rh-na {
+    top: 36%;
+    left: 22%;
+}
+
+.rh-eu {
+    top: 30%;
+    left: 50%;
+}
+
+.rh-as {
+    top: 38%;
+    left: 75%;
+}
+
+.rh-me {
+    top: 43%;
+    left: 61%;
+}
+
+.rh-sa {
+    top: 64%;
+    left: 32%;
+}
+
+.rh-au {
+    top: 67%;
+    left: 78%;
+}
 
 .rh-dot {
     display: block;
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
-    background: rgba(255,107,26,0.5);
+    background: rgba(255, 107, 26, 0.5);
     border: 1px solid var(--vect-accent);
     position: relative;
     z-index: 2;
     transition: all 0.3s ease;
 }
 
-.rh-dot-active, .radar-hotspot.selected .rh-dot {
+.rh-dot-active,
+.radar-hotspot.selected .rh-dot {
     background: var(--vect-accent);
     box-shadow: 0 0 10px var(--vect-accent);
 }
@@ -1555,7 +1750,8 @@ body::after {
 .rh-ping {
     display: block;
     position: absolute;
-    width: 22px; height: 22px;
+    width: 22px;
+    height: 22px;
     border-radius: 50%;
     border: 1px solid var(--vect-accent);
     animation: hotspotPing 2.2s ease-out infinite;
@@ -1563,8 +1759,15 @@ body::after {
 }
 
 @keyframes hotspotPing {
-    0%   { transform: scale(0.5); opacity: 0.8; }
-    100% { transform: scale(1.8); opacity: 0;   }
+    0% {
+        transform: scale(0.5);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(1.8);
+        opacity: 0;
+    }
 }
 
 .rh-lbl {
@@ -1582,7 +1785,8 @@ body::after {
     transition: color 0.3s ease;
 }
 
-.rh-lbl-active, .radar-hotspot.selected .rh-lbl,
+.rh-lbl-active,
+.radar-hotspot.selected .rh-lbl,
 .radar-hotspot:hover .rh-lbl {
     color: var(--vect-accent);
 }
@@ -1604,8 +1808,8 @@ body::after {
 .spectrum-waterfall {
     flex: 1;
     height: 32px;
-    background: rgba(10,10,10,0.8);
-    border: 1px solid rgba(255,107,26,0.12);
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 107, 26, 0.12);
     overflow: hidden;
     border-radius: 2px;
 }
@@ -1620,7 +1824,7 @@ body::after {
 .radar-status-row {
     display: flex;
     gap: 0;
-    border: 1px solid rgba(255,107,26,0.1);
+    border: 1px solid rgba(255, 107, 26, 0.1);
 }
 
 .rsb-item {
@@ -1631,26 +1835,44 @@ body::after {
     font-size: 9px;
     letter-spacing: 1.5px;
     color: var(--vect-silver);
-    border-right: 1px solid rgba(255,107,26,0.1);
+    border-right: 1px solid rgba(255, 107, 26, 0.1);
     flex: 1;
     justify-content: center;
 }
 
-.rsb-item:last-child { border-right: none; }
+.rsb-item:last-child {
+    border-right: none;
+}
 
 .rsb-dot {
     display: inline-block;
-    width: 6px; height: 6px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
     flex-shrink: 0;
 }
 
-.rsb-ok   { background: #22c55e; box-shadow: 0 0 6px rgba(34,197,94,0.6); }
-.rsb-live { background: var(--vect-accent); animation: dotPulse 1.4s ease-in-out infinite; box-shadow: 0 0 8px var(--vect-accent); }
+.rsb-ok {
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.6);
+}
+
+.rsb-live {
+    background: var(--vect-accent);
+    animation: dotPulse 1.4s ease-in-out infinite;
+    box-shadow: 0 0 8px var(--vect-accent);
+}
 
 @keyframes dotPulse {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.3; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
 }
 
 /* ── Right Panel ── */
@@ -1668,7 +1890,7 @@ body::after {
     justify-content: space-between;
     align-items: flex-start;
     padding: 24px 24px 20px;
-    border-bottom: 1px solid rgba(255,107,26,0.1);
+    border-bottom: 1px solid rgba(255, 107, 26, 0.1);
 }
 
 .rip-region-id {
@@ -1685,7 +1907,7 @@ body::after {
     align-items: center;
     gap: 6px;
     padding: 6px 12px;
-    border: 1px solid rgba(255,107,26,0.2);
+    border: 1px solid rgba(255, 107, 26, 0.2);
     font-size: 9px;
     letter-spacing: 2px;
     color: var(--vect-ash);
@@ -1710,13 +1932,22 @@ body::after {
 
 .rip-idle-icon {
     font-size: 48px;
-    color: rgba(255,107,26,0.15);
+    color: rgba(255, 107, 26, 0.15);
     animation: idlePulse 3s ease-in-out infinite;
 }
 
 @keyframes idlePulse {
-    0%, 100% { opacity: 0.3; transform: scale(1); }
-    50%       { opacity: 0.7; transform: scale(1.05); }
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.7;
+        transform: scale(1.05);
+    }
 }
 
 .rip-idle-msg {
@@ -1734,8 +1965,15 @@ body::after {
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .rip-data-row {
@@ -1743,11 +1981,13 @@ body::after {
     justify-content: space-between;
     align-items: flex-start;
     padding: 12px 0;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     gap: 12px;
 }
 
-.rip-data-row:last-child { border-bottom: none; }
+.rip-data-row:last-child {
+    border-bottom: none;
+}
 
 .rip-data-label {
     font-family: 'JetBrains Mono', monospace;
@@ -1766,14 +2006,22 @@ body::after {
     line-height: 1.4;
 }
 
-.rip-data-value.accent { color: var(--vect-accent); }
-.rip-data-value.warn   { color: #f59e0b; }
-.rip-data-value.ok     { color: #22c55e; }
+.rip-data-value.accent {
+    color: var(--vect-accent);
+}
+
+.rip-data-value.warn {
+    color: #f59e0b;
+}
+
+.rip-data-value.ok {
+    color: #22c55e;
+}
 
 /* Telemetry bars */
 .rip-bars {
     padding: 16px 24px 20px;
-    border-top: 1px solid rgba(255,107,26,0.08);
+    border-top: 1px solid rgba(255, 107, 26, 0.08);
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -1794,7 +2042,7 @@ body::after {
 
 .rip-bar-bg {
     height: 3px;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255, 255, 255, 0.06);
     border-radius: 2px;
     overflow: hidden;
 }
@@ -1802,7 +2050,7 @@ body::after {
 .rip-bar-fill {
     height: 100%;
     background: var(--vect-accent);
-    box-shadow: 0 0 8px rgba(255,107,26,0.5);
+    box-shadow: 0 0 8px rgba(255, 107, 26, 0.5);
     transition: width 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: 0%;
     border-radius: 2px;
@@ -1810,7 +2058,7 @@ body::after {
 
 .rip-bar-warn {
     background: #f59e0b;
-    box-shadow: 0 0 8px rgba(245,158,11,0.5);
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
 }
 
 .rip-bar-val {
@@ -1821,7 +2069,7 @@ body::after {
 
 .rip-footer {
     padding: 14px 24px;
-    border-top: 1px solid rgba(255,107,26,0.08);
+    border-top: 1px solid rgba(255, 107, 26, 0.08);
 }
 
 /* ── Responsive ── */
@@ -1870,3 +2118,105 @@ body::after {
     }
 }
 
+/* --------- FAQ STYLES --------- */
+.faq-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 0;
+    cursor: pointer;
+}
+
+.faq-summary {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f5f5f5;
+    list-style: none;
+    /* overrides default arrow visually but works in most browsers */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-summary::-webkit-details-marker {
+    display: none;
+}
+
+.faq-summary .arrow {
+    color: var(--vect-accent);
+    transition: transform 0.3s;
+    font-weight: bold;
+}
+
+.faq-item[open] .faq-summary .arrow {
+    transform: rotate(180deg);
+}
+
+.faq-content {
+    margin-top: 15px;
+    color: var(--vect-silver);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* ── Form Spinner ── */
+.vect-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    border-top-color: #000;
+    animation: vect-spin 0.8s linear infinite;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+@keyframes vect-spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ── Mission Logs SVG Telemetry Animations ── */
+@keyframes missionPulse {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.8; }
+}
+
+@keyframes missionSweep {
+    0% { transform: scaleX(0.1); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: scaleX(1); opacity: 0; }
+}
+
+@keyframes missionBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+.mission-telemetry svg rect:nth-child(1) {
+    animation: missionPulse 2s ease-in-out infinite;
+}
+.mission-telemetry svg rect:nth-child(2) {
+    animation: missionBlink 1.5s steps(2, start) infinite;
+}
+.mission-telemetry svg rect:nth-child(3) {
+    transform-origin: left;
+    animation: missionSweep 3s linear infinite;
+}
+.mission-telemetry svg circle:nth-child(1) {
+    animation: missionPulse 1.5s ease-in-out infinite;
+}
+.mission-telemetry svg circle:nth-child(2) {
+    animation: missionBlink 0.5s steps(2, start) infinite;
+}
+.mission-telemetry svg circle:nth-child(3) {
+    animation: missionPulse 2.5s ease-in-out infinite;
+}
+.mission-telemetry svg path {
+    stroke-dasharray: 50;
+    stroke-dashoffset: 50;
+    animation: dashOffset 4s linear infinite;
+}
+@keyframes dashOffset {
+    to { stroke-dashoffset: 0; }
+}
