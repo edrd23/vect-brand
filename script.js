@@ -634,45 +634,132 @@ function showToast(message, type = 'success') {
     }, 4000);
 }
 
-    // ═══════ MAGNETIC BUTTONS (ReactBits Port) ═══════
+    // ═══════ TEXT SCRAMBLE CLASS ═══════
+    class TextScramble {
+        constructor(el) {
+            this.el = el;
+            this.chars = '!<>-_\\/[]{}—=+*^?#________';
+            this.update = this.update.bind(this);
+        }
+        setText(newText) {
+            const oldText = this.el.innerText;
+            const length = Math.max(oldText.length, newText.length);
+            const promise = new Promise((resolve) => this.resolve = resolve);
+            this.queue = [];
+            for (let i = 0; i < length; i++) {
+                const from = oldText[i] || '';
+                const to = newText[i] || '';
+                const start = Math.floor(Math.random() * 40);
+                const end = start + Math.floor(Math.random() * 40);
+                this.queue.push({ from, to, start, end });
+            }
+            cancelAnimationFrame(this.frameRequest);
+            this.frame = 0;
+            this.update();
+            return promise;
+        }
+        update() {
+            let output = '';
+            let complete = 0;
+            for (let i = 0, n = this.queue.length; i < n; i++) {
+                let { from, to, start, end, char } = this.queue[i];
+                if (this.frame >= end) {
+                    complete++;
+                    output += to;
+                } else if (this.frame >= start) {
+                    if (!char || Math.random() < 0.28) {
+                        char = this.chars[Math.floor(Math.random() * this.chars.length)];
+                        this.queue[i].char = char;
+                    }
+                    output += `<span class="mono" style="opacity:0.3">${char}</span>`;
+                } else {
+                    output += from;
+                }
+            }
+            this.el.innerHTML = output;
+            if (complete === this.queue.length) {
+                this.resolve();
+            } else {
+                this.frameRequest = requestAnimationFrame(this.update);
+                this.frame++;
+            }
+        }
+    }
+
+    // ═══════ SPLIT TEXT UTILITY ═══════
+    const splitText = (el) => {
+        const it = el.querySelector('.it-text');
+        const en = el.querySelector('.en-text');
+        
+        [it, en].forEach(side => {
+            if (!side) return;
+            const text = side.innerText;
+            side.innerHTML = text.split('').map((char, i) => 
+                `<span class="char" style="transition-delay: ${i * 0.03}s">${char === ' ' ? '&nbsp;' : char}</span>`
+            ).join('');
+        });
+    };
+
+    document.querySelectorAll('.section-title').forEach(splitText);
+
+    // ═══════ BUTTON & NAV INTERACTORS ═══════
+    const interactables = document.querySelectorAll('.btn, .nav-links a');
+    interactables.forEach(el => {
+        if (el.classList.contains('btn')) el.classList.add('btn-spotlight');
+        
+        const originalTextIt = el.querySelector('.it-text')?.innerText || '';
+        const originalTextEn = el.querySelector('.en-text')?.innerText || '';
+        
+        const scramblerIt = el.querySelector('.it-text') ? new TextScramble(el.querySelector('.it-text')) : null;
+        const scramblerEn = el.querySelector('.en-text') ? new TextScramble(el.querySelector('.en-text')) : null;
+
+        el.addEventListener('mouseenter', () => {
+            if (scramblerIt) scramblerIt.setText(originalTextIt);
+            if (scramblerEn) scramblerEn.setText(originalTextEn);
+        });
+
+        if (el.classList.contains('btn')) {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                el.style.setProperty('--m-x', `${x}px`);
+                el.style.setProperty('--m-y', `${y}px`);
+            });
+        }
+    });
+
+    // ═══════ MAGNETIC ENHANCEMENT ═══════
     const magneticBtns = document.querySelectorAll('.btn');
-    
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
             const rect = btn.getBoundingClientRect();
             const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
             const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
-            
             btn.style.transform = `translate(${x}px, ${y}px)`;
-            
             const spans = btn.querySelectorAll('span');
             spans.forEach(span => {
-                span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-                span.style.display = 'inline-block';
+                if (!span.classList.contains('it-text') && !span.classList.contains('en-text')) {
+                    span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                }
             });
         });
 
         btn.addEventListener('mouseleave', () => {
             btn.style.transform = `translate(0px, 0px)`;
-            const spans = btn.querySelectorAll('span');
-            spans.forEach(span => {
-                span.style.transform = `translate(0px, 0px)`;
-            });
         });
     });
 
     // ═══════ SECTION GLOW ═══════
     const titles = document.querySelectorAll('.section-title');
     titles.forEach(title => {
-        title.style.transition = 'text-shadow 0.4s ease, letter-spacing 0.4s ease';
         title.addEventListener('mouseenter', () => {
             title.style.textShadow = '0 0 15px rgba(255, 107, 26, 0.3)';
-            title.style.letterSpacing = '0.02em';
         });
         title.addEventListener('mouseleave', () => {
             title.style.textShadow = 'none';
-            title.style.letterSpacing = 'normal';
         });
     });
 });
+
 

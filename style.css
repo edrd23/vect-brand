@@ -248,6 +248,30 @@ a {
     box-shadow: 0 10px 40px rgba(255, 107, 26, 0.4);
 }
 
+/* SPOTLIGHT EFFECT */
+.btn-spotlight {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-spotlight::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        circle at var(--m-x) var(--m-y),
+        rgba(255, 255, 255, 0.15) 0%,
+        transparent 50%
+    );
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.btn-spotlight:hover::before {
+    opacity: 1;
+}
+
 .btn-outline {
     background: var(--surface-low);
     border: 1px solid var(--surface-highest);
@@ -411,6 +435,18 @@ section {
     margin-bottom: 20px;
     line-height: 1.1;
     letter-spacing: -0.02em;
+    overflow: hidden; /* For split-text slide-up */
+}
+
+/* ═══════ SPLIT TEXT UTILS ═══════ */
+.char {
+    display: inline-block;
+    transform: translateY(110%);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-title.active .char {
+    transform: translateY(0);
 }
 
 .section-desc {
