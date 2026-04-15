@@ -5,8 +5,6 @@ const ASSETS = [
     './style.css',
     './script.js',
     './manifest.json',
-    './technical-deck.html',
-    './deck.css',
     './favicon.svg',
     './vect-logo.svg'
 ];
@@ -40,7 +38,7 @@ self.addEventListener('fetch', (event) => {
     }
 
     event.respondWith(
-        caches.match(event.request, { ignoreSearch: true }).then((cachedResponse) => {
+        caches.match(event.request).then((cachedResponse) => {
             return fetch(event.request)
                 .then((networkResponse) => {
                     if (networkResponse.ok) {

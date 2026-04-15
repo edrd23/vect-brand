@@ -167,10 +167,10 @@ export default async function handler(req, res) {
   }
 
   // Validate required fields
-  if (!body.name || !body.email || !body.message) {
+  if (!body.name || !body.email || !body.message || !body.privacyConsent) {
     return res.status(422).json({
       success: false,
-      message: 'Missing required fields: name, email, message',
+      message: 'Missing required fields: name, email, message, or privacy consent.',
     });
   }
 
