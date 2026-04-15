@@ -146,6 +146,18 @@
     background: var(--vect-accent);
 }
 
+/* ═══════ SPACE PARTICLES BACKGROUND ═══════ */
+#vect-space-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+    background: var(--surface-bg); /* Sostituisce il bg del body, che diventerà trasparente se necessario (anche se il canvas ha sfondi neri naturali) */
+}
+
 /* ═══════ RESET & BASE ═══════ */
 * {
     margin: 0;
