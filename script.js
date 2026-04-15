@@ -634,6 +634,9 @@ function showToast(message, type = 'success') {
     }, 4000);
 }
 
+    // ═══════ MOBILE DETECTION ═══════
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+
     // ═══════ TEXT SCRAMBLE CLASS ═══════
     class TextScramble {
         constructor(el) {
@@ -694,13 +697,19 @@ function showToast(message, type = 'success') {
         [it, en].forEach(side => {
             if (!side) return;
             const text = side.innerText;
+            // Accessibility: set label on parent if not already set
+            if (!el.getAttribute('aria-label')) {
+                el.setAttribute('aria-label', text);
+            }
+            side.setAttribute('aria-hidden', 'true');
+            
             side.innerHTML = text.split('').map((char, i) => 
-                `<span class="char" style="transition-delay: ${i * 0.03}s">${char === ' ' ? '&nbsp;' : char}</span>`
+                `<span class="char-wrap"><span class="char" style="transition-delay: ${i * 0.025}s">${char === ' ' ? '&nbsp;' : char}</span></span>`
             ).join('');
         });
     };
 
-    document.querySelectorAll('.section-title').forEach(splitText);
+    document.querySelectorAll('.section-title, .section-label').forEach(splitText);
 
     // ═══════ BUTTON & NAV INTERACTORS ═══════
     const interactables = document.querySelectorAll('.btn, .nav-links a');
@@ -714,11 +723,12 @@ function showToast(message, type = 'success') {
         const scramblerEn = el.querySelector('.en-text') ? new TextScramble(el.querySelector('.en-text')) : null;
 
         el.addEventListener('mouseenter', () => {
+            if (isTouchDevice) return; // Skip on mobile
             if (scramblerIt) scramblerIt.setText(originalTextIt);
             if (scramblerEn) scramblerEn.setText(originalTextEn);
         });
 
-        if (el.classList.contains('btn')) {
+        if (el.classList.contains('btn') && !isTouchDevice) {
             el.addEventListener('mousemove', (e) => {
                 const rect = el.getBoundingClientRect();
                 const x = e.clientX - rect.left;
@@ -729,31 +739,34 @@ function showToast(message, type = 'success') {
         }
     });
 
-    // ═══════ MAGNETIC ENHANCEMENT ═══════
-    const magneticBtns = document.querySelectorAll('.btn');
-    magneticBtns.forEach(btn => {
-        btn.addEventListener('mousemove', (e) => {
-            const rect = btn.getBoundingClientRect();
-            const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
-            const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
-            btn.style.transform = `translate(${x}px, ${y}px)`;
-            const spans = btn.querySelectorAll('span');
-            spans.forEach(span => {
-                if (!span.classList.contains('it-text') && !span.classList.contains('en-text')) {
-                    span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-                }
+    // ═══════ MAGNETIC ENHANCEMENT (Desktop Only) ═══════
+    if (!isTouchDevice) {
+        const magneticBtns = document.querySelectorAll('.btn');
+        magneticBtns.forEach(btn => {
+            btn.addEventListener('mousemove', (e) => {
+                const rect = btn.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
+                const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
+                btn.style.transform = `translate(${x}px, ${y}px)`;
+                const spans = btn.querySelectorAll('span');
+                spans.forEach(span => {
+                    if (!span.classList.contains('it-text') && !span.classList.contains('en-text') && !span.classList.contains('char')) {
+                        span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                    }
+                });
+            });
+
+            btn.addEventListener('mouseleave', () => {
+                btn.style.transform = `translate(0px, 0px)`;
             });
         });
-
-        btn.addEventListener('mouseleave', () => {
-            btn.style.transform = `translate(0px, 0px)`;
-        });
-    });
+    }
 
     // ═══════ SECTION GLOW ═══════
     const titles = document.querySelectorAll('.section-title');
     titles.forEach(title => {
         title.addEventListener('mouseenter', () => {
+            if (isTouchDevice) return;
             title.style.textShadow = '0 0 15px rgba(255, 107, 26, 0.3)';
         });
         title.addEventListener('mouseleave', () => {
@@ -761,5 +774,6 @@ function showToast(message, type = 'success') {
         });
     });
 });
+
 
 
