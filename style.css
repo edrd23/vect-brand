@@ -53,6 +53,11 @@
     /* Spacing */
     --section-padding: 120px 0;
     --container-width: 1200px;
+
+    /* Glass & Glow — Tactical Overhaul */
+    --surface-glass: rgba(10, 10, 10, 0.7);
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --neon-glow: 0 0 15px rgba(255, 107, 26, 0.3);
 }
 
 /* ═══════ CUSTOM SCROLLBAR (TECH) ═══════ */
@@ -139,7 +144,24 @@ a {
 .btn-primary {
     background: var(--primary-ledger);
     color: var(--surface-lowest);
-    box-shadow: 0 0 20px rgba(255, 107, 26, 0.2);
+    box-shadow: 0 4px 15px rgba(255, 107, 26, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: 0.6s;
+}
+
+.btn-primary:hover::after {
+    left: 100%;
 }
 
 .btn-primary:hover {
@@ -221,14 +243,15 @@ nav {
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 20px 60px;
+    padding: 24px 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(5, 5, 5, 0.8);
-    backdrop-filter: blur(24px);
-    border-bottom: 1px solid var(--surface-highest);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background: var(--surface-glass);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border-glass);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 nav.scrolled {
@@ -1256,23 +1279,51 @@ body::after {
     }
 }
 
-/* ═══════ ANIMATIONS ═══════ */
+/* ── Snappy Reveal Core ── */
 .reveal {
-    opacity: 1;
-    /* Visible by default */
-    transform: none;
-    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Only hide if JS is ready - prevents "black screen" if JS fails/is slow */
-body.js-ready .reveal {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px) scale(0.98);
+    transition: 
+        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
 }
 
-body.js-ready .reveal.active {
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.reveal-item {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: 
+        opacity 0.3s cubic-bezier(0, 0, 0, 1),
+        transform 0.4s cubic-bezier(0, 0, 0, 1);
+}
+
+.reveal-item.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* ── Tactical Corner HUD Elements ── */
+.hud-corner {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border: 1px solid var(--vect-accent);
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+.hud-tl { top: 0; left: 0; border-right: none; border-bottom: none; }
+.hud-tr { top: 0; right: 0; border-left: none; border-bottom: none; }
+.hud-bl { bottom: 0; left: 0; border-right: none; border-top: none; }
+.hud-br { bottom: 0; right: 0; border-left: none; border-top: none; }
+
+.service-card {
+    position: relative; /* Ensure corners align */
 }
 
 /* ── Mobile UI Refinement ── */

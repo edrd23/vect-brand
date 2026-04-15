@@ -1,6 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-ready');
 
+    /* ═══════ SNAPPY REVEAL SYSTEM ═══════ */
+    const setupReveal = () => {
+        const observerOptions = {
+            threshold: 0.15,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    // Snappy sequence for children if needed
+                    if (entry.target.hasAttribute('data-reveal-group')) {
+                        entry.target.querySelectorAll('.reveal-item').forEach((item, index) => {
+                            setTimeout(() => item.classList.add('active'), index * 60);
+                        });
+                    }
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+    };
+
+    setupReveal();
+
     // ═══════ TURNSTILE STATE ═══════
     let turnstileVerified = false;
     let turnstileToken = '';

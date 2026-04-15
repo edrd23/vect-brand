@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://unpkg.com https://api.web3forms.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://api.web3forms.com https://vitals.vercel-insights.com;">
 
     <!-- ═══════ SEO ═══════ -->
     <title>VECT — RF Special Ops | RF Coordinator & Spectrum Engineering</title>
@@ -23,6 +25,10 @@
     <meta property="og:description"
         content="Servizio RF boutique per produzioni mission-critical. Noleggio Sennheiser Spectera, coordinamento frequenze e ingegneria dello spettro. Zero dropouts. Maximum uptime.">
     <meta property="og:image" content="https://www.vect-rf.it/og-image.png">
+    <meta property="og:video" content="https://www.vect-rf.it/video/spectera-demo.mp4">
+    <meta property="og:video:type" content="video/mp4">
+    <meta property="og:video:width" content="1920">
+    <meta property="og:video:height" content="1080">
     <meta property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_GB">
     <meta property="og:site_name" content="VECT RF Special Ops">
@@ -56,6 +62,42 @@
       ]
     }
     </script>
+    <!-- ═══════ FAQ SCHEMA ═══════ -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "Cos’è un RF Coordinator e perché serve in un grande evento?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Un RF Coordinator (Coordinatore Frequenze) è il tecnico specializzato che analizza, pianifica e gestisce lo spettro radio per evitare interferenze tra microfoni wireless, IEM e comunicazioni."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Quali sono i vantaggi del noleggiare Sennheiser Spectera con VECT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sennheiser Spectera è la tecnologia WMAS a banda larga che permette di gestire decine di canali riducendo le antenne sul palco, con massima stabilità e zero dropouts."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Come funziona l’Ingegneria Predittiva contro i Dropouts?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Analizziamo lo spettro in anticipo calcolando le intermodulazioni via software prima dello show, blindando il palco da interferenze ed eliminando lo stress."
+        }
+      }, {
+        "@type": "Question",
+        "name": "VECT opera anche all’estero per tour e broadcast?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Certamente. Operiamo Worldwide coordinando le pratiche di assegnazione dello spettro radio in qualsiasi Paese con standard di sicurezza internazionali."
+        }
+      }]
+    }
+    </script>
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="style.css?v=1.1">
 
@@ -72,7 +114,8 @@
     <nav>
         <div class="nav-logo">
             <a href="#">
-                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                    <title>VECT Graphic</title>
                     <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
                         fill="#F5F5F5" />
                     <path
@@ -106,10 +149,12 @@
         </div>
     </nav>
 
-    <section id="home" class="hero">
+    <section id="hero" class="hero reveal" data-reveal>
         <!-- TECH BACKGROUND VISUAL -->
         <div class="hero-bg-visual">
-            <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+            <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"
+                role="img">
+                <title>VECT Graphic</title>
                 <defs>
                     <linearGradient id="waveGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                         <stop offset="0%" style="stop-color:transparent;stop-opacity:0" />
@@ -132,7 +177,8 @@
         <div class="container hero-container">
             <div class="hero-content reveal">
                 <div class="hero-logo-box">
-                    <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <title>VECT Graphic</title>
                         <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
                             fill="#F5F5F5" />
                         <path
@@ -177,15 +223,15 @@
     <div class="divider"></div>
 
     <!-- ═══════ SERVICES ═══════ -->
-    <section id="services" class="container">
-        <div class="reveal">
-            <span class="section-label">01 — <span class="it-text">Servizi</span><span
+    <section id="services" class="reveal" data-reveal-group>
+        <div class="container">
+            <span class="section-label reveal-item">01 — <span class="it-text">Servizi</span><span
                     class="en-text">Services</span></span>
-            <h2 class="section-title">
+            <h2 class="section-title reveal-item">
                 <span class="it-text">Soluzioni Radiofrequenza B2B</span>
                 <span class="en-text">B2B RF Solutions</span>
             </h2>
-            <p class="section-desc">
+            <p class="section-desc reveal-item">
                 <span class="it-text">Utilizziamo la tecnologia WMAS per garantire stabilità e scalabilità senza
                     precedenti in ogni scenario operativo.</span>
                 <span class="en-text">We leverage WMAS technology to ensure unprecedented stability and scalability in
@@ -194,7 +240,7 @@
         </div>
 
         <!-- SPECTERA HIGHLIGHT -->
-        <div class="spectera-banner reveal">
+        <div class="spectera-banner reveal" data-reveal>
             <div class="banner-content">
                 <span class="banner-badge">Sennheiser Spectera — WMAS</span>
                 <h3 class="banner-title">
@@ -293,7 +339,9 @@
         </div>
 
         <div class="services-grid">
-            <div class="service-card reveal">
+            <div class="service-card reveal-item" data-reveal>
+                <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+                <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
                 <div class="service-icon">📦</div>
                 <h3 class="service-title">Smart Rental</h3>
                 <p class="service-desc">
@@ -303,7 +351,9 @@
                         immediate deployment in tours and broadcast.</span>
                 </p>
             </div>
-            <div class="service-card reveal" style="border-color: var(--vect-accent);">
+            <div class="service-card reveal-item" data-reveal style="border-color: var(--vect-accent);">
+                <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+                <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
                 <div class="service-icon">⚡</div>
                 <h3 class="service-title">Tactical Ops</h3>
                 <p class="service-desc">
@@ -313,7 +363,9 @@
                         coordination, and real-time spectrum monitoring.</span>
                 </p>
             </div>
-            <div class="service-card reveal">
+            <div class="service-card reveal-item" data-reveal>
+                <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+                <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
                 <div class="service-icon">📡</div>
                 <h3 class="service-title">Strategic Planning</h3>
                 <p class="service-desc">
@@ -326,7 +378,7 @@
         </div>
 
         <!-- THE ADVANTAGE SECTION (NEW) -->
-        <div class="advantage-section reveal">
+        <div class="advantage-section reveal" data-reveal>
             <h3 class="mono-label">SPECIFICATIONS // THE VECT ADVANTAGE</h3>
             <div class="advantage-grid">
                 <div class="advantage-item">
@@ -349,7 +401,9 @@
                 </div>
                 <div class="advantage-item">
                     <h4 class="mono">GLOBAL COMPLIANCE</h4>
-                    <p><span class="it-text">Esperti nelle normative WMAS mondiali: FCC, ETSI EN 303 978, MIC, ANATEL, ACMA e AGCom.</span><span class="en-text">Experts in global WMAS regulations: FCC, ETSI EN 303 978, MIC, ANATEL, ACMA and AGCom.</span></p>
+                    <p><span class="it-text">Esperti nelle normative WMAS mondiali: FCC, ETSI EN 303 978, MIC, ANATEL,
+                            ACMA e AGCom.</span><span class="en-text">Experts in global WMAS regulations: FCC, ETSI EN
+                            303 978, MIC, ANATEL, ACMA and AGCom.</span></p>
                 </div>
             </div>
         </div>
@@ -358,7 +412,7 @@
     <div class="divider"></div>
 
     <!-- ═══════ GLOBAL RF REGULATORY RADAR ═══════ -->
-    <section id="radar" class="radar-section reveal">
+    <section id="radar" class="radar-section reveal" data-reveal>
         <div class="radar-section-bg">
             <div class="radar-glow-orb radar-orb-1"></div>
             <div class="radar-glow-orb radar-orb-2"></div>
@@ -367,24 +421,29 @@
             <!-- Header -->
             <div class="radar-header">
                 <div class="radar-header-left">
-                    <span class="section-label">02 — <span class="it-text">Radar Normativo</span><span class="en-text">Regulatory Radar</span></span>
+                    <span class="section-label">02 — <span class="it-text">Radar Normativo</span><span
+                            class="en-text">Regulatory Radar</span></span>
                     <h2 class="section-title">
                         <span class="it-text">Spettro Globale.<br>Sotto Controllo.</span>
                         <span class="en-text">Global Spectrum.<br>Under Control.</span>
                     </h2>
                     <p class="section-desc" style="max-width:480px;">
-                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
-                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography. Select a region to view frequency data.</span>
+                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica
+                            operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
+                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography.
+                            Select a region to view frequency data.</span>
                     </p>
                 </div>
                 <div class="radar-live-stats">
                     <div class="radar-stat-block">
                         <span class="radar-stat-value">6</span>
-                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span class="en-text">Regions Monitored</span></span>
+                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span
+                                class="en-text">Regions Monitored</span></span>
                     </div>
                     <div class="radar-stat-block">
                         <span class="radar-stat-value">24/7</span>
-                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span class="en-text">System Uptime</span></span>
+                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span
+                                class="en-text">System Uptime</span></span>
                     </div>
                     <div class="radar-stat-block">
                         <span class="radar-stat-value" id="radar-live-clock">--:--:--</span>
@@ -445,11 +504,15 @@
                         <span class="mono spectrum-freq-label">694 MHz</span>
                     </div>
                     <div class="radar-status-row">
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span>
+                        </div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span>
+                        </div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span>
+                        </div>
                         <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span>
+                        </div>
                     </div>
                 </div>
 
@@ -457,7 +520,9 @@
                 <div class="radar-info-panel">
                     <div class="rip-header">
                         <div>
-                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS · SPECTERA DATA</div>
+                            <div class="mono"
+                                style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS ·
+                                SPECTERA DATA</div>
                             <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
                         </div>
                         <div class="rip-status-chip">
@@ -469,30 +534,39 @@
                         <div class="rip-idle">
                             <div class="rip-idle-icon">&#9678;</div>
                             <p class="mono rip-idle-msg">
-                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
-                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
+                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I
+                                    DATI WMAS / SPECTERA</span>
+                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS /
+                                    SPECTERA DATA</span>
                             </p>
                         </div>
                     </div>
                     <div class="rip-bars" id="rip-bars" style="display:none;">
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
+                            <div class="rip-bar-bg">
+                                <div class="rip-bar-fill" id="bar-compliance"></div>
+                            </div>
                             <span class="rip-bar-val mono" id="val-compliance">-</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
+                            <div class="rip-bar-bg">
+                                <div class="rip-bar-fill" id="bar-quality"></div>
+                            </div>
                             <span class="rip-bar-val mono" id="val-quality">-</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
+                            <div class="rip-bar-bg">
+                                <div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div>
+                            </div>
                             <span class="rip-bar-val mono" id="val-congestion">-</span>
                         </div>
                     </div>
                     <div class="rip-footer">
-                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA
+                            · VECT RF INTEL v2.4</span>
                     </div>
                 </div>
             </div>
@@ -501,9 +575,9 @@
 
 
     <!-- ═══════ ABOUT ═══════ -->
-    <section id="about" class="container">
+    <section id="about" class="container reveal" data-reveal-group>
         <div class="about-grid">
-            <div class="reveal">
+            <div class="reveal-item">
                 <span class="section-label">03 — <span class="it-text">Chi Siamo</span><span
                         class="en-text">About</span></span>
                 <h2 class="section-title">
@@ -527,7 +601,7 @@
                 </div>
             </div>
             <!-- SCANNIGN UI DINAMICA -->
-            <div class="about-visual reveal rf-scanner-ui">
+            <div class="about-visual reveal-item rf-scanner-ui">
                 <div class="scanner-header mono">
                     <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">SCANSIONE
                             ATTIVA</span><span class="en-text">LIVE SCAN</span></div>
@@ -546,7 +620,8 @@
                         <div class="grid-line-v" style="left: 75%"></div>
                     </div>
 
-                    <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none">
+                    <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none" role="img">
+                        <title>VECT Graphic</title>
                         <defs>
                             <linearGradient id="peakGrad" x1="0" y1="0" x2="0" y2="1">
                                 <stop offset="0%" stop-color="var(--vect-accent)" stop-opacity="0.8" />
@@ -575,8 +650,8 @@
     <div class="divider"></div>
 
     <!-- ═══════ REFERENCES ═══════ -->
-    <section id="references" class="container">
-        <div class="reveal">
+    <section id="references" class="container reveal" data-reveal-group>
+        <div class="reveal-item">
             <span class="section-label">04 — <span class="it-text">Referenze</span><span
                     class="en-text">References</span></span>
             <h2 class="section-title">
@@ -586,9 +661,12 @@
         </div>
 
         <div class="services-grid" style="margin-top: 40px;">
-            <div class="service-card reveal">
+            <div class="service-card reveal-item">
+                <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
+                <div class="hud-corner hud-bl"></div><div class="hud-corner hud-br"></div>
                 <div class="mission-telemetry">
-                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <title>VECT Graphic</title>
                         <rect x="0" y="4" width="20" height="12" fill="var(--vect-accent)" opacity="0.2" />
                         <rect x="25" y="8" width="15" height="4" fill="var(--vect-ash)" />
                         <rect x="45" y="6" width="30" height="8" fill="var(--vect-accent)" />
@@ -605,7 +683,8 @@
             </div>
             <div class="service-card reveal">
                 <div class="mission-telemetry">
-                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 100 20" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <title>VECT Graphic</title>
                         <rect x="0" y="4" width="40" height="2" fill="var(--vect-accent)" />
                         <rect x="0" y="8" width="30" height="2" fill="var(--vect-accent)" opacity="0.5" />
                         <rect x="0" y="12" width="20" height="2" fill="var(--vect-accent)" opacity="0.2" />
@@ -620,7 +699,8 @@
             </div>
             <div class="service-card reveal">
                 <div class="mission-telemetry">
-                    <svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg">
+                    <svg viewBox="0 0 100 30" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <title>VECT Graphic</title>
                         <circle cx="10" cy="15" r="5" fill="var(--vect-accent)" />
                         <circle cx="25" cy="15" r="3" fill="var(--vect-accent)" opacity="0.6" />
                         <circle cx="37" cy="15" r="2" fill="var(--vect-accent)" opacity="0.3" />
@@ -640,9 +720,9 @@
     <div class="divider"></div>
 
     <!-- ═══════ CONTACT ═══════ -->
-    <section id="contact" class="container">
+    <section id="contact" class="container reveal" data-reveal-group>
         <div class="contact-grid">
-            <div class="reveal">
+            <div class="reveal-item">
                 <span class="section-label">05 — <span class="it-text">Contatti</span><span
                         class="en-text">Contact</span></span>
                 <h2 class="section-title">
@@ -669,17 +749,14 @@
                     <li class="contact-info-item">
                         <div class="info-label"><span class="it-text">Operatività</span><span
                                 class="en-text">Coverage</span></div>
-                        <div class="info-value"><span class="it-text">Italia + Worldwide</span><span class="en-text">Italy + Worldwide</span></div>
+                        <div class="info-value"><span class="it-text">Italia + Worldwide</span><span
+                                class="en-text">Italy + Worldwide</span></div>
                     </li>
                 </ul>
             </div>
 
             <div class="reveal">
                 <form id="contactForm">
-                    <input type="hidden" name="access_key" value="4cc1583d-1036-49ee-ba64-38637fbb21b9">
-                    <input type="hidden" name="subject" value="Nuova richiesta da VECT [WEB]">
-                    <input type="hidden" name="from_name" value="VECT Website">
-                    <input type="checkbox" name="botcheck" class="hidden" style="display:none">
                     <div class="form-group">
                         <label for="name"><span class="it-text">Nome / Società</span><span class="en-text">Name /
                                 Company</span></label>
@@ -707,7 +784,17 @@
                                 and consent to data processing for managing this request.</span>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+
+                    <!-- ═══════ CLOUDFLARE TURNSTILE ═══════ -->
+                    <div class="form-group" style="margin-bottom: 24px;">
+                        <div class="cf-turnstile" data-sitekey="0x4AAAAAAB8wKR0M4C1gq5WQ" data-theme="dark"
+                            data-size="normal" data-callback="onTurnstileSuccess"
+                            data-expired-callback="onTurnstileExpired" data-error-callback="onTurnstileError">
+                        </div>
+                        <input type="hidden" id="turnstileToken" name="cf_turnstile">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn" disabled>
                         <span class="it-text">Invia Richiesta</span>
                         <span class="en-text">Send Request</span>
                     </button>
@@ -717,66 +804,80 @@
     </section>
 
     <!-- ═══════ FAQ SECTION ═══════ -->
-    <section id="faq" class="faq-section" style="padding: 80px 0; background: #0c0c0c; border-top: 1px solid rgba(255,107,26,0.1);">
+    <section id="faq" class="faq-section"
+        style="padding: 80px 0; background: #0c0c0c; border-top: 1px solid rgba(255,107,26,0.1);">
         <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
-            <div class="section-header reveal" style="text-align: center; margin-bottom: 50px;">
-                <span class="subtitle" style="color: var(--vect-accent); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;">FAQ</span>
+            <div class="section-header reveal-item" style="text-align: center; margin-bottom: 50px;">
+                <span class="subtitle"
+                    style="color: var(--vect-accent); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;">FAQ</span>
                 <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin-top: 5px;">
                     <span class="it-text">Domande Frequenti</span>
                     <span class="en-text">Frequently Asked Questions</span>
                 </h2>
             </div>
 
-            <div class="faq-list reveal">
+            <div class="faq-list reveal-item">
                 <!-- FAQ 1 -->
-                <details style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; cursor: pointer;">
-                    <summary style="font-size: 16px; font-weight: 600; color: #f5f5f5; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                <details class="faq-item">
+                    <summary class="faq-summary">
                         <span class="it-text">Cos’è un RF Coordinator e perché serve in un grande evento?</span>
                         <span class="en-text">What is an RF Coordinator and why you need it?</span>
-                        <span class="arrow" style="color: var(--vect-accent); transition: transform 0.3s; font-weight: bold;">↓</span>
+                        <span class="arrow">↓</span>
                     </summary>
-                    <div style="margin-top: 15px; color: var(--vect-silver); font-size: 14px; line-height: 1.6;">
-                        <span class="it-text">Un <strong>RF Coordinator</strong> (Coordinatore Frequenze) è il tecnico specializzato che analizza, pianifica e gestisce lo spettro radio per evitare interferenze tra microfoni wireless, IEM e comunicazioni.</span>
-                        <span class="en-text">An <strong>RF Coordinator</strong> is the expert who manages the radio spectrum to prevent wireless mics, IEMs, and intercoms from interfering.</span>
+                    <div class="faq-content">
+                        <span class="it-text">Un <strong>RF Coordinator</strong> (Coordinatore Frequenze) è il tecnico
+                            specializzato che analizza, pianifica e gestisce lo spettro radio per evitare interferenze
+                            tra microfoni wireless, IEM e comunicazioni.</span>
+                        <span class="en-text">An <strong>RF Coordinator</strong> is the expert who manages the radio
+                            spectrum to prevent wireless mics, IEMs, and intercoms from interfering.</span>
                     </div>
                 </details>
 
                 <!-- FAQ 2 -->
-                <details style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; cursor: pointer;">
-                    <summary style="font-size: 16px; font-weight: 600; color: #f5f5f5; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                <details class="faq-item">
+                    <summary class="faq-summary">
                         <span class="it-text">Quali sono i vantaggi del noleggiare Sennheiser Spectera con VECT?</span>
                         <span class="en-text">What are the benefits of renting Sennheiser Spectera?</span>
-                        <span class="arrow" style="color: var(--vect-accent); font-weight: bold;">↓</span>
+                        <span class="arrow">↓</span>
                     </summary>
-                    <div style="margin-top: 15px; color: var(--vect-silver); font-size: 14px; line-height: 1.6;">
-                        <span class="it-text"><strong>Sennheiser Spectera</strong> è la tecnologia WMAS a banda larga che permette di gestire decine di canali riducendo le antenne sul palco, con massima stabilità e zero dropouts.</span>
-                        <span class="en-text"><strong>Sennheiser Spectera</strong> is the wideband WMAS tech allowing dozens of channels with fewer antennas on stage and maximum stability.</span>
+                    <div class="faq-content">
+                        <span class="it-text"><strong>Sennheiser Spectera</strong> è la tecnologia WMAS a banda larga
+                            che permette di gestire decine di canali riducendo le antenne sul palco, con massima
+                            stabilità e zero dropouts.</span>
+                        <span class="en-text"><strong>Sennheiser Spectera</strong> is the wideband WMAS tech allowing
+                            dozens of channels with fewer antennas on stage and maximum stability.</span>
                     </div>
                 </details>
 
                 <!-- FAQ 3 -->
-                <details style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; cursor: pointer;">
-                    <summary style="font-size: 16px; font-weight: 600; color: #f5f5f5; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                <details class="faq-item">
+                    <summary class="faq-summary">
                         <span class="it-text">Come funziona l’Ingegneria Predittiva contro i Dropouts?</span>
                         <span class="en-text">How does Predictive Engineering prevent Dropouts?</span>
-                        <span class="arrow" style="color: var(--vect-accent); font-weight: bold;">↓</span>
+                        <span class="arrow">↓</span>
                     </summary>
-                    <div style="margin-top: 15px; color: var(--vect-silver); font-size: 14px; line-height: 1.6;">
-                        <span class="it-text">Analizziamo lo spettro in anticipo calcolando le intermodulazioni via software prima dello show, blindando il palco da interferenze ed eliminando lo stress.</span>
-                        <span class="en-text">We analyze spectrum in advance, calculate intermodulations via software before the show to shield stage from interferences and eliminate stress.</span>
+                    <div class="faq-content">
+                        <span class="it-text">Analizziamo lo spettro in anticipo calcolando le intermodulazioni via
+                            software prima dello show, blindando il palco da interferenze ed eliminando lo
+                            stress.</span>
+                        <span class="en-text">We analyze spectrum in advance, calculate intermodulations via software
+                            before the show to shield stage from interferences and eliminate stress.</span>
                     </div>
                 </details>
 
                 <!-- FAQ 4 -->
-                <details style="border-bottom: 1px solid rgba(255,255,255,0.05); padding: 20px 0; cursor: pointer;">
-                    <summary style="font-size: 16px; font-weight: 600; color: #f5f5f5; list-style: none; display: flex; justify-content: space-between; align-items: center;">
+                <details class="faq-item">
+                    <summary class="faq-summary">
                         <span class="it-text">VECT opera anche all’estero per tour e broadcast?</span>
                         <span class="en-text">Does VECT operate abroad for tour/broadcast?</span>
-                        <span class="arrow" style="color: var(--vect-accent); font-weight: bold;">↓</span>
+                        <span class="arrow">↓</span>
                     </summary>
-                    <div style="margin-top: 15px; color: var(--vect-silver); font-size: 14px; line-height: 1.6;">
-                        <span class="it-text">Certamente. Operiamo <strong>Worldwide</strong> coordinando le pratiche di assegnazione dello spettro radio in qualsiasi Paese con standard di sicurezza internazionali.</span>
-                        <span class="en-text">Absolutely. We operate <strong>Worldwide</strong>, coordinating spectrum allocation bureaucracy anywhere with global safety standards.</span>
+                    <div class="faq-content">
+                        <span class="it-text">Certamente. Operiamo <strong>Worldwide</strong> coordinando le pratiche di
+                            assegnazione dello spettro radio in qualsiasi Paese con standard di sicurezza
+                            internazionali.</span>
+                        <span class="en-text">Absolutely. We operate <strong>Worldwide</strong>, coordinating spectrum
+                            allocation bureaucracy anywhere with global safety standards.</span>
                     </div>
                 </details>
             </div>
@@ -784,15 +885,31 @@
     </section>
 
     <style>
-        details[open] .arrow { transform: rotate(180deg); }
-        details summary::-webkit-details-marker { display: none; }
+    animation: radarRotate 2.5s linear infinite;
+    z-index: 3;
+    opacity: 0.9;
+}
+
+@keyframes radarRotate {
+    0% { transform: rotate(0deg); opacity: 0.8; }
+    50% { opacity: 1; }
+    100% { transform: rotate(360deg); opacity: 0.8; }
+}
+        details[open] .arrow {
+            transform: rotate(180deg);
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
+        }
     </style>
 
 
     <footer>
         <div class="container">
             <div class="footer-logo">
-                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg" role="img">
+                    <title>VECT Graphic</title>
                     <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
                         fill="#F5F5F5" />
                     <path
@@ -806,25 +923,36 @@
             </div>
             <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved. <span
                     style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="privacy.html"
-                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Privacy Policy</a></p>
+                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Privacy Policy</a>
+                <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="sitemap.xml"
+                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sitemap</a>
+            </p>
         </div>
     </footer>
+
+    <!-- ═══════ CLOUDFLARE TURNSTILE ═══════ -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
     <script src="script.js"></script>
 
     <!-- ═══════ GDPR PRIVACY NOTICE ═══════ -->
     <div id="privacy-notice" role="complementary" aria-label="Informativa privacy" style="
-        position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
-        background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
-        border-top: 1px solid rgba(255,107,26,0.2);
-        padding: 16px 24px; display: flex; align-items: center;
+        position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 9999;
+        background: var(--surface-glass); backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-glass);
+        padding: 20px 30px; display: flex; align-items: center;
+        border-radius: 8px;
         justify-content: space-between; gap: 20px; flex-wrap: wrap;
-        font-size: 13px; color: #999; font-family: inherit;
-        transform: translateY(100%); transition: transform 0.4s ease;
+        font-size: 13px; color: #ccc; font-family: var(--font-mono);
+        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+        transform: translateY(120%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     ">
         <p style="margin:0; max-width: 700px; line-height: 1.6;">
-            Questo sito utilizza <strong style="color:#eee">localStorage tecnico</strong> esclusivamente per ricordare la tua preferenza di lingua. Nessun cookie di tracciamento. Nessun dato di profilazione.
-            <a href="privacy.html" style="color:#FF6B1A; text-decoration:underline; margin-left:6px;">Privacy Policy completa &rarr;</a>
+            Questo sito utilizza <strong style="color:#eee">localStorage tecnico</strong> esclusivamente per ricordare
+            la tua preferenza di lingua. Nessun cookie di tracciamento. Nessun dato di profilazione.
+            <a href="privacy.html" style="color:#FF6B1A; text-decoration:underline; margin-left:6px;">Privacy Policy
+                completa &rarr;</a>
         </p>
         <button id="privacy-notice-close" style="
             flex-shrink:0; background: #FF6B1A; color: #000; border: none;
@@ -834,16 +962,35 @@
         " aria-label="Chiudi avviso privacy">OK, capito</button>
     </div>
     <script>
-    (function() {
-        var notice = document.getElementById('privacy-notice');
-        if (!localStorage.getItem('vect_privacy_ack')) {
-            setTimeout(function() { notice.style.transform = 'translateY(0)'; }, 600);
+        (function () {
+            var notice = document.getElementById('privacy-notice');
+            var closeBtn = document.getElementById('privacy-notice-close');
+            if (notice && closeBtn) {
+                if (!localStorage.getItem('vect_privacy_ack')) {
+                    setTimeout(function () { notice.style.transform = 'translateY(0)'; }, 600);
+                } else {
+                    notice.style.display = 'none';
+                }
+                closeBtn.addEventListener('click', function () {
+                    notice.style.transform = 'translateY(100%)';
+                    localStorage.setItem('vect_privacy_ack', '1');
+                    setTimeout(function () { notice.style.display = 'none'; }, 300);
+                });
+            }
+        })();
+    </script>
+
+    <!-- ═══════ SERVICE WORKER ═══════ -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('/sw.js').then(function (registration) {
+                    console.log('SW registered with scope:', registration.scope);
+                }, function (err) {
+                    console.log('SW registration failed:', err);
+                });
+            });
         }
-        document.getElementById('privacy-notice-close').addEventListener('click', function() {
-            notice.style.transform = 'translateY(100%)';
-            localStorage.setItem('vect_privacy_ack', '1');
-        });
-    })();
     </script>
 
 </body>
