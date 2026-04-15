@@ -634,4 +634,45 @@ function showToast(message, type = 'success') {
     }, 4000);
 }
 
+    // ═══════ MAGNETIC BUTTONS (ReactBits Port) ═══════
+    const magneticBtns = document.querySelectorAll('.btn');
+    
+    magneticBtns.forEach(btn => {
+        btn.addEventListener('mousemove', (e) => {
+            const rect = btn.getBoundingClientRect();
+            const x = (e.clientX - rect.left - rect.width / 2) * 0.35;
+            const y = (e.clientY - rect.top - rect.height / 2) * 0.35;
+            
+            btn.style.transform = `translate(${x}px, ${y}px)`;
+            
+            const spans = btn.querySelectorAll('span');
+            spans.forEach(span => {
+                span.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+                span.style.display = 'inline-block';
+            });
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            btn.style.transform = `translate(0px, 0px)`;
+            const spans = btn.querySelectorAll('span');
+            spans.forEach(span => {
+                span.style.transform = `translate(0px, 0px)`;
+            });
+        });
+    });
+
+    // ═══════ SECTION GLOW ═══════
+    const titles = document.querySelectorAll('.section-title');
+    titles.forEach(title => {
+        title.style.transition = 'text-shadow 0.4s ease, letter-spacing 0.4s ease';
+        title.addEventListener('mouseenter', () => {
+            title.style.textShadow = '0 0 15px rgba(255, 107, 26, 0.3)';
+            title.style.letterSpacing = '0.02em';
+        });
+        title.addEventListener('mouseleave', () => {
+            title.style.textShadow = 'none';
+            title.style.letterSpacing = 'normal';
+        });
+    });
 });
+

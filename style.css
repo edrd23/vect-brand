@@ -397,18 +397,20 @@ section {
 .section-label {
     display: block;
     font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 4px;
+    font-size: 10px;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--vect-accent);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    opacity: 0.85;
 }
 
 .section-title {
-    font-size: clamp(32px, 5vw, 56px);
+    font-size: clamp(28px, 4vw, 42px);
     font-weight: 800;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     line-height: 1.1;
+    letter-spacing: -0.02em;
 }
 
 .section-desc {
@@ -813,7 +815,7 @@ section {
 .about-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 40px;
     align-items: center;
 }
 
@@ -1340,7 +1342,7 @@ body::after {
 
     /* Hero */
     section {
-        padding: 80px 0;
+        padding: 60px 0;
     }
 
     .hero {
@@ -1650,7 +1652,7 @@ body::after {
 
 .radar-section {
     background: #050505;
-    padding: 100px 0 80px;
+    padding: 60px 0;
     position: relative;
     overflow: hidden;
 }
@@ -1696,7 +1698,7 @@ body::after {
     justify-content: space-between;
     align-items: flex-end;
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 30px;
 }
 
 .radar-live-stats {
