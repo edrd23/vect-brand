@@ -181,7 +181,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx2.fillStyle = `rgba(${r},${g},26,${alpha})`;
                 ctx2.fillRect(i * binW, H - barH, binW - 1, barH);
             });
-        });
         };
 
 let specInterval = setInterval(drawSpectrum, 80);
@@ -366,8 +365,8 @@ radarHotspots.forEach(btn => {
 });
 
 // ═══════ TURNSTILE STATE ═══════
-let turnstileVerified = false;
-let turnstileToken = '';
+turnstileVerified = false;
+turnstileToken = '';
 
 // Global callbacks for Turnstile (must be on window)
 window.onTurnstileSuccess = function (token) {
