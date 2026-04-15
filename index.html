@@ -167,9 +167,7 @@
                 <path class="spectrum-wave-fast" d="M0 200 Q 250 300 500 200 T 1000 200" stroke="var(--vect-accent)"
                     fill="none" stroke-width="0.5" stroke-dasharray="2,10" />
                 <g class="telemetry-nodes">
-                    <circle cx="200" cy="150" r="2" fill="var(--vect-accent)" class="pulse" />
-                    <circle cx="450" cy="250" r="2" fill="var(--vect-accent)" class="pulse" />
-                    <circle cx="800" cy="180" r="2" fill="var(--vect-accent)" class="pulse" />
+                    <path d="M700 80 L900 120" stroke="rgba(255,107,26,0.5)" stroke-width="0.5" stroke-dasharray="10 5" />
                 </g>
             </svg>
         </div>
@@ -221,6 +219,23 @@
     </section>
 
     <div class="divider"></div>
+
+    <!-- ═══════ TACTICAL BRIEFING (Caveman Mode) ═══════ -->
+    <section id="brevity" class="brevity-section container reveal" data-reveal>
+        <div class="brevity-terminal">
+            <div class="term-header">
+                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
+                <span class="mono term-title">OPERATIONAL_LOG_v3.0</span>
+            </div>
+            <div class="term-body mono">
+                <div class="log-line">> <span class="it-text">SPETTRO RF: PULITO.</span><span class="en-text">RF SPECTRUM: CLEAR.</span></div>
+                <div class="log-line">> <span class="it-text">INTERFERENZE: ZERO.</span><span class="en-text">INTERFERENCE: ZERO.</span></div>
+                <div class="log-line">> <span class="it-text">SPECTERA: LIVE. 64CH.</span><span class="en-text">SPECTERA: LIVE. 64CH.</span></div>
+                <div class="log-line">> <span class="it-text">MISSIONE: SUCCESS.</span><span class="en-text">MISSION: SUCCESS.</span></div>
+                <div class="log-cursor"></div>
+            </div>
+        </div>
+    </section>
 
     <!-- ═══════ SERVICES ═══════ -->
     <section id="services" class="reveal" data-reveal-group>
@@ -804,18 +819,15 @@
     </section>
 
     <!-- ═══════ FAQ SECTION ═══════ -->
-    <section id="faq" class="faq-section"
-        style="padding: 80px 0; background: #0c0c0c; border-top: 1px solid rgba(255,107,26,0.1);">
-        <div class="container" style="max-width: 800px; margin: 0 auto; padding: 0 20px;">
+    <section id="faq" class="faq-section">
+        <div class="container faq-container">
             <div class="section-header reveal-item" style="text-align: center; margin-bottom: 50px;">
-                <span class="subtitle"
-                    style="color: var(--vect-accent); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 700;">FAQ</span>
-                <h2 style="font-size: 32px; font-weight: 800; color: #fff; margin-top: 5px;">
+                <span class="subtitle section-subtitle">FAQ</span>
+                <h2 class="section-title">
                     <span class="it-text">Domande Frequenti</span>
                     <span class="en-text">Frequently Asked Questions</span>
                 </h2>
             </div>
-
             <div class="faq-list reveal-item">
                 <!-- FAQ 1 -->
                 <details class="faq-item">
@@ -885,22 +897,16 @@
     </section>
 
     <style>
-    animation: radarRotate 2.5s linear infinite;
-    z-index: 3;
-    opacity: 0.9;
-}
-
-@keyframes radarRotate {
-    0% { transform: rotate(0deg); opacity: 0.8; }
-    50% { opacity: 1; }
-    100% { transform: rotate(360deg); opacity: 0.8; }
-}
-        details[open] .arrow {
-            transform: rotate(180deg);
+        .radar-sweep-arm {
+            animation: radarRotate 2.5s linear infinite;
+            z-index: 3;
+            opacity: 0.9;
         }
 
-        details summary::-webkit-details-marker {
-            display: none;
+        @keyframes radarRotate {
+            0% { transform: rotate(0deg); opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { transform: rotate(360deg); opacity: 0.8; }
         }
     </style>
 

@@ -21,8 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, observerOptions);
-
-        document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('[data-reveal], [data-reveal-group]').forEach(el => revealObserver.observe(el));
     };
 
     setupReveal();
