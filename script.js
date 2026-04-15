@@ -455,11 +455,6 @@ if (contactForm) {
         // Add Turnstile token
         object['turnstile_token'] = turnstileToken;
 
-        // Hidden submission details
-        object['access_key'] = '4cc1583d-1036-49ee-ba64-38637fbb21b9';
-        object['subject'] = 'Nuova richiesta da VECT [WEB]';
-        object['from_name'] = 'VECT Website';
-
         const json = JSON.stringify(object);
 
         try {
