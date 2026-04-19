@@ -97,6 +97,7 @@
       }]
     }
     </script>
+    <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="style.css?v=1.1">
     <script src="particles.js" defer></script>
@@ -152,7 +153,7 @@
         </div>
     </nav>
 
-    <section id="hero" class="hero reveal" data-reveal>
+    <section id="hero" class="hero reveal spotlight-container" data-reveal>
         <!-- TECH BACKGROUND VISUAL -->
         <div class="hero-bg-visual">
             <svg viewBox="0 0 1000 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +192,7 @@
                         <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
                     </svg>
                 </div>
-                <h1>
+                <h1 class="shiny-text">
                     <span class="it-text">Elite RF Operations.</span>
                     <span class="en-text">Elite RF Operations.</span>
                 </h1>
@@ -221,23 +222,7 @@
         </div>
     </section>
 
-    <div class="divider"></div>
 
-    <!-- ═══════ TACTICAL BRIEFING (Caveman Mode) ═══════ -->
-    <section id="brevity" class="brevity-section container reveal" data-reveal>
-        <div class="brevity-terminal">
-            <div class="term-header">
-                <span class="term-dot"></span><span class="term-dot"></span><span class="term-dot"></span>
-            </div>
-            <div class="term-body mono">
-                <div class="log-line">> <span class="it-text">SPETTRO RF: PULITO.</span><span class="en-text">RF SPECTRUM: CLEAR.</span></div>
-                <div class="log-line">> <span class="it-text">INTERFERENZE: ZERO.</span><span class="en-text">INTERFERENCE: ZERO.</span></div>
-                <div class="log-line">> <span class="it-text">SPECTERA: LIVE. 64CH.</span><span class="en-text">SPECTERA: LIVE. 64CH.</span></div>
-                <div class="log-line">> <span class="it-text">MISSIONE: SUCCESS.</span><span class="en-text">MISSION: SUCCESS.</span></div>
-                <div class="log-cursor"></div>
-            </div>
-        </div>
-    </section>
 
     <!-- ═══════ SERVICES ═══════ -->
     <section id="services" class="reveal" data-reveal-group>
@@ -274,7 +259,7 @@
                 </p>
 
                 <!-- STAT PILLS -->
-                <div class="spectera-stats">
+                <div class="spectera-stats reveal-premium">
                     <div class="stat-pill">
                         <span class="stat-value">0.7<small>ms</small></span>
                         <span class="stat-label">
