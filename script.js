@@ -21,10 +21,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('[data-reveal], [data-reveal-group]').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium').forEach(el => revealObserver.observe(el));
+    };
+
+    const setupSpotlight = () => {
+        const spotlights = document.querySelectorAll('.spotlight-container');
+        spotlights.forEach(container => {
+            const overlay = document.createElement('div');
+            overlay.className = 'spotlight-overlay';
+            container.appendChild(overlay);
+
+            container.addEventListener('mousemove', (e) => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                container.style.setProperty('--mouse-x', `${x}px`);
+                container.style.setProperty('--mouse-y', `${y}px`);
+            });
+        });
     };
 
     setupReveal();
+    setupSpotlight();
+
 
     // ═══════ TURNSTILE STATE ═══════
     let turnstileVerified = false;
@@ -42,6 +61,12 @@ document.addEventListener('DOMContentLoaded', () => {
             langBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
             localStorage.setItem('vect_lang', lang);
+
+            // Update aria-labels for split-text elements
+            document.querySelectorAll('[data-label-it]').forEach(el => {
+                const newLabel = el.getAttribute(`data-label-${lang}`);
+                if (newLabel) el.setAttribute('aria-label', newLabel);
+            });
         });
     });
 
@@ -694,13 +719,18 @@ function showToast(message, type = 'success') {
         const it = el.querySelector('.it-text');
         const en = el.querySelector('.en-text');
         
+        if (it && en) {
+            el.setAttribute('data-label-it', it.innerText);
+            el.setAttribute('data-label-en', en.innerText);
+            
+            // Initial accessibility label based on current html lang
+            const currentLang = document.documentElement.getAttribute('lang') || 'it';
+            el.setAttribute('aria-label', currentLang === 'en' ? en.innerText : it.innerText);
+        }
+
         [it, en].forEach(side => {
             if (!side) return;
             const text = side.innerText;
-            // Accessibility: set label on parent if not already set
-            if (!el.getAttribute('aria-label')) {
-                el.setAttribute('aria-label', text);
-            }
             side.setAttribute('aria-hidden', 'true');
             
             side.innerHTML = text.split('').map((char, i) => 

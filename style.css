@@ -219,6 +219,18 @@ a {
     border: none;
 }
 
+.lang-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+}
+
 .btn-primary {
     background: var(--primary-ledger);
     color: var(--surface-lowest);
@@ -2467,3 +2479,78 @@ body::after {
 @keyframes dashOffset {
     to { stroke-dashoffset: 0; }
 }
+
+/* ═══════════════════════════════════════════
+   PREMIUM "REACTBITS" FX
+   ═══════════════════════════════════════════ */
+
+/* 1. ShinyText (Animated Gradient Text) */
+.shiny-text {
+    background: linear-gradient(
+        120deg,
+        rgba(255, 255, 255, 0) 30%,
+        rgba(255, 255, 255, 0.8) 50%,
+        rgba(255, 255, 255, 0) 70%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0.1); 
+    animation: line-shine 4s infinite linear;
+    display: inline-block;
+}
+
+@keyframes line-shine {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+
+/* 2. Magnetic Interaction Helpers */
+.magnetic-wrap {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    will-change: transform;
+}
+
+/* 3. Premium Scroll Reveal (Blur + Zoom) */
+.reveal-premium {
+    opacity: 0;
+    filter: blur(15px);
+    transform: scale(0.95) translateY(40px);
+    transition: opacity 1.2s ease, filter 1.0s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-premium.active {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1) translateY(0);
+}
+
+/* 4. Mouse Spotlight Overlay */
+.spotlight-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.spotlight-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+        600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+        rgba(255, 107, 26, 0.05),
+        transparent 40%
+    );
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.spotlight-container:hover .spotlight-overlay {
+    opacity: 1;
+}
+
+.spotlight-content {
+    position: relative;
+    z-index: 2;
+}
