@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Generatore veloce di valori RF finti tra 470.000 e 694.000 MHz
         setInterval(() => {
             const randomFreq = (Math.random() * (694 - 470) + 470).toFixed(3);
-            liveFreqLabel.innerHTML = `${randomFreq} <span class="mhz">MHz</span>`;
+            liveFreqLabel.innerHTML = `${randomFreq} <span style="font-size: 10px; opacity: 0.5; margin-left: 4px;">MHz</span>`;
         }, 80);
 
         const logMessages = [
@@ -382,26 +382,26 @@ function showRegionData(regionKey) {
                 </div>
             </div>`;
 
-    // Show and animate bars
-    if (ripBars) {
+    // Show and animate bars (if they exist)
+    if (ripBars && barCompliance && barQuality) {
         ripBars.style.display = 'flex';
         // Reset first
         barCompliance.style.width = '0%';
         barQuality.style.width = '0%';
-        barCongestion.style.width = '0%';
-        valCompliance.textContent = '-';
-        valQuality.textContent = '-';
-        valCongestion.textContent = '-';
+        if (barCongestion) barCongestion.style.width = '0%';
+        if (valCompliance) valCompliance.textContent = '-';
+        if (valQuality) valQuality.textContent = '-';
+        if (valCongestion) valCongestion.textContent = '-';
 
         // Animate after paint
         requestAnimationFrame(() => {
             setTimeout(() => {
                 barCompliance.style.width = data.compliance + '%';
                 barQuality.style.width = data.quality + '%';
-                barCongestion.style.width = data.congestion + '%';
-                valCompliance.textContent = data.compliance + '%';
-                valQuality.textContent = data.quality + '%';
-                valCongestion.textContent = data.congestion + '%';
+                if (barCongestion) barCongestion.style.width = data.congestion + '%';
+                if (valCompliance) valCompliance.textContent = data.compliance + '%';
+                if (valQuality) valQuality.textContent = data.quality + '%';
+                if (valCongestion) valCongestion.textContent = data.congestion + '%';
             }, 80);
         });
     }
