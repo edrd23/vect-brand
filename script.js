@@ -21,7 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium').forEach(el => revealObserver.observe(el));
+        // Include ALL reveal types: data-reveal, data-reveal-group, plain .reveal, .reveal-premium
+        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal, .reveal-premium').forEach(el => revealObserver.observe(el));
     };
 
     const setupSpotlight = () => {
@@ -132,18 +133,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
-    // ═══════ REVEAL ANIMATIONS ═══════
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.12 });
-
-    revealElements.forEach(el => revealObserver.observe(el));
 
     // ═══════ RF SCANNER LOGIC ═══════
     const liveFreqLabel = document.getElementById('live-freq');
@@ -457,11 +446,16 @@ if (contactForm) {
 
         // Validate Turnstile
         if (!turnstileVerified || !turnstileToken) {
-            btn.innerHTML = lang === 'it' ? '⚠ Verifica umana richiesta' : '⚠ Human verification required';
+            const errorMsg = lang === 'it' ? '⚠ Verifica umana richiesta' : '⚠ Human verification required';
+            btn.innerHTML = errorMsg;
             btn.style.background = 'var(--vect-warning)';
+            // Announce to screen readers
+            const formStatus = document.getElementById('form-status');
+            if (formStatus) formStatus.textContent = errorMsg;
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.background = '';
+                if (formStatus) formStatus.textContent = '';
             }, 3000);
             return;
         }
@@ -501,11 +495,14 @@ if (contactForm) {
             const result = await response.json();
 
             if (result.success) {
-                showToast(lang === 'it' ? '✓ Richiesta completata' : '✓ Request completed', 'success');
+                const successMsg = lang === 'it' ? '✓ Richiesta completata' : '✓ Request completed';
+                showToast(successMsg, 'success');
                 btn.innerHTML = lang === 'it' ? '✓ Richiesta inviata' : '✓ Request sent';
                 btn.style.background = 'var(--vect-success)';
                 contactForm.reset();
-
+                // Announce to screen readers
+                const formStatus = document.getElementById('form-status');
+                if (formStatus) formStatus.textContent = successMsg;
                 // Reset Turnstile
                 turnstileVerified = false;
                 turnstileToken = '';
@@ -518,25 +515,33 @@ if (contactForm) {
                     btn.style.background = '';
                     btn.disabled = false;
                     btn.classList.remove('loading');
+                    if (formStatus) formStatus.textContent = '';
                 }, 4000);
             } else {
-                showToast(lang === 'it' ? `Errore server: ${result.message}` : `Server Error: ${result.message}`, 'error');
-                btn.innerHTML = lang === 'it' ? `Errore: ${result.message || 'Server'}` : `Error: ${result.message || 'Server'}`;
+                const errorMsg = lang === 'it' ? `Errore server: ${result.message}` : `Server Error: ${result.message}`;
+                showToast(errorMsg, 'error');
+                btn.innerHTML = errorMsg;
                 btn.style.background = 'var(--vect-error)';
+                const formStatus = document.getElementById('form-status');
+                if (formStatus) formStatus.textContent = errorMsg;
                 throw new Error(result.message || 'Server error');
             }
         } catch (err) {
             console.error('Submission error:', err);
-            showToast(lang === 'it' ? 'Si è verificato un errore di rete.' : 'A network error occurred.', 'error');
+            const errorMsg = lang === 'it' ? 'Si è verificato un errore di rete.' : 'A network error occurred.';
+            showToast(errorMsg, 'error');
             if (!btn.innerHTML.includes('Errore') && !btn.innerHTML.includes('Error')) {
                 btn.innerHTML = lang === 'it' ? 'Errore di rete' : 'Network Error';
                 btn.style.background = 'var(--vect-error)';
             }
+            const formStatus = document.getElementById('form-status');
+            if (formStatus) formStatus.textContent = errorMsg;
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.background = '';
                 btn.disabled = false;
                 btn.classList.remove('loading');
+                if (formStatus) formStatus.textContent = '';
             }, 5000);
         }
     });

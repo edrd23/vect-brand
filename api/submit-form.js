@@ -1,11 +1,11 @@
 /**
  * VECT — Secure Form Submission Proxy
- * 
+ *
  * Purpose:
  * 1. Hide Web3Forms API key from client-side exposure
  * 2. Validate Cloudflare Turnstile CAPTCHA token
  * 3. Forward legitimate submissions to Web3Forms
- * 
+ *
  * Deploy: Vercel Serverless Function (automatic)
  */
 
@@ -13,19 +13,22 @@ const TURNSTILE_SECRET_KEY = process.env.TURNSTILE_SECRET_KEY;
 const WEB3FORMS_API_KEY = process.env.WEB3FORMS_API_KEY;
 
 // ═══════ RATE LIMITING IN-MEMORY CACHE ═══════
-// Nota: Nelle funzioni Serverless Vercel, la cache in memoria resiste finché l'istanza lambda rimane "calda".
-// È un'ottima protezione di prima linea contro bot che sparano raffiche di richieste in pochi secondi.
 const rateLimitMap = new Map();
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000; // 1 Ora
-const MAX_REQUESTS_PER_WINDOW = 3; // Massimo 3 invii per IP ogni ora
+const MAX_REQUESTS_PER_WINDOW = 3; // Max 3 submissions per IP per hour
 
-// CORS headers for security
+// CORS & Security headers
 const CORS_HEADERS = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': process.env.ALLOWED_ORIGIN || 'https://www.vect-rf.it',
-  'Access-Control-Allow-Methods': 'POST, OPTIONS',
-  'Access-Control-Allow-Headers': 'Content-Type, Accept',
-  'Access-Control-Max-Age': '86400',
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': process.env.ALLOWED_ORIGIN || 'https://www.vect-rf.it',
+    'Access-Control-Allow-Methods': 'POST, OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type, Accept',
+    'Access-Control-Max-Age': '86400',
+    // Security headers
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'DENY',
+    'Referrer-Policy': 'strict-origin-when-cross-origin',
+    'X-XSS-Protection': '1; mode=block'
 };
 
 /**

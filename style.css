@@ -76,7 +76,7 @@
     --vect-carbon: #1A1A1A;
     --vect-graphite: #2A2A2A;
     --vect-steel: #3A3A3A;
-    --vect-ash: #808080;
+    --vect-ash: #A0A0A0; /* WCAG AA compliant on dark bg (was #808080) */
     --vect-silver: #B3B3B3;
     --vect-light: #E0E0E0;
     --vect-white: #F5F5F5;
@@ -163,6 +163,29 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+/* Skip Navigation Link — WCAG 2.4.1 */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--vect-accent);
+    color: var(--vect-black);
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    z-index: 9999;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+    outline: 2px solid var(--vect-white);
+    outline-offset: 2px;
 }
 
 html {
@@ -1253,10 +1276,23 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 0, 0.01));
     background-size: 100% 4px, 3px 100%;
     pointer-events: none;
     z-index: 9999;
+}
+
+/* ═══════ SCREEN READER ONLY ═══════ */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 /* ═══════ RF SCANNER UI ═══════ */
@@ -1691,7 +1727,7 @@ body::after {
 }
 
 /* ── CSS Grid Overlay ── */
-body::after {
+body::before {
     content: '';
     position: fixed;
     top: 0;
@@ -2020,21 +2056,27 @@ body::after {
 }
 
 /* ── Hotspots ── */
-.radar-hotspot {
-    position: absolute;
-    width: 28px;
-    height: 28px;
-    transform: translate(-50%, -50%);
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 4;
-}
+ .radar-hotspot {
+     position: absolute;
+     width: 28px;
+     height: 28px;
+     transform: translate(-50%, -50%);
+     background: none;
+     border: none;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 4;
+ }
 
-.rh-na {
+ .radar-hotspot:focus-visible {
+     outline: 2px solid var(--vect-accent);
+     outline-offset: 4px;
+     border-radius: 50%;
+ }
+
+ .rh-na {
     top: 36%;
     left: 22%;
 }
@@ -2505,20 +2547,26 @@ body::after {
     pointer-events: none;
 }
 
-.radar-hotspot {
-    position: absolute;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    z-index: 10;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+ .radar-hotspot {
+     position: absolute;
+     background: transparent;
+     border: none;
+     cursor: pointer;
+     padding: 8px;
+     z-index: 10;
+     transition: all 0.3s ease;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+ }
 
-.rh-dot {
+ .radar-hotspot:focus-visible {
+     outline: 2px solid var(--vect-accent);
+     outline-offset: 4px;
+     border-radius: 50%;
+ }
+
+ .rh-dot {
     width: 5px;
     height: 5px;
     background: rgba(255,255,255,0.4);

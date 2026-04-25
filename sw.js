@@ -38,24 +38,26 @@ self.addEventListener('fetch', (event) => {
     }
 
     event.respondWith(
-        caches.match(event.request).then((cachedResponse) => {
-            return fetch(event.request)
-                .then((networkResponse) => {
+        caches.open(CACHE_NAME).then((cache) => {
+            // Try cache first, then network (stale-while-revalidate)
+            return cache.match(event.request).then((cachedResponse) => {
+                const fetchPromise = fetch(event.request).then((networkResponse) => {
                     if (networkResponse.ok) {
-                        const clonedResponse = networkResponse.clone();
-                        caches.open(CACHE_NAME).then((cache) => cache.put(event.request, clonedResponse));
+                        // Update cache with fresh version
+                        cache.put(event.request, networkResponse.clone());
                     }
                     return networkResponse;
-                })
-                .catch(() => {
-                    if (cachedResponse) {
-                        return cachedResponse;
-                    }
-                    if (event.request.mode === 'navigate') {
-                        return caches.match('./index.html');
-                    }
-                    return new Response('', { status: 503, statusText: 'Offline' });
+                }).catch(() => {
+                    // Network failed, return cached if available
+                    return cachedResponse;
                 });
+
+                // Return cached response immediately (if available), then update in background
+                return cachedResponse || fetchPromise;
+            });
+        }).catch(() => {
+            // Fallback if cache open fails
+            return fetch(event.request);
         })
     );
 });

@@ -3,18 +3,18 @@
  * Vanilla JS Port based on ReactBits Particles logic
  * Zero dependencies, high performance.
  */
-class StarField {
+export class StarField {
     constructor() {
         this.canvas = document.getElementById('vect-space-bg');
         if (!this.canvas) return;
-        
+
         this.ctx = this.canvas.getContext('2d');
         this.stars = [];
         this.numStars = Math.min(window.innerWidth, window.innerHeight) > 768 ? 400 : 200; // Less on mobile
         this.maxZ = 1000;
         this.fov = 300;
         this.baseSpeed = 0.5; // slow drift by default
-        
+
         this.colors = [
             'rgba(255, 255, 255, {opacity})', // white
             'rgba(255, 255, 255, {opacity})', // white
@@ -25,7 +25,7 @@ class StarField {
         this.init();
         this.resize();
         window.addEventListener('resize', () => this.resize());
-        
+
         // Slight interaction on scroll
         window.addEventListener('scroll', () => {
             this.baseSpeed = 2.0; // accelerate briefly on scroll
@@ -95,7 +95,11 @@ class StarField {
     }
 }
 
-// Initialize when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
+// Auto-init if loaded as classic script (non-module) for backward compatibility
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new StarField();
+    });
+} else {
     new StarField();
-});
+}
