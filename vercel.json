@@ -11,7 +11,19 @@
       "use": "@vercel/static"
     },
     {
-      "src": "*.{css,js,svg,png,webmanifest,xml,txt,woff2}",
+      "src": "*.{css,js,svg,png,webmanifest,xml,txt,woff2,ico,json}",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "js/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "fonts/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**",
       "use": "@vercel/static"
     }
   ],
