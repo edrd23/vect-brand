@@ -95,11 +95,5 @@ export class StarField {
     }
 }
 
-// Auto-init if loaded as classic script (non-module) for backward compatibility
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
-        new StarField();
-    });
-} else {
-    new StarField();
-}
+// NOTE: StarField is instantiated exclusively by js/main.js (ES module).
+// Do NOT add auto-init here — it would create a duplicate instance.

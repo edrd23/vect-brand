@@ -8,6 +8,10 @@
 import { StarField } from './particles.js';
 new StarField();
 
+// ═══════ CURSOR: Initialize early for snappy response ═══════
+import { initCursor } from './cursor.js';
+initCursor();
+
 // ═══════ DOCUMENT READY ═══════
 document.addEventListener('DOMContentLoaded', async () => {
     // Always load: Navigation + Animations
@@ -22,8 +26,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     if (document.querySelector('#contactForm')) {
-        await import('./form.js');
+        // Load form handler + inline validation together
+        const [{ initContactForm }, { initFormValidation }] = await Promise.all([
+            import('./form.js'),
+            import('./form-validation.js')
+        ]);
+        initContactForm();
+        initFormValidation();
     }
 
     console.log('[VECT] All modules loaded');
 });
+

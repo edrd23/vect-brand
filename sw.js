@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vect-v2';
+const CACHE_NAME = 'vect-v3';
 const ASSETS = [
     './',
     './index.html',
@@ -6,8 +6,19 @@ const ASSETS = [
     './script.js',
     './manifest.json',
     './favicon.svg',
-    './vect-logo.svg'
+    './vect-logo.svg',
+    './fonts/fonts.css',
+    './js/main.js',
+    './js/animations.js',
+    './js/form.js',
+    './particles.js',
+    './js/privacy-consent.js'
 ];
+
+// Network-first routes (API calls should never be cached stale)
+const NETWORK_FIRST = ['/api/'];
+// Cache-first routes (static assets, long TTL)
+const CACHE_FIRST = ['.css', '.js', '.svg', '.png', '.jpg', '.webp', '.woff2'];
 
 self.addEventListener('install', (event) => {
     event.waitUntil(
@@ -28,36 +39,38 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-    if (event.request.method !== 'GET') {
-        return;
-    }
+    if (event.request.method !== 'GET') return;
 
     const requestUrl = new URL(event.request.url);
-    if (requestUrl.origin !== self.location.origin) {
+    if (requestUrl.origin !== self.location.origin) return;
+
+    const pathname = requestUrl.pathname;
+
+    // Network-first: API routes always go to network
+    if (NETWORK_FIRST.some(route => pathname.startsWith(route))) {
+        event.respondWith(
+            fetch(event.request).catch(() => {
+                return new Response(JSON.stringify({ error: 'offline' }), {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+            })
+        );
         return;
     }
 
+    // Stale-while-revalidate: serve from cache, update in background
     event.respondWith(
         caches.open(CACHE_NAME).then((cache) => {
-            // Try cache first, then network (stale-while-revalidate)
             return cache.match(event.request).then((cachedResponse) => {
                 const fetchPromise = fetch(event.request).then((networkResponse) => {
-                    if (networkResponse.ok) {
-                        // Update cache with fresh version
+                    if (networkResponse && networkResponse.ok) {
                         cache.put(event.request, networkResponse.clone());
                     }
                     return networkResponse;
-                }).catch(() => {
-                    // Network failed, return cached if available
-                    return cachedResponse;
-                });
+                }).catch(() => cachedResponse);
 
-                // Return cached response immediately (if available), then update in background
                 return cachedResponse || fetchPromise;
             });
-        }).catch(() => {
-            // Fallback if cache open fails
-            return fetch(event.request);
-        })
+        }).catch(() => fetch(event.request))
     );
 });

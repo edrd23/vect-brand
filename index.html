@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://va.vercel-scripts.com https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://challenges.cloudflare.com https://vitals.vercel-insights.com; frame-src https://challenges.cloudflare.com;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://va.vercel-scripts.com https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://challenges.cloudflare.com https://vitals.vercel-insights.com; frame-src https://challenges.cloudflare.com;">
     
     <!-- ═══════ SEO ═══════ -->
     <title>VECT — RF Special Ops | RF Coordinator & Spectrum Engineering</title>
@@ -21,6 +21,41 @@
     <!-- Preconnect to external origins for performance -->
     <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="preconnect" href="https://va.vercel-scripts.com">
+    <!-- Preload critical fonts (prevents FOUT) — actual hash-based filenames from fonts/ -->
+    <link rel="preload" href="fonts/UcC73FwrK3iLTeHuS_nVMrMxCp50SjIa1ZL7.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/tDbv2o-flEEny0FZhsfKu5WU4zr3E_BX0PnT8RD8yKwBNntkaToggR7BYRbKPxDcwg.woff2" as="font" type="font/woff2" crossorigin>
+    <!-- Page Transition: hide body until CSS/fonts load (anti-FOUC) -->
+    <style>
+        #vect-page-loader {
+            position: fixed; inset: 0;
+            background: #0A0A0A;
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+        #vect-page-loader.loaded {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #vect-page-loader .loader-bar {
+            width: 120px; height: 2px;
+            background: #2A2A2A;
+            position: relative;
+            overflow: hidden;
+        }
+        #vect-page-loader .loader-bar::after {
+            content: '';
+            position: absolute;
+            left: -100%; top: 0;
+            width: 100%; height: 100%;
+            background: #FF6B1A;
+            animation: loader-slide 0.5s ease forwards;
+        }
+        @keyframes loader-slide { to { left: 0; } }
+    </style>
 
     <!-- ═══════ OPEN GRAPH (WhatsApp, LinkedIn, Facebook) ═══════ -->
     <meta property="og:type" content="website">
@@ -103,12 +138,8 @@
     }
     </script>
     <link rel="manifest" href="./manifest.json">
-    <link rel="preload" href="fonts/fonts.css" as="style" onload="this.rel='stylesheet'">
-    <link rel="preload" href="style.css?v=1.1" as="style" onload="this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="fonts/fonts.css">
-        <link rel="stylesheet" href="style.css?v=1.1">
-    </noscript>
+    <link rel="stylesheet" href="fonts/fonts.css">
+    <link rel="stylesheet" href="style.css?v=1.3">
 
     <!-- Main JS Module (code-split, lazy-loaded) -->
     <script type="module" src="js/main.js"></script>
@@ -119,6 +150,31 @@
 </head>
 
 <body>
+
+    <!-- ═══════ PAGE LOADER (anti-FOUC) ═══════ -->
+    <div id="vect-page-loader" role="status" aria-label="Caricamento VECT">
+        <div class="loader-bar"></div>
+    </div>
+    <script>
+        // Dismiss loader as soon as DOM + CSS are ready
+        (function() {
+            function dismissLoader() {
+                var el = document.getElementById('vect-page-loader');
+                if (el) el.classList.add('loaded');
+            }
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', dismissLoader);
+            } else {
+                dismissLoader();
+            }
+            // Hard fallback: 1.5s max
+            setTimeout(dismissLoader, 1500);
+        })();
+    </script>
+
+    <!-- ═══════ CUSTOM CURSOR ═══════ -->
+    <div id="vect-cursor" aria-hidden="true"></div>
+    <div id="vect-cursor-dot" aria-hidden="true"></div>
 
     <!-- Skip to main content for keyboard users -->
     <a href="#hero" class="skip-link">Salta al contenuto principale</a>
@@ -148,6 +204,11 @@
         </div>
         <div class="nav-actions">
             <button class="btn btn-primary btn-sm" onclick="location.href='#contact'">DEPLOY</button>
+            <button class="mobile-toggle" aria-label="Menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </div>
     </nav>
 
@@ -176,11 +237,13 @@
 
     <!-- ═══════ SERVICES SECTION ═══════ -->
     <section id="services" class="container reveal" data-reveal-group>
-        <span class="section-label">01 — <span class="it-text">Servizi Speciali</span><span class="en-text">Special Ops</span></span>
-        <h2 class="section-title">
-            <span class="it-text">Soluzioni Tactical RF</span>
-            <span class="en-text">Tactical RF Solutions</span>
-        </h2>
+        <div class="section-heading">
+            <span class="section-label">01 — <span class="it-text">Servizi Speciali</span><span class="en-text">Special Ops</span></span>
+            <h2 class="section-title">
+                <span class="it-text">Soluzioni Tactical RF</span>
+                <span class="en-text">Tactical RF Solutions</span>
+            </h2>
+        </div>
         <div class="services-grid">
             <div class="service-card reveal-item">
                 <div class="hud-corner hud-tl"></div><div class="hud-corner hud-tr"></div>
@@ -205,11 +268,11 @@
 
     <div class="divider"></div>
 
-    <!-- ═══════ VISION SECTION (ABOUT US) ═══════ -->
+    <!-- ═══════ VISION // 01 ═══════ -->
     <section id="vision" class="container reveal">
         <div class="vision-grid">
             <div class="reveal-item">
-                <span class="section-label">02 — <span class="it-text">La Visione</span><span class="en-text">The Vision</span></span>
+                <span class="section-label">VISION // 01</span>
                 <h2 class="section-title">
                     <span class="it-text">Zero Dropouts.<br>Maximum Uptime.</span>
                     <span class="en-text">Zero Dropouts.<br>Maximum Uptime.</span>
@@ -220,65 +283,196 @@
                     <span class="it-text">VECT è un servizio boutique di ingegneria RF e coordinamento frequenze per produzioni dove il fallimento non è un'opzione.</span>
                     <span class="en-text">VECT is a boutique RF engineering and frequency coordination service for productions where failure is not an option.</span>
                 </p>
-                <p>
-                    <span class="it-text">Nasciamo dall'esigenza di colmare il divario tra la tecnologia RF di fascia alta e le complessità crescenti delle produzioni moderne. In un mondo saturo di segnali, la nostra missione è blindare il tuo spettro, garantendo una trasmissione impeccabile in qualsiasi ambiente, dai festival multi-stage alle produzioni broadcast globali.</span>
-                    <span class="en-text">We were born from the need to bridge the gap between high-end RF technology and the increasing complexities of modern productions. In a world saturated with signals, our mission is to secure your spectrum, ensuring flawless transmission in any environment, from multi-stage festivals to global broadcast productions.</span>
-                </p>
-                <p>
-                    <span class="it-text">Il nostro approccio combina l'ingegneria predittiva con le più recenti innovazioni tecnologiche. Non ci limitiamo a gestire le frequenze; progettiamo l'invisibile per rendere possibile l'indimenticabile.</span>
-                    <span class="en-text">Our approach combines predictive engineering with the latest technological innovations. We don't just manage frequencies; we design the invisible to make the unforgettable possible.</span>
-                </p>
+                <div class="vision-text-content">
+                    <p>
+                        <span class="it-text">Nasciamo dall'esigenza di colmare il divario tra la tecnologia RF di fascia alta e le complessità crescenti delle produzioni moderne. In un mondo saturo di segnali, la nostra missione è blindare il tuo spettro, garantendo una trasmissione impeccabile in qualsiasi ambiente.</span>
+                        <span class="en-text">We were born from the need to bridge the gap between high-end RF technology and the increasing complexities of modern productions. In a world saturated with signals, our mission is to secure your spectrum, ensuring flawless transmission in any environment.</span>
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
     <div class="divider"></div>
 
-    <!-- ═══════ WMAS TECHNOLOGY SECTION ═══════ -->
-    <section id="wmas" class="container reveal">
-        <span class="section-label">03 — WMAS TECHNOLOGY</span>
-        <h2 class="section-title">Sennheiser Spectera Specialists</h2>
-        <div class="wmas-content">
-            <div class="reveal-item">
-                <p><span class="it-text">VECT è pioniere nell'adozione della tecnologia Wireless Multi-Channel Audio System (WMAS). Utilizziamo il sistema Sennheiser Spectera per rivoluzionare la gestione dei canali audio in scenari ad altissima densità.</span><span class="en-text">VECT is a pioneer in adopting Wireless Multi-Channel Audio System (WMAS) technology. We use the Sennheiser Spectera system to revolutionize audio channel management in ultra-high-density scenarios.</span></p>
+    <!-- GLOBAL RF REGULATORY RADAR (v.2.4) // 02 -->
+    <section id="radar" class="radar-section reveal">
+        <div class="radar-section-bg">
+            <div class="radar-glow-orb radar-orb-1"></div>
+            <div class="radar-glow-orb radar-orb-2"></div>
+        </div>
+
+        <div class="container">
+            <div class="radar-header">
+                <div class="section-heading">
+                    <span class="section-label">GLOBAL COMPLIANCE // 02</span>
+                    <h2 class="section-title text-gradient">RADAR // COVERAGE</h2>
+                </div>
                 
-                <div class="tech-specs-table" style="margin-top: 30px; overflow-x: auto;">
+                <div class="radar-live-stats">
+                    <div class="radar-stat-block">
+                        <span id="radar-live-clock" class="radar-stat-value">00:00:00</span>
+                        <span class="radar-stat-label">UTC SYNC</span>
+                    </div>
+                    <div class="radar-stat-block">
+                        <span class="radar-stat-value">LIVE</span>
+                        <span class="radar-stat-label">SCANNER STATUS</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="radar-main-grid">
+                <!-- Left: Scanner -->
+                <div class="radar-scanner-wrap">
+                    <div class="radar-scanner-frame">
+                        <div class="rframe-corner rframe-tl"></div>
+                        <div class="rframe-corner rframe-tr"></div>
+                        <div class="rframe-corner rframe-bl"></div>
+                        <div class="rframe-corner rframe-br"></div>
+                        
+                        <div class="radar-scanner-inner">
+                            <div class="radar-rings">
+                                <div class="radar-ring" style="width: 25%; height: 25%;"></div>
+                                <div class="radar-ring" style="width: 50%; height: 50%;"></div>
+                                <div class="radar-ring" style="width: 75%; height: 75%;"></div>
+                                <div class="radar-ring" style="width: 100%; height: 100%;"></div>
+                            </div>
+                            
+                            <div class="radar-crosshairs">
+                                <div class="radar-ch-h"></div>
+                                <div class="radar-ch-v"></div>
+                            </div>
+                            
+                            <div class="radar-sweep-arm"></div>
+                            
+                            <!-- Regional Hotspots -->
+                            <button class="radar-hotspot rh-na" data-region="na" aria-label="North America">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">NA</span>
+                            </button>
+                            <button class="radar-hotspot rh-eu" data-region="eu" aria-label="Europe">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">EU</span>
+                            </button>
+                            <button class="radar-hotspot rh-as" data-region="as" aria-label="Asia">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">AS</span>
+                            </button>
+                            <button class="radar-hotspot rh-me" data-region="me" aria-label="Middle East">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">ME</span>
+                            </button>
+                            <button class="radar-hotspot rh-sa" data-region="sa" aria-label="South America">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">SA</span>
+                            </button>
+                            <button class="radar-hotspot rh-au" data-region="au" aria-label="Australia">
+                                <span class="rh-ping"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-lbl">AU</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Spectrum Waterfall (Micro) -->
+                    <div class="spectrum-bar-wrap">
+                        <span class="spectrum-freq-label">RF SCAN (GHZ)</span>
+                        <div class="spectrum-waterfall">
+                            <canvas id="spectrumCanvas"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="radar-status-row">
+                        <div class="rsb-item">
+                            <span class="rsb-dot rsb-ok"></span> SYSTEM OK
+                        </div>
+                        <div class="rsb-item">
+                            <span class="rsb-dot rsb-live"></span> FREQ DIVERSITY
+                        </div>
+                        <div class="rsb-item">
+                            <span class="rsb-dot rsb-ok"></span> SECURE SYNC
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Information Panel -->
+                <div class="radar-info-panel">
+                    <div class="rip-header">
+                        <div id="rip-region-id" class="rip-region-id">--</div>
+                        <div class="rip-status-chip">
+                            <span class="rsb-dot rsb-live"></span>
+                            <span id="rip-status-val">READY</span>
+                        </div>
+                    </div>
+                    <span class="it-text">VECT è pioniere nell'adozione della tecnologia Wireless Multi-Channel Audio System (WMAS). Utilizziamo il sistema Sennheiser Spectera per rivoluzionare la gestione dei canali audio in scenari ad altissima densità.</span>
+                    <span class="en-text">VECT is a pioneer in adopting Wireless Multi-Channel Audio System (WMAS) technology. We use the Sennheiser Spectera system to revolutionize audio channel management in ultra-high-density scenarios.</span>
+                </p>
+                <p>
+                    <span class="it-text">Il sistema Spectera permette una gestione bidirezionale senza precedenti: un singolo bodypack SEK gestisce sia il segnale microfonico che il monitoraggio IEM, dimezzando l'hardware necessario sul palco e ottimizzando il workflow dell'artista. Grazie alla tecnologia a banda larga, le intermodulazioni sono fisicamente eliminate, permettendo una densità di canali impossibile con i sistemi tradizionali.</span>
+                    <span class="en-text">The Spectera system allows for unprecedented bidirectional management: a single SEK bodypack handles both the microphone signal and IEM monitoring, halving the hardware needed on stage and optimizing the artist's workflow. Thanks to wideband technology, intermodulations are physically eliminated, allowing for a channel density impossible with traditional systems.</span>
+                </p>
+                
+                <div class="comparison-table-wrap" style="margin-top: 30px; overflow-x: auto;">
                     <table style="width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid var(--vect-graphite);">
                         <thead>
                             <tr style="border-bottom: 1px solid var(--vect-accent);">
                                 <th style="padding: 15px; text-align: left; color: var(--vect-accent);">Feature</th>
-                                <th style="padding: 15px; text-align: left;">Narrowband (Legacy)</th>
-                                <th style="padding: 15px; text-align: left; color: var(--vect-white);">WMAS (Spectera)</th>
+                                <th style="padding: 15px; text-align: left;">Standard RF</th>
+                                <th style="padding: 15px; text-align: left; color: var(--vect-white);">Sennheiser Spectera</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 12px 15px; font-weight: bold;">Carrier Spacing</td>
-                                <td style="padding: 12px 15px;">200 kHz</td>
-                                <td style="padding: 12px 15px;">600 kHz - 20 MHz</td>
+                                <td style="padding: 12px 15px; font-weight: bold;">Bodypack Design</td>
+                                <td style="padding: 12px 15px;">Single Function (Mic or IEM)</td>
+                                <td style="padding: 12px 15px; color: var(--vect-accent);">Bidirectional SEK (Mic + IEM)</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 12px 15px; font-weight: bold;">Spectral Efficiency</td>
-                                <td style="padding: 12px 15px;">Standard</td>
-                                <td style="padding: 12px 15px;">Ultra-High (WMAS)</td>
+                                <td style="padding: 12px 15px; font-weight: bold;">Channel Density</td>
+                                <td style="padding: 12px 15px;">~8-12 per 8 MHz</td>
+                                <td style="padding: 12px 15px;">Up to 64 per 20 MHz</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-                                <td style="padding: 12px 15px; font-weight: bold;">Audio Quality</td>
-                                <td style="padding: 12px 15px;">16-bit / 48kHz</td>
-                                <td style="padding: 12px 15px;">24-bit / 96kHz</td>
+                                <td style="padding: 12px 15px; font-weight: bold;">Audio Resolution</td>
+                                <td style="padding: 12px 15px;">24-bit / 48kHz</td>
+                                <td style="padding: 12px 15px;">24-bit / 96kHz (AES67/Dante)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                <td style="padding: 12px 15px; font-weight: bold;">Intermodulation</td>
+                                <td style="padding: 12px 15px;">High Risk / Nonlinear</td>
+                                <td style="padding: 12px 15px; color: var(--vect-accent);">Zero (Broadband Digital)</td>
                             </tr>
                             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
                                 <td style="padding: 12px 15px; font-weight: bold;">Latency</td>
-                                <td style="padding: 12px 15px;">Variable / Jitter</td>
-                                <td style="padding: 12px 15px;">Ultra-Low Fixed</td>
-                            </tr>
-                            <tr>
-                                <td style="padding: 12px 15px; font-weight: bold;">Battery Life</td>
-                                <td style="padding: 12px 15px;">4-6 Hours</td>
-                                <td style="padding: 12px 15px;">8-10 Hours</td>
+                                <td style="padding: 12px 15px;">Variable (~2.9ms)</td>
+                                <td style="padding: 12px 15px;">Ultra-Low Fixed (&lt; 0.5ms)</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <div class="tech-specs-table reveal" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                        <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Modulation</span>
+                        <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">OFDMA / SC-FDMA</span>
+                    </div>
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                        <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Spectrum Range</span>
+                        <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">470 - 1525 MHz</span>
+                    </div>
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                        <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Node Capacity</span>
+                        <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">100+ Streams / 20MHz</span>
+                    </div>
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                        <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Encryption</span>
+                        <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">AES-256 Integrated</span>
+                    </div>
                 </div>
             </div>
         </div>
