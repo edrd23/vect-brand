@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vect-v3';
+const CACHE_NAME = 'vect-v4';
 const ASSETS = [
     './',
     './index.html',
@@ -11,6 +11,8 @@ const ASSETS = [
     './js/main.js',
     './js/animations.js',
     './js/form.js',
+    './js/cursor.js',
+    './js/form-validation.js',
     './particles.js',
     './js/privacy-consent.js'
 ];
