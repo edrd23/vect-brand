@@ -2211,6 +2211,7 @@ body::before {
 
 .radar-live-stats {
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
     border: 1px solid rgba(255, 107, 26, 0.2);
     flex-shrink: 0;
@@ -2254,7 +2255,7 @@ body::before {
     display: grid;
     grid-template-columns: 1fr 440px;
     gap: 40px;
-    align-items: start;
+    align-items: stretch;
 }
 
 /* ── Scanner Wrap ── */
@@ -2541,6 +2542,7 @@ body::before {
 /* ── Status Row ── */
 .radar-status-row {
     display: flex;
+    flex-wrap: wrap;
     gap: 0;
     border: 1px solid rgba(255, 107, 26, 0.1);
 }
@@ -2814,10 +2816,11 @@ body::before {
 
     .radar-live-stats {
         width: 100%;
+        gap: 12px;
     }
 
     .radar-stat-block {
-        flex: 1;
+        flex: 1 1 120px;
         padding: 16px 12px;
         min-width: unset;
     }

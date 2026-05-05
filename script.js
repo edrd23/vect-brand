@@ -242,7 +242,7 @@ const RADAR_REGIONS = {
 };
 
 const ripRegionId = document.getElementById('rip-region-id');
-const ripStatusText = document.getElementById('rip-status-text');
+const ripStatusText = document.getElementById('rip-status-val');
 const ripBody = document.getElementById('rip-body');
 const ripBars = document.getElementById('rip-bars');
 const barCompliance = document.getElementById('bar-compliance');

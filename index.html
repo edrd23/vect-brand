@@ -409,17 +409,58 @@
                             <span id="rip-status-val">READY</span>
                         </div>
                     </div>
-                <p>
-                    <span class="it-text">VECT è pioniere nell'adozione della tecnologia Wireless Multi-Channel Audio System (WMAS). Utilizziamo il sistema Sennheiser Spectera per rivoluzionare la gestione dei canali audio in scenari ad altissima densità.</span>
-                    <span class="en-text">VECT is a pioneer in adopting Wireless Multi-Channel Audio System (WMAS) technology. We use the Sennheiser Spectera system to revolutionize audio channel management in ultra-high-density scenarios.</span>
-                </p>
-                <p>
-                    <span class="it-text">Il sistema Spectera permette una gestione bidirezionale senza precedenti: un singolo bodypack SEK gestisce sia il segnale microfonico che il monitoraggio IEM, dimezzando l'hardware necessario sul palco e ottimizzando il workflow dell'artista. Grazie alla tecnologia a banda larga, le intermodulazioni sono fisicamente eliminate, permettendo una densità di canali impossibile con i sistemi tradizionali.</span>
-                    <span class="en-text">The Spectera system allows for unprecedented bidirectional management: a single SEK bodypack handles both the microphone signal and IEM monitoring, halving the hardware needed on stage and optimizing the artist's workflow. Thanks to wideband technology, intermodulations are physically eliminated, allowing for a channel density impossible with traditional systems.</span>
-                </p>
+                    <div class="rip-body" id="rip-body">
+                        <div class="rip-idle">
+                            <div class="rip-idle-icon">&#9678;</div>
+                            <p class="mono rip-idle-msg">
+                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI NORMATIVI RF</span>
+                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR RF REGULATORY DATA</span>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="rip-bars" id="rip-bars" style="display:none;">
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">WMAS</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
+                            <span class="rip-bar-val mono" id="val-compliance">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">QUALITY</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
+                            <span class="rip-bar-val mono" id="val-quality">-</span>
+                        </div>
+                        <div class="rip-bar-row">
+                            <span class="rip-bar-lbl mono">LOAD</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
+                            <span class="rip-bar-val mono" id="val-congestion">-</span>
+                        </div>
+                    </div>
+                    <div class="rip-footer">
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">AES-256 ENCRYPTED &#183; VECT RF INTEL v2.4</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Spectera WMAS Technology Section -->
+            <div class="spectera-tech-section" style="margin-top: 80px;">
+                <div class="section-heading" style="margin-bottom: 40px; text-align: center;">
+                    <span class="section-label">TECHNOLOGY // 03</span>
+                    <h2 class="section-title text-gradient">SENNHEISER SPECTERA</h2>
+                </div>
                 
-                <div class="comparison-table-wrap" style="margin-top: 30px; overflow-x: auto;">
-                    <table style="width: 100%; border-collapse: collapse; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid var(--vect-graphite);">
+                <div style="max-width: 800px; margin: 0 auto; text-align: center; color: var(--vect-silver); line-height: 1.6;">
+                    <p style="margin-bottom: 20px;">
+                        <span class="it-text">VECT è pioniere nell'adozione della tecnologia Wireless Multi-Channel Audio System (WMAS). Utilizziamo il sistema Sennheiser Spectera per rivoluzionare la gestione dei canali audio in scenari ad altissima densità.</span>
+                        <span class="en-text">VECT is a pioneer in adopting Wireless Multi-Channel Audio System (WMAS) technology. We use the Sennheiser Spectera system to revolutionize audio channel management in ultra-high-density scenarios.</span>
+                    </p>
+                    <p>
+                        <span class="it-text">Il sistema Spectera permette una gestione bidirezionale senza precedenti: un singolo bodypack SEK gestisce sia il segnale microfonico che il monitoraggio IEM, dimezzando l'hardware necessario sul palco e ottimizzando il workflow dell'artista. Grazie alla tecnologia a banda larga, le intermodulazioni sono fisicamente eliminate, permettendo una densità di canali impossibile con i sistemi tradizionali.</span>
+                        <span class="en-text">The Spectera system allows for unprecedented bidirectional management: a single SEK bodypack handles both the microphone signal and IEM monitoring, halving the hardware needed on stage and optimizing the artist's workflow. Thanks to wideband technology, intermodulations are physically eliminated, allowing for a channel density impossible with traditional systems.</span>
+                    </p>
+                </div>
+
+                <div class="comparison-table-wrap" style="margin-top: 50px; overflow-x: auto;">
+                    <table style="width: 100%; max-width: 1000px; margin: 0 auto; border-collapse: collapse; background: rgba(255,255,255,0.03); backdrop-filter: blur(10px); border: 1px solid var(--vect-graphite);">
                         <thead>
                             <tr style="border-bottom: 1px solid var(--vect-accent);">
                                 <th style="padding: 15px; text-align: left; color: var(--vect-accent);">Feature</th>
@@ -457,20 +498,20 @@
                     </table>
                 </div>
 
-                <div class="tech-specs-table reveal" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                <div class="tech-specs-table reveal" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 1000px; margin-left: auto; margin-right: auto;">
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px; background: rgba(0,0,0,0.2); padding: 15px 15px 15px 20px;">
                         <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Modulation</span>
                         <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">OFDMA / SC-FDMA</span>
                     </div>
-                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px; background: rgba(0,0,0,0.2); padding: 15px 15px 15px 20px;">
                         <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Spectrum Range</span>
                         <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">470 - 1525 MHz</span>
                     </div>
-                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px; background: rgba(0,0,0,0.2); padding: 15px 15px 15px 20px;">
                         <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Node Capacity</span>
                         <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">100+ Streams / 20MHz</span>
                     </div>
-                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px;">
+                    <div class="tech-row" style="border-left: 2px solid var(--vect-accent); padding-left: 15px; background: rgba(0,0,0,0.2); padding: 15px 15px 15px 20px;">
                         <span class="tech-label" style="display: block; font-size: 10px; color: var(--vect-silver); text-transform: uppercase;">Encryption</span>
                         <span class="tech-value" style="font-family: var(--font-mono); color: var(--vect-white);">AES-256 Integrated</span>
                     </div>
