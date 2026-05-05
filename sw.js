@@ -1,4 +1,4 @@
-const CACHE_NAME = 'vect-v4';
+const CACHE_NAME = 'vect-v5';
 const ASSETS = [
     './',
     './index.html',

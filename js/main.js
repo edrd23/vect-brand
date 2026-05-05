@@ -15,14 +15,17 @@ initCursor();
 // ═══════ DOCUMENT READY ═══════
 document.addEventListener('DOMContentLoaded', async () => {
     // Always load: Navigation + Animations
-    await Promise.all([
+    const [{ initNavigation }, { initAnimations }] = await Promise.all([
         import('./nav.js'),
         import('./animations.js')
     ]);
+    initNavigation();
+    initAnimations();
 
     // Conditionally load heavy modules only if needed on page
     if (document.querySelector('.radar-scanner-wrap')) {
-        await import('./radar.js');
+        const { initRadar } = await import('./radar.js');
+        initRadar();
     }
 
     if (document.querySelector('#contactForm')) {
