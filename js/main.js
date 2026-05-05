@@ -5,7 +5,7 @@
  */
 
 // ═══════ CORE: PARTICLES (immediate) ═══════
-import { StarField } from './particles.js';
+import { StarField } from '../particles.js';
 new StarField();
 
 // ═══════ CURSOR: Initialize early for snappy response ═══════
