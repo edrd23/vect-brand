@@ -1,9 +1,4 @@
-import { initNavigation } from './js/nav.js';
-import { initAnimations } from './js/animations.js';
-
 document.addEventListener('DOMContentLoaded', () => {
-    initNavigation();
-    initAnimations();
     document.body.classList.add('js-ready');
     // NOTE: Reveal, Spotlight, TextScramble, Magnetic buttons, Counters
     // are all handled exclusively by js/animations.js (ES Module).
@@ -13,11 +8,54 @@ document.addEventListener('DOMContentLoaded', () => {
     let turnstileVerified = false;
     let turnstileToken = '';
 
-    // ═══════ NAVIGATION & LANGUAGE ═══════
-    // (Handled by js/nav.js — no duplication needed here)
+    // ═══════ LANGUAGE SWITCHER ═══════
+    const langBtns = document.querySelectorAll('.lang-btn');
+    const htmlRoot = document.documentElement;
+    const nav = document.querySelector('nav');
 
-    // ═══════ NAVIGATION ═══════
-    // (Handled by js/nav.js — no duplication needed here)
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.getAttribute('data-lang');
+            htmlRoot.setAttribute('lang', lang);
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            localStorage.setItem('vect_lang', lang);
+
+            // Update aria-labels for split-text elements
+            document.querySelectorAll('[data-label-it]').forEach(el => {
+                const newLabel = el.getAttribute(`data-label-${lang}`);
+                if (newLabel) el.setAttribute('aria-label', newLabel);
+            });
+        });
+    });
+
+    const currentLang = localStorage.getItem('vect_lang') || 'it';
+    const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
+    if (activeBtn) activeBtn.click();
+
+    // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
+    const sections = document.querySelectorAll('section');
+    const navLinksList = document.querySelectorAll('.nav-links a');
+
+    window.addEventListener('scroll', () => {
+        nav.classList.toggle('scrolled', window.scrollY > 80);
+
+        // ScrollSpy logic
+        let currentSection = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= (sectionTop - 200)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        navLinksList.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(currentSection)) {
+                link.classList.add('active');
+            }
+        });
+    }, { passive: true });
 
     // ═══════ MOBILE MENU TOGGLE ═══════
     // (Handled by js/nav.js — no duplication needed here)

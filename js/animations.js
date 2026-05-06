@@ -25,19 +25,8 @@ export function initAnimations() {
                 }
             });
         }, observerOptions);
-        // Include ALL reveal types — including split-text targets
-        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal, .reveal-premium, .section-title, .section-label').forEach(el => revealObserver.observe(el));
-
-        // Elements already visible on load (e.g. hero) get .active immediately
-        const immediateObserver = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    obs.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0, rootMargin: '0px' });
-        document.querySelectorAll('.section-title, .section-label').forEach(el => immediateObserver.observe(el));
+        // Include ALL reveal types
+        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal, .reveal-premium').forEach(el => revealObserver.observe(el));
     };
 
     const setupSpotlight = () => {
