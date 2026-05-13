@@ -1829,18 +1829,45 @@ body::after {
     text-align: center;
 }
 
-/* ── Main Grid ── */
-/* ── Unified radar+about 3-col grid ── */
-.radar-about-grid {
-    display: grid;
-    grid-template-columns: 320px 1fr 340px;
-    gap: 32px;
-    align-items: start;
+/* ── Synthetic About Bar ── */
+.synthetic-about-bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: rgba(255, 107, 26, 0.03);
+    border: 1px solid rgba(255, 107, 26, 0.1);
+    padding: 16px 24px;
+    margin-bottom: 24px;
 }
 
-.radar-about-text {
-    display: flex;
-    flex-direction: column;
+.sab-label {
+    color: var(--vect-accent);
+    font-size: 11px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.sab-content {
+    font-size: 13px;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+.sab-mini-scanner {
+    flex-shrink: 0;
+    width: 200px;
+    margin-top: 0 !important;
+    padding: 8px !important;
+}
+
+/* ── Main Grid ── */
+/* ── Unified radar+info 2-col grid ── */
+.radar-about-grid {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 32px;
+    align-items: start;
 }
 
 /* Mini RF scanner inside about col */
@@ -2392,19 +2419,6 @@ body::after {
 @media (max-width: 1200px) {
     .radar-about-grid {
         grid-template-columns: 1fr 340px;
-        grid-template-rows: auto auto;
-    }
-    .radar-about-text {
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-    }
-    .radar-scanner-wrap {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-    }
-    .radar-info-panel {
-        grid-column: 2 / 3;
-        grid-row: 1 / 3;
     }
 }
 
@@ -2412,7 +2426,14 @@ body::after {
     .radar-about-grid {
         grid-template-columns: 1fr;
     }
-    .radar-about-text,
+    .synthetic-about-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .sab-mini-scanner {
+        width: 100%;
+    }
     .radar-scanner-wrap,
     .radar-info-panel {
         grid-column: auto;
