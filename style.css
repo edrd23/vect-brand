@@ -2660,4 +2660,31 @@ body::after {
 .spotlight-content {
     position: relative;
     z-index: 2;
+}
+
+/* ── About Synthetic Grid (Section 03) ── */
+.about-synthetic-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 20px;
+    border: 1px solid rgba(255, 107, 26, 0.1);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 40px;
+    position: relative;
+    align-items: center;
+}
+
+.about-synthetic-visual {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+@media (max-width: 900px) {
+    .about-synthetic-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 24px;
+    }
 }
