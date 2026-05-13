@@ -408,39 +408,30 @@
         </div>
     </section>
 
-    <!-- ═══════ GLOBAL RF REGULATORY RADAR ═══════ -->
+    <!-- ═══════ 02 — RADAR NORMATIVO & CHI SIAMO ═══════ -->
     <section id="radar" class="radar-section reveal" data-reveal>
         <div class="radar-section-bg">
             <div class="radar-glow-orb radar-orb-1"></div>
             <div class="radar-glow-orb radar-orb-2"></div>
         </div>
         <div class="container">
-            <!-- Header -->
+            <!-- Header unificato -->
             <div class="radar-header">
                 <div class="radar-header-left">
-                    <span class="section-label">02 — <span class="it-text">Radar Normativo</span><span
-                            class="en-text">Regulatory Radar</span></span>
+                    <span class="section-label">02 — <span class="it-text">Radar Normativo & Chi Siamo</span><span class="en-text">Regulatory Radar & About</span></span>
                     <h2 class="section-title">
                         <span class="it-text">Spettro Globale.<br>Sotto Controllo.</span>
                         <span class="en-text">Global Spectrum.<br>Under Control.</span>
                     </h2>
-                    <p class="section-desc" style="max-width:480px;">
-                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica
-                            operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
-                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography.
-                            Select a region to view frequency data.</span>
-                    </p>
                 </div>
                 <div class="radar-live-stats">
                     <div class="radar-stat-block">
                         <span class="radar-stat-value">6</span>
-                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span
-                                class="en-text">Regions Monitored</span></span>
+                        <span class="radar-stat-label"><span class="it-text">Regioni Monitorate</span><span class="en-text">Regions Monitored</span></span>
                     </div>
                     <div class="radar-stat-block">
                         <span class="radar-stat-value">24/7</span>
-                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span
-                                class="en-text">System Uptime</span></span>
+                        <span class="radar-stat-label"><span class="it-text">Uptime Sistema</span><span class="en-text">System Uptime</span></span>
                     </div>
                     <div class="radar-stat-block">
                         <span class="radar-stat-value" id="radar-live-clock">--:--:--</span>
@@ -449,9 +440,49 @@
                 </div>
             </div>
 
-            <!-- Main Grid: Scanner + Region Panel -->
-            <div class="radar-main-grid">
-                <!-- Left: Radar Scanner -->
+            <!-- Body: 3 colonne — About | Radar Scanner | Info Panel -->
+            <div class="radar-about-grid">
+
+                <!-- COL 1: Chi Siamo -->
+                <div class="radar-about-text reveal-item">
+                    <p class="section-desc" style="margin-bottom:20px;">
+                        <span class="it-text">VECT monitora la conformità normativa RF in ogni area geografica operativa. Seleziona una regione per visualizzare i dati di frequenza.</span>
+                        <span class="en-text">VECT monitors RF regulatory compliance across every operational geography. Select a region to view frequency data.</span>
+                    </p>
+                    <div style="border-left:2px solid var(--vect-accent);padding:16px 20px;background:rgba(255,107,26,0.04);margin-bottom:20px;">
+                        <p style="font-style:italic;font-size:14px;color:var(--vect-white);line-height:1.6;">
+                            <span class="it-text">"Il coordinamento RF non è un dettaglio, è la base su cui poggia l'intera produzione."</span>
+                            <span class="en-text">"RF coordination is not a detail; it's the foundation on which the entire production rests."</span>
+                        </p>
+                    </div>
+                    <p class="section-desc" style="font-size:13px;">
+                        <span class="it-text">VECT nasce dall'esigenza di elevare gli standard RF nel B2B. Non siamo solo fornitori, siamo partner tecnici che garantiscono l'integrità del segnale in ogni condizione.</span>
+                        <span class="en-text">VECT was born from the need to elevate RF standards in B2B. We are not just suppliers; we are technical partners who ensure signal integrity under all conditions.</span>
+                    </p>
+                    <!-- Mini RF Scanner compatto -->
+                    <div class="mini-rf-scanner rf-scanner-ui" style="margin-top:24px;">
+                        <div class="scanner-header mono">
+                            <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">SCANSIONE ATTIVA</span><span class="en-text">LIVE SCAN</span></div>
+                            <div class="scanner-main-freq" id="live-freq">470.000 <span class="mhz">MHz</span></div>
+                        </div>
+                        <div class="scanner-display" style="height:90px;">
+                            <div class="scanner-grid">
+                                <div class="grid-line-h"></div>
+                                <div class="grid-line-h" style="top:50%"></div>
+                                <div class="grid-line-v"></div>
+                                <div class="grid-line-v" style="left:50%"></div>
+                            </div>
+                            <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none" role="img">
+                                <title>VECT RF Scan</title>
+                                <defs><linearGradient id="peakGrad2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="var(--vect-accent)" stop-opacity="0.8"/><stop offset="100%" stop-color="var(--vect-accent)" stop-opacity="0"/></linearGradient></defs>
+                                <path d="M0 300 L 150 300 L 200 150 L 250 300 L 400 300 L 450 80 L 500 300 L 700 300 L 750 200 L 800 300 L 850 300 L 880 120 L 910 300 L 1000 300" fill="url(#peakGrad2)" stroke="var(--vect-accent)" stroke-width="2" vector-effect="non-scaling-stroke"/>
+                            </svg>
+                            <div class="scanner-sweep"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- COL 2: Radar Scanner -->
                 <div class="radar-scanner-wrap">
                     <div class="radar-scanner-frame">
                         <div class="rframe-corner rframe-tl"></div>
@@ -469,30 +500,12 @@
                                 <div class="radar-ch-v"></div>
                             </div>
                             <div class="radar-sweep-arm"></div>
-                            <button class="radar-hotspot rh-na" data-region="NA">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">NA</span>
-                            </button>
-                            <button class="radar-hotspot rh-eu" data-region="EU">
-                                <span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl rh-lbl-active">EU</span>
-                            </button>
-                            <button class="radar-hotspot rh-as" data-region="AS">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">AS</span>
-                            </button>
-                            <button class="radar-hotspot rh-me" data-region="ME">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">ME</span>
-                            </button>
-                            <button class="radar-hotspot rh-sa" data-region="SA">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">SA</span>
-                            </button>
-                            <button class="radar-hotspot rh-au" data-region="AU">
-                                <span class="rh-dot"></span><span class="rh-ping"></span>
-                                <span class="rh-lbl">AU</span>
-                            </button>
+                            <button class="radar-hotspot rh-na" data-region="NA"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">NA</span></button>
+                            <button class="radar-hotspot rh-eu" data-region="EU"><span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span><span class="rh-lbl rh-lbl-active">EU</span></button>
+                            <button class="radar-hotspot rh-as" data-region="AS"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">AS</span></button>
+                            <button class="radar-hotspot rh-me" data-region="ME"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">ME</span></button>
+                            <button class="radar-hotspot rh-sa" data-region="SA"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">SA</span></button>
+                            <button class="radar-hotspot rh-au" data-region="AU"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">AU</span></button>
                         </div>
                     </div>
                     <div class="spectrum-bar-wrap">
@@ -501,25 +514,19 @@
                         <span class="mono spectrum-freq-label">694 MHz</span>
                     </div>
                     <div class="radar-status-row">
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span>
-                        </div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span>
-                        </div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span>
-                        </div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
                         <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span>
-                        </div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
                     </div>
                 </div>
 
-                <!-- Right: Region Info Panel -->
+                <!-- COL 3: Info Panel -->
                 <div class="radar-info-panel">
                     <div class="rip-header">
                         <div>
-                            <div class="mono"
-                                style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS ·
-                                SPECTERA DATA</div>
+                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS · SPECTERA DATA</div>
                             <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
                         </div>
                         <div class="rip-status-chip">
@@ -531,110 +538,34 @@
                         <div class="rip-idle">
                             <div class="rip-idle-icon">&#9678;</div>
                             <p class="mono rip-idle-msg">
-                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I
-                                    DATI WMAS / SPECTERA</span>
-                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS /
-                                    SPECTERA DATA</span>
+                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
+                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
                             </p>
                         </div>
                     </div>
                     <div class="rip-bars" id="rip-bars" style="display:none;">
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
-                            <div class="rip-bar-bg">
-                                <div class="rip-bar-fill" id="bar-compliance"></div>
-                            </div>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
                             <span class="rip-bar-val mono" id="val-compliance">-</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
-                            <div class="rip-bar-bg">
-                                <div class="rip-bar-fill" id="bar-quality"></div>
-                            </div>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
                             <span class="rip-bar-val mono" id="val-quality">-</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
-                            <div class="rip-bar-bg">
-                                <div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div>
-                            </div>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
                             <span class="rip-bar-val mono" id="val-congestion">-</span>
                         </div>
                     </div>
                     <div class="rip-footer">
-                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA
-                            · VECT RF INTEL v2.4</span>
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
 
-
-    <!-- ═══════ ABOUT ═══════ -->
-    <section id="about" class="container reveal" data-reveal-group>
-        <div class="about-grid">
-            <div class="reveal-item">
-                <span class="section-label">03 — <span class="it-text">Chi Siamo</span><span
-                        class="en-text">About</span></span>
-                <h2 class="section-title">
-                    <span class="it-text">Precisione in ogni Hertz.</span>
-                    <span class="en-text">Precision in every Hertz.</span>
-                </h2>
-                <p style="margin-bottom: 24px;">
-                    <span class="it-text">VECT nasce dall'esigenza di elevare gli standard RF nel B2B. Non siamo solo
-                        fornitori, siamo partner tecnici che garantiscono l'integrità del segnale in ogni
-                        condizione.</span>
-                    <span class="en-text">VECT was born from the need to elevate RF standards in B2B. We are not just
-                        suppliers; we are technical partners who ensure signal integrity under all conditions.</span>
-                </p>
-                <div style="padding: 24px; border-left: 2px solid var(--vect-accent); background: var(--vect-dark);">
-                    <p style="font-style: italic; font-size: 15px; color: var(--vect-white);">
-                        <span class="it-text">"Il coordinamento RF non è un dettaglio, è la base su cui poggia l'intera
-                            produzione."</span>
-                        <span class="en-text">"RF coordination is not a detail; it's the foundation on which the entire
-                            production rests."</span>
-                    </p>
-                </div>
-            </div>
-            <!-- SCANNIGN UI DINAMICA -->
-            <div class="about-visual reveal-item rf-scanner-ui">
-                <div class="scanner-header mono">
-                    <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">SCANSIONE
-                            ATTIVA</span><span class="en-text">LIVE SCAN</span></div>
-                    <div class="scanner-main-freq" id="live-freq">470.000 <span class="mhz">MHz</span></div>
-                </div>
-
-                <div class="scanner-display">
-                    <div class="scanner-grid">
-                        <div class="grid-line-h"></div>
-                        <div class="grid-line-h" style="top: 25%"></div>
-                        <div class="grid-line-h" style="top: 50%"></div>
-                        <div class="grid-line-h" style="top: 75%"></div>
-                        <div class="grid-line-v"></div>
-                        <div class="grid-line-v" style="left: 25%"></div>
-                        <div class="grid-line-v" style="left: 50%"></div>
-                        <div class="grid-line-v" style="left: 75%"></div>
-                    </div>
-
-                    <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none" role="img">
-                        <title>VECT Graphic</title>
-                        <defs>
-                            <linearGradient id="peakGrad" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="0%" stop-color="var(--vect-accent)" stop-opacity="0.8" />
-                                <stop offset="100%" stop-color="var(--vect-accent)" stop-opacity="0" />
-                            </linearGradient>
-                        </defs>
-                        <path
-                            d="M0 300 L 150 300 L 200 150 L 250 300 L 400 300 L 450 80 L 500 300 L 700 300 L 750 200 L 800 300 L 850 300 L 880 120 L 910 300 L 1000 300"
-                            fill="url(#peakGrad)" stroke="var(--vect-accent)" stroke-width="2"
-                            vector-effect="non-scaling-stroke" />
-                    </svg>
-                    <div class="scanner-sweep"></div>
-                </div>
-
-                </div>
-            </div>
+            </div><!-- /radar-about-grid -->
         </div>
     </section>
 
