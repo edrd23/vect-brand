@@ -490,6 +490,7 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     position: relative;
     overflow: hidden;
 }
@@ -570,6 +571,9 @@ section {
 .hero-container {
     position: relative;
     z-index: 20;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-logo-box {
