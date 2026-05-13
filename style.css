@@ -361,6 +361,7 @@ nav {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     align-items: center;
+    justify-items: center;
     background: var(--surface-glass);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
@@ -375,6 +376,10 @@ nav.scrolled {
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--surface-highest);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.nav-logo {
+    justify-self: start;
 }
 
 .nav-logo svg {
@@ -506,6 +511,8 @@ section {
     max-width: 900px;
     position: relative;
     z-index: 10;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .hero-bg-visual {
@@ -567,6 +574,8 @@ section {
 
 .hero-logo-box {
     margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
 }
 
 .hero-logo-box svg {
@@ -585,7 +594,7 @@ section {
     font-size: clamp(15px, 1.8vw, 17px);
     color: var(--vect-silver);
     max-width: 650px;
-    margin-bottom: 40px;
+    margin: 0 auto 40px auto;
 }
 
 .hero-tagline {
@@ -598,6 +607,7 @@ section {
     margin-bottom: 12px !important;
     display: flex;
     align-items: center;
+    justify-content: center;
     gap: 15px;
 }
 
