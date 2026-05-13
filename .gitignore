@@ -44,3 +44,5 @@ mcp_config.json.tmp
 
 # Git hooks
 .husky/
+
+.vercel
