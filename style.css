@@ -1786,7 +1786,7 @@ body::after {
     justify-content: space-between;
     align-items: flex-end;
     gap: 40px;
-    margin-bottom: 30px;
+    margin-bottom: 15px;
 }
 
 .radar-live-stats {
@@ -1797,13 +1797,13 @@ body::after {
 }
 
 .radar-stat-block {
-    padding: 20px 28px;
+    padding: 10px 16px;
     border-right: 1px solid rgba(255, 107, 26, 0.15);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 6px;
-    min-width: 110px;
+    gap: 4px;
+    min-width: 100px;
 }
 
 .radar-stat-block:last-child {
@@ -1812,7 +1812,7 @@ body::after {
 
 .radar-stat-value {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
-    font-size: 26px;
+    font-size: 20px;
     font-weight: 700;
     color: var(--vect-accent);
     letter-spacing: 2px;
@@ -1874,7 +1874,7 @@ body::after {
     position: relative;
     aspect-ratio: 1;
     width: 100%;
-    max-width: 480px;
+    max-width: 320px;
     margin: 0 auto;
 }
 
@@ -2147,7 +2147,7 @@ body::after {
     display: flex;
     align-items: center;
     gap: 6px;
-    padding: 8px 14px;
+    padding: 4px 10px;
     font-size: 9px;
     letter-spacing: 1.5px;
     color: var(--vect-silver);
@@ -2205,7 +2205,7 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 24px 24px 20px;
+    padding: 16px;
     border-bottom: 1px solid rgba(255, 107, 26, 0.1);
 }
 
@@ -2231,9 +2231,9 @@ body::after {
 
 .rip-body {
     flex: 1;
-    padding: 24px;
+    padding: 16px;
     position: relative;
-    min-height: 220px;
+    min-height: 160px;
 }
 
 .rip-idle {
@@ -2296,7 +2296,7 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 12px 0;
+    padding: 8px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     gap: 12px;
 }
