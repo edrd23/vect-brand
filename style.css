@@ -1789,7 +1789,7 @@ body::after {
 
 .radar-section .container {
     position: relative;
-    z-index: 1;
+    z-index: 10;
 }
 
 /* ── Header ── */
@@ -1887,10 +1887,12 @@ body::after {
     border: 1px solid rgba(255,107,26,0.2);
     background: rgba(0,0,0,0.5);
     padding: 12px;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 .mini-rf-scanner .scanner-display {
-    height: 90px;
+    height: 60px;
 }
 
 /* Legacy alias for old layout */
