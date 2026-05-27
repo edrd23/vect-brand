@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VECT — White Paper: WMAS nei Festival Multi-Stage</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0A0A0A;
+            --dark: #111111;
+            --carbon: #1A1A1A;
+            --steel: #2A2A2A;
+            --ash: #666666;
+            --silver: #999999;
+            --light: #E0E0E0;
+            --white: #F5F5F5;
+            --accent: #FF6B1A;
+            --accent-glow: rgba(255, 107, 26, 0.12);
+            --cyan: #00D4FF;
+            --font: 'Inter', sans-serif;
+            --mono: 'JetBrains Mono', monospace;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font);
+            background: var(--black);
+            color: var(--light);
+            line-height: 1.7;
+        }
+
+        /* -- COVER --------------------------------- */
+        .cover {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px 100px;
+            position: relative;
+            overflow: hidden;
+            background: var(--black);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -150px;
+            right: -150px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 26, 0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .cover-badge {
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 4px;
+            color: var(--accent);
+            text-transform: uppercase;
+            border: 1px solid rgba(255, 107, 26, 0.3);
+            display: inline-block;
+            padding: 6px 18px;
+            border-radius: 100px;
+            margin-bottom: 50px;
+            width: fit-content;
+        }
+
+        .cover-logo {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .cover-logo svg {
+            width: 180px;
+        }
+
+        .cover-label {
+            font-family: var(--mono);
+            font-size: 12px;
+            color: var(--ash);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+
+        .cover-title {
+            font-size: clamp(36px, 5vw, 64px);
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .cover-title em {
+            color: var(--accent);
+            font-style: normal;
+        }
+
+        .cover-sub {
+            font-size: 18px;
+            color: var(--silver);
+            max-width: 600px;
+            margin-bottom: 60px;
+            font-weight: 300;
+        }
+
+        .cover-meta {
+            display: flex;
+            gap: 50px;
+        }
+
+        .meta-item label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ash);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .meta-item span {
+            font-size: 14px;
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        /* -- SECTIONS ----------------------------- */
+        .section {
+            padding: 80px 100px;
+            border-bottom: 1px solid var(--steel);
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-number {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--accent);
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .section-title {
+            font-size: clamp(26px, 3vw, 40px);
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .section-title .accent {
+            color: var(--accent);
+        }
+
+        p {
+            font-size: 16px;
+            color: #BBBBBB;
+            margin-bottom: 20px;
+            max-width: 780px;
+        }
+
+        /* -- PROBLEM CARDS ------------------------- */
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .problem-card {
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-top: 3px solid var(--accent);
+            padding: 30px 24px;
+            border-radius: 4px;
+        }
+
+        .problem-card .icon {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+
+        .problem-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 10px;
+        }
+
+        .problem-card p {
+            font-size: 14px;
+            color: var(--silver);
+            margin: 0;
+        }
+
+        /* -- SPEC TABLE --------------------------- */
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 40px 0;
+            font-size: 15px;
+        }
+
+        .spec-table th {
+            background: var(--carbon);
+            font-family: var(--mono);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            padding: 14px 20px;
+            text-align: left;
+            border: 1px solid var(--steel);
+        }
+
+        .spec-table td {
+            padding: 13px 20px;
+            border: 1px solid var(--steel);
+            color: var(--light);
+        }
+
+        .spec-table tr:nth-child(odd) td {
+            background: var(--carbon);
+        }
+
+        .spec-table tr:nth-child(even) td {
+            background: var(--dark);
+        }
+
+        .spec-table .val-old {
+            color: #FF4D4D;
+            font-weight: 600;
+        }
+
+        .spec-table .val-new {
+            color: #00CC66;
+            font-weight: 700;
+            font-family: var(--mono);
+        }
+
+        /* -- COMPARISON --------------------------- */
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin: 40px 0;
+        }
+
+        .comp-card {
+            padding: 36px;
+            border-radius: 4px;
+            border: 1px solid var(--steel);
+        }
+
+        .comp-card.legacy {
+            background: rgba(255, 50, 50, 0.04);
+            border-color: rgba(255, 70, 70, 0.3);
+        }
+
+        .comp-card.wmas {
+            background: rgba(255, 107, 26, 0.04);
+            border-color: var(--accent);
+        }
+
+        .comp-badge {
+            font-family: var(--mono);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 3px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .comp-card.legacy .comp-badge {
+            color: #FF6666;
+            background: rgba(255, 50, 50, 0.1);
+        }
+
+        .comp-card.wmas .comp-badge {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .comp-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .comp-list {
+            list-style: none;
+        }
+
+        .comp-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--steel);
+            font-size: 14px;
+            color: var(--silver);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .comp-list li:last-child {
+            border-bottom: none;
+        }
+
+        .comp-list li .ico {
+            flex-shrink: 0;
+            font-size: 16px;
+        }
+
+        /* -- STATS ROW --------------------------- */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin: 40px 0;
+            padding: 40px;
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-radius: 4px;
+        }
+
+        .stat-block {
+            text-align: center;
+        }
+
+        .stat-val {
+            font-family: var(--mono);
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .stat-unit {
+            font-family: var(--mono);
+            font-size: 16px;
+            color: var(--silver);
+        }
+
+        .stat-desc {
+            font-size: 12px;
+            color: var(--ash);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 8px;
+        }
+
+        /* -- SCENARIO BOX -------------------------- */
+        .scenario {
+            background: var(--carbon);
+            border: 1px solid var(--steel);
+            border-left: 4px solid var(--accent);
+            padding: 36px 40px;
+            margin: 40px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .scenario h4 {
+            font-family: var(--mono);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 16px;
+        }
+
+        .scenario p {
+            margin: 0;
+            color: var(--light);
+            font-size: 15px;
+        }
+
+        /* -- CTA FOOTER ---------------------------- */
+        .cta-section {
+            padding: 80px 100px;
+            background: var(--carbon);
+            text-align: center;
+            border-top: 2px solid var(--accent);
+        }
+
+        .cta-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .cta-section p {
+            color: var(--silver);
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+
+        .cta-contacts {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+        }
+
+        .cta-item label {
+            display: block;
+            font-family: var(--mono);
+            font-size: 10px;
+            color: var(--ash);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 6px;
+        }
+
+        .cta-item a {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .print-btn {
+            background: var(--accent);
+            color: #000;
+            font-family: var(--mono);
+            font-weight: 700;
+            padding: 12px 28px;
+            border: none;
+            cursor: pointer;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            border-radius: 4px;
+        }
+
+        .print-btn:hover {
+            background: var(--white);
+        }
+
+        @media print {
+            body {
+                background: #fff;
+                color: #000;
+            }
+
+            .cover {
+                background: #fff;
+                border-bottom: 2px solid #000;
+                min-height: auto;
+                padding: 50px;
+            }
+
+            .cover-title {
+                color: #000;
+            }
+
+            .cover-sub,
+            p {
+                color: #444;
+            }
+
+            .problem-card,
+            .comp-card,
+            .spec-table td,
+            .stats-row {
+                background: #f7f7f7;
+                border-color: #ddd;
+            }
+
+            .section {
+                max-width: 100%;
+                padding: 50px;
+            }
+
+            .print-btn {
+                display: none;
+            }
+
+            .cta-section {
+                background: #f0f0f0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
+
+    <!-- -- COVER -------------------------------------------- -->
+    <div class="cover">
+        <div class="cover-badge">White Paper Tecnico · 2026</div>
+
+        <div class="cover-logo">
+            <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M40 30L68 86C70 90 75 90 77 90L80 90C83 90 86 90 88 86L115 30H100L77.5 75L55 30H40Z"
+                    fill="#F5F5F5" />
+                <path
+                    d="M140 30H185V43H148Q143 43 143 48V54H178V66H143V72Q143 77 148 77H185V90H140Q130 90 130 80V40Q130 30 140 30Z"
+                    fill="#FF6B1A" />
+                <path d="M225 30H270V43H233Q228 43 228 48V72Q228 77 233 77H270V90H225Q215 90 215 80V40Q215 30 225 30Z"
+                    fill="#F5F5F5" />
+                <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
+            </svg>
+        </div>
+
+        <div class="cover-label">Technical White Paper — RF Engineering</div>
+        <h1 class="cover-title">Il <em>WMAS</em> nei Festival<br>Multi-Stage</h1>
+        <p class="cover-sub">Come la tecnologia Wideband Wireless Audio (WMAS) sta ridefinendo la gestione dello spettro
+            RF nelle grandi produzioni live, eliminando la complessità e garantendo affidabilità assoluta.</p>
+
+        <div class="cover-meta">
+            <div class="meta-item">
+                <label>Autore</label>
+                <span>VECT / Carmine Eduardo De Vita</span>
+            </div>
+            <div class="meta-item">
+                <label>Tecnologia</label>
+                <span>Sennheiser Spectera (WMAS)</span>
+            </div>
+            <div class="meta-item">
+                <label>Revisione</label>
+                <span>v1.0 — Marzo 2026</span>
+            </div>
+            <div class="meta-item">
+                <label>Classificazione</label>
+                <span>B2B / Technical Director</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- -- SECTION 1: EXECUTIVE SUMMARY ----------------------- -->
+    <div class="section">
+        <div class="section-number">// 01 · Executive Summary</div>
+        <h2 class="section-title">Il problema che ogni Technical Director conosce</h2>
+        <p>Ogni anno, nelle grandi produzioni live italiane ed europee, il coordinamento RF è diventato uno dei colli di
+            bottiglia più critici. Festival multi-stage con 80–120 link wireless attivi simultaneamente rappresentano
+            una sfida che i sistemi legacy tradizionali non sono più in grado di gestire in modo affidabile.</p>
+        <p>Questo White Paper descrive come la tecnologia <strong style="color: var(--white);">WMAS (Wideband
+                Multicarrier Audio System)</strong> — implementata dal sistema Sennheiser Spectera — risolva
+            strutturalmente questi problemi, e come VECT possa essere il partner RF certificato per le vostre
+            produzioni.</p>
+
+        <div class="stats-row">
+            <div class="stat-block">
+                <div class="stat-val">64<span class="stat-unit">ch</span></div>
+                <div class="stat-desc">In 1U rack · zero coordinamento IMD</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-val">0.7<span class="stat-unit">ms</span></div>
+                <div class="stat-desc">Latenza costante · link bidirezionale</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-val">40<span class="stat-unit">x</span></div>
+                <div class="stat-desc">Diversità wideband · interferenz-proof</div>
+            </div>
+            <div class="stat-block">
+                <div class="stat-val">1<span class="stat-unit"> portante</span></div>
+                <div class="stat-desc">6–8 MHz · per tutti i link simultanei</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- -- SECTION 2: IL PROBLEMA ---------------------------- -->
+    <div class="section">
+        <div class="section-number">// 02 · Il Problema</div>
+        <h2 class="section-title">RF Management nei festival:<br>perché il modello <span class="accent">legacy è
+                rotto</span></h2>
+        <p>Nelle produzioni multi-stage, ogni palco richiede decine di link wireless: microfoni, IEM, comms di regia.
+            L'accumulo di tutti questi sistemi crea un ambiente RF denso e instabile, dove ogni scelta di coordinamento
+            impatta tutti gli altri.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">??</div>
+                <h4>Saturazione dello Spettro</h4>
+                <p>Nella banda UHF 470–694 MHz, il numero di frequenze compatibili è fisicamente limitato. Con 5+
+                    fornitori attivi sul campo, la coesistenza è spesso impossibile senza collisioni.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">??</div>
+                <h4>IMD: Intermodulation Distortion</h4>
+                <p>Ogni trasmettitore genera prodotti intermodulazione (IMD) che interferiscono con le frequenze
+                    adiacenti. Calcolare piani frequenze per 80+ link richiede ore e margini di errore elevati.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">??</div>
+                <h4>Complessità Logistica</h4>
+                <p>Sistemi legacy richiedono distrib. RF analogiche, amplificatori, splitter passivi e decine di cavi
+                    coassiali. Il payload di un sistema a 32 link può superare i 4U di rack.</p>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <h4>// Scenario Reale — Festival Multi-Stage</h4>
+            <p>Main Stage (40 link) + Second Stage (24 link) + Press Area (12 link) + Broadcast SNG van (8 link HF) = 84
+                link simultanei. Nello spazio UHF disponibile in Italia dopo la refarming, coordinate correttamente
+                anche 40 link con sistemi convenzionali è già al limite del possibile.</p>
+        </div>
+    </div>
+
+    <!-- -- SECTION 3: LA SOLUZIONE WMAS ------------------------ -->
+    <div class="section">
+        <div class="section-number">// 03 · La Soluzione</div>
+        <h2 class="section-title">WMAS: una portante,<br><span class="accent">capacità illimitata</span></h2>
+        <p>Il Wireless Multicarrier Audio System (WMAS) è un approccio radicalmente diverso alla trasmissione wireless
+            audio. Invece di assegnare una frequenza dedicata a ogni link, WMAS utilizza <strong
+                style="color:var(--white)">una singola portante larga 6–8 MHz</strong> per trasportare simultaneamente
+            decine di flussi audio bidirezionali tramite protocolli TDMA/TDD.</p>
+
+        <table class="spec-table">
+            <thead>
+                <tr>
+                    <th>Parametro</th>
+                    <th>Legacy Multi-Carrier</th>
+                    <th>WMAS / Spectera</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Link per portante</td>
+                    <td class="val-old">1</td>
+                    <td class="val-new">32 (up) + 32 (down)</td>
+                </tr>
+                <tr>
+                    <td>Spazio spettrale per 32 canali</td>
+                    <td class="val-old">~128 MHz (4 MHz/ch)</td>
+                    <td class="val-new">6–8 MHz</td>
+                </tr>
+                <tr>
+                    <td>Coordinamento IMD</td>
+                    <td class="val-old">Obbligatorio · ore di lavoro</td>
+                    <td class="val-new">Zero — eliminato by design</td>
+                </tr>
+                <tr>
+                    <td>Latenza audio</td>
+                    <td class="val-old">1.5–3 ms (companding)</td>
+                    <td class="val-new">0.7 ms costante</td>
+                </tr>
+                <tr>
+                    <td>Direzione link</td>
+                    <td class="val-old">Unidirezionale</td>
+                    <td class="val-new">Bidirezionale (IEM + Mic in 1 SEK)</td>
+                </tr>
+                <tr>
+                    <td>Encryption</td>
+                    <td class="val-old">Nessuna / proprietaria</td>
+                    <td class="val-new">AES-256 CTR</td>
+                </tr>
+                <tr>
+                    <td>Rack space (32 ch)</td>
+                    <td class="val-old">6–10U (rice+distrib.)</td>
+                    <td class="val-new">1U (Base Station)</td>
+                </tr>
+                <tr>
+                    <td>Integrazione digitale</td>
+                    <td class="val-old">Analogica / AES3</td>
+                    <td class="val-new">Dante 32×32 + MADI parallelo</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- -- SECTION 4: CONFRONTO DIRETTO ------------------------ -->
+    <div class="section">
+        <div class="section-number">// 04 · Caso Studio</div>
+        <h2 class="section-title">Confronto diretto:<br>festival <span class="accent">350 artisti</span></h2>
+        <p>Scenario: festival con 3 palchi, 350 artisti nel weekend, 4 fornitori audio concorrenti. Obiettivo: garantire
+            32 link IEM+Mic con affidabilità broadcast-grade per il main stage senza impattare sugli altri fornitori.
+        </p>
+
+        <div class="comparison">
+            <div class="comp-card legacy">
+                <span class="comp-badge">Legacy — Multi-Carrier</span>
+                <h3>Approccio Convenzionale</h3>
+                <ul class="comp-list">
+                    <li><span class="ico">?</span> Necessità di coordinare ~128 MHz di spettro, spesso non disponibile
+                        dopo la refarming 700 MHz</li>
+                    <li><span class="ico">?</span> 4–6 ore di frequency planning pre-show con WSM/IAS</li>
+                    <li><span class="ico">?</span> Rischio dropout elevato in ambienti con +5 fornitori attivi</li>
+                    <li><span class="ico">?</span> Distrib. RF passiva: 3U extra rack, +15 cavi coassiali sul campo</li>
+                    <li><span class="ico">?</span> Ogni bodypack = solo microfono O solo IEM, non entrambi</li>
+                    <li><span class="ico">?</span> Nessuna crittografia nativa: il segnale è intercettabile</li>
+                </ul>
+            </div>
+            <div class="comp-card wmas">
+                <span class="comp-badge">WMAS — Sennheiser Spectera</span>
+                <h3>Approccio VECT</h3>
+                <ul class="comp-list">
+                    <li><span class="ico">?</span> 6–8 MHz di spettro per tutti i 32+32 link: coesiste facilmente con
+                        altri fornitori</li>
+                    <li><span class="ico">?</span> Zero frequency planning IMD: plug-in, check, go</li>
+                    <li><span class="ico">?</span> 40x diversità wideband: immune a interferenze spot e multipath</li>
+                    <li><span class="ico">?</span> 1U base station + 2 DAD Antenna: setup completo in 20 minuti</li>
+                    <li><span class="ico">?</span> SEK bodypack bidirezionale: IEM + Mic/Line in un solo dispositivo
+                    </li>
+                    <li><span class="ico">?</span> AES-256 end-to-end: audio VIP e artisti protetto</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="scenario">
+            <h4>// Risultato Operativo</h4>
+            <p>Nel confronto storico con sistemi legacy, le produzioni che hanno adottato il Sennheiser Spectera su main
+                stage hanno registrato <strong style="color:var(--white)">zero dropout legati a interferenze RF</strong>
+                durante il window operativo, con un tempo di setup ridotto del 60% rispetto al sistema precedente
+                (fonte: Sennheiser user case studies, 2024).</p>
+        </div>
+    </div>
+
+    <!-- -- SECTION 5: VECT COME PARTNER ------------------------ -->
+    <div class="section">
+        <div class="section-number">// 05 · VECT Come Partner</div>
+        <h2 class="section-title">Perché affidarsi a <span class="accent">VECT</span></h2>
+        <p>VECT è un operatore RF specializzato basato a Milano, focalizzato esclusivamente sull'ecosistema Sennheiser
+            Spectera. Non siamo un service generalista: siamo lo <strong style="color:var(--white)">specialista
+                WMAS</strong> di riferimento per il mercato italiano.</p>
+
+        <div class="problem-grid">
+            <div class="problem-card">
+                <div class="icon">??</div>
+                <h4>Focus Esclusivo</h4>
+                <p>Tutto il nostro know-how tecnico, la documentazione di setup e la formazione sono centrati
+                    esclusivamente su Spectera/WMAS. Non offriamo compromessi.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">???</div>
+                <h4>Legalmente Blindato</h4>
+                <p>Contratti professionali con clausole specifiche su limitazione responsabilità spettrale, NDA
+                    integrate e conformità D.Lgs 81/08 per ogni intervento.</p>
+            </div>
+            <div class="problem-card">
+                <div class="icon">?</div>
+                <h4>Ready in 20 min</h4>
+                <p>Il sistema Spectera VECT è pre-configurato e pre-cablato. Dal flight case al primo check audio: 20
+                    minuti flat in condizioni standard.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- -- CTA ------------------------------------------------- -->
+    <div class="cta-section">
+        <h2>Parlate con noi prima del vostro prossimo show</h2>
+        <p>Forniamo un'analisi RF gratuita dello spazio spettrale della vostra venue e una proposta tecnica
+            personalizzata entro 24h.</p>
+        <div class="cta-contacts">
+            <div class="cta-item">
+                <label>Operazioni</label>
+                <a href="mailto:tech@vect-rf.it">tech@vect-rf.it</a>
+            </div>
+            <div class="cta-item">
+                <label>Web</label>
+                <a href="https://vect-rf.it" target="_blank">vect-rf.it</a>
+            </div>
+            <div class="cta-item">
+                <label>Sede</label>
+                <span style="color:var(--light); font-size:16px; font-weight:600;">Milano, IT</span>
+            </div>
+        </div>
+        <p style="margin-top:50px; font-size:12px; color:var(--ash);">© 2026 VECT · Tutti i dati tecnici si riferiscono
+            al sistema Sennheiser Spectera BSS · Documento riservato a uso B2B</p>
+    </div>
+
+</body>
+
+</html>
