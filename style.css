@@ -923,17 +923,17 @@ section {
 }
 
 .scanner-status {
-    font-size: 10px;
-    letter-spacing: 2px;
+    font-size: 6px;
+    letter-spacing: 1px;
     color: var(--vect-accent);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 4px;
 }
 
 .status-dot {
-    width: 6px;
-    height: 6px;
+    width: 4px;
+    height: 4px;
     background: var(--vect-accent);
     border-radius: 50%;
     animation: blink 1s infinite alternate;
@@ -951,26 +951,26 @@ section {
 }
 
 .scanner-main-freq {
-    font-size: 36px;
+    font-size: 18px;
     font-weight: 700;
     color: var(--vect-white);
     line-height: 1;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
 }
 
 .scanner-main-freq .mhz {
-    font-size: 14px;
+    font-size: 8px;
     color: var(--vect-ash);
 }
 
 .scanner-display {
     flex: 1;
     position: relative;
-    margin: 20px 0;
+    margin: 10px 0;
     border: 1px solid rgba(255, 107, 26, 0.15);
     background: rgba(10, 10, 10, 0.5);
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 4px;
 }
 
 .scanner-grid {
@@ -1886,13 +1886,14 @@ body::after {
 .mini-rf-scanner {
     border: 1px solid rgba(255,107,26,0.2);
     background: rgba(0,0,0,0.5);
-    padding: 12px;
-    max-width: 250px;
+    padding: 6px;
+    max-width: 125px;
     margin: 0 auto;
+    font-size: 8px; /* Shrink text */
 }
 
 .mini-rf-scanner .scanner-display {
-    height: 60px;
+    height: 30px;
 }
 
 /* Legacy alias for old layout */
@@ -2679,17 +2680,17 @@ body::after {
 /* ── About Synthetic Grid (Section 03) ── */
 .about-synthetic-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 20px;
-    margin-top: 15px;
+    margin-top: 10px;
     border: 1px solid rgba(255, 107, 26, 0.1);
     background: rgba(0, 0, 0, 0.3);
-    padding: 24px;
+    padding: 20px;
     position: relative;
     align-items: center;
 }
 #about {
-    padding-top: 30px;
+    padding-top: 15px;
 }
 
 .about-synthetic-visual {
