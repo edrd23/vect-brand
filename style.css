@@ -1907,16 +1907,18 @@ body::after {
 .mini-rf-scanner {
     border: 1px solid rgba(255,107,26,0.3);
     background: linear-gradient(145deg, rgba(15,15,15,0.95), rgba(0,0,0,0.98));
-    padding: 16px 20px;
+    padding: 10px 16px;
     border-radius: 10px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 107, 26, 0.04);
     backdrop-filter: blur(8px);
     max-width: 100%;
+    max-height: 160px;
+    overflow: hidden;
     margin: 0 auto;
 }
 
 .mini-rf-scanner .scanner-display {
-    height: 70px;
+    height: 50px;
 }
 
 /* Legacy alias for old layout */
@@ -2704,15 +2706,14 @@ body::after {
 .about-synthetic-grid {
     display: grid;
     grid-template-columns: 1fr 380px;
-    gap: 48px;
-    margin-top: 32px;
-    align-items: center;
+    gap: 32px;
+    margin-top: 20px;
+    align-items: start;
     position: relative;
 }
 
 #about {
-    padding-top: 10px;
-    padding-bottom: var(--section-padding);
+    padding: 40px 0;
     background: #060606;
     scroll-margin-top: 100px;
 }
