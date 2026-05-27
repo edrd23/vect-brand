@@ -923,17 +923,17 @@ section {
 }
 
 .scanner-status {
-    font-size: 6px;
-    letter-spacing: 1px;
+    font-size: 9px;
+    letter-spacing: 2px;
     color: var(--vect-accent);
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
 }
 
 .status-dot {
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     background: var(--vect-accent);
     border-radius: 50%;
     animation: blink 1s infinite alternate;
@@ -951,7 +951,7 @@ section {
 }
 
 .scanner-main-freq {
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
     color: var(--vect-white);
     line-height: 1;
@@ -959,18 +959,18 @@ section {
 }
 
 .scanner-main-freq .mhz {
-    font-size: 8px;
+    font-size: 12px;
     color: var(--vect-ash);
 }
 
 .scanner-display {
     flex: 1;
     position: relative;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
     border: 1px solid rgba(255, 107, 26, 0.15);
     background: rgba(10, 10, 10, 0.5);
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: 6px;
 }
 
 .scanner-grid {
@@ -1886,14 +1886,13 @@ body::after {
 .mini-rf-scanner {
     border: 1px solid rgba(255,107,26,0.2);
     background: rgba(0,0,0,0.5);
-    padding: 6px;
-    max-width: 125px;
+    padding: 12px;
+    max-width: 100%;
     margin: 0 auto;
-    font-size: 8px; /* Shrink text */
 }
 
 .mini-rf-scanner .scanner-display {
-    height: 30px;
+    height: 40px;
 }
 
 /* Legacy alias for old layout */
@@ -2680,12 +2679,12 @@ body::after {
 /* ── About Synthetic Grid (Section 03) ── */
 .about-synthetic-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 20px;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 24px;
     margin-top: 10px;
     border: 1px solid rgba(255, 107, 26, 0.1);
     background: rgba(0, 0, 0, 0.3);
-    padding: 20px;
+    padding: 24px;
     position: relative;
     align-items: center;
 }
