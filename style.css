@@ -2695,33 +2695,54 @@ body::after {
 
 /* ── About Synthetic Grid (Section 03) ── */
 .about-synthetic-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    margin: 15px auto 0 auto;
-    max-width: 750px;
-    border: 1px solid rgba(255, 107, 26, 0.15);
-    background: rgba(0, 0, 0, 0.4);
-    padding: 32px;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 48px;
+    margin-top: 32px;
+    align-items: center;
     position: relative;
-    align-items: stretch;
-    border-radius: 8px;
-    text-align: center;
 }
+
 #about {
-    padding-top: 15px;
+    padding-top: 10px;
+}
+
+.about-synthetic-text {
+    text-align: left;
+}
+
+.about-synthetic-text .section-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    color: var(--vect-ash);
+}
+
+.about-synthetic-text blockquote {
+    border-left: 2px solid var(--vect-accent);
+    padding: 12px 20px;
+    background: rgba(255,107,26,0.04);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--vect-white);
+    margin: 0;
+    border-radius: 0 4px 4px 0;
 }
 
 .about-synthetic-visual {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: stretch;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .about-synthetic-grid {
         grid-template-columns: 1fr;
         gap: 32px;
-        padding: 24px;
+    }
+
+    .about-synthetic-visual {
+        max-width: 480px;
     }
 }
