@@ -438,6 +438,14 @@ nav.scrolled {
 section {
     padding: var(--section-padding);
     scroll-margin-top: 100px;
+    background: var(--vect-black);
+    position: relative;
+    z-index: 1;
+}
+
+/* Hero stays transparent to show particles */
+section.hero {
+    background: transparent;
 }
 
 .section-label {
