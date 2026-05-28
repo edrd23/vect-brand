@@ -7,8 +7,6 @@ window.onTurnstileSuccess = function (token) {
     turnstileToken = token;
     const hiddenInput = document.getElementById('turnstileToken');
     if (hiddenInput) hiddenInput.value = token;
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = false;
 };
 
 window.onTurnstileExpired = function () {
@@ -16,14 +14,11 @@ window.onTurnstileExpired = function () {
     turnstileToken = '';
     const hiddenInput = document.getElementById('turnstileToken');
     if (hiddenInput) hiddenInput.value = '';
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = true;
 };
 
 window.onTurnstileError = function () {
-    console.error('[VECT] Turnstile error occurred');
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = true;
+    // Turnstile failed — log but don't block the user
+    console.warn('[VECT] Turnstile error — proceeding without token');
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -428,6 +423,18 @@ radarHotspots.forEach(btn => {
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 
+// Abilita/disabilita il bottone in base alla spunta privacy
+if (contactForm) {
+    const privacyCheck = document.getElementById('privacyConsent');
+    if (privacyCheck && submitBtn) {
+        // Stato iniziale: disabilitato
+        submitBtn.disabled = true;
+        privacyCheck.addEventListener('change', () => {
+            submitBtn.disabled = !privacyCheck.checked;
+        });
+    }
+}
+
 if (contactForm) {
     contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -436,14 +443,12 @@ if (contactForm) {
         const lang = document.documentElement.getAttribute('lang') || 'it';
         const originalHTML = btn.innerHTML;
 
-        // Validate Turnstile
-        if (!turnstileVerified || !turnstileToken) {
-            btn.innerHTML = lang === 'it' ? '⚠ Verifica umana richiesta' : '⚠ Human verification required';
+        // Verifica privacy (doppia sicurezza)
+        const privacyCheck = document.getElementById('privacyConsent');
+        if (privacyCheck && !privacyCheck.checked) {
+            btn.innerHTML = lang === 'it' ? '⚠ Accetta la Privacy Policy' : '⚠ Accept Privacy Policy';
             btn.style.background = 'var(--vect-warning)';
-            setTimeout(() => {
-                btn.innerHTML = originalHTML;
-                btn.style.background = '';
-            }, 3000);
+            setTimeout(() => { btn.innerHTML = originalHTML; btn.style.background = ''; }, 3000);
             return;
         }
 
