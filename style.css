@@ -1173,16 +1173,19 @@ textarea {
 }
 
 input[type="checkbox"] {
-    width: auto;
-    height: auto;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    border: none;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 0 !important;
+    margin: 4px 10px 0 0 !important;
+    appearance: checkbox !important;
+    -webkit-appearance: checkbox !important;
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: initial !important;
+    border: initial !important;
     accent-color: var(--vect-accent);
     cursor: pointer;
-    appearance: auto;
-    -webkit-appearance: auto;
 }
 
 input:focus,
