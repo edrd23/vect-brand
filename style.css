@@ -1548,13 +1548,14 @@ body::after {
         align-items: center;
         gap: 36px;
         z-index: 1001;
-        padding: 80px 40px 40px;
-        transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+        padding: 80px 40px calc(40px + env(safe-area-inset-bottom));
+        transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s step-end;
     }
 
     .nav-links.open {
         right: 0;
         visibility: visible;
+        transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s step-start;
     }
 
     .nav-links a {
@@ -2872,4 +2873,196 @@ body::after {
     .about-synthetic-visual {
         max-width: 480px;
     }
-}
+}
+
+/* ═══════ MOBILE UI/UX POLISH ═══════ */
+@media (max-width: 768px) {
+    /* iOS Zoom Prevention for Forms */
+    input[type="text"],
+    input[type="email"],
+    textarea {
+        font-size: 16px !important;
+    }
+
+    /* Safe Area Padding for Notch/Home Bar on Toasts */
+    #toast-container {
+        bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Toast Notification Full Width */
+    #toast-container {
+        left: 20px;
+        right: 20px;
+    }
+    #toast-container > div {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+/* ------- CRO ELEMENTS (Trust Badges, WA, Socials) ------- */
+
+/* 1. Trust Badges */
+.trust-badges-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #030303;
+    padding: 30px 0;
+    border-top: 1px solid rgba(255, 107, 26, 0.1);
+    border-bottom: 1px solid rgba(255, 107, 26, 0.1);
+    position: relative;
+    z-index: 10;
+}
+.trust-badges-wrapper::before,
+.trust-badges-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 100px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+.trust-badges-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, #0A0A0A 0%, transparent 100%);
+}
+.trust-badges-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, #0A0A0A 0%, transparent 100%);
+}
+.trust-badges-track {
+    display: flex;
+    width: fit-content;
+    animation: marquee 35s linear infinite;
+    align-items: center;
+}
+.trust-badges-track:hover {
+    animation-play-state: paused;
+}
+.badge-item {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    color: var(--vect-silver);
+    opacity: 0.3;
+    padding: 0 50px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    transition: opacity 0.3s ease, color 0.3s ease;
+}
+.badge-item:hover {
+    opacity: 1;
+    color: var(--vect-accent);
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-33.333%); }
+}
+
+/* 2. Floating WhatsApp */
+.floating-wa {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 65px;
+    height: 65px;
+    background-color: var(--vect-accent);
+    color: #0A0A0A;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+    box-shadow: 0 4px 20px rgba(255, 107, 26, 0.3);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    cursor: pointer;
+}
+.floating-wa:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(255, 107, 26, 0.5);
+}
+.wa-tooltip {
+    position: absolute;
+    right: 80px;
+    background: #111;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255,107,26,0.3);
+}
+.wa-tooltip::after {
+    content: '';
+    position: absolute;
+    right: -7px;
+    top: 50%;
+    transform: translateY(-50%);
+    border-width: 6px 0 6px 6px;
+    border-style: solid;
+    border-color: transparent transparent transparent rgba(255,107,26,0.3);
+}
+.floating-wa:hover .wa-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+/* 3. Footer Socials */
+.footer-socials {
+    margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.footer-socials a {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 36px;
+    height: 36px;
+    color: var(--vect-ash);
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.footer-socials a:hover {
+    color: #0A0A0A;
+    background: var(--vect-accent);
+    transform: translateY(-3px);
+}
+.footer-socials a svg {
+    width: 18px;
+    height: 18px;
+}
+
+@media (max-width: 768px) {
+    .floating-wa {
+        bottom: 20px;
+        right: 20px;
+        width: 55px;
+        height: 55px;
+    }
+    .floating-wa svg {
+        width: 24px;
+        height: 24px;
+    }
+    .wa-tooltip {
+        display: none !important;
+    }
+    .badge-item {
+        font-size: 1.2rem;
+        padding: 0 30px;
+    }
+    .trust-badges-wrapper {
+        padding: 20px 0;
+    }
+}

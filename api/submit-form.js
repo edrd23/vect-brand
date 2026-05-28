@@ -166,6 +166,14 @@ export default async function handler(req, res) {
     });
   }
 
+  // Ensure body exists
+  if (!body || typeof body !== 'object') {
+    return res.status(400).json({
+      success: false,
+      message: 'Empty or invalid request body',
+    });
+  }
+
   // Validate required fields
   if (!body.name || !body.email || !body.message || !body.privacyConsent) {
     return res.status(422).json({
