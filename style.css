@@ -1172,20 +1172,98 @@ textarea {
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* ═══════ CUSTOM CHECKBOX — CROSS-BROWSER (Brave, Firefox, Safari, Chrome, Mobile) ═══════ */
+
+/* Nascondi il checkbox nativo su tutti i browser */
 input[type="checkbox"] {
-    width: 16px !important;
-    height: 16px !important;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
     padding: 0 !important;
-    margin: 4px 10px 0 0 !important;
-    appearance: checkbox !important;
-    -webkit-appearance: checkbox !important;
-    display: inline-block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
-    background: initial !important;
-    border: initial !important;
-    accent-color: var(--vect-accent);
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+    opacity: 0 !important;
+}
+
+/* Layout del gruppo privacy */
+.privacy-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
     cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Il quadratino custom — visibile su ogni browser */
+.custom-checkbox {
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    border: 2px solid var(--vect-graphite);
+    border-radius: 4px;
+    background: var(--surface-container);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    position: relative;
+}
+
+/* Segno di spunta (nascosto di default) */
+.custom-checkbox::after {
+    content: '';
+    display: block;
+    width: 5px;
+    height: 9px;
+    border: 2px solid #fff;
+    border-top: none;
+    border-left: none;
+    transform: rotate(45deg) translateY(-1px);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+
+/* Stato spuntato */
+#privacyConsent:checked + .custom-checkbox {
+    background: var(--vect-accent);
+    border-color: var(--vect-accent);
+}
+
+#privacyConsent:checked + .custom-checkbox::after {
+    opacity: 1;
+}
+
+/* Hover */
+.privacy-label:hover .custom-checkbox {
+    border-color: var(--vect-accent);
+}
+
+/* Focus accessibilità tastiera */
+#privacyConsent:focus-visible + .custom-checkbox {
+    outline: 2px solid var(--vect-accent);
+    outline-offset: 3px;
+}
+
+/* Testo privacy */
+.privacy-text {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--vect-silver);
+    line-height: 1.5;
+}
+
+.privacy-text a {
+    color: var(--vect-accent);
+    text-decoration: underline;
+}
+
+.privacy-text a:hover {
+    color: var(--vect-accent-bright);
 }
 
 input:focus,
@@ -1194,6 +1272,28 @@ textarea:focus {
     border-color: var(--primary-ledger);
     background: var(--surface-highest);
     box-shadow: 0 0 15px rgba(255, 107, 26, 0.1);
+}
+
+/* ═══════ CONTACT FORM — MOBILE RESPONSIVE ═══════ */
+@media (max-width: 768px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .privacy-label {
+        gap: 10px;
+    }
+
+    .custom-checkbox {
+        width: 20px;
+        height: 20px;
+        flex-shrink: 0;
+    }
+
+    .privacy-text {
+        font-size: 13px;
+    }
 }
 /* ═══════ FAQ SECTION ═══════ */
 .faq-section {

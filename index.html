@@ -99,7 +99,7 @@
     </script>
     <link rel="manifest" href="./manifest.json">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="style.css?v=1.2">
+    <link rel="stylesheet" href="style.css?v=1.3">
     <script src="particles.js" defer></script>
 
     <!-- ═══════ VERCEL ANALYTICS ═══════ -->
@@ -694,18 +694,14 @@
                         <label for="message"><span class="it-text">Messaggio</span><span class="en-text">Message</span></label>
                         <textarea id="message" name="message" rows="5" required></textarea>
                     </div>
-                    <div class="form-group checkbox-group"
-                        style="display: flex; align-items: flex-start; gap: 10px; margin-bottom: 24px;">
-                        <input type="checkbox" id="privacyConsent" name="privacyConsent" required
-                            style="margin-top: 4px; width: auto; height: auto;">
-                        <label for="privacyConsent"
-                            style="font-size: 12px; font-weight: 400; color: var(--vect-silver); text-transform: none; letter-spacing: normal; cursor: pointer;">
-                            <span class="it-text">Ho letto la <a href="privacy.html" target="_blank" rel="noopener noreferrer"
-                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a> e
-                                acconsento al trattamento dei dati per la gestione di questa richiesta.</span>
-                            <span class="en-text">I have read the <a href="privacy.html" target="_blank" rel="noopener noreferrer"
-                                    style="color: var(--vect-accent); text-decoration: underline;">Privacy Policy</a>
-                                and consent to data processing for managing this request.</span>
+                    <div class="form-group checkbox-group">
+                        <label class="privacy-label" for="privacyConsent">
+                            <input type="checkbox" id="privacyConsent" name="privacyConsent" required>
+                            <span class="custom-checkbox" aria-hidden="true"></span>
+                            <span class="privacy-text">
+                                <span class="it-text">Ho letto la <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> e acconsento al trattamento dei dati per la gestione di questa richiesta.</span>
+                                <span class="en-text">I have read the <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and consent to data processing for managing this request.</span>
+                            </span>
                         </label>
                     </div>
 
