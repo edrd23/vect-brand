@@ -1,3 +1,31 @@
+// ═══════ TURNSTILE GLOBAL STATE & CALLBACKS ═══════
+let turnstileVerified = false;
+let turnstileToken = '';
+
+window.onTurnstileSuccess = function (token) {
+    turnstileVerified = true;
+    turnstileToken = token;
+    const hiddenInput = document.getElementById('turnstileToken');
+    if (hiddenInput) hiddenInput.value = token;
+    const btn = document.getElementById('submitBtn');
+    if (btn) btn.disabled = false;
+};
+
+window.onTurnstileExpired = function () {
+    turnstileVerified = false;
+    turnstileToken = '';
+    const hiddenInput = document.getElementById('turnstileToken');
+    if (hiddenInput) hiddenInput.value = '';
+    const btn = document.getElementById('submitBtn');
+    if (btn) btn.disabled = true;
+};
+
+window.onTurnstileError = function () {
+    console.error('[VECT] Turnstile error occurred');
+    const btn = document.getElementById('submitBtn');
+    if (btn) btn.disabled = true;
+};
+
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-ready');
 
@@ -45,10 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setupSpotlight();
 
 
-    // ═══════ TURNSTILE STATE ═══════
-    let turnstileVerified = false;
-    let turnstileToken = '';
-
     // ═══════ LANGUAGE SWITCHER ═══════
     const langBtns = document.querySelectorAll('.lang-btn');
     const htmlRoot = document.documentElement;
@@ -60,7 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
             htmlRoot.setAttribute('lang', lang);
             langBtns.forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
-            localStorage.setItem('vect_lang', lang);
+            try {
+                localStorage.setItem('vect_lang', lang);
+            } catch (e) {
+                console.warn('LocalStorage unavailable');
+            }
 
             // Update aria-labels for split-text elements
             document.querySelectorAll('[data-label-it]').forEach(el => {
@@ -70,7 +98,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    const currentLang = localStorage.getItem('vect_lang') || 'it';
+    let currentLang = 'it';
+    try {
+        currentLang = localStorage.getItem('vect_lang') || 'it';
+    } catch (e) {
+        console.warn('LocalStorage unavailable, defaulting to it');
+    }
     const activeBtn = document.querySelector(`.lang-btn[data-lang="${currentLang}"]`);
     if (activeBtn) activeBtn.click();
 
@@ -390,34 +423,6 @@ radarHotspots.forEach(btn => {
     });
 });
 
-// ═══════ TURNSTILE STATE ═══════
-turnstileVerified = false;
-turnstileToken = '';
-
-// Global callbacks for Turnstile (must be on window)
-window.onTurnstileSuccess = function (token) {
-    turnstileVerified = true;
-    turnstileToken = token;
-    const hiddenInput = document.getElementById('turnstileToken');
-    if (hiddenInput) hiddenInput.value = token;
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = false;
-};
-
-window.onTurnstileExpired = function () {
-    turnstileVerified = false;
-    turnstileToken = '';
-    const hiddenInput = document.getElementById('turnstileToken');
-    if (hiddenInput) hiddenInput.value = '';
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = true;
-};
-
-window.onTurnstileError = function () {
-    console.error('[VECT] Turnstile error occurred');
-    const btn = document.getElementById('submitBtn');
-    if (btn) btn.disabled = true;
-};
 
 // ═══════ FORM HANDLING — WEB3FORMS + TURNSTILE ═══════
 const contactForm = document.getElementById('contactForm');
@@ -446,27 +451,26 @@ if (contactForm) {
         btn.disabled = true;
         btn.classList.add('loading');
 
-        // Robust FormData to JSON conversion
+        // Robust FormData creation
         const formData = new FormData(contactForm);
-        const object = {};
-        formData.forEach((value, key) => {
-            if (key !== 'botcheck') object[key] = value;
-        });
+        
+        // ════════════════════════════════════════════════════════════
+        // CONFIGURAZIONE WEB3FORMS (INVIO DIRETTO)
+        // ════════════════════════════════════════════════════════════
+        formData.append('access_key', '4cc1583d-1036-49ee-ba64-38637fbb21b9');
+        formData.append('subject', 'Nuova richiesta dal sito VECT');
+        formData.append('from_name', 'VECT Website');
 
-        // Add Turnstile token
-        object['turnstile_token'] = turnstileToken;
-
-        const json = JSON.stringify(object);
+        // Add Turnstile token per certificare che è un umano
+        if (turnstileToken) {
+            formData.append('turnstile_token', turnstileToken);
+        }
 
         try {
-            // Use Vercel serverless proxy (secure — hides API key + validates Turnstile)
-            const response = await fetch('/api/submit-form', {
+            // Invio diretto a Web3Forms usando FormData
+            const response = await fetch('https://api.web3forms.com/submit', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: json
+                body: formData
             });
 
             if (!response.ok) {
