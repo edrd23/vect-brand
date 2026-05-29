@@ -509,7 +509,7 @@
 
 <body>
     <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
-    <div class="cert-stripe">✅ VECT Certified RF Report - Documento Ufficiale di Coordinamento Spettro</div>
+    <div class="cert-stripe" style="background: #ff3232; color: white;">⚠️ FACSIMILE - DOCUMENTO DI ESEMPIO NON VALIDO PER USO REALE ⚠️</div>
     <div class="doc-header">
         <div class="header-left">
             <svg viewBox="0 0 400 120" fill="none">
@@ -523,9 +523,9 @@
                 <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
             </svg>
             <div>
-                <div class="doc-tag">// RF Engineering - Post Setup Report (SAMPLE COMPILATO)</div>
+                <div class="doc-tag">// RF Engineering - Post Setup Report</div>
                 <div class="doc-title">RF Coordination Report</div>
-                <div class="certified-badge">✅ VECT Certified - Spettro Verificato</div>
+                <div class="certified-badge" style="background: rgba(255,50,50,0.1); color: #ff3232; border-color: rgba(255,50,50,0.35);">⚠️ FACSIMILE / ESEMPIO DIMOSTRATIVO</div>
             </div>
         </div>
         <div class="header-right">
@@ -590,87 +590,12 @@
                     </div>
                 </div>
             </div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Sistema / Fornitore</th>
-                        <th>Banda (MHz)</th>
-                        <th>N° Link</th>
-                        <th>Note Interferenze</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="font-weight:600;color:var(--accent)">VECT - Sennheiser Spectera BSS</td>
-                        <td><input value="566-574" readonly></td>
-                        <td><input type="number" value="32" style="width:60px" readonly></td>
-                        <td><input value="Nessuna interferenza rilevata" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><input value="Fornitore Audio B (PSM1000)" readonly></td>
-                        <td><input value="470-510" readonly></td>
-                        <td><input type="number" value="12" style="width:60px" readonly></td>
-                        <td><input value="Banda riservata, coord. via WSM" readonly></td>
-                    </tr>
-                    <tr>
-                        <td><input value="Fornitore Broadcast (ENG)" readonly></td>
-                        <td><input value="614-638" readonly></td>
-                        <td><input type="number" value="8" style="width:60px" readonly></td>
-                        <td><input value="Canali TV locali adiacenti, OK" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
+
         </div>
         <div class="section">
-            <div class="section-title">// Configurazione Sistema - Parametri Confermati</div>
-            <table class="data-table">
-                <thead>
-                    <tr>
-                        <th>Parametro</th>
-                        <th>Valore Nominale</th>
-                        <th>Valore Misurato</th>
-                        <th>Esito</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Banda operativa</td>
-                        <td><input value="566-574 MHz" readonly></td>
-                        <td><input value="Scan confermato (Pulito)" readonly></td>
-                        <td><input value="✅ OK" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>Latenza</td>
-                        <td>0.7 ms</td>
-                        <td><input value="0.7 ms" readonly></td>
-                        <td><input value="✅ OK" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>Crittografia AES-256</td>
-                        <td>Attiva su tutti i link</td>
-                        <td><input value="Verificata su tutti i bodypack" readonly></td>
-                        <td><input value="✅ OK" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>Integrazione Dante</td>
-                        <td><input value="64×64 @ 24-bit / 96kHz" readonly></td>
-                        <td><input value="Sync testato con MADI backup" readonly></td>
-                        <td><input value="✅ OK" readonly></td>
-                    </tr>
-                    <tr>
-                        <td>Antenne DAD  RSSI</td>
-                        <td><input value="Posizione A/B Main Stage" readonly></td>
-                        <td><input value="-52 dBm medio (Link quality 100%)" readonly></td>
-                        <td><input value="✅ OK" readonly></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="section">
-            <div class="section-title">// Incident Log</div>
-            <div class="incident-field"><label>Interferenze esterne</label><textarea readonly>Nessuna interferenza critica rilevata durante il main show. Alle 16:30 rilevata portante DVB-T debole su 570MHz, Spectera ha compensato automaticamente senza dropout.</textarea></div>
-            <div class="incident-field"><label>Dropout / degrado segnale</label><textarea readonly>Nessun dropout registrato. Link Quality stabilmente sopra l'85% in tutta l'area stage e catwalk.</textarea></div>
-            <div class="incident-field"><label>Note per eventi futuri in questa venue</label><textarea readonly>L'installazione delle antenne DAD sui tower layer delay ha garantito una copertura perfetta. Da replicare per futuri eventi in questa venue.</textarea></div>
+            <div class="section-title">// Incident Log & Note</div>
+            <div class="incident-field"><label>Sintesi Performance</label><textarea readonly>Nessuna interferenza critica rilevata durante il main show. Spectera ha compensato automaticamente i disturbi senza dropout.
+Link Quality stabilmente sopra l'85% in tutta l'area stage e catwalk.</textarea></div>
         </div>
         <div class="section">
             <div class="section-title">// Esito Certificazione</div>
