@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT — Asset Tracking</title>
+    <title>VECT Ã¨ Asset Tracking</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -553,7 +553,7 @@
                 <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
             </svg>
             <div>
-                <div class="header-tag">// Area D · Asset Management</div>
+                <div class="header-tag">// Area D Ã¨ Asset Management</div>
                 <div class="header-title">Inventario Hardware</div>
             </div>
         </div>
@@ -590,7 +590,7 @@
     <div class="toolbar">
         <div class="search-box">
             <span style="color:var(--ash)">??</span>
-            <input type="text" id="search" placeholder="Cerca per nome, seriale, categoria…" oninput="renderTable()">
+            <input type="text" id="search" placeholder="Cerca per nome, seriale, categoria-" oninput="renderTable()">
         </div>
         <button class="filter-btn active" onclick="setFilter('tutti', this)">Tutti</button>
         <button class="filter-btn" onclick="setFilter('Disponibile', this)">Disponibile</button>
@@ -668,13 +668,13 @@
                     <input type="date" id="f-date">
                 </div>
                 <div class="form-field">
-                    <label>Valore (€)</label>
+                    <label>Valore (-)</label>
                     <input type="number" id="f-value" placeholder="es. 850">
                 </div>
                 <div class="form-field full">
                     <label>Note</label>
                     <textarea id="f-notes"
-                        placeholder="Condizioni, riparazioni effettuate, accessori abbinati…"></textarea>
+                        placeholder="Condizioni, riparazioni effettuate, accessori abbinati-"></textarea>
                 </div>
             </div>
             <div class="modal-actions">
@@ -692,18 +692,18 @@
         let sortDir = 1;
 
         const DEFAULT_ASSETS = [
-            { id: 1, name: 'BSS Base Station Spectera', category: 'Base Station (BSS)', serial: 'BSS-26-001', tag: 'VECT-BSS-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 8500, notes: 'Sistema principale. Aggiornamento firmware: febbraio 2026.' },
+            { id: 1, name: 'BSS Base Station Spectera', category: 'Base Station (BSS)', serial: 'BSS-26-001', tag: 'VECT-BSS-01', status: 'Disponibile', event: '-', date: '2024-01-15', value: 8500, notes: 'Sistema principale. Aggiornamento firmware: febbraio 2026.' },
             { id: 2, name: 'SEK Bodypack #1', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-001', tag: 'VECT-SEK-01', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-02-01', value: 850, notes: 'Dual mode IEM + Mic. AES-256 attivo.' },
             { id: 3, name: 'SEK Bodypack #2', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-002', tag: 'VECT-SEK-02', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-02-01', value: 850, notes: '' },
-            { id: 4, name: 'SEK Bodypack #3', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-003', tag: 'VECT-SEK-03', status: 'Disponibile', event: '—', date: '2024-02-01', value: 850, notes: '' },
-            { id: 5, name: 'SEK Bodypack #4', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-004', tag: 'VECT-SEK-04', status: 'Disponibile', event: '—', date: '2024-02-01', value: 850, notes: '' },
+            { id: 4, name: 'SEK Bodypack #3', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-003', tag: 'VECT-SEK-03', status: 'Disponibile', event: '-', date: '2024-02-01', value: 850, notes: '' },
+            { id: 5, name: 'SEK Bodypack #4', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-004', tag: 'VECT-SEK-04', status: 'Disponibile', event: '-', date: '2024-02-01', value: 850, notes: '' },
             { id: 6, name: 'SEK Bodypack #5', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-005', tag: 'VECT-SEK-05', status: 'Manutenzione', event: 'Estate Festival', date: '2024-02-01', value: 850, notes: 'Contatto batteria intermittente. In revisione.' },
-            { id: 7, name: 'SEK Bodypack #6', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-006', tag: 'VECT-SEK-06', status: 'Disponibile', event: '—', date: '2024-03-10', value: 850, notes: '' },
+            { id: 7, name: 'SEK Bodypack #6', category: 'Bodypack Tx (SEK)', serial: 'SEK-26-006', tag: 'VECT-SEK-06', status: 'Disponibile', event: '-', date: '2024-03-10', value: 850, notes: '' },
             { id: 8, name: 'DAD Antenna Attiva #1', category: 'Antenna (DAD)', serial: 'DAD-26-001', tag: 'VECT-DAD-01', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-01-20', value: 1200, notes: 'Stage Right. TNC-F, cavo RG-8X 10m.' },
             { id: 9, name: 'DAD Antenna Attiva #2', category: 'Antenna (DAD)', serial: 'DAD-26-002', tag: 'VECT-DAD-02', status: 'Disponibile', event: 'Summer Arena Tour', date: '2024-01-20', value: 1200, notes: 'Stage Left.' },
-            { id: 10, name: 'Flight Case Spectera', category: 'Case / Rack', serial: 'FC-26-001', tag: 'VECT-CASE-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 650, notes: 'SKB case 12U. BSS + 8 SEK + 2 DAD.' },
-            { id: 11, name: 'Cavo RG-8X 10m', category: 'Cablaggio RF', serial: '—', tag: 'VECT-CAB-01', status: 'Disponibile', event: '—', date: '2024-01-15', value: 80, notes: 'BNC-BNC. Perdita attesa: ~3dB.' },
-            { id: 12, name: 'Alimentatore rack EQ-PSU', category: 'Alimentazione', serial: 'PSU-26-001', tag: 'VECT-PSU-01', status: 'Disponibile', event: '—', date: '2024-03-01', value: 220, notes: '' },
+            { id: 10, name: 'Flight Case Spectera', category: 'Case / Rack', serial: 'FC-26-001', tag: 'VECT-CASE-01', status: 'Disponibile', event: '-', date: '2024-01-15', value: 650, notes: 'SKB case 12U. BSS + 8 SEK + 2 DAD.' },
+            { id: 11, name: 'Cavo RG-8X 10m', category: 'Cablaggio RF', serial: '-', tag: 'VECT-CAB-01', status: 'Disponibile', event: '-', date: '2024-01-15', value: 80, notes: 'BNC-BNC. Perdita attesa: ~3dB.' },
+            { id: 12, name: 'Alimentatore rack EQ-PSU', category: 'Alimentazione', serial: 'PSU-26-001', tag: 'VECT-PSU-01', status: 'Disponibile', event: '-', date: '2024-03-01', value: 220, notes: '' },
         ];
 
         function load() {
@@ -755,7 +755,7 @@
             <td class="td-mono">${a.serial}</td>
             <td><span class="status ${statusClass(a.status)}">${a.status}</span></td>
             <td style="font-size:12px;color:var(--silver)">${a.event}</td>
-            <td style="font-size:12px;color:var(--ash);max-width:200px;">${a.notes || '—'}</td>
+            <td style="font-size:12px;color:var(--ash);max-width:200px;">${a.notes || '-'}</td>
             <td>
                 <div class="actions">
                     <button class="act-btn" onclick="editAsset(${a.id})">Modifica</button>
@@ -814,10 +814,10 @@
             const editId = document.getElementById('edit-id').value;
             const obj = {
                 name, category: document.getElementById('f-category').value,
-                serial: document.getElementById('f-serial').value.trim() || '—',
-                tag: document.getElementById('f-tag').value.trim() || '—',
+                serial: document.getElementById('f-serial').value.trim() || '-',
+                tag: document.getElementById('f-tag').value.trim() || '-',
                 status: document.getElementById('f-status').value,
-                event: document.getElementById('f-event').value.trim() || '—',
+                event: document.getElementById('f-event').value.trim() || '-',
                 date: document.getElementById('f-date').value,
                 value: parseFloat(document.getElementById('f-value').value) || 0,
                 notes: document.getElementById('f-notes').value.trim(),

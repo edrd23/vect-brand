@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT — CRM Contatti Strategici</title>
+    <title>VECT Ã¨ CRM Contatti Strategici</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -553,7 +553,7 @@
                     fill="#F5F5F5" />
                 <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
             </svg>
-            <div class="topbar-title"><strong>CRM</strong> — Contatti B2B Strategici</div>
+            <div class="topbar-title"><strong>CRM</strong> Ã¨ Contatti B2B Strategici</div>
         </div>
         <div class="topbar-right">
             <button class="btn btn-ghost" onclick="window.print()">Stampa Pipeline</button>
@@ -609,7 +609,7 @@
         <button class="filter-btn" data-filter="Prospect">Prospect</button>
         <button class="filter-btn" data-filter="Nurturing">Nurturing</button>
         <button class="filter-btn" data-filter="Inattivo">Inattivo</button>
-        <input class="search-box" type="text" id="searchInput" placeholder="Cerca nome, azienda, ruolo…">
+        <input class="search-box" type="text" id="searchInput" placeholder="Cerca nome, azienda, ruolo-">
     </div>
 
     <!-- TABLE -->
@@ -622,7 +622,7 @@
                     <th>Agenzia / Produzione</th>
                     <th>Settore</th>
                     <th>Status</th>
-                    <th>Priorità</th>
+                    <th>Priorit"</th>
                     <th>Ultimo Contatto</th>
                     <th>Note</th>
                     <th></th>
@@ -642,7 +642,7 @@
         <div class="modal">
             <div class="modal-header">
                 <h3 id="modal-title">Nuovo Contatto</h3>
-                <button class="modal-close" onclick="closeModal()">×</button>
+                <button class="modal-close" onclick="closeModal()">-</button>
             </div>
             <div class="modal-body">
                 <div class="form-grid">
@@ -697,7 +697,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label>Priorità</label>
+                        <label>Priorit"</label>
                         <select id="f-priorita">
                             <option value="Alta">Alta</option>
                             <option value="Media">Media</option>
@@ -719,7 +719,7 @@
                     <div class="form-group full">
                         <label>Note Interne</label>
                         <textarea id="f-note"
-                            placeholder="Note sul rapporto, interessi, eventi precedenti, follow-up programmati…"></textarea>
+                            placeholder="Note sul rapporto, interessi, eventi precedenti, follow-up programmati-"></textarea>
                     </div>
                 </div>
             </div>
@@ -742,7 +742,7 @@
             { id: 5, nome: 'Marco', cognome: 'Bianchi', ruolo: 'Venue Technical Manager', agenzia: 'Mediolanum Forum', settore: 'Venue', status: 'Prospect', priorita: 'Alta', email: '', tel: '', data: '', note: 'Contatto da raggiungere. Venue di primo livello per eventi broadcast e concerti internazionali.' },
             { id: 6, nome: 'Valentina', cognome: 'Romano', ruolo: 'Production Manager', agenzia: 'MTV Italia (Paramount)', settore: 'Broadcast / TV', status: 'Caldo', priorita: 'Alta', email: 'v.romano@mtv.it', tel: '', data: '2026-03-03', note: 'Produzione TV live. Specifico interesse per gestione frequenze in ambienti densi (set con pubblico). WP inviato.' },
             { id: 7, nome: 'Davide', cognome: 'Esposito', ruolo: 'RF Coordinator', agenzia: 'STS Group', settore: 'Service', status: 'Inattivo', priorita: 'Bassa', email: 'd.esposito@stsgroup.it', tel: '', data: '2025-11-01', note: 'Competitor indiretto. Rapporto neutro. Monitorare in caso di partnership su eventi di grande formato.' },
-            { id: 8, nome: 'Chiara', cognome: 'De Luca', ruolo: 'A&R / Label', agenzia: 'Warner Music Italy', settore: 'Touring', status: 'Nurturing', priorita: 'Media', email: 'c.deluca@warnermusic.com', tel: '', data: '2026-02-10', note: 'Gestisce artisti con tour UE. Il team tecnico decide in autonomia, ma lei può fare la referral giusta.' },
+            { id: 8, nome: 'Chiara', cognome: 'De Luca', ruolo: 'A&R / Label', agenzia: 'Warner Music Italy', settore: 'Touring', status: 'Nurturing', priorita: 'Media', email: 'c.deluca@warnermusic.com', tel: '', data: '2026-02-10', note: 'Gestisce artisti con tour UE. Il team tecnico decide in autonomia, ma lei pu" fare la referral giusta.' },
         ];
 
         function loadData() {
@@ -803,12 +803,12 @@
                     ${c.email ? `<div class="contact-company">${c.email}</div>` : ''}
                 </td>
                 <td><span class="role-badge">${c.ruolo}</span></td>
-                <td>${c.agenzia || '<span style="color:var(--ash)">—</span>'}</td>
+                <td>${c.agenzia || '<span style="color:var(--ash)">-</span>'}</td>
                 <td style="color:var(--silver); font-size:13px;">${c.settore}</td>
                 <td>${statusBadge(c.status)}</td>
                 <td style="font-size:13px;">${priorityDot(c.priorita)}</td>
-                <td style="font-size:12px; color:var(--silver); font-family:var(--mono);">${c.data || '—'}</td>
-                <td class="note-cell" title="${c.note}">${c.note || '—'}</td>
+                <td style="font-size:12px; color:var(--silver); font-family:var(--mono);">${c.data || '-'}</td>
+                <td class="note-cell" title="${c.note}">${c.note || '-'}</td>
                 <td onclick="event.stopPropagation()">
                     <button class="btn btn-ghost" style="padding:4px 10px; font-size:10px;" onclick="deleteContact(${c.id})">?</button>
                 </td>

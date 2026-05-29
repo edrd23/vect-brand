@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT — SOP Manuale Operativo</title>
+    <title>VECT Ã¨ SOP Manuale Operativo</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -532,11 +532,11 @@
     <div class="content">
         <div class="doc-header">
             <div>
-                <div class="doc-tag">// Area D · Standard Operating Procedures</div>
-                <div class="doc-title">SOP — Manuale Operativo VECT</div>
+                <div class="doc-tag">// Area D Ã¨ Standard Operating Procedures</div>
+                <div class="doc-title">SOP Ã¨ Manuale Operativo VECT</div>
             </div>
             <div style="display:flex;gap:10px;align-items:center;">
-                <span class="version-badge">v1.0 · 2026</span>
+                <span class="version-badge">v1.0 Ã¨ 2026</span>
                 <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
             </div>
         </div>
@@ -557,7 +557,7 @@
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 01</span>
                     <span class="sop-title">Setup Sistema Spectera BSS</span>
-                    <span class="sop-time">? 45–90 min</span>
+                    <span class="sop-time">? 45-90 min</span>
                 </div>
                 <div class="alert info"><span class="alert-icon">??</span><span>Eseguire questo SOP
                         <strong>prima</strong> dello scan RF. Il sistema deve essere completamente configurato prima di
@@ -567,7 +567,7 @@
                         <div class="step-dot">1</div>
                         <div class="step-content">
                             <div class="step-title">Posizionamento fisico Base Station (BSS)</div>
-                            <div class="step-desc">Installare la BSS nel rack — consigliato Stage Right o posizione
+                            <div class="step-desc">Installare la BSS nel rack Ã¨ consigliato Stage Right o posizione
                                 centrale rispetto ai palchi. Verificare ventilazione laterale libera (min. 5cm). Rack a
                                 terra o su carrello, mai a oltre 1m dal punto di connessione Dante.</div>
                         </div>
@@ -577,11 +577,11 @@
                         <div class="step-content">
                             <div class="step-title">Posizionamento antenne DAD</div>
                             <div class="step-desc">Montare le antenne DAD con line-of-sight ottimale verso il palco.
-                                Altezza ideale: 3–5m. Evitare tralicci metallici in mezzo. Cablaggio coassiale BNC da
-                                BSS ad antenne — verificare perdita attesa su lunghezza cavo (&lt;6 dB per 30m RG-8X).
+                                Altezza ideale: 3-5m. Evitare tralicci metallici in mezzo. Cablaggio coassiale BNC da
+                                BSS ad antenne Ã¨ verificare perdita attesa su lunghezza cavo (&lt;6 dB per 30m RG-8X).
                             </div>
                             <div class="step-note">?? Regola pratica: se puoi vedere l'area di movimento dei performer
-                                dall'antenna, la posizione è corretta.</div>
+                                dall'antenna, la posizione Ã¨ corretta.</div>
                         </div>
                     </div>
                     <div class="step-item" onclick="toggleStep(this)">
@@ -591,7 +591,7 @@
                             <div class="step-desc">Collegare BSS alla rete Dante tramite porta ETH dedicata. Verificare
                                 indirizzo IP nello stesso subnet della console (es. 192.168.0.x). Aprire Dante
                                 Controller per confermare presenza BSS sulla rete. Impostare sample rate a 48kHz.</div>
-                            <div class="step-warn">?? Non usare switch non-managed per reti audio Dante ad alta densità.
+                            <div class="step-warn">?? Non usare switch non-managed per reti audio Dante ad alta densit-.
                             </div>
                         </div>
                     </div>
@@ -620,7 +620,7 @@
                             <div class="step-title">Attivazione AES-256 e impostazioni globali</div>
                             <div class="step-desc">In Spectera Manager: Settings ? Security ? Enable Encryption ?
                                 AES-256. Verificare che la crittografia sia attiva su tutti i canali. Impostare la
-                                latenza target: 0.7ms (modalità Low Latency). Abilitare il monitoraggio RSSI in tempo
+                                latenza target: 0.7ms (modalit" Low Latency). Abilitare il monitoraggio RSSI in tempo
                                 reale.</div>
                         </div>
                     </div>
@@ -629,7 +629,7 @@
                         <div class="step-content">
                             <div class="step-title">Routing Dante verso console</div>
                             <div class="step-desc">In Dante Controller: collegare le uscite BSS agli ingressi della
-                                console (es. VECT CH01 ? FOH IN 17, VECT CH02 ? FOH IN 18…). Confermare routing con il
+                                console (es. VECT CH01 ? FOH IN 17, VECT CH02 ? FOH IN 18-). Confermare routing con il
                                 soundcheck engineer FOH. Verificare assenza di loop e clipping digitale su tutti i
                                 canali.</div>
                         </div>
@@ -642,9 +642,9 @@
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 02</span>
                     <span class="sop-title">Scan Spettro & Coordinamento RF</span>
-                    <span class="sop-time">? 30–60 min</span>
+                    <span class="sop-time">? 30-60 min</span>
                 </div>
-                <div class="alert danger"><span class="alert-icon">??</span><span><strong>Priorità assoluta:</strong> Il
+                <div class="alert danger"><span class="alert-icon">??</span><span><strong>Priorit" assoluta:</strong> Il
                         coordinamento RF deve avvenire PRIMA che qualsiasi altro sistema wireless attivi i
                         trasmettitori. Organizza una riunione RF con tutti i fornitori wireless appena possibile dopo
                         l'arrivo in venue.</span></div>
@@ -653,7 +653,7 @@
                         <div class="step-dot">1</div>
                         <div class="step-content">
                             <div class="step-title">Scan iniziale spettro</div>
-                            <div class="step-desc">Con tutti i sistemi SPENTI: eseguire full scan UHF 470–694MHz con lo
+                            <div class="step-desc">Con tutti i sistemi SPENTI: eseguire full scan UHF 470-694MHz con lo
                                 scanner integrato Spectera o con analyzer esterno. Identificare e documentare: segnali
                                 persistenti (broadcaster, LTE, altro), picchi di disturbo, bande pulite disponibili.
                             </div>
@@ -675,7 +675,7 @@
                         <div class="step-content">
                             <div class="step-title">Selezione banda operativa Spectera</div>
                             <div class="step-desc">Identificare una finestra di almeno 8MHz contigui e puliti per
-                                l'operatività Spectera. Evitare adiacenza a segnali LTE 800MHz (>20MHz di guardia).
+                                l'operativit" Spectera. Evitare adiacenza a segnali LTE 800MHz (>20MHz di guardia).
                                 Documentare la banda selezionata nel RF Coordination Report. Configurare i parametri di
                                 banda su Spectera Manager.</div>
                         </div>
@@ -697,7 +697,7 @@
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 03</span>
                     <span class="sop-title">Pre-Show Checklist</span>
-                    <span class="sop-time">? 15–20 min · Prima del soundcheck</span>
+                    <span class="sop-time">? 15-20 min Ã¨ Prima del soundcheck</span>
                 </div>
                 <ul class="cl">
                     <li><input type="checkbox" onchange="updateProgress()"><label>Tutti i SEK bodypack caricati
@@ -706,14 +706,14 @@
                             verificato in Spectera Manager (target: > -75 dBm)</label></li>
                     <li><input type="checkbox" onchange="updateProgress()"><label>Latenza confermata = 0.7ms su tutti i
                             canali attivi</label></li>
-                    <li><input type="checkbox" onchange="updateProgress()"><label>Crittografia AES-256 attiva —
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Crittografia AES-256 attiva -
                             indicatore verde su tutti i link</label></li>
                     <li><input type="checkbox" onchange="updateProgress()"><label>Routing Dante verificato: tutti i
                             canali arrivano alle console FOH e Monitor</label></li>
-                    <li><input type="checkbox" onchange="updateProgress()"><label>Scan RF rapido eseguito — nessuna
+                    <li><input type="checkbox" onchange="updateProgress()"><label>Scan RF rapido eseguito Ã¨ nessuna
                             nuova interferenza nella banda Spectera</label></li>
                     <li><input type="checkbox" onchange="updateProgress()"><label>Walk-test eseguito: camminare sul
-                            palco con SEK attivi — zero dropout</label></li>
+                            palco con SEK attivi Ã¨ zero dropout</label></li>
                     <li><input type="checkbox" onchange="updateProgress()"><label>Backup frequenza identificata e
                             configurata (pronta ma non attiva)</label></li>
                     <li><input type="checkbox" onchange="updateProgress()"><label>Contatto diretto sound engineer FOH
@@ -734,9 +734,9 @@
                     <div class="step-item" onclick="toggleStep(this)">
                         <div class="step-dot">1</div>
                         <div class="step-content">
-                            <div class="step-title">Monitoraggio continuo RSSI e qualità link</div>
+                            <div class="step-title">Monitoraggio continuo RSSI e qualit" link</div>
                             <div class="step-desc">Tenere Spectera Manager visibile durante tutta la durata dello show.
-                                Monitorare in particolare: RSSI (non deve scendere sotto -80 dBm per più di 2 secondi),
+                                Monitorare in particolare: RSSI (non deve scendere sotto -80 dBm per pi" di 2 secondi),
                                 packet loss (target: 0%), latenza (target: stabile a 0.7ms).</div>
                         </div>
                     </div>
@@ -746,7 +746,7 @@
                             <div class="step-title">Posizione operatore durante lo show</div>
                             <div class="step-desc">Stare in posizione con visuale sia sul palco che sul monitor
                                 Spectera. Se operatore separato da FOH: mantenere canale radio aperto con la produzione.
-                                Non allontanarsi dal sistema durante i brani — essere sempre pronto ad intervenire entro
+                                Non allontanarsi dal sistema durante i brani Ã¨ essere sempre pronto ad intervenire entro
                                 10 secondi.</div>
                         </div>
                     </div>
@@ -778,7 +778,7 @@
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 05</span>
                     <span class="sop-title">Post-Show & Smontaggio</span>
-                    <span class="sop-time">? 30–60 min</span>
+                    <span class="sop-time">? 30-60 min</span>
                 </div>
                 <div class="step-list">
                     <div class="step-item" onclick="toggleStep(this)">
@@ -795,7 +795,7 @@
                         <div class="step-content">
                             <div class="step-title">Carica batterie SEK</div>
                             <div class="step-desc">Inserire tutti i SEK in carica immediatamente dopo la raccolta. Non
-                                lasciare batterie scariche oltre 12h. Usare caricatore ufficiale Sennheiser — non terze
+                                lasciare batterie scariche oltre 12h. Usare caricatore ufficiale Sennheiser Ã¨ non terze
                                 parti.</div>
                         </div>
                     </div>
@@ -804,7 +804,7 @@
                         <div class="step-content">
                             <div class="step-title">Smontaggio cablaggio e antenne</div>
                             <div class="step-desc">Scollegare antenne DAD dal cablaggio coassiale. Avvolgere i cavi in
-                                anelli larghi (non piegare a 90°). Proteggere connettori BNC/TNC con tappi copripolvere.
+                                anelli larghi (non piegare a 90-). Proteggere connettori BNC/TNC con tappi copripolvere.
                                 Inserire antenne DAD nel case dedicato.</div>
                         </div>
                     </div>
@@ -813,7 +813,7 @@
                         <div class="step-content">
                             <div class="step-title">Inventario e firma Verbale Consegna</div>
                             <div class="step-desc">Se Dry Hire: compilare il Verbale di Consegna con il responsabile del
-                                cliente. Verificare ogni pezzo — stato vs. stato di check-out. Far firmare entrambe le
+                                cliente. Verificare ogni pezzo Ã¨ stato vs. stato di check-out. Far firmare entrambe le
                                 parti. Fotografare eventuale danno prima di consegnare.</div>
                         </div>
                     </div>
@@ -833,11 +833,11 @@
             <div class="sop-section" id="sop-06">
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 06</span>
-                    <span class="sop-title">Incident Response — Gestione Emergenze RF</span>
+                    <span class="sop-title">Incident Response Ã¨ Gestione Emergenze RF</span>
                     <span class="sop-time">? Variabile</span>
                 </div>
                 <div class="alert danger"><span class="alert-icon">??</span><span>Mantenere la calma. La maggior parte
-                        dei problemi RF si risolve in 30–90 secondi se si segue la procedura corretta.</span></div>
+                        dei problemi RF si risolve in 30-90 secondi se si segue la procedura corretta.</span></div>
                 <div style="margin-top:16px;">
                     <p
                         style="font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:14px;">
@@ -869,10 +869,10 @@
                         <div class="step-item" onclick="toggleStep(this)">
                             <div class="step-dot">?</div>
                             <div class="step-content">
-                                <div class="step-title">Interferenza di banda — verifica scan in tempo reale</div>
-                                <div class="step-desc">Aprire analyzer spettrale. Cercare la sorgente interferente: se è
-                                    impulsiva (burst brevi), probabilmente è un dispositivo LTE in movimento. Se è
-                                    continua, è un sistema fisso. Note al FOH che il problema è in analisi.</div>
+                                <div class="step-title">Interferenza di banda Ã¨ verifica scan in tempo reale</div>
+                                <div class="step-desc">Aprire analyzer spettrale. Cercare la sorgente interferente: se -
+                                    impulsiva (burst brevi), probabilmente Ã¨ un dispositivo LTE in movimento. Se -
+                                    continua, Ã¨ un sistema fisso. Note al FOH che il problema Ã¨ in analisi.</div>
                             </div>
                         </div>
                         <div class="step-item" onclick="toggleStep(this)">
@@ -883,7 +883,7 @@
                                     banda alternativa identificata durante lo scan iniziale (SOP 02). Procedura:
                                     Spectera Manager ? Global Settings ? Band ? nuova banda ? Apply. Tutti i link si
                                     ricollegano in circa 20 secondi.</div>
-                                <div class="step-warn">?? Comunicare al FOH prima di eseguire — sarà udibile un breve
+                                <div class="step-warn">?? Comunicare al FOH prima di eseguire Ã¨ sar" udibile un breve
                                     silenzio sui canali durante il riallinemento.</div>
                             </div>
                         </div>
@@ -895,7 +895,7 @@
             <div class="sop-section" id="sop-07">
                 <div class="sop-section-header">
                     <span class="sop-num">SOP 07</span>
-                    <span class="sop-title">Manutenzione Hardware — Calendario</span>
+                    <span class="sop-title">Manutenzione Hardware Ã¨ Calendario</span>
                     <span class="sop-time">? Periodica</span>
                 </div>
                 <table class="spec-table">
@@ -961,7 +961,7 @@
                     <span class="sop-title">Onboarding Collaboratori</span>
                     <span class="sop-time">? Prima uscita con VECT</span>
                 </div>
-                <div class="alert tip"><span class="alert-icon">?</span><span>Un collaboratore è operativo in autonomia
+                <div class="alert tip"><span class="alert-icon">?</span><span>Un collaboratore Ã¨ operativo in autonomia
                         dopo 2 eventi affiancati. Non mandare mai un collaboratore in autonomia prima di questo
                         percorso.</span></div>
                 <div class="step-list">
@@ -969,7 +969,7 @@
                         <div class="step-dot">1</div>
                         <div class="step-content">
                             <div class="step-title">Studio pre-uscita</div>
-                            <div class="step-desc">Il collaboratore deve leggere i SOP 01–06 prima dell'primo evento.
+                            <div class="step-desc">Il collaboratore deve leggere i SOP 01-06 prima dell'primo evento.
                                 Fornire accesso a questo documento e al White Paper WMAS. Verificare conoscenza di base:
                                 Dante, UHF coordination, Sennheiser Spectera.</div>
                         </div>
@@ -977,7 +977,7 @@
                     <div class="step-item" onclick="toggleStep(this)">
                         <div class="step-dot">2</div>
                         <div class="step-content">
-                            <div class="step-title">Evento 1 — Solo affiancamento</div>
+                            <div class="step-title">Evento 1 Ã¨ Solo affiancamento</div>
                             <div class="step-desc">Il collaboratore osserva e assiste. Non opera il sistema in
                                 autonomia. Alla fine dell'evento: briefing di 15 minuti con feedback. Il collaboratore
                                 compila il Pre-Show Checklist in autonomia come esercizio.</div>
@@ -986,7 +986,7 @@
                     <div class="step-item" onclick="toggleStep(this)">
                         <div class="step-dot">3</div>
                         <div class="step-content">
-                            <div class="step-title">Evento 2 — Operatività Assistita</div>
+                            <div class="step-title">Evento 2 Ã¨ Operativit" Assistita</div>
                             <div class="step-desc">Il collaboratore esegue il setup e gestisce lo show. VECT
                                 supervisiona senza intervenire se non necessario. Debriefing finale: punti di forza,
                                 lacune, aree su cui lavorare.</div>
@@ -996,9 +996,9 @@
                         <div class="step-dot">4</div>
                         <div class="step-content">
                             <div class="step-title">Autorizzazione autonomia</div>
-                            <div class="step-desc">Se la performance è soddisfacente: il collaboratore può operare in
-                                autonomia su eventi di complessità media (=24 link, venue indoor standard). Per eventi
-                                complessi (festival multi-stage, broadcast) è sempre presente un senior VECT.</div>
+                            <div class="step-desc">Se la performance Ã¨ soddisfacente: il collaboratore pu" operare in
+                                autonomia su eventi di complessit" media (=24 link, venue indoor standard). Per eventi
+                                complessi (festival multi-stage, broadcast) Ã¨ sempre presente un senior VECT.</div>
                         </div>
                     </div>
                     <div class="step-item" onclick="toggleStep(this)">
@@ -1017,7 +1017,7 @@
             <div class="sop-section" id="ref-spec">
                 <div class="sop-section-header">
                     <span class="sop-num">REF</span>
-                    <span class="sop-title">Parametri Tecnici — Sennheiser Spectera BSS</span>
+                    <span class="sop-title">Parametri Tecnici Ã¨ Sennheiser Spectera BSS</span>
                 </div>
                 <table class="spec-table">
                     <thead>
@@ -1029,11 +1029,11 @@
                     <tbody>
                         <tr>
                             <td>Tecnologia</td>
-                            <td class="v-accent">WMAS (Wideband Multibeam Antenna System) — ETSI TS 103 745</td>
+                            <td class="v-accent">WMAS (Wideband Multibeam Antenna System) Ã¨ ETSI TS 103 745</td>
                         </tr>
                         <tr>
                             <td>Banda operativa</td>
-                            <td class="v-accent">470–694 MHz (UHF)</td>
+                            <td class="v-accent">470-694 MHz (UHF)</td>
                         </tr>
                         <tr>
                             <td>Larghezza di banda necessaria</td>
@@ -1041,11 +1041,11 @@
                         </tr>
                         <tr>
                             <td>Link massimi simultanei</td>
-                            <td class="v-accent">32 (BSS singola) · scalabile multi-BSS</td>
+                            <td class="v-accent">32 (BSS singola) Ã¨ scalabile multi-BSS</td>
                         </tr>
                         <tr>
                             <td>Latenza</td>
-                            <td class="v-accent">0.7 ms (modalità Low Latency)</td>
+                            <td class="v-accent">0.7 ms (modalit" Low Latency)</td>
                         </tr>
                         <tr>
                             <td>Crittografia</td>
@@ -1053,7 +1053,7 @@
                         </tr>
                         <tr>
                             <td>Integrazione digitale</td>
-                            <td class="v-accent">Dante (AES67) · MADI · AES3</td>
+                            <td class="v-accent">Dante (AES67) Ã¨ MADI Ã¨ AES3</td>
                         </tr>
                         <tr>
                             <td>Potenza trasmettitore SEK</td>
@@ -1074,51 +1074,51 @@
             <div class="sop-section" id="ref-freq">
                 <div class="sop-section-header">
                     <span class="sop-num">REF</span>
-                    <span class="sop-title">Bande UHF — Panoramica Italia 2026</span>
+                    <span class="sop-title">Bande UHF Ã¨ Panoramica Italia 2026</span>
                 </div>
                 <table class="spec-table">
                     <thead>
                         <tr>
                             <th>Banda (MHz)</th>
-                            <th>Disponibilità</th>
+                            <th>Disponibilit"</th>
                             <th>Note</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td class="v-accent">470–694</td>
+                            <td class="v-accent">470-694</td>
                             <td>? Disponibile PMSE</td>
                             <td>Banda principale per sistemi wireless professionali. Licenza necessaria sopra 25mW.</td>
                         </tr>
                         <tr>
-                            <td>694–790</td>
+                            <td>694-790</td>
                             <td>?? Protetta / Limitata</td>
-                            <td>Banda 700 — assegnata a LTE mobile. Evitare assolutamente.</td>
+                            <td>Banda 700 Ã¨ assegnata a LTE mobile. Evitare assolutamente.</td>
                         </tr>
                         <tr>
-                            <td>790–862</td>
+                            <td>790-862</td>
                             <td>?? Vietata</td>
-                            <td>Banda 800 — LTE. Interferisce fortemente.</td>
+                            <td>Banda 800 Ã¨ LTE. Interferisce fortemente.</td>
                         </tr>
                         <tr>
-                            <td>863–865</td>
-                            <td>? ISM · 25mW</td>
+                            <td>863-865</td>
+                            <td>? ISM Ã¨ 25mW</td>
                             <td>Libera senza licenza fino a 25mW. Congestionata in grandi venue.</td>
                         </tr>
                         <tr>
-                            <td>1880–1900</td>
+                            <td>1880-1900</td>
                             <td>? DECT</td>
                             <td>Sistema DECT 6.0. Non compatibile con Spectera.</td>
                         </tr>
                         <tr>
-                            <td>2400–2484</td>
+                            <td>2400-2484</td>
                             <td>?? WiFi / BLE congestionata</td>
                             <td>Evitare per sistemi professionali. Latenza non accettabile.</td>
                         </tr>
                     </tbody>
                 </table>
                 <div class="alert info" style="margin-top:16px;"><span class="alert-icon">??</span><span>Per l'utilizzo
-                        professionale in Italia (potenza &gt;25mW), è necessaria una licenza temporanea o permanente
+                        professionale in Italia (potenza &gt;25mW), Ã¨ necessaria una licenza temporanea o permanente
                         rilasciata da AGCOM/MIMIT. VECT gestisce la documentazione per ogni evento.</span></div>
             </div>
 
