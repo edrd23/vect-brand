@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT ó RF Coordination Report</title>
+    <title>VECT - RF Coordination Report</title>
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -509,7 +509,7 @@
 
 <body>
     <button class="print-btn" onclick="window.print()">Stampa / PDF</button>
-    <div class="cert-stripe">? VECT Certified RF Report ó Documento Ufficiale di Coordinamento Spettro</div>
+    <div class="cert-stripe">? VECT Certified RF Report - Documento Ufficiale di Coordinamento Spettro</div>
     <div class="doc-header">
         <div class="header-left">
             <svg viewBox="0 0 400 120" fill="none">
@@ -523,14 +523,14 @@
                 <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
             </svg>
             <div>
-                <div class="doc-tag">// RF Engineering ó Post Setup Report</div>
+                <div class="doc-tag">// RF Engineering - Post Setup Report</div>
                 <div class="doc-title">RF Coordination Report</div>
-                <div class="certified-badge">? VECT Certified ∑ Spettro Verificato</div>
+                <div class="certified-badge">? VECT Certified - Spettro Verificato</div>
             </div>
         </div>
         <div class="header-right">
             <div class="doc-id">RFC-<span id="doc-id">000000</span></div>
-            <div class="doc-date" id="doc-date">ó</div>
+            <div class="doc-date" id="doc-date"></div>
         </div>
     </div>
     <div class="doc-body">
@@ -544,10 +544,10 @@
             <div class="section-title">// Metriche Operative</div>
             <div class="outcome-grid">
                 <div class="outcome-card">
-                    <div><span class="outcome-val" id="v1">ó</span> <span class="outcome-unit">link</span></div>
+                    <div><span class="outcome-val" id="v1"></span> <span class="outcome-unit">link</span></div>
                     <div class="outcome-desc">Attivi simultanei</div>
                     <input class="outcome-input" type="number" placeholder="28"
-                        oninput="document.getElementById('v1').textContent=this.value||'ó'">
+                        oninput="document.getElementById('v1').textContent=this.value||''">
                 </div>
                 <div class="outcome-card">
                     <div><span class="outcome-val" id="v2">0.7</span> <span class="outcome-unit">ms</span></div>
@@ -564,9 +564,9 @@
             </div>
         </div>
         <div class="section">
-            <div class="section-title">// Mappa Spettro UHF (470ñ694 MHz)</div>
+            <div class="section-title">// Mappa Spettro UHF (470-694 MHz)</div>
             <div class="spectrum-bar-wrap">
-                <div class="spectrum-label">Rappresentazione utilizzo bande ó rilevato on-site</div>
+                <div class="spectrum-label">Rappresentazione utilizzo bande - rilevato on-site</div>
                 <div class="spectrum-track">
                     <div class="band band-other">Fornitori</div>
                     <div class="band band-lte">LTE</div>
@@ -595,14 +595,14 @@
                     <tr>
                         <th>Sistema / Fornitore</th>
                         <th>Banda (MHz)</th>
-                        <th>N∞ Link</th>
+                        <th>N¬∞ Link</th>
                         <th>Note Interferenze</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="font-weight:600;color:var(--accent)">VECT ó Sennheiser Spectera BSS</td>
-                        <td><input placeholder="es. 566ñ574"></td>
+                        <td style="font-weight:600;color:var(--accent)">VECT - Sennheiser Spectera BSS</td>
+                        <td><input placeholder="es. 566-574"></td>
                         <td><input type="number" placeholder="32" style="width:60px"></td>
                         <td><input placeholder="Nessuna"></td>
                     </tr>
@@ -622,7 +622,7 @@
             </table>
         </div>
         <div class="section">
-            <div class="section-title">// Configurazione Sistema ó Parametri Confermati</div>
+            <div class="section-title">// Configurazione Sistema - Parametri Confermati</div>
             <table class="data-table">
                 <thead>
                     <tr>
@@ -635,33 +635,33 @@
                 <tbody>
                     <tr>
                         <td>Banda operativa</td>
-                        <td><input placeholder="es. 566ñ574 MHz"></td>
+                        <td><input placeholder="es. 566-574 MHz"></td>
                         <td><input placeholder="Scan confermato"></td>
-                        <td><input placeholder="? OK"></td>
+                        <td><input placeholder="‚úÖ OK"></td>
                     </tr>
                     <tr>
                         <td>Latenza</td>
                         <td>0.7 ms</td>
                         <td><input placeholder="0.7 ms"></td>
-                        <td><input placeholder="? OK"></td>
+                        <td><input placeholder="‚úÖ OK"></td>
                     </tr>
                     <tr>
                         <td>Crittografia AES-256</td>
                         <td>Attiva su tutti i link</td>
                         <td><input placeholder="Verificata"></td>
-                        <td><input placeholder="? OK"></td>
+                        <td><input placeholder="‚úÖ OK"></td>
                     </tr>
                     <tr>
                         <td>Integrazione Dante</td>
-                        <td><input placeholder="32◊32 @ 48kHz"></td>
+                        <td><input placeholder="64√ó64 @ 96kHz"></td>
                         <td><input placeholder="Verificato"></td>
-                        <td><input placeholder="? OK"></td>
+                        <td><input placeholder="‚úÖ OK"></td>
                     </tr>
                     <tr>
-                        <td>Antenne DAD ó RSSI</td>
+                        <td>Antenne DAD  RSSI</td>
                         <td><input placeholder="Posizione prevista"></td>
                         <td><input placeholder="es. -52 dBm medio"></td>
-                        <td><input placeholder="? OK"></td>
+                        <td><input placeholder="‚úÖ OK"></td>
                     </tr>
                 </tbody>
             </table>
@@ -669,34 +669,34 @@
         <div class="section">
             <div class="section-title">// Incident Log</div>
             <div class="incident-field"><label>Interferenze esterne</label><textarea
-                    placeholder="Nessuna oppure: frequenza, orario, durata, fonte, azione correttivaÖ"></textarea></div>
+                    placeholder="Nessuna oppure: frequenza, orario, durata, fonte, azione correttiva"></textarea></div>
             <div class="incident-field"><label>Dropout / degrado segnale</label><textarea
-                    placeholder="Nessuno oppure: numero, durata, link, causaÖ"></textarea></div>
+                    placeholder="Nessuno oppure: numero, durata, link, causa"></textarea></div>
             <div class="incident-field"><label>Note per eventi futuri in questa venue</label><textarea
-                    placeholder="Bande da evitare, posizioni antenna ottimali, note logisticheÖ"></textarea></div>
+                    placeholder="Bande da evitare, posizioni antenna ottimali, note logistiche"></textarea></div>
         </div>
         <div class="section">
             <div class="section-title">// Esito Certificazione</div>
             <div class="verdict ok" id="verdict-box">
                 <div class="verdict-icon" id="v-icon">?</div>
                 <div class="verdict-text">
-                    <h3 id="v-title">Prestazione RF Certificata ó Nessun Dropout</h3>
+                    <h3 id="v-title">Prestazione RF Certificata - Nessun Dropout</h3>
                     <p id="v-sub">Il sistema VECT ha operato nei parametri nominali per l'intera durata dell'evento.</p>
                 </div>
             </div>
             <select class="verdict-select" onchange="setVerdict(this.value)">
-                <option value="ok">? Evento senza criticit‡</option>
-                <option value="warn">?? Criticit‡ gestite ó vedi log</option>
+                <option value="ok">‚úÖ Evento senza criticit√†</option>
+                <option value="warn">‚ö†Ô∏è Criticit√† gestite - vedi log</option>
             </select>
         </div>
         <div class="sign-grid">
-            <div class="sign-box"><label>Redatto da ó VECT</label>
+            <div class="sign-box"><label>Redatto da - VECT</label>
                 <div class="sign-line"></div>
-                <div class="sign-name">Carmine Eduardo De Vita ∑ RF Engineer ∑ Data: ___/___/______</div>
+                <div class="sign-name">Carmine Eduardo De Vita - RF Engineer - Data: ___/___/______</div>
             </div>
-            <div class="sign-box"><label>Ricevuto da ó Cliente</label>
+            <div class="sign-box"><label>Ricevuto da - Cliente</label>
                 <div class="sign-line"></div>
-                <div class="sign-name">Nome ∑ Ruolo ∑ Data: ___/___/______</div>
+                <div class="sign-name">Nome - Ruolo - Data: ___/___/______</div>
             </div>
         </div>
     </div>
@@ -706,8 +706,8 @@
         document.getElementById('doc-date').textContent = `${pad(now.getDate())}/${pad(now.getMonth() + 1)}/${now.getFullYear()}`;
         function setVerdict(v) {
             const b = document.getElementById('verdict-box');
-            if (v === 'ok') { b.className = 'verdict ok'; document.getElementById('v-icon').textContent = '?'; document.getElementById('v-title').textContent = 'Prestazione RF Certificata ó Nessun Dropout'; document.getElementById('v-sub').textContent = 'Il sistema VECT ha operato nei parametri nominali.'; }
-            else { b.className = 'verdict warn'; document.getElementById('v-icon').textContent = '??'; document.getElementById('v-title').textContent = 'Criticit‡ Gestite ó Consulta Incident Log'; document.getElementById('v-sub').textContent = 'Si sono verificate anomalie. Le azioni correttive hanno garantito la continuit‡ operativa.'; }
+            if (v === 'ok') { b.className = 'verdict ok'; document.getElementById('v-icon').textContent = '‚úÖ'; document.getElementById('v-title').textContent = 'Prestazione RF Certificata - Nessun Dropout'; document.getElementById('v-sub').textContent = 'Il sistema VECT ha operato nei parametri nominali.'; }
+            else { b.className = 'verdict warn'; document.getElementById('v-icon').textContent = '‚ö†Ô∏è'; document.getElementById('v-title').textContent = 'Criticit√† Gestite - Consulta Incident Log'; document.getElementById('v-sub').textContent = 'Si sono verificate anomalie. Le azioni correttive hanno garantito la continuit√† operativa.'; }
         }
     </script>
 </body>
