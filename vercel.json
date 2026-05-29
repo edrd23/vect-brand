@@ -11,6 +11,10 @@
       "use": "@vercel/static"
     },
     {
+      "src": "documenti/*.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "*.{css,js,svg,png,webmanifest,xml,txt,woff2}",
       "use": "@vercel/static"
     }
