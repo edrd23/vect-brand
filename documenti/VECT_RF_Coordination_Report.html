@@ -523,7 +523,7 @@
                 <path d="M300 30H360V43H337V90H323V43H300V30Z" fill="#F5F5F5" />
             </svg>
             <div>
-                <div class="doc-tag">// RF Engineering - Post Setup Report</div>
+                <div class="doc-tag">// RF Engineering - Post Setup Report (SAMPLE COMPILATO)</div>
                 <div class="doc-title">RF Coordination Report</div>
                 <div class="certified-badge">✅ VECT Certified - Spettro Verificato</div>
             </div>
@@ -535,30 +535,30 @@
     </div>
     <div class="doc-body">
         <div class="event-banner">
-            <div class="ev-field"><label>Evento</label><input placeholder="es. Estate Festival 2026"></div>
-            <div class="ev-field"><label>Data Evento</label><input type="date"></div>
-            <div class="ev-field"><label>Location</label><input placeholder="es. Mediolanum Forum"></div>
-            <div class="ev-field"><label>Cliente</label><input placeholder="es. Live Nation Italy"></div>
+            <div class="ev-field"><label>Evento</label><input value="Arena Summer Fest 2026" readonly></div>
+            <div class="ev-field"><label>Data Evento</label><input type="date" value="2026-07-15" readonly></div>
+            <div class="ev-field"><label>Location</label><input value="Unipol Arena, Bologna" readonly></div>
+            <div class="ev-field"><label>Cliente</label><input value="Live Nation Italia" readonly></div>
         </div>
         <div class="section">
             <div class="section-title">// Metriche Operative</div>
             <div class="outcome-grid">
                 <div class="outcome-card">
-                    <div><span class="outcome-val" id="v1"></span> <span class="outcome-unit">link</span></div>
+                    <div><span class="outcome-val" id="v1">32</span> <span class="outcome-unit">link</span></div>
                     <div class="outcome-desc">Attivi simultanei</div>
-                    <input class="outcome-input" type="number" placeholder="28"
-                        oninput="document.getElementById('v1').textContent=this.value||''">
+                    <input class="outcome-input" type="number" value="32" readonly
+                        oninput="document.getElementById('v1').textContent=this.value||'32'">
                 </div>
                 <div class="outcome-card">
                     <div><span class="outcome-val" id="v2">0.7</span> <span class="outcome-unit">ms</span></div>
                     <div class="outcome-desc">Latenza massima rilevata</div>
-                    <input class="outcome-input" type="number" step="0.1" placeholder="0.7"
+                    <input class="outcome-input" type="number" step="0.1" value="0.7" readonly
                         oninput="document.getElementById('v2').textContent=this.value||'0.7'">
                 </div>
                 <div class="outcome-card">
                     <div><span class="outcome-val" id="v3">0</span></div>
                     <div class="outcome-desc">Dropout durante show</div>
-                    <input class="outcome-input" type="number" placeholder="0"
+                    <input class="outcome-input" type="number" value="0" readonly
                         oninput="document.getElementById('v3').textContent=this.value||'0'">
                 </div>
             </div>
@@ -602,21 +602,21 @@
                 <tbody>
                     <tr>
                         <td style="font-weight:600;color:var(--accent)">VECT - Sennheiser Spectera BSS</td>
-                        <td><input placeholder="es. 566-574"></td>
-                        <td><input type="number" placeholder="32" style="width:60px"></td>
-                        <td><input placeholder="Nessuna"></td>
+                        <td><input value="566-574" readonly></td>
+                        <td><input type="number" value="32" style="width:60px" readonly></td>
+                        <td><input value="Nessuna interferenza rilevata" readonly></td>
                     </tr>
                     <tr>
-                        <td><input placeholder="Altro service / sistema"></td>
-                        <td><input placeholder=""></td>
-                        <td><input type="number" style="width:60px"></td>
-                        <td><input placeholder=""></td>
+                        <td><input value="Fornitore Audio B (PSM1000)" readonly></td>
+                        <td><input value="470-510" readonly></td>
+                        <td><input type="number" value="12" style="width:60px" readonly></td>
+                        <td><input value="Banda riservata, coord. via WSM" readonly></td>
                     </tr>
                     <tr>
-                        <td><input placeholder="Altro service / sistema"></td>
-                        <td><input placeholder=""></td>
-                        <td><input type="number" style="width:60px"></td>
-                        <td><input placeholder=""></td>
+                        <td><input value="Fornitore Broadcast (ENG)" readonly></td>
+                        <td><input value="614-638" readonly></td>
+                        <td><input type="number" value="8" style="width:60px" readonly></td>
+                        <td><input value="Canali TV locali adiacenti, OK" readonly></td>
                     </tr>
                 </tbody>
             </table>
@@ -635,45 +635,42 @@
                 <tbody>
                     <tr>
                         <td>Banda operativa</td>
-                        <td><input placeholder="es. 566-574 MHz"></td>
-                        <td><input placeholder="Scan confermato"></td>
-                        <td><input placeholder="✅ OK"></td>
+                        <td><input value="566-574 MHz" readonly></td>
+                        <td><input value="Scan confermato (Pulito)" readonly></td>
+                        <td><input value="✅ OK" readonly></td>
                     </tr>
                     <tr>
                         <td>Latenza</td>
                         <td>0.7 ms</td>
-                        <td><input placeholder="0.7 ms"></td>
-                        <td><input placeholder="✅ OK"></td>
+                        <td><input value="0.7 ms" readonly></td>
+                        <td><input value="✅ OK" readonly></td>
                     </tr>
                     <tr>
                         <td>Crittografia AES-256</td>
                         <td>Attiva su tutti i link</td>
-                        <td><input placeholder="Verificata"></td>
-                        <td><input placeholder="✅ OK"></td>
+                        <td><input value="Verificata su tutti i bodypack" readonly></td>
+                        <td><input value="✅ OK" readonly></td>
                     </tr>
                     <tr>
                         <td>Integrazione Dante</td>
-                        <td><input placeholder="64×64 @ 24-bit / 96kHz"></td>
-                        <td><input placeholder="Verificato"></td>
-                        <td><input placeholder="✅ OK"></td>
+                        <td><input value="64×64 @ 24-bit / 96kHz" readonly></td>
+                        <td><input value="Sync testato con MADI backup" readonly></td>
+                        <td><input value="✅ OK" readonly></td>
                     </tr>
                     <tr>
                         <td>Antenne DAD  RSSI</td>
-                        <td><input placeholder="Posizione prevista"></td>
-                        <td><input placeholder="es. -52 dBm medio"></td>
-                        <td><input placeholder="✅ OK"></td>
+                        <td><input value="Posizione A/B Main Stage" readonly></td>
+                        <td><input value="-52 dBm medio (Link quality 100%)" readonly></td>
+                        <td><input value="✅ OK" readonly></td>
                     </tr>
                 </tbody>
             </table>
         </div>
         <div class="section">
             <div class="section-title">// Incident Log</div>
-            <div class="incident-field"><label>Interferenze esterne</label><textarea
-                    placeholder="Nessuna oppure: frequenza, orario, durata, fonte, azione correttiva"></textarea></div>
-            <div class="incident-field"><label>Dropout / degrado segnale</label><textarea
-                    placeholder="Nessuno oppure: numero, durata, link, causa"></textarea></div>
-            <div class="incident-field"><label>Note per eventi futuri in questa venue</label><textarea
-                    placeholder="Bande da evitare, posizioni antenna ottimali, note logistiche"></textarea></div>
+            <div class="incident-field"><label>Interferenze esterne</label><textarea readonly>Nessuna interferenza critica rilevata durante il main show. Alle 16:30 rilevata portante DVB-T debole su 570MHz, Spectera ha compensato automaticamente senza dropout.</textarea></div>
+            <div class="incident-field"><label>Dropout / degrado segnale</label><textarea readonly>Nessun dropout registrato. Link Quality stabilmente sopra l'85% in tutta l'area stage e catwalk.</textarea></div>
+            <div class="incident-field"><label>Note per eventi futuri in questa venue</label><textarea readonly>L'installazione delle antenne DAD sui tower layer delay ha garantito una copertura perfetta. Da replicare per futuri eventi in questa venue.</textarea></div>
         </div>
         <div class="section">
             <div class="section-title">// Esito Certificazione</div>
