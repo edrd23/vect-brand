@@ -3118,3 +3118,42 @@ body::after {
         font-size: 1.4rem;
     }
 }
+
+/* ------- FIX: Footer Links spacing ------- */
+.footer-links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    margin: 15px 0;
+}
+.footer-links a {
+    color: var(--vect-ash);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 5px 18px;
+    transition: color 0.2s ease;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+.footer-links a:last-child {
+    border-right: none;
+}
+.footer-links a:hover {
+    color: var(--vect-accent);
+}
+
+/* ------- FIX: Intelligence card label spacing ------- */
+#intelligence .reveal-item {
+    margin-bottom: 25px;
+}
+
+/* ------- FIX: White Paper btn width ------- */
+.intel-action .btn {
+    display: inline-flex;
+    width: auto;
+    padding: 12px 28px;
+    font-size: 13px;
+}
