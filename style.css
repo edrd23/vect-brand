@@ -3066,3 +3066,55 @@ body::after {
         padding: 20px 0;
     }
 }
+
+/* ------- INTELLIGENCE / WHITE PAPER ------- */
+.intelligence-card {
+    display: flex;
+    align-items: center;
+    background: rgba(10, 10, 10, 0.6);
+    border: 1px solid rgba(255, 107, 26, 0.15);
+    position: relative;
+    padding: 40px;
+    margin-top: 30px;
+    gap: 40px;
+    backdrop-filter: blur(10px);
+    transition: border-color 0.3s ease;
+}
+.intelligence-card:hover {
+    border-color: rgba(255, 107, 26, 0.4);
+}
+.intel-content {
+    flex: 1;
+    z-index: 2;
+}
+.intel-title {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 15px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+.intel-desc {
+    color: var(--vect-ash);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+.intel-visual {
+    flex: 0 0 300px;
+    height: 150px;
+    opacity: 0.8;
+}
+@media (max-width: 768px) {
+    .intelligence-card {
+        flex-direction: column;
+        padding: 25px;
+        gap: 20px;
+    }
+    .intel-visual {
+        flex: 0 0 120px;
+        width: 100%;
+    }
+    .intel-title {
+        font-size: 1.4rem;
+    }
+}
