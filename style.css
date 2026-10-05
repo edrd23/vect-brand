@@ -3471,3 +3471,90 @@ nav {
 .intelligence-card {
     padding: 60px !important;
 }
+
+/* ------- SLEEK RADAR GRAPHICS ------- */
+.radar-scanner-inner {
+    border-radius: 50% !important; /* Fix previous override */
+    background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, rgba(0, 0, 0, 0.4) 100%) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    box-shadow: inset 0 0 60px rgba(0,0,0,0.8), 0 0 40px rgba(255, 107, 26, 0.05) !important;
+}
+
+.radar-ring {
+    border: 1px solid rgba(255, 255, 255, 0.04) !important;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.01) !important;
+}
+
+.radar-ch-h {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05) 50%, transparent) !important;
+    height: 1px !important;
+}
+
+.radar-ch-v {
+    background: linear-gradient(0deg, transparent, rgba(255,255,255,0.05) 50%, transparent) !important;
+    width: 1px !important;
+}
+
+.radar-sweep-arm {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: 50% !important;
+    height: 50% !important;
+    transform-origin: 0% 0% !important;
+    top: 50% !important;
+    left: 50% !important;
+}
+
+.radar-sweep-arm::after {
+    content: '' !important;
+    position: absolute !important;
+    top: -100% !important;
+    left: -100% !important;
+    width: 200% !important;
+    height: 200% !important;
+    background: conic-gradient(from 0deg at 50% 50%, transparent 70%, rgba(255, 107, 26, 0.15) 100%) !important;
+    border-radius: 50% !important;
+    clip-path: polygon(50% 50%, 100% 50%, 100% 100%, 50% 100%) !important;
+    pointer-events: none;
+}
+
+.rh-dot {
+    background: rgba(255, 255, 255, 0.2) !important;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+    border: 1px solid rgba(255,255,255,0.1) !important;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.rh-dot-active, .radar-hotspot.selected .rh-dot {
+    background: var(--vect-white) !important;
+    box-shadow: 0 0 20px rgba(255, 107, 26, 0.6), 0 0 40px rgba(255, 107, 26, 0.4) !important;
+    border-color: var(--vect-white) !important;
+}
+
+.radar-hotspot:hover .rh-dot {
+    background: var(--vect-white) !important;
+    transform: scale(1.5) !important;
+    box-shadow: 0 0 15px rgba(255, 107, 26, 0.4) !important;
+}
+
+.rh-lbl {
+    color: var(--vect-silver) !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.1em !important;
+}
+
+.rh-lbl-active, .radar-hotspot.selected .rh-lbl {
+    color: var(--vect-white) !important;
+    text-shadow: 0 0 10px rgba(255, 107, 26, 0.5) !important;
+}
+
+/* Add a sleek overlay shadow to the scanner frame to blend it */
+.radar-scanner-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 32px;
+    box-shadow: inset 0 0 40px rgba(0,0,0,0.5);
+    pointer-events: none;
+}
