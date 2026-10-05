@@ -3369,37 +3369,63 @@ body::after {
 
 
 
-/* ------- SPECIAL OPS / CONCRETE IDENTITY ------- */
+/* ------- PREMIUM / SLEEK IDENTITY ------- */
 .hero {
     position: relative;
-    background-image: linear-gradient(to bottom, rgba(10,10,10,0.8), rgba(10,10,10,1)), url('images/hero-bg.jpg');
+    background-image: linear-gradient(to bottom, rgba(10,10,10,0.6), rgba(10,10,10,1)), url('images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
 }
 #vect-space-bg {
-    opacity: 0.1;
+    opacity: 0.05;
 }
 h1, h2, h3, h4 {
-    text-transform: uppercase;
-    font-weight: 800;
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: -0.04em;
+}
+h1.shiny-text {
+    font-weight: 300;
+    font-size: 3.5rem;
 }
 .btn {
-    border-radius: 0 !important;
-    border: 1px solid var(--vect-accent) !important;
+    border-radius: 30px !important;
+    border: 1px solid rgba(255, 107, 26, 0.4) !important;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 500;
+    padding: 12px 32px;
 }
 .btn-primary {
-    background: rgba(255, 107, 26, 0.1) !important;
-    backdrop-filter: blur(4px);
+    background: rgba(255, 107, 26, 0.05) !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(255, 107, 26, 0.1);
 }
 .btn-primary:hover {
-    background: var(--vect-accent) !important;
-    color: var(--vect-black) !important;
+    background: rgba(255, 107, 26, 0.15) !important;
+    border-color: var(--vect-accent) !important;
+    box-shadow: 0 10px 40px rgba(255, 107, 26, 0.2);
+    color: var(--vect-white) !important;
+}
+.hero-content {
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 60px;
+    margin-top: 40px;
 }
 .section-label {
-    border-left: 2px solid var(--vect-accent);
-    padding-left: 10px;
-    font-family: var(--font-mono);
+    border: none;
     text-transform: uppercase;
-    color: var(--vect-accent-bright);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--vect-silver);
+    opacity: 0.6;
+}
+nav {
+    backdrop-filter: blur(20px);
+    background: rgba(10, 10, 10, 0.5) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
 }
