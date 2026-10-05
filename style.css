@@ -3714,3 +3714,35 @@ nav {
     border-top: 1px solid rgba(255,255,255,0.05) !important;
     padding-top: 16px !important;
 }
+
+/* ------- SLEEK CONTACT FORM OVERRIDES ------- */
+.form-group input, .form-group textarea {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 12px !important;
+    color: #fff !important;
+    font-family: 'Inter', sans-serif !important;
+    padding: 16px 20px !important;
+    transition: all 0.3s ease !important;
+    backdrop-filter: blur(10px) !important;
+}
+.form-group input:focus, .form-group textarea:focus {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 122, 0, 0.5) !important;
+    box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.1) !important;
+    outline: none !important;
+}
+.form-group label {
+    font-size: 13px !important;
+    letter-spacing: 0.5px !important;
+    color: rgba(255, 255, 255, 0.6) !important;
+    text-transform: uppercase !important;
+    margin-bottom: 8px !important;
+}
+.contact-grid {
+    background: rgba(255, 255, 255, 0.01) !important;
+    border: 1px solid rgba(255, 255, 255, 0.03) !important;
+    border-radius: 24px !important;
+    padding: 40px !important;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3) !important;
+}
