@@ -537,36 +537,27 @@
                         </div>
                         <div class="rip-status-chip">
                             <span class="rsb-dot rsb-live"></span>
-                            <span class="mono" id="rip-status-text">IDLE</span>
+                            <span class="mono" id="rip-status-text">ACTIVE</span>
                         </div>
                     </div>
-                    <div class="rip-body" id="rip-body">
-                        <div class="rip-idle">
-                            <div class="rip-idle-icon">&#9678;</div>
-                            <p class="mono rip-idle-msg">
-                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
-                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
-                            </p>
-                        </div>
-                    </div>
-                    <div class="rip-bars" id="rip-bars" style="display:none;">
+                    <div class="rip-bars" id="rip-bars" style="display:block; margin-top: 20px;">
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
-                            <span class="rip-bar-val mono" id="val-compliance">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance" style="width: 100%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-compliance">100%</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
-                            <span class="rip-bar-val mono" id="val-quality">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality" style="width: 98%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-quality">98%</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
-                            <span class="rip-bar-val mono" id="val-congestion">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion" style="width: 42%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-congestion">42%</span>
                         </div>
                     </div>
-                    <div class="rip-footer">
+                    <div class="rip-footer" style="margin-top: 30px;">
                         <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
                     </div>
                 </div>
