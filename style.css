@@ -3369,10 +3369,10 @@ body::after {
 
 
 
-/* ------- PREMIUM / SLEEK IDENTITY ------- */
+/* ------- PREMIUM / SLEEK IDENTITY (REFINED) ------- */
 .hero {
     position: relative;
-    background-image: linear-gradient(to bottom, rgba(10,10,10,0.6), rgba(10,10,10,1)), url('images/hero-bg.jpg');
+    background-image: linear-gradient(to bottom, rgba(10,10,10,0.7), rgba(10,10,10,1)), url('images/hero-bg.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -3382,50 +3382,62 @@ body::after {
 }
 h1, h2, h3, h4 {
     text-transform: none;
-    font-weight: 400;
-    letter-spacing: -0.04em;
+    font-weight: 500;
+    letter-spacing: -0.03em;
 }
 h1.shiny-text {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 24px;
 }
+.hero-tagline {
+    font-size: 1.2rem;
+    color: var(--vect-white);
+    opacity: 0.9;
+}
+/* Miglioramento netto visibilità bottoni */
 .btn {
-    border-radius: 30px !important;
-    border: 1px solid rgba(255, 107, 26, 0.4) !important;
+    border-radius: 40px !important;
     text-transform: none;
-    letter-spacing: 0;
-    font-weight: 500;
-    padding: 12px 32px;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    padding: 14px 36px;
+    font-size: 14px;
+    transition: all 0.25s ease-out;
 }
 .btn-primary {
-    background: rgba(255, 107, 26, 0.05) !important;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 10px 30px rgba(255, 107, 26, 0.1);
+    background: var(--vect-accent) !important;
+    color: var(--vect-black) !important;
+    border: none !important;
+    box-shadow: 0 8px 24px rgba(255, 107, 26, 0.3) !important;
 }
 .btn-primary:hover {
-    background: rgba(255, 107, 26, 0.15) !important;
-    border-color: var(--vect-accent) !important;
-    box-shadow: 0 10px 40px rgba(255, 107, 26, 0.2);
-    color: var(--vect-white) !important;
+    background: var(--vect-accent-bright) !important;
+    box-shadow: 0 12px 32px rgba(255, 107, 26, 0.5) !important;
+    transform: translateY(-2px);
 }
 .hero-content {
-    background: rgba(10, 10, 10, 0.4);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(10, 10, 10, 0.5);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 60px;
     margin-top: 40px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
 }
 .section-label {
     border: none;
     text-transform: uppercase;
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    color: var(--vect-silver);
-    opacity: 0.6;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    color: var(--vect-white);
+    opacity: 0.7;
+    margin-bottom: 16px;
+    display: block;
 }
 nav {
-    backdrop-filter: blur(20px);
-    background: rgba(10, 10, 10, 0.5) !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(24px);
+    background: rgba(10, 10, 10, 0.6) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
