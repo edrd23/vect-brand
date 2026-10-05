@@ -3441,3 +3441,33 @@ nav {
     background: rgba(10, 10, 10, 0.6) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* ------- SLEEK OVERRIDES FOR CAPITOLO 02/03 ------- */
+.radar-scanner-frame, 
+.radar-info-panel, 
+.about-synthetic-grid, 
+.intelligence-card {
+    background: rgba(15, 15, 15, 0.6) !important;
+    backdrop-filter: blur(24px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    border-radius: 32px !important;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5) !important;
+    overflow: hidden;
+}
+.intelligence-card:hover {
+    border-color: rgba(255, 107, 26, 0.3) !important;
+    transform: translateY(-5px);
+    box-shadow: 0 40px 80px rgba(255, 107, 26, 0.15) !important;
+}
+.radar-section-bg {
+    opacity: 0.2; /* Riduce l'intensita dei bagliori dietro al radar */
+}
+.radar-scanner-inner {
+    border-radius: 32px;
+}
+.about-synthetic-grid {
+    padding: 60px !important;
+}
+.intelligence-card {
+    padding: 60px !important;
+}
