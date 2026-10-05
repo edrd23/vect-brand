@@ -3651,3 +3651,66 @@ nav {
     font-weight: 300 !important;
     color: rgba(255,255,255,0.5) !important;
 }
+
+/* ------- SLEEK FAQ PREMIUM REDESIGN ------- */
+.faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.faq-item {
+    background: rgba(255, 255, 255, 0.02) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 16px !important;
+    padding: 20px 24px !important;
+    margin: 0 !important;
+    transition: all 0.3s ease !important;
+}
+.faq-item:hover {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.faq-item[open] {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(255, 122, 0, 0.3) !important;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2) !important;
+}
+.faq-summary {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding: 0 !important;
+    font-size: 17px !important;
+    font-weight: 400 !important;
+    cursor: pointer !important;
+    list-style: none !important;
+}
+.faq-summary::-webkit-details-marker {
+    display: none !important;
+}
+.faq-summary .arrow {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50% !important;
+    background: rgba(255, 255, 255, 0.05) !important;
+    font-size: 14px !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    color: var(--vect-orange) !important;
+}
+.faq-item[open] .faq-summary .arrow {
+    transform: rotate(180deg) !important;
+    background: var(--vect-orange) !important;
+    color: #000 !important;
+}
+.faq-content {
+    margin-top: 16px !important;
+    padding-bottom: 0 !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    color: rgba(255, 255, 255, 0.65) !important;
+    border-top: 1px solid rgba(255,255,255,0.05) !important;
+    padding-top: 16px !important;
+}
