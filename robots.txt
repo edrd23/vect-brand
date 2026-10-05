@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
+Disallow: /documenti/VECT_Index
+Disallow: /documenti/VECT_CRM
+Disallow: /documenti/VECT_Contratti
+Disallow: /documenti/VECT_Rate_Card
+Disallow: /documenti/VECT_Playbook
+Disallow: /documenti/VECT_NDA
+Disallow: /documenti/VECT_Asset
+Disallow: /documenti/VECT_Finance
 
 Sitemap: https://www.vect-rf.it/sitemap.xml

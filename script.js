@@ -2,11 +2,22 @@
 let turnstileVerified = false;
 let turnstileToken = '';
 
+function updateSubmitButtonState() {
+    const submitBtn = document.getElementById('submitBtn');
+    const privacyCheck = document.getElementById('privacyConsent');
+    if (!submitBtn || submitBtn.classList.contains('loading')) return;
+
+    const privacyOk = privacyCheck ? privacyCheck.checked : false;
+    const turnstileOk = turnstileVerified && Boolean(turnstileToken);
+    submitBtn.disabled = !(privacyOk && turnstileOk);
+}
+
 window.onTurnstileSuccess = function (token) {
     turnstileVerified = true;
     turnstileToken = token;
     const hiddenInput = document.getElementById('turnstileToken');
     if (hiddenInput) hiddenInput.value = token;
+    updateSubmitButtonState();
 };
 
 window.onTurnstileExpired = function () {
@@ -14,11 +25,16 @@ window.onTurnstileExpired = function () {
     turnstileToken = '';
     const hiddenInput = document.getElementById('turnstileToken');
     if (hiddenInput) hiddenInput.value = '';
+    updateSubmitButtonState();
 };
 
 window.onTurnstileError = function () {
-    // Turnstile failed — log but don't block the user
-    console.warn('[VECT] Turnstile error — proceeding without token');
+    turnstileVerified = false;
+    turnstileToken = '';
+    const hiddenInput = document.getElementById('turnstileToken');
+    if (hiddenInput) hiddenInput.value = '';
+    console.warn('[VECT] Turnstile error — complete the verification to send');
+    updateSubmitButtonState();
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -44,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium').forEach(el => revealObserver.observe(el));
+        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium, .reveal').forEach(el => revealObserver.observe(el));
     };
 
     const setupSpotlight = () => {
@@ -103,18 +119,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (activeBtn) activeBtn.click();
 
     // ═══════ STICKY NAVBAR & SCROLLSPY ═══════
-    const sections = document.querySelectorAll('section');
+    const scrollTargets = document.querySelectorAll('section[id], #spectera');
     const navLinksList = document.querySelectorAll('.nav-links a');
 
     window.addEventListener('scroll', () => {
         nav.classList.toggle('scrolled', window.scrollY > 80);
 
-        // ScrollSpy logic
         let currentSection = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
+        scrollTargets.forEach((target) => {
+            const sectionTop = target.offsetTop;
             if (window.scrollY >= (sectionTop - 200)) {
-                currentSection = section.getAttribute('id');
+                currentSection = target.getAttribute('id');
             }
         });
 
@@ -161,17 +176,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ═══════ REVEAL ANIMATIONS ═══════
-    const revealElements = document.querySelectorAll('.reveal');
-    const revealObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-            }
-        });
-    }, { threshold: 0.12 });
+    // ═══════ SPECTERA GALLERY ═══════
+    const specteraHero = document.getElementById('spectera-hero-img');
+    const specteraThumbs = document.querySelectorAll('.spectera-thumb');
+    if (specteraHero && specteraThumbs.length > 0) {
+        specteraThumbs.forEach((thumb) => {
+            thumb.addEventListener('click', () => {
+                const src = thumb.getAttribute('data-src');
+                if (!src) return;
 
-    revealElements.forEach(el => revealObserver.observe(el));
+                const lang = document.documentElement.getAttribute('lang') || 'it';
+                const alt = thumb.getAttribute(lang === 'en' ? 'data-alt-en' : 'data-alt-it') || specteraHero.alt;
+
+                specteraHero.src = src;
+                specteraHero.alt = alt;
+
+                specteraThumbs.forEach((t) => {
+                    const active = t === thumb;
+                    t.classList.toggle('is-active', active);
+                    t.setAttribute('aria-selected', String(active));
+                });
+            });
+        });
+    }
 
     // ═══════ RF SCANNER LOGIC ═══════
     const freqElements = document.querySelectorAll('.scanner-main-freq');
@@ -423,16 +450,12 @@ radarHotspots.forEach(btn => {
 const contactForm = document.getElementById('contactForm');
 const submitBtn = document.getElementById('submitBtn');
 
-// Abilita/disabilita il bottone in base alla spunta privacy
 if (contactForm) {
     const privacyCheck = document.getElementById('privacyConsent');
-    if (privacyCheck && submitBtn) {
-        // Stato iniziale: disabilitato
-        submitBtn.disabled = true;
-        privacyCheck.addEventListener('change', () => {
-            submitBtn.disabled = !privacyCheck.checked;
-        });
+    if (privacyCheck) {
+        privacyCheck.addEventListener('change', updateSubmitButtonState);
     }
+    updateSubmitButtonState();
 }
 
 if (contactForm) {
@@ -448,7 +471,16 @@ if (contactForm) {
         if (privacyCheck && !privacyCheck.checked) {
             btn.innerHTML = lang === 'it' ? '⚠ Accetta la Privacy Policy' : '⚠ Accept Privacy Policy';
             btn.style.background = 'var(--vect-warning)';
-            setTimeout(() => { btn.innerHTML = originalHTML; btn.style.background = ''; }, 3000);
+            setTimeout(() => { btn.innerHTML = originalHTML; btn.style.background = ''; updateSubmitButtonState(); }, 3000);
+            return;
+        }
+
+        if (!turnstileVerified || !turnstileToken) {
+            showToast(
+                lang === 'it' ? 'Completa la verifica anti-spam (Turnstile).' : 'Complete the anti-spam check (Turnstile).',
+                'error'
+            );
+            updateSubmitButtonState();
             return;
         }
 
@@ -456,26 +488,28 @@ if (contactForm) {
         btn.disabled = true;
         btn.classList.add('loading');
 
-        // Robust FormData creation
+        // Costruzione payload per il backend proxy Vercel
         const formData = new FormData(contactForm);
+        const payload = Object.fromEntries(formData.entries());
         
-        // ════════════════════════════════════════════════════════════
-        // CONFIGURAZIONE WEB3FORMS (INVIO DIRETTO)
-        // ════════════════════════════════════════════════════════════
-        formData.append('access_key', '4cc1583d-1036-49ee-ba64-38637fbb21b9');
-        formData.append('subject', 'Nuova richiesta dal sito VECT');
-        formData.append('from_name', 'VECT Website');
-
-        // Add Turnstile token per certificare che è un umano
         if (turnstileToken) {
-            formData.append('turnstile_token', turnstileToken);
+            payload.turnstile_token = turnstileToken;
         }
 
+        // Aggiunta campi opzionali gestiti dal backend
+        payload.subject = 'Nuova richiesta dal sito VECT';
+        payload.from_name = 'VECT Website';
+        // Conversione booleana privacy
+        payload.privacyConsent = !!payload.privacyConsent;
+
         try {
-            // Invio diretto a Web3Forms usando FormData
-            const response = await fetch('https://api.web3forms.com/submit', {
+            // Invio sicuro tramite Serverless Function
+            const response = await fetch('/api/submit-form', {
                 method: 'POST',
-                body: formData
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
             });
 
             if (!response.ok) {
@@ -501,8 +535,8 @@ if (contactForm) {
                 setTimeout(() => {
                     btn.innerHTML = originalHTML;
                     btn.style.background = '';
-                    btn.disabled = false;
                     btn.classList.remove('loading');
+                    updateSubmitButtonState();
                 }, 4000);
             } else {
                 showToast(lang === 'it' ? `Errore server: ${result.message}` : `Server Error: ${result.message}`, 'error');
@@ -520,8 +554,8 @@ if (contactForm) {
             setTimeout(() => {
                 btn.innerHTML = originalHTML;
                 btn.style.background = '';
-                btn.disabled = false;
                 btn.classList.remove('loading');
+                updateSubmitButtonState();
             }, 5000);
         }
     });
@@ -573,24 +607,6 @@ if (statValues.length > 0) {
     
     statValues.forEach(val => observer.observe(val));
 }
-
-// ═══════ MAGNETIC BUTTONS ═══════
-const magneticBtns = document.querySelectorAll('.btn-primary');
-magneticBtns.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        
-        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
-        btn.style.transition = 'transform 0.1s ease-out';
-    });
-    
-    btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0px, 0px)';
-        btn.style.transition = 'transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-    });
-});
 
 // ═══════ TOAST NOTIFICATIONS ═══════
 function showToast(message, type = 'success') {
@@ -718,9 +734,10 @@ function showToast(message, type = 'success') {
             const text = side.innerText;
             side.setAttribute('aria-hidden', 'true');
             
-            side.innerHTML = text.split('').map((char, i) => 
-                `<span class="char-wrap"><span class="char" style="transition-delay: ${i * 0.025}s">${char === ' ' ? '&nbsp;' : char}</span></span>`
-            ).join('');
+            side.innerHTML = text.split('').map((char, i) => {
+                if (char === '\n') return '<br>';
+                return `<span class="char-wrap"><span class="char" style="transition-delay: ${i * 0.025}s">${char === ' ' ? '&nbsp;' : char}</span></span>`;
+            }).join('');
         });
     };
 

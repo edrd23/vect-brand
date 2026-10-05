@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://va.vercel-scripts.com https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://challenges.cloudflare.com https://vitals.vercel-insights.com https://api.web3forms.com; frame-src https://challenges.cloudflare.com;">
+        content="default-src 'self'; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com https://va.vercel-scripts.com https://unpkg.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data: https:; connect-src 'self' https://challenges.cloudflare.com https://vitals.vercel-insights.com https://va.vercel-scripts.com; frame-src https://challenges.cloudflare.com;">
     <!-- ═══════ SEO ═══════ -->
     <title>VECT — RF Coordinator | Noleggio Wireless & RF Rental Italy</title>
     <meta name="description"
@@ -24,10 +24,9 @@
     <meta property="og:description"
         content="VECT è l'RF Coordinator di riferimento per produzioni mission-critical. Noleggio wireless (RF rental), gestione frequenze e Sennheiser Spectera. Zero dropouts.">
     <meta property="og:image" content="https://www.vect-rf.it/og-image.png">
-    <meta property="og:video" content="https://www.vect-rf.it/video/spectera-demo.mp4">
-    <meta property="og:video:type" content="video/mp4">
-    <meta property="og:video:width" content="1920">
-    <meta property="og:video:height" content="1080">
+    <meta property="og:image:width" content="640">
+    <meta property="og:image:height" content="640">
+    <meta property="og:image:alt" content="VECT — RF Coordinator e noleggio wireless Sennheiser Spectera">
     <meta property="og:locale" content="it_IT">
     <meta property="og:locale:alternate" content="en_GB">
     <meta property="og:site_name" content="VECT RF Special Ops">
@@ -115,15 +114,10 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="apple-touch-icon" href="./favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="style.css?v=1.3">
+    <link rel="stylesheet" href="style.css?v=1.5">
     <script src="particles.js" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-
-    <!-- ═══════ VERCEL ANALYTICS ═══════ -->
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+    <script src="consent.js"></script>
 </head>
 
 <body>
@@ -151,7 +145,10 @@
         </div>
         <ul class="nav-links">
             <li><a href="#services"><span class="it-text">Servizi</span><span class="en-text">Services</span></a></li>
+            <li><a href="#spectera"><span class="it-text">Spectera</span><span class="en-text">Spectera</span></a></li>
+            <li><a href="#radar"><span class="it-text">Radar</span><span class="en-text">Radar</span></a></li>
             <li><a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a></li>
+            <li><a href="#faq"><span class="it-text">FAQ</span><span class="en-text">FAQ</span></a></li>
             <li><a href="#contact"><span class="it-text">Contatti</span><span class="en-text">Contact</span></a></li>
         </ul>
         <div class="nav-right">
@@ -317,7 +314,47 @@
         </div>
 
         <!-- SPECTERA HIGHLIGHT — moved here after services grid -->
-        <div class="spectera-banner reveal" data-reveal>
+        <div id="spectera" class="spectera-banner reveal" data-reveal>
+            <div class="banner-visual" aria-hidden="false">
+                <figure class="spectera-figure">
+                    <img id="spectera-hero-img" class="spectera-hero-img" src="images/spectera/in-use-stage.jpg"
+                        width="800" height="600" loading="eager" decoding="async"
+                        alt="Sennheiser Spectera in uso su palco — noleggio wireless VECT">
+                </figure>
+                <div class="spectera-thumb-row" role="tablist"
+                    aria-label="Galleria Sennheiser Spectera">
+                    <button type="button" class="spectera-thumb is-active" role="tab" aria-selected="true"
+                        data-src="images/spectera/in-use-stage.jpg"
+                        data-alt-it="Spectera in uso su evento live"
+                        data-alt-en="Spectera in use at a live event">
+                        <img src="images/spectera/in-use-stage.jpg" alt="" width="80" height="60" loading="lazy">
+                    </button>
+                    <button type="button" class="spectera-thumb" role="tab" aria-selected="false"
+                        data-src="images/spectera/sek-headset.jpg"
+                        data-alt-it="Bodypack SEK con headset"
+                        data-alt-en="SEK bodypack with headset">
+                        <img src="images/spectera/sek-headset.jpg" alt="" width="80" height="60" loading="lazy">
+                    </button>
+                    <button type="button" class="spectera-thumb" role="tab" aria-selected="false"
+                        data-src="images/spectera/base-station.jpg"
+                        data-alt-it="Base station Spectera"
+                        data-alt-en="Spectera base station">
+                        <img src="images/spectera/base-station.jpg" alt="" width="80" height="60" loading="lazy">
+                    </button>
+                    <button type="button" class="spectera-thumb" role="tab" aria-selected="false"
+                        data-src="images/spectera/dad-antennas.jpg"
+                        data-alt-it="Antenne DAD e UHF"
+                        data-alt-en="DAD and UHF antennas">
+                        <img src="images/spectera/dad-antennas.jpg" alt="" width="80" height="60" loading="lazy">
+                    </button>
+                    <button type="button" class="spectera-thumb" role="tab" aria-selected="false"
+                        data-src="images/spectera/system-overview.webp"
+                        data-alt-it="Panoramica sistema WMAS"
+                        data-alt-en="WMAS system overview">
+                        <img src="images/spectera/system-overview.webp" alt="" width="80" height="60" loading="lazy">
+                    </button>
+                </div>
+            </div>
             <div class="banner-content">
                 <span class="banner-badge">Sennheiser Spectera — WMAS</span>
                 <h3 class="banner-title">
@@ -958,7 +995,10 @@
             
             <div class="footer-links">
                 <a href="#services"><span class="it-text">Servizi</span><span class="en-text">Services</span></a>
+                <a href="#spectera">Spectera</a>
+                <a href="#radar"><span class="it-text">Radar</span><span class="en-text">Radar</span></a>
                 <a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a>
+                <a href="#faq">FAQ</a>
                 <a href="privacy.html" target="_blank">Privacy Policy</a>
             </div>
             
@@ -978,6 +1018,10 @@
             <p class="footer-copy">© 2026 VECT — RF Special Ops. All rights reserved. <span
                     style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="privacy.html"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Privacy Policy</a>
+                <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <button type="button"
+                    class="footer-cookie-prefs" onclick="window.VECTConsent &amp;&amp; window.VECTConsent.openPreferences()">
+                    <span class="it-text">Preferenze cookie</span><span class="en-text">Cookie settings</span>
+                </button>
                 <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="sitemap.xml"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sitemap</a>
                 <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="documenti/VECT_WhitePaper_WMAS_Festival.html"
@@ -997,52 +1041,7 @@
         </svg>
     </a>
 
-    <script src="script.js?v=1.2"></script>
-
-    <!-- ═══════ GDPR PRIVACY NOTICE ═══════ -->
-    <div id="privacy-notice" role="complementary" aria-label="Informativa privacy" style="
-        position: fixed; bottom: 20px; left: 20px; right: 20px; z-index: 9999;
-        background: var(--surface-glass); backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        border: 1px solid var(--border-glass);
-        padding: 20px 30px; display: flex; align-items: center;
-        border-radius: 8px;
-        justify-content: space-between; gap: 20px; flex-wrap: wrap;
-        font-size: 13px; color: #ccc; font-family: var(--font-mono);
-        box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-        transform: translateY(120%); transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    ">
-        <p style="margin:0; max-width: 700px; line-height: 1.6;">
-            Questo sito utilizza <strong style="color:#eee">localStorage tecnico</strong> esclusivamente per ricordare
-            la tua preferenza di lingua. Nessun cookie di tracciamento. Nessun dato di profilazione.
-            <a href="privacy.html" style="color:#FF6B1A; text-decoration:underline; margin-left:6px;">Privacy Policy
-                completa &rarr;</a>
-        </p>
-        <button id="privacy-notice-close" style="
-            flex-shrink:0; background: #FF6B1A; color: #000; border: none;
-            padding: 10px 22px; font-size: 12px; font-weight: 700;
-            letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer;
-            border-radius: 3px; white-space: nowrap;
-        " aria-label="Chiudi avviso privacy">OK, capito</button>
-    </div>
-    <script>
-        (function () {
-            var notice = document.getElementById('privacy-notice');
-            var closeBtn = document.getElementById('privacy-notice-close');
-            if (notice && closeBtn) {
-                if (!localStorage.getItem('vect_privacy_ack')) {
-                    setTimeout(function () { notice.style.transform = 'translateY(0)'; }, 600);
-                } else {
-                    notice.style.display = 'none';
-                }
-                closeBtn.addEventListener('click', function () {
-                    notice.style.transform = 'translateY(100%)';
-                    localStorage.setItem('vect_privacy_ack', '1');
-                    setTimeout(function () { notice.style.display = 'none'; }, 300);
-                });
-            }
-        })();
-    </script>
+    <script src="script.js?v=1.6"></script>
 
     <!-- ═══════ SERVICE WORKER ═══════ -->
     <script>
