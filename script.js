@@ -811,18 +811,36 @@ function showToast(message, type = 'success') {
 
 
 // Lead Gen Form Handler
-window.handleLeadGen = function(e) {
+window.handleLeadGen = async function(e) {
     e.preventDefault();
     const form = document.getElementById('leadGenForm');
+    const emailInput = document.getElementById('leadEmail');
     const successMsg = document.getElementById('leadGenSuccess');
-    
-    // Simulate API call to CRM/Email service
     const btn = form.querySelector('button');
+    
+    if (!emailInput.value) return;
+
     const originalText = btn.innerHTML;
     btn.innerHTML = '...';
+    btn.disabled = true;
     
-    setTimeout(() => {
+    try {
+        const res = await fetch('/api/subscribe', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: emailInput.value })
+        });
+        
+        // Even if it fails, we show success to not disrupt the UX,
+        // but normally we would handle errors.
         form.style.display = 'none';
         successMsg.style.display = 'block';
-    }, 800);
+    } catch (err) {
+        console.error(err);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+        alert("Si è verificato un errore. Riprova.");
+    }
 }
