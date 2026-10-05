@@ -809,3 +809,20 @@ function showToast(message, type = 'success') {
 
 
 
+
+// Lead Gen Form Handler
+window.handleLeadGen = function(e) {
+    e.preventDefault();
+    const form = document.getElementById('leadGenForm');
+    const successMsg = document.getElementById('leadGenSuccess');
+    
+    // Simulate API call to CRM/Email service
+    const btn = form.querySelector('button');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '...';
+    
+    setTimeout(() => {
+        form.style.display = 'none';
+        successMsg.style.display = 'block';
+    }, 800);
+}

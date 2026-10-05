@@ -642,11 +642,27 @@
                     <span class="it-text">Un'analisi tecnica approfondita a cura di VECT su come l'architettura Sennheiser Spectera (WMAS) stia rivoluzionando la densità spettrale e l'affidabilità nei grandi eventi live.</span>
                     <span class="en-text">An in-depth technical analysis by VECT on how the Sennheiser Spectera (WMAS) architecture is revolutionizing spectral density and reliability in large-scale live events.</span>
                 </p>
-                <div class="intel-action">
-                    <a href="documenti/VECT_WhitePaper_WMAS_Festival.html" class="btn btn-primary" target="_blank">
-                        <span class="it-text">→ Leggi il White Paper</span>
-                        <span class="en-text">→ Read White Paper</span>
-                    </a>
+                <div class="intel-action" id="leadGenWrapper">
+                    <form id="leadGenForm" class="lead-gen-form" onsubmit="handleLeadGen(event)">
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
+                            <input type="email" id="leadEmail" placeholder="Email aziendale / Business email" required class="sleek-input" style="flex: 1; min-width: 200px;">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="it-text">Scarica Gratis</span>
+                                <span class="en-text">Download Free</span>
+                            </button>
+                        </div>
+                        <p style="font-size: 11px; color: var(--vect-ash); margin-top: 8px;">
+                            <span class="it-text">Inviando acconsenti alla Privacy Policy.</span>
+                            <span class="en-text">By submitting you agree to the Privacy Policy.</span>
+                        </p>
+                    </form>
+                    <div id="leadGenSuccess" style="display: none; background: rgba(0,255,100,0.1); border: 1px solid rgba(0,255,100,0.3); padding: 15px; border-radius: 12px; margin-top: 10px;">
+                        <p style="color: #2ecc71; margin-bottom: 15px; font-weight: 500; font-size: 14px;">✓ Access Granted</p>
+                        <a href="documenti/VECT_WhitePaper_WMAS_Festival.html" class="btn btn-primary" target="_blank" style="width: 100%; text-align: center;">
+                            <span class="it-text">→ Apri il White Paper</span>
+                            <span class="en-text">→ Open White Paper</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             
