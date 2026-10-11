@@ -15,7 +15,7 @@
       "use": "@vercel/static"
     },
     {
-      "src": "documenti/VECT_WhitePaper_WMAS_Festival.html",
+      "src": "documenti/VECT_WhitePaper.html",
       "use": "@vercel/static"
     },
     {
