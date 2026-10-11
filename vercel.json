@@ -41,6 +41,14 @@
       "dest": "/api/subscribe.js"
     },
     {
+      "src": "/whitepaper",
+      "dest": "/documenti/VECT_WhitePaper.html"
+    },
+    {
+      "src": "/report",
+      "dest": "/documenti/VECT_RF_Coordination_Report.html"
+    },
+    {
       "handle": "filesystem"
     },
     {
