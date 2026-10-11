@@ -4,7 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VECT - White Paper: WMAS nei Festival Multi-Stage</title>
+    <!-- ═══════ SEO ═══════ -->
+    <title>VECT - White Paper: WMAS nei Festival Multi-Stage | RF Coordinator</title>
+    <meta name="description" content="White Paper Tecnico sul coordinamento RF nei festival multi-stage utilizzando la tecnologia WMAS (Sennheiser Spectera). A cura di VECT RF Coordinator.">
+    <meta name="keywords" content="WMAS, Sennheiser Spectera, RF Coordinator, noleggio wireless, coordinamento frequenze, festival multi-stage, VECT">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.vect-rf.it/documenti/VECT_WhitePaper_WMAS_Festival.html">
+    <!-- ═══════ OPEN GRAPH ═══════ -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.vect-rf.it/documenti/VECT_WhitePaper_WMAS_Festival.html">
+    <meta property="og:title" content="VECT - White Paper: WMAS nei Festival Multi-Stage">
+    <meta property="og:description" content="Approfondimento tecnico sul coordinamento RF nei festival live. Scopri come la tecnologia WMAS ridefinisce l'affidabilità wireless.">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
         rel="stylesheet">
@@ -437,6 +447,92 @@
             font-weight: 600;
             color: var(--accent);
             text-decoration: none;
+        .doc-header-nav {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.94);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--steel);
+            padding: 12px 24px;
+        }
+
+        .doc-header-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .doc-nav-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .doc-back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .doc-back-link:hover {
+            color: var(--accent);
+        }
+
+        .doc-nav-tag {
+            font-family: var(--mono);
+            font-size: 11px;
+            color: var(--ash);
+            border-left: 1px solid var(--steel);
+            padding-left: 14px;
+        }
+
+        .doc-nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .doc-nav-link {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 12px;
+            font-family: var(--mono);
+            transition: color 0.2s ease;
+        }
+
+        .doc-nav-link:hover {
+            color: var(--white);
+        }
+
+        .nav-print-btn {
+            background: var(--accent);
+            color: #000;
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 7px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .nav-print-btn:hover {
+            background: #fff;
         }
 
         .print-btn {
@@ -444,20 +540,40 @@
             color: #000;
             font-family: var(--mono);
             font-weight: 700;
-            padding: 12px 28px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 1px;
             position: fixed;
             bottom: 30px;
             right: 30px;
             border-radius: 4px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            z-index: 99;
+            transition: all 0.2s ease;
         }
 
         .print-btn:hover {
             background: var(--white);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .doc-nav-tag {
+                display: none;
+            }
+            .cover {
+                padding: 40px 24px;
+            }
+            .cover-meta {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .cta-contacts {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media print {
@@ -466,11 +582,16 @@
                 color: #000;
             }
 
+            .doc-header-nav,
+            .print-btn {
+                display: none !important;
+            }
+
             .cover {
                 background: #fff;
                 border-bottom: 2px solid #000;
                 min-height: auto;
-                padding: 50px;
+                padding: 40px 20px;
             }
 
             .cover-title {
@@ -479,7 +600,7 @@
 
             .cover-sub,
             p {
-                color: #444;
+                color: #333;
             }
 
             .problem-card,
@@ -492,11 +613,7 @@
 
             .section {
                 max-width: 100%;
-                padding: 50px;
-            }
-
-            .print-btn {
-                display: none;
+                padding: 40px 20px;
             }
 
             .cta-section {
@@ -508,10 +625,28 @@
 
 <body>
 
+    <!-- TOP NAVIGATION -->
+    <header class="doc-header-nav">
+        <div class="doc-header-inner">
+            <div class="doc-nav-left">
+                <a href="../index.html" class="doc-back-link">
+                    &larr; Torna alla Home VECT
+                </a>
+                <span class="doc-nav-tag">White Paper Tecnico WMAS</span>
+            </div>
+            <div class="doc-nav-right">
+                <a href="VECT_RF_Coordination_Report.html" class="doc-nav-link">Sample Report RF &rarr;</a>
+                <button type="button" class="nav-print-btn" onclick="window.print()">Stampa / PDF</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- FLOATING PRINT BUTTON -->
+    <button type="button" class="print-btn" onclick="window.print()" title="Stampa o salva in PDF">Stampa / PDF</button>
 
     <!-- -- COVER -------------------------------------------- -->
     <div class="cover">
-        <div class="cover-badge">White Paper Tecnico -© 2026</div>
+        <div class="cover-badge">White Paper Tecnico — Edizione 2026</div>
 
         <div class="cover-logo">
             <svg viewBox="0 0 400 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -526,10 +661,10 @@
             </svg>
         </div>
 
-        <div class="cover-label">Technical White Paper - RF Engineering</div>
+        <div class="cover-label">Technical White Paper — RF Engineering</div>
         <h1 class="cover-title">Il <em>WMAS</em> nei Festival<br>Multi-Stage</h1>
-        <p class="cover-sub">Come la tecnologia Wideband Wireless Audio (WMAS) sta ridefinendo la gestione dello spettro
-            RF nelle grandi produzioni live, eliminando la complessità e garantendo affidabilità assoluta.</p>
+        <p class="cover-sub">Come la tecnologia Wireless Multicarrier Audio System (WMAS) sta ridefinendo la gestione dello spettro
+            RF nelle grandi produzioni live, azzerando le complessità di intermodulazione e garantendo affidabilità assoluta.</p>
 
         <div class="cover-meta">
             <div class="meta-item">
@@ -542,11 +677,11 @@
             </div>
             <div class="meta-item">
                 <label>Revisione</label>
-                <span>v1.0 - Marzo© 2026</span>
+                <span>v1.1 — 2026</span>
             </div>
             <div class="meta-item">
-                <label>Classificazione</label>
-                <span>B2B / Technical Director</span>
+                <label>Destinatari</label>
+                <span>B2B / Direzione di Produzione & Technical Director</span>
             </div>
         </div>
     </div>
@@ -555,30 +690,29 @@
     <div class="section">
         <div class="section-number">// 01 - Executive Summary</div>
         <h2 class="section-title">Il problema che ogni Technical Director conosce</h2>
-        <p>Ogni anno, nelle grandi produzioni live italiane ed europee, il coordinamento RF  diventato uno dei colli di
-            bottiglia più critici. Festival multi-stage con 80-120 link wireless attivi simultaneamente rappresentano
-            una sfida che i sistemi legacy tradizionali non sono pi in grado di gestire in modo affidabile.</p>
-        <p>Questo White Paper descrive come la tecnologia <strong style="color: var(--white);">WMAS (Wideband
-                Multicarrier Audio System)</strong>  implementata dal sistema Sennheiser Spectera - risolva
-            strutturalmente questi problemi, e come VECT possa essere il partner RF certificato per le vostre
-            produzioni.</p>
+        <p>Nelle grandi produzioni live contemporanee, il coordinamento RF è diventato uno dei fattori operativi più critici.
+            Festival multi-stage con 80–120 canali wireless attivi simultaneamente rappresentano una sfida che i sistemi
+            analogici e digitali tradizionali a portante singola non sono più in grado di gestire in modo affidabile e tempestivo.</p>
+        <p>Questo White Paper descrive come la tecnologia <strong style="color: var(--white);">WMAS (Wireless
+                Multicarrier Audio System)</strong> — implementata dal sistema Sennheiser Spectera — risolva
+            strutturalmente questi problemi e come VECT sia il partner RF specializzato per le vostre produzioni.</p>
 
         <div class="stats-row">
             <div class="stat-block">
                 <div class="stat-val">64<span class="stat-unit">ch</span></div>
-                <div class="stat-desc">In 1U rack - zero coordinamento IMD</div>
+                <div class="stat-desc">In 1U rack — zero calcoli IMD</div>
             </div>
             <div class="stat-block">
                 <div class="stat-val">0.7<span class="stat-unit">ms</span></div>
-                <div class="stat-desc">Latenza costante - link bidirezionale</div>
+                <div class="stat-desc">Latenza costante — link bidirezionale</div>
             </div>
             <div class="stat-block">
                 <div class="stat-val">40<span class="stat-unit">x</span></div>
-                <div class="stat-desc">Diversit wideband - interferenz-proof</div>
+                <div class="stat-desc">Diversità wideband — immune da drop</div>
             </div>
             <div class="stat-block">
                 <div class="stat-val">1<span class="stat-unit"> portante</span></div>
-                <div class="stat-desc">6-8 MHz - per tutti i link simultanei</div>
+                <div class="stat-desc">6–8 MHz — per tutti i link simultanei</div>
             </div>
         </div>
     </div>
@@ -586,98 +720,97 @@
     <!-- -- SECTION 2: IL PROBLEMA ---------------------------- -->
     <div class="section">
         <div class="section-number">// 02 - Il Problema</div>
-        <h2 class="section-title">RF Management nei festival:<br>perché il modello <span class="accent">legacy 
-                rotto</span></h2>
-        <p>Nelle produzioni multi-stage, ogni palco richiede decine di link wireless: microfoni, IEM, comms di regia.
+        <h2 class="section-title">RF Management nei festival:<br>perché il modello <span class="accent">legacy è superato</span></h2>
+        <p>Nelle produzioni multi-stage, ogni palco richiede decine di link wireless: microfoni, IEM, intercom di regia.
             L'accumulo di tutti questi sistemi crea un ambiente RF denso e instabile, dove ogni scelta di coordinamento
-            impatta tutti gli altri.</p>
+            impatta su tutti gli altri palchi.</p>
 
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="icon">📉</div>
                 <h4>Saturazione dello Spettro</h4>
-                <p>Nella banda UHF 470-694 MHz, il numero di frequenze compatibili è fisicamente limitato. Con 5+
-                    fornitori attivi sul campo, la coesistenza è spesso impossibile senza collisioni.</p>
+                <p>Nella banda UHF 470–694 MHz, il numero di frequenze compatibili è fisicamente limitato dopo il refarming al 5G.
+                    Con più di 5 fornitori attivi sul campo, la coesistenza senza collisioni diventa critica.</p>
             </div>
             <div class="problem-card">
                 <div class="icon">⚠️</div>
-                <h4>IMD: Intermodulation Distortion</h4>
-                <p>Ogni trasmettitore genera prodotti intermodulazione (IMD) che interferiscono con le frequenze
-                    adiacenti. Calcolare piani frequenze per 80+ link richiede ore e margini di errore elevati.</p>
+                <h4>Intermodulation Distortion (IMD)</h4>
+                <p>Ogni trasmettitore convenzionale genera prodotti di intermodulazione (IMD) che interferiscono con le frequenze
+                    adiacenti. Calcolare piani frequenze puliti per 80+ link richiede ore e impone margini di errore elevati.</p>
             </div>
             <div class="problem-card">
                 <div class="icon">🚧</div>
                 <h4>Complessità Logistica</h4>
-                <p>Sistemi legacy richiedono distrib. RF analogiche, amplificatori, splitter passivi e decine di cavi
-                    coassiali. Il payload di un sistema a 32 link può superare i 4U di rack.</p>
+                <p>I sistemi legacy richiedono distribuzioni RF complesse, amplificatori di linea, splitter passivi e decine di cavi
+                    coassiali. L'ingombro a rack di un sistema a 32 link supera agevolmente le 6–10 unità (6–10U).</p>
             </div>
         </div>
 
         <div class="scenario">
-            <h4>// Scenario Reale - Festival Multi-Stage</h4>
-            <p>Main Stage (40 link) + Second Stage (24 link) + Press Area (12 link) + Broadcast SNG van (8 link HF) = 84
-                link simultanei. Nello spazio UHF disponibile in Italia dopo la refarming, coordinate correttamente
-                anche 40 link con sistemi convenzionali  è già al limite del possibile.</p>
+            <h4>// Scenario Reale — Festival Multi-Stage</h4>
+            <p>Main Stage (40 link) + Second Stage (24 link) + Press Area (12 link) + Broadcast SNG van (8 link) = 84
+                link simultanei. Nello spazio UHF disponibile in Italia dopo il refarming della banda 700 MHz, coordinare correttamente
+                anche 40 link con sistemi convenzionali a portante singola è già al limite della fisica spettrale.</p>
         </div>
     </div>
 
     <!-- -- SECTION 3: LA SOLUZIONE WMAS ------------------------ -->
     <div class="section">
         <div class="section-number">// 03 - La Soluzione</div>
-        <h2 class="section-title">WMAS: una portante,<br><span class="accent">capacità illimitata</span></h2>
-        <p>Il Wireless Multicarrier Audio System (WMAS)  un approccio radicalmente diverso alla trasmissione wireless
-            audio. Invece di assegnare una frequenza dedicata a ogni link, WMAS utilizza <strong
-                style="color:var(--white)">una singola portante larga 6-8 MHz</strong> per trasportare simultaneamente
-            decine di flussi audio bidirezionali tramite protocolli TDMA/TDD.</p>
+        <h2 class="section-title">WMAS: una sola portante,<br><span class="accent">efficienza e capacità totali</span></h2>
+        <p>Il Wireless Multicarrier Audio System (WMAS) è un approccio radicalmente nuovo alla trasmissione wireless
+            audio. Invece di assegnare una frequenza dedicata e isolata a ogni singolo trasmettitore, WMAS utilizza <strong
+                style="color:var(--white)">una singola portante a banda larga di 6–8 MHz</strong> per trasportare simultaneamente
+            decine di flussi audio bidirezionali tramite modulazione multicarrier e protocolli TDMA/TDD.</p>
 
         <table class="spec-table">
             <thead>
                 <tr>
                     <th>Parametro</th>
-                    <th>Legacy Multi-Carrier</th>
-                    <th>WMAS / Spectera</th>
+                    <th>Legacy a Banda Stretta</th>
+                    <th>WMAS / Sennheiser Spectera</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>Link per portante</td>
-                    <td class="val-old">1</td>
-                    <td class="val-new">32 (up) + 32 (down)</td>
+                    <td class="val-old">1 (canale singolo)</td>
+                    <td class="val-new">Fino a 64 (32 up + 32 down)</td>
                 </tr>
                 <tr>
                     <td>Spazio spettrale per 32 canali</td>
                     <td class="val-old">~128 MHz (4 MHz/ch)</td>
-                    <td class="val-new">6-8 MHz</td>
+                    <td class="val-new">6–8 MHz (un solo canale TV)</td>
                 </tr>
                 <tr>
                     <td>Coordinamento IMD</td>
-                    <td class="val-old">Obbligatorio - ore di lavoro</td>
-                    <td class="val-new">Zero - eliminato by design</td>
+                    <td class="val-old">Obbligatorio — ore di calcolo</td>
+                    <td class="val-new">Azzerato — eliminato by design</td>
                 </tr>
                 <tr>
                     <td>Latenza audio</td>
-                    <td class="val-old">1.5-3 ms (companding)</td>
+                    <td class="val-old">1.5–3.2 ms (con compander)</td>
                     <td class="val-new">0.7 ms costante</td>
                 </tr>
                 <tr>
                     <td>Direzione link</td>
-                    <td class="val-old">Unidirezionale</td>
-                    <td class="val-new">Bidirezionale (IEM + Mic in 1 SEK)</td>
+                    <td class="val-old">Unidirezionale (solo TX o solo RX)</td>
+                    <td class="val-new">Bidirezionale nativo (IEM + Mic nello stesso bodypack SEK)</td>
                 </tr>
                 <tr>
-                    <td>Encryption</td>
-                    <td class="val-old">Nessuna / proprietaria</td>
-                    <td class="val-new">AES-256 CTR</td>
+                    <td>Cifratura / Sicurezza</td>
+                    <td class="val-old">Nessuna o proprietaria base</td>
+                    <td class="val-new">AES-256 CTR di grado broadcast</td>
                 </tr>
                 <tr>
-                    <td>Rack space (32 ch)</td>
-                    <td class="val-old">6-10U (rice+distrib.)</td>
-                    <td class="val-new">1U (Base Station)</td>
+                    <td>Ingombro rack (32 ch)</td>
+                    <td class="val-old">6–10U (ricevitori, combiner, splitter)</td>
+                    <td class="val-new">1U (Base Station Spectera)</td>
                 </tr>
                 <tr>
                     <td>Integrazione digitale</td>
-                    <td class="val-old">Analogica / AES3</td>
-                    <td class="val-new">Dante 64×64 + MADI parallelo</td>
+                    <td class="val-old">Analogica / Cavi multipolari / AES3</td>
+                    <td class="val-new">Dante 64×64 ridondante + MADI parallelo</td>
                 </tr>
             </tbody>
         </table>
@@ -686,47 +819,43 @@
     <!-- -- SECTION 4: CONFRONTO DIRETTO ------------------------ -->
     <div class="section">
         <div class="section-number">// 04 - Caso Studio</div>
-        <h2 class="section-title">Confronto diretto:<br>festival <span class="accent">350 artisti</span></h2>
+        <h2 class="section-title">Confronto diretto:<br>festival con <span class="accent">350 artisti</span></h2>
         <p>Scenario: festival con 3 palchi, 350 artisti nel weekend, 4 fornitori audio concorrenti. Obiettivo: garantire
-            32 link IEM+Mic con affidabilità broadcast-grade per il main stage senza impattare sugli altri fornitori.
+            32 link IEM + Microfoni con affidabilità broadcast-grade per il main stage senza subire né creare interferenze sugli altri palchi.
         </p>
 
         <div class="comparison">
             <div class="comp-card legacy">
-                <span class="comp-badge">Legacy - Multi-Carrier</span>
-                <h3>Approccio Convenzionale</h3>
+                <span class="comp-badge">Legacy — Approccio Convenzionale</span>
+                <h3>Sistemi a Banda Stretta</h3>
                 <ul class="comp-list">
-                    <li><span class="ico">❌</span> Necessità di coordinare ~128 MHz di spettro, spesso non disponibile
-                        dopo la refarming 700 MHz</li>
-                    <li><span class="ico">❌</span> 4-6 ore di frequency planning pre-show con WSM/IAS</li>
-                    <li><span class="ico">❌</span> Rischio dropout elevato in ambienti con +5 fornitori attivi</li>
-                    <li><span class="ico">❌</span> Distrib. RF passiva: 3U extra rack, +15 cavi coassiali sul campo</li>
-                    <li><span class="ico">❌</span> Ogni bodypack = solo microfono O solo IEM, non entrambi</li>
-                    <li><span class="ico">❌</span> Nessuna crittografia nativa: il segnale è intercettabile</li>
+                    <li><span class="ico">❌</span> Necessità di coordinare ~128 MHz di spettro frammentato dopo il refarming dei 700 MHz</li>
+                    <li><span class="ico">❌</span> 4–6 ore di frequency planning e continui ricalcoli pre-show con WSM/IAS</li>
+                    <li><span class="ico">❌</span> Elevato rischio di dropout in ambienti affollati con più service attivi</li>
+                    <li><span class="ico">❌</span> Distribuzione RF ingombrante: 3U extra rack e oltre 15 cavi coassiali sul palco</li>
+                    <li><span class="ico">❌</span> Ogni artista deve indossare dispositivi separati per microfono e monitor IEM</li>
+                    <li><span class="ico">❌</span> Nessuna crittografia nativa: le comunicazioni radio e i feed sono intercettabili</li>
                 </ul>
             </div>
             <div class="comp-card wmas">
-                <span class="comp-badge">WMAS - Sennheiser Spectera</span>
-                <h3>Approccio VECT</h3>
+                <span class="comp-badge">WMAS — Sennheiser Spectera</span>
+                <h3>Approccio Operativo VECT</h3>
                 <ul class="comp-list">
-                    <li><span class="ico">✅</span> 6-8 MHz di spettro per tutti i 32+32 link: coesiste facilmente con
-                        altri fornitori</li>
-                    <li><span class="ico">✅</span> Zero frequency planning IMD: plug-in, check, go</li>
-                    <li><span class="ico">✅</span> 40x diversità wideband: immune a interferenze spot e multipath</li>
-                    <li><span class="ico">✅</span> 1U base station + 2 DAD Antenna: setup completo in 20 minuti</li>
-                    <li><span class="ico">✅</span> SEK bodypack bidirezionale: IEM + Mic/Line in un solo dispositivo
-                    </li>
-                    <li><span class="ico">✅</span> AES-256 end-to-end: audio VIP e artisti protetto</li>
+                    <li><span class="ico">✅</span> 6–8 MHz di spettro per tutti i 32+32 canali: convivenza immediata con tutti i fornitori</li>
+                    <li><span class="ico">✅</span> Zero calcoli di intermodulazione IMD: configurazione plug-in rapida e sicura</li>
+                    <li><span class="ico">✅</span> 40× diversità wideband equivalente: barriera totale contro interferenze e multipath</li>
+                    <li><span class="ico">✅</span> 1U Base Station + 2 sole antenne DAD su Cat5e: allestimento completato in 20 minuti</li>
+                    <li><span class="ico">✅</span> Bodypack bidirezionale SEK: IEM stereo e microfono integrati nello stesso dispositivo</li>
+                    <li><span class="ico">✅</span> Cifratura AES-256 end-to-end: audio di artisti e produzioni VIP totalmente protetto</li>
                 </ul>
             </div>
         </div>
 
         <div class="scenario">
             <h4>// Risultato Operativo</h4>
-            <p>Nel confronto storico con sistemi legacy, le produzioni che hanno adottato il Sennheiser Spectera su main
-                stage hanno registrato <strong style="color:var(--white)">zero dropout legati a interferenze RF</strong>
-                durante il window operativo, con un tempo di setup ridotto del 60% rispetto al sistema precedente
-                (fonte: Sennheiser user case studies, 2024).</p>
+            <p>Nel confronto sul campo con sistemi legacy, le produzioni che hanno adottato l'ecosistema Sennheiser Spectera su main
+                stage hanno registrato <strong style="color:var(--white)">zero incidenti e zero dropout legati a problemi RF</strong>
+                durante l'intera finestra operativa, con tempi di allestimento ridotti di oltre il 60% rispetto alla tecnologia convenzionale.</p>
         </div>
     </div>
 
@@ -734,53 +863,65 @@
     <div class="section">
         <div class="section-number">// 05 - VECT Come Partner</div>
         <h2 class="section-title">Perché affidarsi a <span class="accent">VECT</span></h2>
-        <p>VECT è un operatore RF specializzato basato a Roma, focalizzato esclusivamente sull'ecosistema Sennheiser
-            Spectera. Non siamo un service generalista: siamo lo <strong style="color:var(--white)">specialista
-                WMAS</strong> di riferimento per il mercato italiano.</p>
+        <p>VECT è un operatore RF specializzato con base a Roma, focalizzato sull'ingegneria delle radiofrequenze e sull'ecosistema
+            Sennheiser Spectera. Non operiamo come fornitore generalista, ma come <strong style="color:var(--white)">partner tecnico
+                e coordinatore di spettro</strong> a supporto di produzioni broadcast, festival e tour a tolleranza zero.</p>
 
         <div class="problem-grid">
             <div class="problem-card">
                 <div class="icon">🎯</div>
-                <h4>Focus Esclusivo</h4>
-                <p>Tutto il nostro know-how tecnico, la documentazione di setup e la formazione sono centrati
-                    esclusivamente su Spectera/WMAS. Non offriamo compromessi.</p>
+                <h4>Focus Specialistico</h4>
+                <p>Tutto il nostro know-how tecnico, le procedure di misurazione sul campo e i rack pre-cablati sono progettati
+                    specificamente attorno all'ecosistema Spectera/WMAS.</p>
             </div>
             <div class="problem-card">
                 <div class="icon">🛡️</div>
-                <h4>Legalmente Blindato</h4>
-                <p>Contratti professionali con clausole specifiche su limitazione responsabilità spettrale, NDA
-                    integrate e conformità D.Lgs 81/08 per ogni intervento.</p>
+                <h4>Garanzia Contrattuale</h4>
+                <p>Contratti trasparenti con clausole dedicate sulla ripartizione e limitazione della responsabilità spettrale,
+                    accordi di non divulgazione (NDA) e piena conformità al D.Lgs 81/08.</p>
             </div>
             <div class="problem-card">
                 <div class="icon">⚡</div>
-                <h4>Ready in 20 min</h4>
-                <p>Il sistema Spectera VECT è pre-configurato e pre-cablato. Dal flight case al primo check audio: 20
-                    minuti flat in condizioni standard.</p>
+                <h4>Operativi in 20 Minuti</h4>
+                <p>L'infrastruttura VECT è interamente pre-configurata e testata. Dall'apertura del flight case al primo check audio:
+                    20 minuti esatti in condizioni operative standard.</p>
             </div>
         </div>
     </div>
 
     <!-- -- CTA ------------------------------------------------- -->
     <div class="cta-section">
-        <h2>Parlate con noi prima del vostro prossimo show</h2>
-        <p>Forniamo un'analisi RF gratuita dello spazio spettrale della vostra venue e una proposta tecnica
-            personalizzata entro 24h.</p>
+        <h2>Parliamo della gestione RF del vostro prossimo evento</h2>
+        <p>Offriamo un'analisi preliminare gratuita dello spazio spettrale della vostra location e una proposta tecnica
+            su misura entro 24 ore.</p>
         <div class="cta-contacts">
             <div class="cta-item">
-                <label>Operazioni</label>
+                <label>Operazioni & Info</label>
                 <a href="mailto:info@vect-rf.it">info@vect-rf.it</a>
             </div>
             <div class="cta-item">
-                <label>Web</label>
-                <a href="https://vect-rf.it" target="_blank">vect-rf.it</a>
+                <label>Telefono / Urgenze</label>
+                <a href="tel:+393331959951">+39 333 195 9951</a>
             </div>
             <div class="cta-item">
-                <label>Sede</label>
-                <span style="color:var(--light); font-size:16px; font-weight:600;">Roma, IT</span>
+                <label>WhatsApp Diretto</label>
+                <a href="https://wa.me/393331959951" target="_blank">Scrivici su WhatsApp</a>
+            </div>
+            <div class="cta-item">
+                <label>Portale Web</label>
+                <a href="../index.html">vect-rf.it (Torna alla Home)</a>
+            </div>
+            <div class="cta-item">
+                <label>Documentazione</label>
+                <a href="VECT_RF_Coordination_Report.html">Vedi Sample Report RF &rarr;</a>
+            </div>
+            <div class="cta-item">
+                <label>Sede Operativa</label>
+                <span style="color:var(--light); font-size:15px; font-weight:600;">Roma, IT (Operativi Worldwide)</span>
             </div>
         </div>
-        <p style="margin-top:50px; font-size:12px; color:var(--ash);">© 2026 VECT  Tutti i dati tecnici si riferiscono
-            al sistema Sennheiser Spectera BSS - Documento riservato a uso B2B</p>
+        <p style="margin-top:50px; font-size:12px; color:var(--ash);">© 2026 VECT — Tutti i dati tecnici si riferiscono
+            all'ecosistema Sennheiser Spectera — Documento a uso professionale B2B</p>
     </div>
 
 </body>

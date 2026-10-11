@@ -9,13 +9,22 @@
     <!-- ═══════ SEO ═══════ -->
     <title>VECT — RF Coordinator | Noleggio Wireless & RF Rental Italy</title>
     <meta name="description"
-        content="VECT è l'RF Coordinator di riferimento in Italia per il noleggio wireless (RF rental) B2B. Gestione frequenze e Sennheiser Spectera per eventi mission-critical.">
+        content="VECT è l'RF Coordinator di riferimento in Italia e in Europa per il noleggio wireless (RF rental) B2B. Gestione frequenze e Sennheiser Spectera per eventi mission-critical in Italia, Roma e Worldwide.">
     <meta name="keywords"
-        content="noleggio RF, RF rental, noleggio radiomicrofoni, affitto IEM, Shure Axient, Wisycom, Sennheiser Spectera, WMAS, wireless audio, coordinamento frequenze eventi live, RF Coordinator, Frequency Coordinator, RF engineering, IEM, broadcast TV, wireless intercom, intermodulazioni">
+        content="noleggio RF, RF rental, noleggio radiomicrofoni, affitto IEM, Shure Axient, Wisycom, Sennheiser Spectera, WMAS, wireless audio, coordinamento frequenze eventi live, RF Coordinator, Frequency Coordinator, RF engineering, IEM, broadcast TV, wireless intercom, intermodulazioni, noleggio radio Roma, noleggio wireless Italia, RF coordinator Europe">
     <meta name="author" content="VECT RF Special Ops">
     <meta name="robots" content="index, follow">
+    
+    <!-- ═══════ LOCAL SEO & GEO TAGS ═══════ -->
+    <meta name="geo.region" content="IT-RM" />
+    <meta name="geo.placename" content="Roma" />
+    <meta name="geo.position" content="41.902784;12.496366" />
+    <meta name="ICBM" content="41.902784, 12.496366" />
     <meta name="google-site-verification" content="dyM6DwY3IDV8GRmrCORb4-q3edn_ytxfHiJTRSr8ExU" />
     <link rel="canonical" href="https://www.vect-rf.it/">
+    <link rel="alternate" hreflang="it-IT" href="https://www.vect-rf.it/" />
+    <link rel="alternate" hreflang="en" href="https://www.vect-rf.it/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://www.vect-rf.it/" />
 
     <!-- ═══════ OPEN GRAPH (WhatsApp, LinkedIn, Facebook) ═══════ -->
     <meta property="og:type" content="website">
@@ -42,13 +51,23 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "ProfessionalService",
+      "@type": ["ProfessionalService", "LocalBusiness"],
       "name": "VECT RF Coordinator & Wireless Rental",
-      "description": "L'RF Coordinator di riferimento in Italia e nel mondo. Servizio B2B di noleggio wireless (RF rental) boutique specializzato per produzioni mission-critical. Sennheiser Spectera e gestione frequenze.",
+      "description": "L'RF Coordinator di riferimento in Italia e in Europa. Servizio B2B di noleggio wireless (RF rental) boutique specializzato per produzioni mission-critical. Sennheiser Spectera e gestione frequenze per eventi e tour internazionali.",
       "url": "https://www.vect-rf.it/",
       "email": "info@vect-rf.it",
       "telephone": "+393331959951",
-      "areaServed": "Worldwide",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Roma",
+        "addressCountry": "IT"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "41.9027835",
+        "longitude": "12.4963655"
+      },
+      "areaServed": ["Italia", "Europe", "Worldwide"],
       "inLanguage": ["it", "en"],
       "serviceType": ["Noleggio Radiomicrofoni", "Affitto IEM", "Noleggio RF", "Wireless Rental", "RF Rental", "Gestione Spettro Eventi", "Spectrum Coordination", "RF Coordinator", "RF Design", "RF Engineering", "Sennheiser Spectera", "WMAS", "Wireless Intercom"],
       "brand": {
@@ -56,7 +75,8 @@
         "name": "VECT"
       },
       "sameAs": [
-        "https://www.linkedin.com/company/vect-rf"
+        "https://www.linkedin.com/company/vect-rf",
+        "https://www.instagram.com/vect.rf"
       ]
     }
     </script>
@@ -428,6 +448,13 @@
                         <span class="it-text">UHF 470–698 MHz — 11 Audio Link Modes</span>
                         <span class="en-text">UHF 470–698 MHz — 11 Audio Link Modes</span>
                     </div>
+                </div>
+
+                <div style="margin-top: 28px;">
+                    <a href="documenti/VECT_WhitePaper_WMAS_Festival.html" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+                        <span class="it-text">White Paper Tecnico WMAS &rarr;</span>
+                        <span class="en-text">WMAS Technical White Paper &rarr;</span>
+                    </a>
                 </div>
             </div>
         </div>
@@ -978,6 +1005,8 @@
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sitemap</a>
                 <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="documenti/VECT_WhitePaper_WMAS_Festival.html"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">WMAS Whitepaper</a>
+                <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="documenti/VECT_RF_Coordination_Report.html"
+                    style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sample Report RF</a>
             </p>
         </div>
     </footer>
@@ -993,7 +1022,7 @@
         </svg>
     </a>
 
-    <script src="script.js?v=1.6"></script>
+    <script src="script.js?v=1.6" defer></script>
 
     <!-- ═══════ SERVICE WORKER ═══════ -->
     <script>
