@@ -42,7 +42,15 @@
     },
     {
       "src": "/whitepaper",
-      "dest": "/documenti/VECT_WhitePaper.html"
+      "dest": "/whitepaper.html"
+    },
+    {
+      "src": "/documenti/VECT_WhitePaper.html",
+      "dest": "/whitepaper.html"
+    },
+    {
+      "src": "/documenti/VECT_WhitePaper_WMAS_Festival.html",
+      "dest": "/whitepaper.html"
     },
     {
       "src": "/report",
