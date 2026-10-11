@@ -843,4 +843,27 @@ window.handleLeadGen = async function(e) {
         btn.disabled = false;
         alert("Si è verificato un errore. Riprova.");
     }
-}
+};
+
+// Download Standalone White Paper HTML
+window.downloadWhitePaperHtml = async function(e) {
+    if (e && e.preventDefault) e.preventDefault();
+    try {
+        const res = await fetch('VECT_WhitePaper.html');
+        const blob = await res.blob();
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.style.display = 'none';
+        a.href = url;
+        a.download = 'VECT_WhitePaper.html';
+        document.body.appendChild(a);
+        a.click();
+        setTimeout(() => {
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }, 100);
+    } catch (err) {
+        window.location.href = 'VECT_WhitePaper.html';
+    }
+};
+

@@ -757,9 +757,15 @@
                         <td class="val-wmas">1 singolo pack bidirezionale (Mic + IEM)</td>
                     </tr>
                     <tr>
-                        <td><strong>Setup & Soundcheck RF</strong></td>
-                        <td class="val-legacy">4–6 ore con continui re-scan e conflitti</td>
-                        <td class="val-wmas">&lt; 30 minuti con link digitale blindato</td>
+                        <td><strong><span class="it-text">Setup & Soundcheck RF</span><span class="en-text">RF Setup & Soundcheck</span></strong></td>
+                        <td class="val-legacy">
+                            <span class="it-text">Richiede RF scan differenti e sync di tutti i dispositivi</span>
+                            <span class="en-text">Requires separate RF scans and sync of all devices</span>
+                        </td>
+                        <td class="val-wmas">
+                            <span class="it-text">Pronto all'uso dopo una sola scan</span>
+                            <span class="en-text">Ready to use after a single scan</span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -767,17 +773,19 @@
 
         <!-- ACTION BAR -->
         <div class="reveal-item" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
-            <button type="button" onclick="window.print()" class="btn btn-secondary" style="cursor: pointer;">
-                <span class="it-text">🖨️ Stampa / Salva in PDF</span>
-                <span class="en-text">🖨️ Print / Save as PDF</span>
-            </button>
-            <a href="#spectera" class="btn btn-secondary">
-                <span class="it-text">Tecnologia Spectera →</span>
-                <span class="en-text">Spectera Technology →</span>
+            <a href="VECT_WhitePaper.html" download="VECT_WhitePaper.html" onclick="downloadWhitePaperHtml(event)" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span>⬇️</span>
+                <span class="it-text">Scarica White Paper HTML</span>
+                <span class="en-text">Download White Paper HTML</span>
             </a>
-            <a href="#contact" class="btn btn-primary">
-                <span class="it-text">Richiedi Coordinamento RF / Spectera →</span>
-                <span class="en-text">Request RF Coordination / Spectera →</span>
+            <a href="VECT_WhitePaper.html" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px;">
+                <span>📄</span>
+                <span class="it-text">Apri Documento Completo</span>
+                <span class="en-text">Open Full Document</span>
+            </a>
+            <a href="#contact" class="btn btn-secondary">
+                <span class="it-text">Richiedi Coordinamento RF →</span>
+                <span class="en-text">Request RF Coordination →</span>
             </a>
         </div>
     </section>
