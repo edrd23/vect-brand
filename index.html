@@ -135,6 +135,7 @@
     <link rel="apple-touch-icon" href="./favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
     <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="stylesheet" href="whitepaper.css">
     <script src="particles.js" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="consent.js"></script>
@@ -166,7 +167,7 @@
         <ul class="nav-links">
             <li><a href="#services"><span class="it-text">Servizi</span><span class="en-text">Services</span></a></li>
             <li><a href="#spectera"><span class="it-text">Spectera</span><span class="en-text">Spectera</span></a></li>
-            <li><a href="whitepaper.html"><span class="it-text">White Paper</span><span class="en-text">White Paper</span></a></li>
+            <li><a href="#whitepaper"><span class="it-text">White Paper</span><span class="en-text">White Paper</span></a></li>
             <li><a href="#radar"><span class="it-text">Radar</span><span class="en-text">Radar</span></a></li>
             <li><a href="#about"><span class="it-text">Chi Siamo</span><span class="en-text">About</span></a></li>
             <li><a href="#faq"><span class="it-text">FAQ</span><span class="en-text">FAQ</span></a></li>
@@ -653,61 +654,131 @@
 
     <div class="divider"></div>
 
-    <!-- ═══════ 03.5 - INTELLIGENCE / LEAD MAGNET ═══════ -->
-    <section id="intelligence" class="container reveal" data-reveal-group style="margin-top: 60px; margin-bottom: 60px;">
-        <div class="reveal-item">
-            <span class="section-label">03.5 — <span class="it-text">Intelligence</span><span class="en-text">Intelligence</span></span>
+    <!-- ═══════ 03.5 - WHITEPAPER: WMAS NEI GRANDI FESTIVAL ═══════ -->
+    <section id="whitepaper" class="container reveal" data-reveal-group style="margin-top: 80px; margin-bottom: 80px;">
+        <div class="reveal-item" style="text-align: center; max-width: 800px; margin: 0 auto 40px;">
+            <span class="section-label">03.5 — <span class="it-text">White Paper Ufficiale</span><span class="en-text">Official White Paper</span></span>
+            <h2 class="section-title" style="margin-top: 12px; font-size: clamp(28px, 4vw, 44px);">
+                <span class="it-text">WMAS nei Grandi Festival</span>
+                <span class="en-text">WMAS in Large-Scale Festivals</span>
+            </h2>
+            <p style="color: var(--vect-silver); font-size: 15px; line-height: 1.6; margin-top: 14px;">
+                <span class="it-text">Analisi tecnica approfondita a cura di VECT: saturazione dello spettro RF (470–694 MHz), superamento delle intermodulazioni e benchmark operativo dell'architettura bidirezionale a banda larga Sennheiser Spectera nei festival multi-stage.</span>
+                <span class="en-text">In-depth technical analysis by VECT: RF spectrum congestion (470–694 MHz), elimination of intermodulation distortion, and real-world operational benchmarks of Sennheiser Spectera broadband architecture in multi-stage festivals.</span>
+            </p>
         </div>
-        
-        <div class="intelligence-card reveal-item">
-            
-            <div class="intel-content">
-                <h3 class="intel-title">
-                    <span class="it-text">White Paper: WMAS nei Grandi Festival</span>
-                    <span class="en-text">White Paper: WMAS in Large Festivals</span>
-                </h3>
-                <p class="intel-desc">
-                    <span class="it-text">Un'analisi tecnica approfondita a cura di VECT su come l'architettura Sennheiser Spectera (WMAS) stia rivoluzionando la densità spettrale e l'affidabilità nei grandi eventi live.</span>
-                    <span class="en-text">An in-depth technical analysis by VECT on how the Sennheiser Spectera (WMAS) architecture is revolutionizing spectral density and reliability in large-scale live events.</span>
+
+        <!-- KEY SPECS GRID -->
+        <div class="wp-stats-grid reveal-item" style="margin-bottom: 48px;">
+            <div class="wp-stat-card">
+                <div class="wp-stat-num">64<span class="wp-stat-unit">ch</span></div>
+                <div class="wp-stat-label">BIDIREZIONALI IN 1U RACK</div>
+            </div>
+            <div class="wp-stat-card">
+                <div class="wp-stat-num">0.7<span class="wp-stat-unit">ms</span></div>
+                <div class="wp-stat-label">LATENZA AUDIO ULTRA-LOW</div>
+            </div>
+            <div class="wp-stat-card">
+                <div class="wp-stat-num">40<span class="wp-stat-unit">×</span></div>
+                <div class="wp-stat-label">DENSITÀ SPETTRALE VS NARROWBAND</div>
+            </div>
+            <div class="wp-stat-card">
+                <div class="wp-stat-num">6–8<span class="wp-stat-unit">MHz</span></div>
+                <div class="wp-stat-label">CANALE RF TV SINGOLO DEDICATO</div>
+            </div>
+        </div>
+
+        <!-- 3 PROBLEM / ARCHITECTURE CARDS -->
+        <div class="wp-problems-grid reveal-item" style="margin-bottom: 48px;">
+            <div class="wp-card">
+                <div class="wp-card-icon">⚡</div>
+                <h4>
+                    <span class="it-text">1. Crisi dello Spettro UHF</span>
+                    <span class="en-text">1. UHF Spectrum Crisis</span>
+                </h4>
+                <p>
+                    <span class="it-text">I dividendi digitali 700 e 800 MHz hanno ridotto la banda utile PMSE a soli 470–694 MHz. In festival con 80+ canali tra artisti, presentatori e IEM, la banda stretta è al collasso.</span>
+                    <span class="en-text">Digital dividends have reduced PMSE band to 470–694 MHz. In festivals with 80+ channels between artists and IEMs, narrowband architectures reach total saturation.</span>
                 </p>
-                <div class="intel-action" id="leadGenWrapper">
-                    <form id="leadGenForm" class="lead-gen-form" onsubmit="handleLeadGen(event)">
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px;">
-                            <input type="email" id="leadEmail" placeholder="Email aziendale / Business email" required class="sleek-input" style="flex: 1; min-width: 200px;">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="it-text">Scarica Gratis</span>
-                                <span class="en-text">Download Free</span>
-                            </button>
-                        </div>
-                        <p style="font-size: 11px; color: var(--vect-ash); margin-top: 8px;">
-                            <span class="it-text">Inviando acconsenti alla Privacy Policy.</span>
-                            <span class="en-text">By submitting you agree to the Privacy Policy.</span>
-                        </p>
-                    </form>
-                    <div id="leadGenSuccess" style="display: none; background: rgba(0,255,100,0.1); border: 1px solid rgba(0,255,100,0.3); padding: 15px; border-radius: 12px; margin-top: 10px;">
-                        <p style="color: #2ecc71; margin-bottom: 15px; font-weight: 500; font-size: 14px;">✓ Access Granted</p>
-                        <a href="whitepaper.html" class="btn btn-primary" style="width: 100%; text-align: center;">
-                            <span class="it-text">→ Apri il White Paper</span>
-                            <span class="en-text">→ Open White Paper</span>
-                        </a>
-                    </div>
-                </div>
             </div>
-            
-            <div class="intel-visual">
-                <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
-                    <path d="M10,80 C 40,40 70,80 110,20 C 140,50 170,10 190,10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" opacity="0.8" />
-                    <circle cx="110" cy="20" r="4" fill="rgba(255,255,255,0.9)" />
-                    <rect x="0" y="90" width="200" height="1" fill="var(--vect-ash)" opacity="0.1" />
-                    <path d="M10,80 C 40,40 70,80 110,20 C 140,50 170,10 190,10 L190,90 L10,90 Z" fill="url(#gradient)" opacity="0.1" />
-                    <defs>
-                        <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#ffffff"/>
-                            <stop offset="100%" stop-color="transparent"/>
-                        </linearGradient>
-                    </defs>
-                </svg>
+            <div class="wp-card">
+                <div class="wp-card-icon">🛑</div>
+                <h4>
+                    <span class="it-text">2. Fine delle Intermodulazioni</span>
+                    <span class="en-text">2. Zero Intermodulation (IMD)</span>
+                </h4>
+                <p>
+                    <span class="it-text">Nei trasmettitori narrowband tradizionali, i prodotti IMD di 3° e 5° ordine divorano spazio utile. WMAS alloca sotto-portanti ortogonali digitali: zero prodotti di intermodulazione interna.</span>
+                    <span class="en-text">Traditional narrowband transmitters generate 3rd and 5th order IMD products. WMAS uses digital orthogonal subcarriers: intermodulation products are physically eliminated.</span>
+                </p>
             </div>
+            <div class="wp-card">
+                <div class="wp-card-icon">🛡️</div>
+                <h4>
+                    <span class="it-text">3. Trasmittente Bidirezionale</span>
+                    <span class="en-text">3. Bidirectional Transceiver</span>
+                </h4>
+                <p>
+                    <span class="it-text">Un unico beltpack gestisce microfono e monitoraggio IEM simultaneamente via singola antenna DAD. Controllo remoto in tempo reale di guadagni, RF power e monitoraggio batteria.</span>
+                    <span class="en-text">A single bodypack handles both mic transmission and IEM return over a single DAD antenna, with real-time remote telemetry for gain, RF power and battery status.</span>
+                </p>
+            </div>
+        </div>
+
+        <!-- COMPARISON TABLE -->
+        <div class="reveal-item" style="margin-bottom: 40px; overflow-x: auto;">
+            <table class="wp-spec-table">
+                <thead>
+                    <tr>
+                        <th>Parametro Tecnico</th>
+                        <th>Banda Stretta Tradizionale (Narrowband)</th>
+                        <th class="col-highlight">Sennheiser Spectera WMAS (VECT)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Spettro per 32 Canali</strong></td>
+                        <td class="val-legacy">24 – 32 MHz (frammentati, rischio DVB-T)</td>
+                        <td class="val-wmas">6 – 8 MHz (singolo canale TV DVB-T)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Intermodulazione (IMD)</strong></td>
+                        <td class="val-legacy">Elevata: calcolo spaziatura non lineare</td>
+                        <td class="val-wmas">Zero: portanti ortogonali sincronizzate</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Antenne a Palco</strong></td>
+                        <td class="val-legacy">Foresta di antenne (RX mic + TX IEM combinati)</td>
+                        <td class="val-wmas">1–2 Antenne DAD bidirezionali (PoE CAT6)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bodypack Artista</strong></td>
+                        <td class="val-legacy">2 pack separati (1 TX mic + 1 RX IEM)</td>
+                        <td class="val-wmas">1 singolo pack bidirezionale (Mic + IEM)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Setup & Soundcheck RF</strong></td>
+                        <td class="val-legacy">4–6 ore con continui re-scan e conflitti</td>
+                        <td class="val-wmas">&lt; 30 minuti con link digitale blindato</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ACTION BAR -->
+        <div class="reveal-item" style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; align-items: center; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 24px;">
+            <button type="button" onclick="window.print()" class="btn btn-secondary" style="cursor: pointer;">
+                <span class="it-text">🖨️ Stampa / Salva in PDF</span>
+                <span class="en-text">🖨️ Print / Save as PDF</span>
+            </button>
+            <a href="#spectera" class="btn btn-secondary">
+                <span class="it-text">Tecnologia Spectera →</span>
+                <span class="en-text">Spectera Technology →</span>
+            </a>
+            <a href="#contact" class="btn btn-primary">
+                <span class="it-text">Richiedi Coordinamento RF / Spectera →</span>
+                <span class="en-text">Request RF Coordination / Spectera →</span>
+            </a>
         </div>
     </section>
 
@@ -1005,7 +1076,7 @@
                 </button>
                 <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="sitemap.xml"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sitemap</a>
-                <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="whitepaper.html"
+                <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="#whitepaper"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">WMAS Whitepaper</a>
                 <span style="margin: 0 10px; color: var(--vect-graphite);">|</span> <a href="documenti/VECT_RF_Coordination_Report.html"
                     style="color: var(--vect-ash); text-decoration: underline; font-size: 13px;">Sample Report RF</a>

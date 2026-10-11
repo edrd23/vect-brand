@@ -41,20 +41,23 @@
       "dest": "/api/subscribe.js"
     },
     {
-      "src": "/whitepaper",
-      "dest": "/whitepaper.html"
+      "src": "^/whitepaper/?$",
+      "status": 302,
+      "headers": { "Location": "/#whitepaper" }
     },
     {
-      "src": "/documenti/VECT_WhitePaper.html",
-      "dest": "/whitepaper.html"
+      "src": "^/whitepaper\\.html$",
+      "status": 302,
+      "headers": { "Location": "/#whitepaper" }
     },
     {
-      "src": "/documenti/VECT_WhitePaper_WMAS_Festival.html",
-      "dest": "/whitepaper.html"
+      "src": "^/documenti/VECT_WhitePaper.*",
+      "status": 302,
+      "headers": { "Location": "/#whitepaper" }
     },
     {
       "src": "/report",
-      "dest": "/documenti/VECT_RF_Coordination_Report.html"
+      "dest": "/index.html"
     },
     {
       "handle": "filesystem"

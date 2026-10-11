@@ -1,0 +1,112 @@
+/* ═══════ INTEGRATED WHITEPAPER SECTION STYLES ═══════ */
+.wp-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 24px;
+}
+.wp-stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 24px 20px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.2s;
+}
+.wp-stat-card:hover {
+    border-color: var(--vect-accent);
+    transform: translateY(-2px);
+}
+.wp-stat-num {
+    font-size: 38px;
+    font-weight: 800;
+    color: var(--vect-white);
+    line-height: 1;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+}
+.wp-stat-unit {
+    font-size: 18px;
+    color: var(--vect-accent);
+    margin-left: 4px;
+    font-weight: 600;
+}
+.wp-stat-label {
+    font-size: 12px;
+    color: var(--vect-silver);
+    margin-top: 10px;
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    letter-spacing: 0.02em;
+}
+.wp-problems-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+.wp-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 24px;
+}
+.wp-card-icon {
+    font-size: 28px;
+    margin-bottom: 14px;
+}
+.wp-card h4 {
+    font-size: 16px;
+    color: var(--vect-white);
+    margin-bottom: 10px;
+}
+.wp-card p {
+    font-size: 13px;
+    color: var(--vect-silver);
+    line-height: 1.6;
+    margin: 0;
+}
+.wp-spec-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.wp-spec-table th, .wp-spec-table td {
+    padding: 16px 20px;
+    text-align: left;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.wp-spec-table th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--vect-white);
+    font-family: var(--font-mono, monospace);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+.wp-spec-table th.col-highlight {
+    color: var(--vect-accent);
+    background: rgba(255, 107, 26, 0.08);
+}
+.val-legacy {
+    color: var(--vect-ash);
+}
+.val-wmas {
+    color: var(--vect-white);
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .wp-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .wp-problems-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 500px) {
+    .wp-stats-grid {
+        grid-template-columns: 1fr;
+    }
+}
