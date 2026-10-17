@@ -153,7 +153,7 @@ class VectAtmosphere {
             if (x2d > 0 && x2d < w && y2d > 0 && y2d < h) {
                 const opacity = Math.max(0, 1 - (star.z / this.maxZ));
                 const size2d = Math.max(0.25, star.size * scale * (1 / (star.z * 0.001 + 0.09)));
-                ctx.fillStyle = star.colorTemplate.replace('{opacity}', opacity.toFixed(2));
+                ctx.fillStyle = opacity > 0.8 ? star.colorTemplate.replace('{opacity}', '0.9') : star.colorTemplate.replace('{opacity}', '0.4');
                 ctx.beginPath();
                 ctx.arc(x2d, y2d, size2d, 0, Math.PI * 2);
                 ctx.fill();
@@ -177,9 +177,7 @@ class VectAtmosphere {
             ctx.beginPath();
             ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
             ctx.strokeStyle = `rgba(255, 107, 26, ${(sw.strength * 0.45).toFixed(3)})`;
-            ctx.lineWidth = 2.5;
-            ctx.shadowColor = '#FF6B1A';
-            ctx.shadowBlur = 12;
+            ctx.lineWidth = 2.0;
             ctx.stroke();
 
             // Inner subtle ring
@@ -193,6 +191,9 @@ class VectAtmosphere {
     }
 
     drawRFSpectrum() {
+        // Performance optimization: skip complex RF spectrum calculations when scrolled past Hero
+        if (window.scrollY > window.innerHeight * 1.05) return;
+
         const ctx = this.ctx;
         const w = this.canvas.width;
         const h = this.canvas.height;
@@ -271,9 +272,7 @@ class VectAtmosphere {
 
         // ═══════ 3. DUAL-HARMONIC WMAS CARRIER (ORANGE + GLOW) ═══════
         ctx.save();
-        ctx.lineWidth = 2.2;
-        ctx.shadowColor = 'rgba(255, 107, 26, 0.85)';
-        ctx.shadowBlur = 18;
+        ctx.lineWidth = 2.0;
 
         // Gradient under the wave
         const grad = ctx.createLinearGradient(0, baseY - maxAmp * 1.3, 0, baseY + maxAmp * 1.8);
@@ -315,9 +314,16 @@ class VectAtmosphere {
             else ctx.lineTo(x, y);
         }
 
-        // Stroke primary carrier
+        // Pass 1: Wide soft GPU glow stroke (0% CPU shadowBlur penalty)
+        ctx.save();
+        ctx.lineWidth = 6;
+        ctx.strokeStyle = 'rgba(255, 107, 26, 0.28)';
+        ctx.stroke();
+        // Pass 2: Crisp primary carrier
+        ctx.lineWidth = 2.0;
         ctx.strokeStyle = '#FF6B1A';
         ctx.stroke();
+        ctx.restore();
 
         // Fill under wave
         ctx.lineTo(w, baseY + maxAmp * 2.0);

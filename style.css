@@ -365,8 +365,8 @@ nav {
     align-items: center;
     justify-items: center;
     background: var(--surface-glass);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--border-glass);
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -374,8 +374,8 @@ nav {
 nav.scrolled {
     padding: 12px 60px;
     background: rgba(10, 10, 10, 0.9);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border-bottom: 1px solid var(--surface-highest);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
@@ -706,8 +706,8 @@ section.hero {
 
 .advantage-item {
     background: rgba(18, 18, 18, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 16px;
     padding: 32px;
@@ -760,8 +760,8 @@ section.hero {
 /* ═══════ SPECTERA BANNER ═══════ */
 .spectera-banner {
     background: linear-gradient(145deg, rgba(18, 18, 18, 0.6) 0%, rgba(10, 10, 10, 0.8) 100%);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 60px;
@@ -1599,8 +1599,8 @@ body::after {
         height: 100dvh;
         visibility: hidden;
         background: rgba(10, 10, 10, 0.97);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -2448,7 +2448,7 @@ body::after {
 .radar-info-panel {
     background: rgba(12, 12, 12, 0.7);
     border: 1px solid rgba(255, 107, 26, 0.18);
-    backdrop-filter: blur(16px);
+    backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -3251,8 +3251,8 @@ body::after {
     width: 100%;
     max-width: 920px;
     background: var(--surface-glass, rgba(18, 18, 18, 0.92));
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     border: 1px solid var(--border-glass, rgba(255, 255, 255, 0.1));
     border-radius: 8px;
     padding: 20px 24px;
@@ -3421,7 +3421,7 @@ h1.shiny-text {
 }
 .hero-content {
     background: rgba(10, 10, 10, 0.5);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(8px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 24px;
     padding: 60px;
@@ -3439,7 +3439,7 @@ h1.shiny-text {
     display: block;
 }
 nav {
-    backdrop-filter: blur(24px);
+    backdrop-filter: blur(8px);
     background: rgba(10, 10, 10, 0.6) !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -3880,8 +3880,9 @@ body.has-cursor #vect-cursor-spotlight {
     perspective: 1000px;
 }
 
-.has-tilt.is-tilting {
-    transition: transform 0.08s ease-out, box-shadow 0.15s ease;
+.has-tilt.is-tilting,
+.has-tilt.is-tilting * {
+    transition: none !important; /* Instant 1:1 movement with zero delay or rubber-band lag */
 }
 
 .has-tilt:active {

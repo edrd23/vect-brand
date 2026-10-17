@@ -146,23 +146,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             let rafId = null;
+            let cardRect = null;
 
+            // Cache bounding client rect on enter & scroll to prevent forced layout reflow
             card.addEventListener('mouseenter', () => {
+                cardRect = card.getBoundingClientRect();
                 card.classList.add('is-tilting');
             });
 
             card.addEventListener('mousemove', (e) => {
+                if (!cardRect) cardRect = card.getBoundingClientRect();
                 if (rafId) cancelAnimationFrame(rafId);
+                
                 rafId = requestAnimationFrame(() => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
+                    const x = e.clientX - cardRect.left;
+                    const y = e.clientY - cardRect.top;
+                    const centerX = cardRect.width * 0.5;
+                    const centerY = cardRect.height * 0.5;
 
-                    // Proportional tilt angles (max 7.5 deg for cards, 3.5 deg for wide banners)
-                    const isWide = rect.width > 600;
-                    const maxTilt = isWide ? 3.5 : 7.0;
+                    const isWide = cardRect.width > 600;
+                    const maxTilt = isWide ? 3.0 : 6.0;
 
                     const normX = (x - centerX) / centerX;
                     const normY = (y - centerY) / centerY;
@@ -170,20 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     const rotateX = normY * -maxTilt;
                     const rotateY = normX * maxTilt;
 
-                    // Chromatic glare angle & position
-                    const angleRad = Math.atan2(y - centerY, x - centerX);
-                    const angleDeg = (angleRad * (180 / Math.PI) + 90).toFixed(1);
-
-                    // Dynamic light-opposed cast shadow
-                    const shadowX = (-rotateY * 2.8).toFixed(1);
-                    const shadowY = (rotateX * 2.8).toFixed(1);
-
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px) scale3d(1.018, 1.018, 1.018)`;
-                    card.style.boxShadow = `${shadowX}px ${shadowY}px 40px rgba(0,0,0,0.65), 0 0 25px rgba(255,107,26,0.18)`;
-
+                    // Direct hardware transform without child lag
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
                     card.style.setProperty('--glare-x', x + 'px');
                     card.style.setProperty('--glare-y', y + 'px');
-                    card.style.setProperty('--glare-angle', angleDeg + 'deg');
                 });
             }, { passive: true });
 
