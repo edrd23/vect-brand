@@ -3802,6 +3802,9 @@ body.has-cursor #vect-cursor-spotlight {
 .radar-card,
 .stat-pill,
 .spectera-banner,
+.wp-card,
+.wp-stat-card,
+.radar-info-panel,
 .faq-item {
     position: relative;
     will-change: transform;
@@ -3810,15 +3813,18 @@ body.has-cursor #vect-cursor-spotlight {
 .service-card::before,
 .advantage-item::before,
 .radar-card::before,
-.spectera-banner::before {
+.spectera-banner::before,
+.wp-card::before,
+.wp-stat-card::before,
+.radar-info-panel::before {
     content: '';
     position: absolute;
-    inset: -1px;
+    inset: -1.5px;
     border-radius: inherit;
     padding: 1.5px;
-    background: radial-gradient(350px circle at var(--card-mouse-x, -500px) var(--card-mouse-y, -500px), 
-        rgba(255, 107, 26, 0.6), 
-        rgba(255, 255, 255, 0.18) 30%, 
+    background: radial-gradient(380px circle at var(--card-mouse-x, -500px) var(--card-mouse-y, -500px), 
+        rgba(255, 107, 26, 0.75), 
+        rgba(255, 255, 255, 0.22) 35%, 
         transparent 65%);
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -3832,22 +3838,34 @@ body.has-cursor #vect-cursor-spotlight {
 .service-card:hover::before,
 .advantage-item:hover::before,
 .radar-card:hover::before,
-.spectera-banner:hover::before {
+.spectera-banner:hover::before,
+.wp-card:hover::before,
+.wp-stat-card:hover::before,
+.radar-info-panel:hover::before {
     opacity: 1;
 }
 
-/* 3. 3D Tilt Glare Overlay */
+/* 3. 3D Tilt Glare Overlay with Prismatic Chromatic Dispersion */
 .card-glare {
     position: absolute;
     inset: 0;
     border-radius: inherit;
     pointer-events: none;
-    background: radial-gradient(400px circle at var(--glare-x, 50%) var(--glare-y, 50%), 
-        rgba(255, 255, 255, 0.08), 
-        transparent 60%);
+    background: 
+        radial-gradient(350px circle at var(--glare-x, 50%) var(--glare-y, 50%), 
+            rgba(255, 255, 255, 0.18) 0%, 
+            rgba(255, 107, 26, 0.08) 40%, 
+            transparent 70%),
+        linear-gradient(var(--glare-angle, 135deg), 
+            transparent 25%, 
+            rgba(255, 107, 26, 0.06) 42%, 
+            rgba(0, 229, 255, 0.07) 50%, 
+            rgba(255, 255, 255, 0.08) 58%, 
+            transparent 75%);
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 3;
+    mix-blend-mode: screen;
 }
 
 .has-tilt:hover .card-glare {
@@ -3857,8 +3875,55 @@ body.has-cursor #vect-cursor-spotlight {
 .has-tilt {
     transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.45s ease, border-color 0.3s ease;
     transform-style: preserve-3d;
+    perspective: 1000px;
 }
 
 .has-tilt.is-tilting {
-    transition: transform 0.08s ease-out, box-shadow 0.2s ease;
+    transition: transform 0.08s ease-out, box-shadow 0.15s ease;
+}
+
+.has-tilt:active {
+    transform: perspective(1000px) scale3d(0.985, 0.985, 0.985) !important;
+    transition: transform 0.08s ease !important;
+}
+
+/* 4. Multi-Layer Stereoscopic 3D Parallax Inside Cards */
+.has-tilt .service-icon,
+.has-tilt .wp-card-icon {
+    transform: translateZ(34px);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.has-tilt .service-title,
+.has-tilt h3,
+.has-tilt h4,
+.has-tilt .wp-stat-num,
+.has-tilt .stat-value {
+    transform: translateZ(24px);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.has-tilt .service-desc,
+.has-tilt p,
+.has-tilt .wp-stat-label,
+.has-tilt .stat-label {
+    transform: translateZ(14px);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.has-tilt .hud-corner,
+.has-tilt .wp-card-badge,
+.has-tilt .banner-badge {
+    transform: translateZ(18px);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+.has-tilt .spectera-figure {
+    transform: translateZ(26px);
+    transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    transform-style: preserve-3d;
 }

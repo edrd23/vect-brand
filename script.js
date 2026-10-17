@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 2. Per-Card Border Illumination
         const interactiveCards = document.querySelectorAll(
-            '.service-card, .advantage-item, .radar-card, .stat-pill, .spectera-banner, .faq-item'
+            '.service-card, .advantage-item, .radar-card, .stat-pill, .spectera-banner, .wp-card, .wp-stat-card, .radar-info-panel, .faq-item'
         );
         interactiveCards.forEach(card => {
             card.addEventListener('mousemove', (e) => {
@@ -117,7 +117,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
         if (!canHover) return;
 
-        const tiltCards = document.querySelectorAll('.service-card, .advantage-item, .stat-pill');
+        const tiltCards = document.querySelectorAll(
+            '.service-card, .advantage-item, .stat-pill, .wp-card, .wp-stat-card, .spectera-banner'
+        );
+
         tiltCards.forEach(card => {
             card.classList.add('has-tilt');
 
@@ -143,19 +146,38 @@ document.addEventListener('DOMContentLoaded', () => {
                     const centerX = rect.width / 2;
                     const centerY = rect.height / 2;
 
-                    const rotateX = ((y - centerY) / centerY) * -5.0;
-                    const rotateY = ((x - centerX) / centerX) * 5.0;
+                    // Proportional tilt angles (max 7.5 deg for cards, 3.5 deg for wide banners)
+                    const isWide = rect.width > 600;
+                    const maxTilt = isWide ? 3.5 : 7.0;
 
-                    card.style.transform = 'perspective(900px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) translateY(-4px) scale3d(1.015, 1.015, 1.015)';
+                    const normX = (x - centerX) / centerX;
+                    const normY = (y - centerY) / centerY;
+
+                    const rotateX = normY * -maxTilt;
+                    const rotateY = normX * maxTilt;
+
+                    // Chromatic glare angle & position
+                    const angleRad = Math.atan2(y - centerY, x - centerX);
+                    const angleDeg = (angleRad * (180 / Math.PI) + 90).toFixed(1);
+
+                    // Dynamic light-opposed cast shadow
+                    const shadowX = (-rotateY * 2.8).toFixed(1);
+                    const shadowY = (rotateX * 2.8).toFixed(1);
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-5px) scale3d(1.018, 1.018, 1.018)`;
+                    card.style.boxShadow = `${shadowX}px ${shadowY}px 40px rgba(0,0,0,0.65), 0 0 25px rgba(255,107,26,0.18)`;
+
                     card.style.setProperty('--glare-x', x + 'px');
                     card.style.setProperty('--glare-y', y + 'px');
+                    card.style.setProperty('--glare-angle', angleDeg + 'deg');
                 });
             }, { passive: true });
 
             card.addEventListener('mouseleave', () => {
                 if (rafId) cancelAnimationFrame(rafId);
                 card.classList.remove('is-tilting');
-                card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+                card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
+                card.style.boxShadow = '';
             });
         });
     };
