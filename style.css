@@ -949,8 +949,8 @@ section.hero {
 /* ═══════ 03 — ABOUT & RACKMOUNT LIVE SCANNER ═══════ */
 .about-synthetic-grid {
     display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 48px;
+    grid-template-columns: 1fr 1.08fr;
+    gap: 36px;
     align-items: center;
     padding: 30px 0 50px;
 }
@@ -960,7 +960,7 @@ section.hero {
     background: #090909;
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 6px;
-    padding: 16px 18px 14px;
+    padding: 16px 16px 14px;
     box-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.06);
     overflow: hidden;
     backdrop-filter: blur(8px);
@@ -996,7 +996,8 @@ section.hero {
     align-items: center;
     padding: 0 4px 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    gap: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .rack-header-left {
@@ -1068,6 +1069,54 @@ section.hero {
     background: rgba(34, 197, 94, 0.08);
     border-color: rgba(34, 197, 94, 0.25);
     color: #22c55e;
+}
+
+/* Hardware Status LED Bus */
+.rack-led-bus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 5px 10px;
+    background: #050505;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 3px;
+    margin: 8px 0 10px;
+}
+
+.rlb-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 7.5px;
+    letter-spacing: 0.5px;
+    color: var(--vect-silver);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.rlb-led {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.rlb-ok {
+    background: #22c55e;
+    box-shadow: 0 0 6px rgba(34, 197, 94, 0.8);
+    animation: ledPulse 2.2s infinite ease-in-out;
+}
+
+.rlb-accent {
+    background: var(--vect-accent);
+    box-shadow: 0 0 6px rgba(255, 107, 26, 0.8);
+    animation: ledPulse 1.7s infinite ease-in-out;
+}
+
+@keyframes ledPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.9); }
 }
 
 /* Screen Display */
@@ -1191,10 +1240,11 @@ section.hero {
 }
 
 .rfk-v {
-    font-size: 10px;
+    font-size: 9.5px;
     font-weight: 700;
     color: var(--vect-silver);
-    letter-spacing: 0.5px;
+    letter-spacing: 0.3px;
+    white-space: nowrap;
 }
 
 .rfk-v.rfk-ok {
@@ -2543,11 +2593,13 @@ body::after {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
     font-size: 8px;
-    letter-spacing: 1px;
+    letter-spacing: 0.8px;
     color: var(--vect-ash);
     text-transform: uppercase;
-    padding-bottom: 4px;
+    padding-bottom: 6px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
 }
 
@@ -2560,28 +2612,52 @@ body::after {
 }
 
 .sth-pulse {
-    width: 5px;
-    height: 5px;
+    width: 6px;
+    height: 6px;
     background: var(--vect-accent);
     border-radius: 50%;
     animation: dotPulse 1.2s infinite;
+    box-shadow: 0 0 6px rgba(255, 107, 26, 0.6);
 }
 
 .sth-center {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     color: var(--vect-silver);
 }
 
+.sth-tag {
+    padding: 1px 5px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2px;
+    color: var(--vect-silver);
+    font-size: 7.5px;
+}
+
 .sth-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
     color: #ffffff;
     font-weight: 700;
 }
 
+.sth-metric {
+    font-variant-numeric: tabular-nums;
+}
+
+.sth-metric.sth-ok {
+    color: #22c55e;
+}
+
 .spectrum-waterfall {
     position: relative;
-    height: 52px;
+    height: 80px;
     background: #030303;
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 4px;
     overflow: hidden;
 }
 
@@ -2589,6 +2665,53 @@ body::after {
     width: 100%;
     height: 100%;
     display: block;
+}
+
+.spectrum-legend {
+    position: absolute;
+    top: 5px;
+    right: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(4, 4, 4, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 2px 7px;
+    border-radius: 3px;
+    backdrop-filter: blur(4px);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.s-leg-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 7.5px;
+    color: var(--vect-silver);
+    letter-spacing: 0.5px;
+}
+
+.s-leg-box {
+    width: 7px;
+    height: 3px;
+    border-radius: 1px;
+    display: inline-block;
+}
+
+.leg-ant-a {
+    background: #FF6B1A;
+    box-shadow: 0 0 6px rgba(255, 107, 26, 0.8);
+}
+
+.leg-ant-b {
+    background: #38bdf8;
+    box-shadow: 0 0 6px rgba(56, 189, 248, 0.8);
+}
+
+.leg-wmas {
+    background: rgba(255, 107, 26, 0.35);
+    border: 1px dashed rgba(255, 107, 26, 0.7);
 }
 
 .spectrum-scale-row {
@@ -2604,6 +2727,40 @@ body::after {
 .spectrum-scale-row .scale-accent {
     color: var(--vect-accent);
     font-weight: 700;
+}
+
+/* Spectera Deck Hardware Specs */
+.spectera-deck-specs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    padding: 6px 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+    margin-top: 4px;
+}
+
+.sds-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 8px;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+}
+
+.sds-k {
+    color: var(--vect-ash);
+}
+
+.sds-v {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.sds-v.sds-ok {
+    color: #22c55e;
 }
 
 /* Regulatory Status Bar */
@@ -2686,11 +2843,12 @@ body::after {
 }
 
 .rip-region-id {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 800;
     letter-spacing: 2px;
     color: #ffffff;
     line-height: 1;
+    white-space: nowrap;
 }
 
 .rip-status-chip {
@@ -2897,6 +3055,33 @@ body::after {
     .rsb-item {
         padding: 8px 6px;
         font-size: 8px;
+    }
+
+    .radar-status-row {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .spectera-deck-specs {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .spectrum-telemetry-hdr {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    .rack-led-bus {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px;
+    }
+
+    .rack-footer {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
     }
 }
 

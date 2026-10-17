@@ -134,9 +134,9 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="apple-touch-icon" href="./favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="style.css?v=2.8">
+    <link rel="stylesheet" href="style.css?v=2.9">
     <link rel="stylesheet" href="whitepaper.css">
-    <script src="particles.js?v=2.8" defer></script>
+    <script src="particles.js?v=2.9" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="consent.js"></script>
 </head>
@@ -644,21 +644,43 @@
                         </div>
                     </div>
 
-                    <!-- Spectrum Waterfall / FFT scope -->
+                    <!-- Spectrum Waterfall / FFT scope with Real Spectera Telemetry -->
                     <div class="spectrum-bar-wrap">
                         <div class="spectrum-telemetry-hdr mono">
-                            <span class="sth-left"><span class="sth-pulse"></span>WMAS 8 MHz CARRIER ANALYZER</span>
-                            <span class="sth-center">CHANNEL 35 // 582.000–590.000 MHz</span>
-                            <span class="sth-right">PEAK: -18.2 dBm</span>
+                            <div class="sth-left">
+                                <span class="sth-pulse"></span>
+                                <span class="sth-title">SPECTERA BASE STATION 01 // WMAS 8 MHz ENGINE</span>
+                            </div>
+                            <div class="sth-center">
+                                <span class="sth-tag">CH 35: 582.000–590.000 MHz</span>
+                                <span class="sth-tag">BW: 8.00 MHz</span>
+                            </div>
+                            <div class="sth-right">
+                                <span class="sth-metric">TX: +13 dBm (20mW)</span>
+                                <span class="sth-metric sth-ok">LQM: 99.8%</span>
+                                <span class="sth-metric">LAT: 0.7ms</span>
+                            </div>
                         </div>
                         <div class="spectrum-waterfall">
                             <canvas id="spectrumCanvas"></canvas>
+                            <div class="spectrum-legend mono">
+                                <span class="s-leg-item"><span class="s-leg-box leg-ant-a"></span>DAD ANT A</span>
+                                <span class="s-leg-item"><span class="s-leg-box leg-ant-b"></span>DAD ANT B (DIV)</span>
+                                <span class="s-leg-item"><span class="s-leg-box leg-wmas"></span>32x OFDM CH</span>
+                            </div>
                         </div>
                         <div class="spectrum-scale-row mono">
                             <span>470 MHz [CH 21]</span>
                             <span class="scale-accent">▲ 582.000 MHz (WMAS CARRIER)</span>
                             <span class="scale-accent">590.000 MHz ▲</span>
                             <span>694 MHz [CH 48]</span>
+                        </div>
+                        <!-- Spectera hardware spec badges -->
+                        <div class="spectera-deck-specs mono">
+                            <div class="sds-item"><span class="sds-k">CODEC:</span> <span class="sds-v">SeDAC 24-bit/96kHz</span></div>
+                            <div class="sds-item"><span class="sds-k">CAPACITY:</span> <span class="sds-v">64ch BIDI / 1U</span></div>
+                            <div class="sds-item"><span class="sds-k">INTERMOD:</span> <span class="sds-v sds-ok">0.00% IMD</span></div>
+                            <div class="sds-item"><span class="sds-k">ANTENNA:</span> <span class="sds-v">DAD DUAL ACTIVE</span></div>
                         </div>
                     </div>
 
@@ -695,16 +717,16 @@
                             </div>
                             <div class="rip-data-row">
                                 <span class="rip-data-label"><span class="it-text">BANDE WMAS</span><span class="en-text">WMAS BANDS</span></span>
-                                <span class="rip-data-value" style="white-space:pre-line">470–694 MHz (WMAS native)
-8 MHz TV channel carrier</span>
+                                <span class="rip-data-value" style="white-space:pre-line">470–694 MHz (UHF WMAS Nativo)
+CH 35: 582.000–590.000 MHz (8 MHz BW)</span>
                             </div>
                             <div class="rip-data-row">
                                 <span class="rip-data-label"><span class="it-text">ENTE CERTIFICANTE</span><span class="en-text">CERTIFYING BODY</span></span>
-                                <span class="rip-data-value" style="font-size:10px">ETSI · CE Mark · AGCom-IT · OFCOM</span>
+                                <span class="rip-data-value" style="font-size:10px">ETSI · CE Mark · AGCOM-IT · OFCOM-UK</span>
                             </div>
                             <div class="rip-data-row">
                                 <span class="rip-data-label"><span class="it-text">RISCHIO INTERMOD WMAS</span><span class="en-text">WMAS INTERMOD RISK</span></span>
-                                <span class="rip-data-value ok"><span class="it-text">BASSO — WMAS elimina intermod</span><span class="en-text">LOW — WMAS eliminates intermod</span></span>
+                                <span class="rip-data-value ok"><span class="it-text">0.00% IMD — Zero intermodulazione (OFDM)</span><span class="en-text">0.00% IMD — Zero intermodulation (OFDM)</span></span>
                             </div>
                         </div>
                     </div>
@@ -726,7 +748,7 @@
                         </div>
                     </div>
                     <div class="rip-footer">
-                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.8</span>
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.9</span>
                     </div>
                 </div>
 
@@ -763,10 +785,10 @@
                     <div class="rack-header mono">
                         <div class="rack-header-left">
                             <span class="status-dot"></span>
-                            <span class="rack-id-label">LIVE SCAN // DECK 01</span>
+                            <span class="rack-id-label">SPECTERA RF // RACK 01</span>
                         </div>
                         <div class="rack-header-center">
-                            <span class="rack-freq-val" id="rackFreqVal">582.400</span> <span class="mhz">MHz</span>
+                            <span class="rack-freq-val" id="rackFreqVal">586.000</span> <span class="mhz">MHz</span>
                             <span class="rack-chan-tag">CH 35 WMAS</span>
                         </div>
                         <div class="rack-header-right">
@@ -774,16 +796,25 @@
                             <span class="rack-chip chip-accent">IMD 0.00%</span>
                         </div>
                     </div>
+
+                    <!-- Hardware Status LED Bus -->
+                    <div class="rack-led-bus mono">
+                        <span class="rlb-item"><span class="rlb-led rlb-ok"></span>DAD-01 PRIMARY</span>
+                        <span class="rlb-item"><span class="rlb-led rlb-ok"></span>DAD-02 DIVERSITY</span>
+                        <span class="rlb-item"><span class="rlb-led rlb-ok"></span>PTP CLOCK LOCKED</span>
+                        <span class="rlb-item"><span class="rlb-led rlb-accent"></span>SeDAC 0.7ms</span>
+                    </div>
                     
                     <div class="rack-screen" id="rackScreenWrap">
                         <canvas id="aboutRfCanvas"></canvas>
                         <div class="rack-grid-overlay">
-                            <div class="rgo-line rgo-h" style="top:25%;"><span>-20 dBm</span></div>
-                            <div class="rgo-line rgo-h" style="top:50%;"><span>-50 dBm</span></div>
-                            <div class="rgo-line rgo-h" style="top:75%;"><span>-80 dBm</span></div>
-                            <div class="rgo-line rgo-v" style="left:35%;"><span>CH 33</span></div>
-                            <div class="rgo-line rgo-v" style="left:52%;"><span>CH 35 WMAS</span></div>
-                            <div class="rgo-line rgo-v" style="left:72%;"><span>CH 38</span></div>
+                            <div class="rgo-line rgo-h" style="top:20%;"><span>-20 dBm</span></div>
+                            <div class="rgo-line rgo-h" style="top:45%;"><span>-50 dBm</span></div>
+                            <div class="rgo-line rgo-h" style="top:70%;"><span>-80 dBm</span></div>
+                            <div class="rgo-line rgo-h" style="top:92%;"><span>-108 dBm</span></div>
+                            <div class="rgo-line rgo-v" style="left:35%;"><span>DTV CH 28</span></div>
+                            <div class="rgo-line rgo-v" style="left:53%;"><span>WMAS CH 35 (8 MHz)</span></div>
+                            <div class="rgo-line rgo-v" style="left:78%;"><span>DTV CH 42</span></div>
                         </div>
                         <div class="rack-hud-cursor" id="rackHudCursor">
                             <div class="rhc-line"></div>
@@ -797,20 +828,21 @@
                             <span class="rfk-v">8.00 MHz</span>
                         </div>
                         <div class="rfk-col">
-                            <span class="rfk-k">MODULATION</span>
-                            <span class="rfk-v">OFDM 32-CH</span>
+                            <span class="rfk-k">AUDIO STREAMS</span>
+                            <span class="rfk-v">32 TX / 32 RX</span>
                         </div>
                         <div class="rfk-col">
-                            <span class="rfk-k">NOISE FLOOR</span>
-                            <span class="rfk-v">-108 dBm</span>
+                            <span class="rfk-k">AUDIO LATENCY</span>
+                            <span class="rfk-v">0.7 ms (SeDAC)</span>
                         </div>
                         <div class="rfk-col">
                             <span class="rfk-k">LINK INTEGRITY</span>
-                            <span class="rfk-v rfk-ok">99.98% PASS</span>
+                            <span class="rfk-v rfk-ok">99.98% (BER &lt; 10⁻⁸)</span>
                         </div>
                     </div>
                 </div>
             </div>
+        </div><!-- /about-synthetic-grid -->
     </section>
 
     <div class="divider"></div>
@@ -1299,7 +1331,7 @@
         </svg>
     </a>
 
-    <script src="script.js?v=2.8" defer></script>
+    <script src="script.js?v=2.9" defer></script>
 
     <!-- ═══════ SERVICE WORKER ═══════ -->
     <script>

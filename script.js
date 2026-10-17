@@ -345,13 +345,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     rackHudCursor.style.left = `${hoverX}px`;
                     const freqMhz = (470 + (hoverX / rect.width) * (694 - 470)).toFixed(3);
                     let pwr = -108 + Math.random() * 1.5;
+                    let tag = 'NOISE FLOOR (-108 dBm)';
                     if (freqMhz >= 582 && freqMhz <= 590) {
-                        pwr = -18.2 + Math.sin(freqMhz * 10) * 1.5;
-                    } else if (Math.abs(freqMhz - 530) < 4 || Math.abs(freqMhz - 642) < 4) {
-                        pwr = -46 + Math.random() * 3;
+                        pwr = -18.2 + Math.sin(freqMhz * 10) * 1.4;
+                        tag = 'DAD A+B DIVERSITY LOCKED // LQM 99.8%';
+                        if (rackFreqVal) rackFreqVal.textContent = freqMhz;
+                    } else if (Math.abs(freqMhz - 530) < 4) {
+                        pwr = -46.4 + Math.random() * 2.5;
+                        tag = 'DTV CH 28 REJECTED (>60dB)';
+                    } else if (Math.abs(freqMhz - 642) < 4) {
+                        pwr = -51.8 + Math.random() * 2.5;
+                        tag = 'DTV CH 42 REJECTED (>60dB)';
                     }
                     if (rackHudBadge) {
-                        rackHudBadge.textContent = `${freqMhz} MHz | ${pwr.toFixed(1)} dBm`;
+                        rackHudBadge.textContent = `${freqMhz} MHz | ${pwr.toFixed(1)} dBm | ${tag}`;
                     }
                 }
             });
@@ -361,8 +368,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         const SUBCARRIERS = 32;
-        const subcarrierAmps = new Float32Array(SUBCARRIERS);
-        for (let i = 0; i < SUBCARRIERS; i++) subcarrierAmps[i] = 0.8 + Math.random() * 0.2;
+        const subcarrierAmpsA = new Float32Array(SUBCARRIERS);
+        const subcarrierAmpsB = new Float32Array(SUBCARRIERS);
+        for (let i = 0; i < SUBCARRIERS; i++) {
+            subcarrierAmpsA[i] = 0.82 + Math.random() * 0.16;
+            subcarrierAmpsB[i] = 0.78 + Math.random() * 0.18;
+        }
 
         const drawRackSpectrum = () => {
             if (!isVisible) return;
@@ -374,48 +385,94 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fillStyle = '#040404';
             ctx.fillRect(0, 0, W, H);
 
-            sweepPhase = (sweepPhase + 0.006) % 1;
+            // Horizontal reference grid lines
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+            ctx.lineWidth = 1;
+            [0.20, 0.45, 0.70, 0.92].forEach(ratio => {
+                ctx.beginPath();
+                ctx.moveTo(0, H * ratio);
+                ctx.lineTo(W, H * ratio);
+                ctx.stroke();
+            });
+
+            // Reticle sweep cursor
+            sweepPhase = (sweepPhase + 0.005) % 1;
             const sweepX = sweepPhase * W;
             if (!isHovering && rackHudCursor) {
                 rackHudCursor.style.left = `${sweepX}px`;
                 const freq = (470 + sweepPhase * (694 - 470)).toFixed(3);
                 let pwr = -108 + (Math.random() - 0.5) * 2;
+                let tag = 'NOISE FLOOR';
                 if (freq >= 582 && freq <= 590) {
                     pwr = -18.4 + (Math.random() - 0.5) * 1.2;
+                    tag = 'DAD A+B LOCKED // LQM 99.8%';
                     if (rackFreqVal) rackFreqVal.textContent = freq;
                 } else if (Math.abs(freq - 530) < 4) {
-                    pwr = -46.2;
+                    pwr = -46.2 + (Math.random() - 0.5) * 1.5;
+                    tag = 'DTV CH 28 REJECTED';
                 } else if (Math.abs(freq - 642) < 4) {
-                    pwr = -52.1;
+                    pwr = -52.1 + (Math.random() - 0.5) * 1.5;
+                    tag = 'DTV CH 42 REJECTED';
                 }
                 if (rackHudBadge) {
-                    rackHudBadge.textContent = `${freq} MHz | ${pwr.toFixed(1)} dBm`;
+                    rackHudBadge.textContent = `${freq} MHz | ${pwr.toFixed(1)} dBm | ${tag}`;
                 }
             }
 
+            // Animate 32 OFDM subcarriers with modulation jitter
             for (let i = 0; i < SUBCARRIERS; i++) {
-                subcarrierAmps[i] += (Math.random() - 0.5) * 0.08;
-                subcarrierAmps[i] = Math.max(0.65, Math.min(0.98, subcarrierAmps[i]));
+                subcarrierAmpsA[i] += (Math.random() - 0.5) * 0.05;
+                subcarrierAmpsA[i] = Math.max(0.70, Math.min(0.98, subcarrierAmpsA[i]));
+                subcarrierAmpsB[i] += (Math.random() - 0.5) * 0.05;
+                subcarrierAmpsB[i] = Math.max(0.65, Math.min(0.95, subcarrierAmpsB[i]));
             }
 
+            // WMAS 8 MHz Channel block (582 to 590 MHz)
             const wmasStart = W * ((582 - 470) / (694 - 470));
             const wmasEnd = W * ((590 - 470) / (694 - 470));
             const wmasWidth = wmasEnd - wmasStart;
 
             ctx.fillStyle = 'rgba(255, 107, 26, 0.06)';
             ctx.fillRect(wmasStart, 6, wmasWidth, H - 16);
-            ctx.strokeStyle = 'rgba(255, 107, 26, 0.25)';
+            ctx.strokeStyle = 'rgba(255, 107, 26, 0.28)';
             ctx.lineWidth = 1;
             ctx.setLineDash([2, 2]);
             ctx.strokeRect(wmasStart, 6, wmasWidth, H - 16);
             ctx.setLineDash([]);
 
+            // ── TRACE 1: DAD ANT B (DIVERSITY - CYAN) ──
             ctx.beginPath();
             ctx.moveTo(0, H - 12);
-
             for (let x = 0; x <= W; x += 2) {
                 const freq = 470 + (x / W) * (694 - 470);
-                let y = H - 14 + (Math.random() - 0.5) * 3;
+                let y = H - 13 + (Math.random() - 0.5) * 2;
+
+                if (Math.abs(freq - 530) < 4) {
+                    const dist = 1 - Math.abs(freq - 530) / 4;
+                    y -= dist * dist * (H * 0.38);
+                } else if (Math.abs(freq - 642) < 4) {
+                    const dist = 1 - Math.abs(freq - 642) / 4;
+                    y -= dist * dist * (H * 0.32);
+                } else if (freq >= 582 && freq <= 590) {
+                    const scIndex = Math.min(SUBCARRIERS - 1, Math.floor(((freq - 582) / 8) * SUBCARRIERS));
+                    const scAmp = subcarrierAmpsB[scIndex];
+                    const edgeFactor = Math.sin(((freq - 582) / 8) * Math.PI);
+                    const basePeak = H * 0.75;
+                    const ripple = Math.sin(((freq - 582) / 8) * Math.PI * 32) * 2.2;
+                    y -= (basePeak * Math.min(1, edgeFactor * 2.6) * scAmp) + ripple;
+                }
+                ctx.lineTo(x, Math.max(8, y));
+            }
+            ctx.strokeStyle = 'rgba(56, 189, 248, 0.75)';
+            ctx.lineWidth = 1.1;
+            ctx.stroke();
+
+            // ── TRACE 2: DAD ANT A (PRIMARY - VECT ORANGE) ──
+            ctx.beginPath();
+            ctx.moveTo(0, H - 12);
+            for (let x = 0; x <= W; x += 2) {
+                const freq = 470 + (x / W) * (694 - 470);
+                let y = H - 14 + (Math.random() - 0.5) * 2.5;
 
                 if (Math.abs(freq - 530) < 4) {
                     const dist = 1 - Math.abs(freq - 530) / 4;
@@ -425,19 +482,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     y -= dist * dist * (H * 0.35);
                 } else if (freq >= 582 && freq <= 590) {
                     const scIndex = Math.min(SUBCARRIERS - 1, Math.floor(((freq - 582) / 8) * SUBCARRIERS));
-                    const scAmp = subcarrierAmps[scIndex];
+                    const scAmp = subcarrierAmpsA[scIndex];
                     const edgeFactor = Math.sin(((freq - 582) / 8) * Math.PI);
                     const basePeak = H * 0.82;
-                    y -= basePeak * Math.min(1, edgeFactor * 2.5) * scAmp;
+                    const ripple = Math.sin(((freq - 582) / 8) * Math.PI * 32) * 2.8;
+                    y -= (basePeak * Math.min(1, edgeFactor * 2.6) * scAmp) + ripple;
                 }
-
                 ctx.lineTo(x, Math.max(8, y));
             }
-
             ctx.lineTo(W, H - 12);
 
             const grad = ctx.createLinearGradient(0, 0, 0, H);
-            grad.addColorStop(0, 'rgba(255, 107, 26, 0.4)');
+            grad.addColorStop(0, 'rgba(255, 107, 26, 0.38)');
             grad.addColorStop(0.5, 'rgba(255, 107, 26, 0.12)');
             grad.addColorStop(1, 'rgba(255, 107, 26, 0.0)');
             ctx.fillStyle = grad;
@@ -488,9 +544,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const specCanvas = document.getElementById('spectrumCanvas');
     if (specCanvas) {
         const ctx2 = specCanvas.getContext('2d');
-        const NUM_BINS = 96;
-        let bins = new Float32Array(NUM_BINS);
-        for (let i = 0; i < NUM_BINS; i++) bins[i] = 0.08 + Math.random() * 0.05;
+        const NUM_BINS = 128;
+        let binsA = new Float32Array(NUM_BINS);
+        let binsB = new Float32Array(NUM_BINS);
+        for (let i = 0; i < NUM_BINS; i++) {
+            binsA[i] = 0.08 + Math.random() * 0.04;
+            binsB[i] = 0.07 + Math.random() * 0.04;
+        }
 
         // Offline waterfall offscreen canvas
         const offCanvas = document.createElement('canvas');
@@ -505,75 +565,129 @@ document.addEventListener('DOMContentLoaded', () => {
             const H = specCanvas.offsetHeight;
             if (!W || !H) return;
 
-            if (specCanvas.width !== W || specCanvas.height !== H) {
-                specCanvas.width = W;
-                specCanvas.height = H;
-                offCanvas.width = W;
-                offCanvas.height = H;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            if (specCanvas.width !== Math.floor(W * dpr) || specCanvas.height !== Math.floor(H * dpr)) {
+                specCanvas.width = Math.floor(W * dpr);
+                specCanvas.height = Math.floor(H * dpr);
+                offCanvas.width = Math.floor(W * dpr);
+                offCanvas.height = Math.floor(H * dpr);
+                ctx2.setTransform(dpr, 0, 0, dpr, 0, 0);
             }
 
-            const splitH = Math.floor(H * 0.48); // Top: FFT line, Bottom: Waterfall
+            const splitH = Math.floor(H * 0.52); // Top: Dual-trace FFT, Bottom: Thermal Waterfall
             const waterH = H - splitH;
 
             // Scroll waterfall down 1px
             if (offCanvas.width > 0 && offCanvas.height > 0) {
-                offCtx.drawImage(specCanvas, 0, splitH, W, waterH - 1, 0, splitH + 1, W, waterH - 1);
+                offCtx.drawImage(specCanvas, 0, splitH * dpr, W * dpr, (waterH - 1) * dpr, 0, (splitH + 1) * dpr, W * dpr, (waterH - 1) * dpr);
             }
 
-            // Update spectrum bins
-            // WMAS is between bins 46 and 54 (corresponding to 582-590 MHz out of 470-694 MHz)
+            // WMAS is between 582-590 MHz out of 470-694 MHz band
             const wmasBinStart = Math.floor(NUM_BINS * ((582 - 470) / (694 - 470)));
             const wmasBinEnd = Math.floor(NUM_BINS * ((590 - 470) / (694 - 470)));
 
+            // Update spectrum bins for Antenna A & Antenna B (Dual Diversity)
             for (let i = 0; i < NUM_BINS; i++) {
                 if (i >= wmasBinStart && i <= wmasBinEnd) {
-                    bins[i] = 0.72 + (Math.random() - 0.5) * 0.16; // WMAS high energy
-                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.28)) < 2) {
-                    bins[i] = 0.42 + (Math.random() - 0.5) * 0.1; // DTV 1
-                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.74)) < 2) {
-                    bins[i] = 0.38 + (Math.random() - 0.5) * 0.1; // DTV 2
+                    // 32-carrier OFDM comb ripple inside WMAS
+                    const rel = (i - wmasBinStart) / (wmasBinEnd - wmasBinStart);
+                    const ripple = Math.sin(rel * Math.PI * 16) * 0.06;
+                    binsA[i] = 0.76 + ripple + (Math.random() - 0.5) * 0.08;
+                    binsB[i] = 0.70 - ripple * 0.8 + (Math.random() - 0.5) * 0.09;
+                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.28)) < 3) {
+                    // DTV broadcast carrier 1 (adjacent rejection)
+                    binsA[i] = 0.40 + (Math.random() - 0.5) * 0.08;
+                    binsB[i] = 0.38 + (Math.random() - 0.5) * 0.08;
+                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.74)) < 3) {
+                    // DTV broadcast carrier 2
+                    binsA[i] = 0.36 + (Math.random() - 0.5) * 0.08;
+                    binsB[i] = 0.35 + (Math.random() - 0.5) * 0.08;
                 } else {
-                    bins[i] = Math.max(0.04, Math.min(0.2, bins[i] + (Math.random() - 0.49) * 0.04));
+                    // Ambient RF noise floor (-108 dBm)
+                    binsA[i] = Math.max(0.04, Math.min(0.18, binsA[i] + (Math.random() - 0.49) * 0.03));
+                    binsB[i] = Math.max(0.04, Math.min(0.18, binsB[i] + (Math.random() - 0.49) * 0.03));
                 }
             }
 
-            // Render top FFT pane
-            ctx2.fillStyle = '#060606';
+            // Clear top FFT pane
+            ctx2.fillStyle = '#050505';
             ctx2.fillRect(0, 0, W, splitH);
 
-            const binW = W / NUM_BINS;
-            ctx2.beginPath();
-            ctx2.moveTo(0, splitH - 2);
-
-            for (let i = 0; i < NUM_BINS; i++) {
-                const x = i * binW;
-                const barH = bins[i] * (splitH - 4);
-                ctx2.lineTo(x, splitH - barH);
-            }
-            ctx2.lineTo(W, splitH - 2);
-
-            ctx2.fillStyle = 'rgba(255, 107, 26, 0.15)';
-            ctx2.fill();
-            ctx2.strokeStyle = 'rgba(255, 107, 26, 0.85)';
+            // Calibrated reference grid lines
+            ctx2.strokeStyle = 'rgba(255, 255, 255, 0.03)';
             ctx2.lineWidth = 1;
-            ctx2.stroke();
+            [0.25, 0.50, 0.75].forEach(r => {
+                ctx2.beginPath();
+                ctx2.moveTo(0, splitH * r);
+                ctx2.lineTo(W, splitH * r);
+                ctx2.stroke();
+            });
 
-            // Highlight WMAS boundary in FFT pane
+            const binW = W / NUM_BINS;
+
+            // Highlight WMAS 8 MHz channel
             const wmasX1 = wmasBinStart * binW;
             const wmasX2 = wmasBinEnd * binW;
             ctx2.fillStyle = 'rgba(255, 107, 26, 0.08)';
             ctx2.fillRect(wmasX1, 0, wmasX2 - wmasX1, splitH);
+            ctx2.strokeStyle = 'rgba(255, 107, 26, 0.3)';
+            ctx2.setLineDash([2, 2]);
+            ctx2.strokeRect(wmasX1, 0, wmasX2 - wmasX1, splitH);
+            ctx2.setLineDash([]);
 
-            // Render bottom Waterfall row
+            // ── TRACE B: DAD ANT B DIVERSITY (CYAN) ──
+            ctx2.beginPath();
+            ctx2.moveTo(0, splitH - 2);
             for (let i = 0; i < NUM_BINS; i++) {
-                const v = bins[i];
-                let r = 10, g = 10, b = 15;
-                if (v > 0.6) {
-                    r = 255; g = Math.floor(107 + (v - 0.6) * 300); b = 30;
-                } else if (v > 0.25) {
-                    r = Math.floor(v * 280); g = Math.floor(v * 90); b = 20;
-                } else {
-                    r = Math.floor(v * 70); g = Math.floor(v * 40); b = 40;
+                const x = i * binW;
+                const barH = binsB[i] * (splitH - 4);
+                ctx2.lineTo(x, splitH - barH);
+            }
+            ctx2.lineTo(W, splitH - 2);
+            ctx2.strokeStyle = 'rgba(56, 189, 248, 0.75)';
+            ctx2.lineWidth = 1;
+            ctx2.stroke();
+
+            // ── TRACE A: DAD ANT A PRIMARY (VECT ORANGE) ──
+            ctx2.beginPath();
+            ctx2.moveTo(0, splitH - 2);
+            for (let i = 0; i < NUM_BINS; i++) {
+                const x = i * binW;
+                const barH = binsA[i] * (splitH - 4);
+                ctx2.lineTo(x, splitH - barH);
+            }
+            ctx2.lineTo(W, splitH - 2);
+
+            const grad = ctx2.createLinearGradient(0, 0, 0, splitH);
+            grad.addColorStop(0, 'rgba(255, 107, 26, 0.28)');
+            grad.addColorStop(0.6, 'rgba(255, 107, 26, 0.08)');
+            grad.addColorStop(1, 'rgba(255, 107, 26, 0.0)');
+            ctx2.fillStyle = grad;
+            ctx2.fill();
+
+            ctx2.strokeStyle = 'rgba(255, 107, 26, 0.95)';
+            ctx2.lineWidth = 1.3;
+            ctx2.stroke();
+
+            // ── BOTTOM WATERFALL PANE (THERMAL SPECTRUM) ──
+            for (let i = 0; i < NUM_BINS; i++) {
+                const v = Math.max(binsA[i], binsB[i]);
+                let r = 8, g = 10, b = 18;
+                if (v > 0.65) {
+                    // Hot WMAS carrier: fiery orange to white
+                    r = 255;
+                    g = Math.min(255, Math.floor(107 + (v - 0.65) * 450));
+                    b = Math.min(255, Math.floor(26 + (v - 0.65) * 550));
+                } else if (v > 0.35) {
+                    // Mid power broadcast: copper / amber
+                    r = Math.floor(180 + (v - 0.35) * 200);
+                    g = Math.floor(80 + (v - 0.35) * 90);
+                    b = 20;
+                } else if (v > 0.15) {
+                    // Low signals: dark cyan/teal
+                    r = 10;
+                    g = Math.floor(40 + v * 120);
+                    b = Math.floor(70 + v * 200);
                 }
                 ctx2.fillStyle = `rgb(${r},${g},${b})`;
                 ctx2.fillRect(i * binW, splitH, binW + 1, 1);
@@ -581,7 +695,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Copy scrolled waterfall history
             if (offCanvas.width > 0 && offCanvas.height > 0) {
-                ctx2.drawImage(offCanvas, 0, splitH + 1, W, waterH - 1, 0, splitH + 1, W, waterH - 1);
+                ctx2.drawImage(offCanvas, 0, (splitH + 1) * dpr, W * dpr, (waterH - 1) * dpr, 0, splitH + 1, W, waterH - 1);
             }
         };
 
@@ -607,70 +721,70 @@ document.addEventListener('DOMContentLoaded', () => {
 // ═══════ RADAR — REGION DATA (WMAS / SPECTERA FOCUS) ═══════
 const RADAR_REGIONS = {
     'NA': {
-        label: 'NA-USA',
-        name: { it: 'Nord America', en: 'North America' },
-        standard: 'FCC Part 74H — WMAS Licensed',
-        bands: '470–608 MHz\n653–663 MHz (WMAS authorized)',
-        body: 'FCC · Sennheiser Spectera Certified',
-        intermod: { it: 'BASSO — WMAS attivo', en: 'LOW — WMAS active' },
+        label: 'NA-FCC',
+        name: { it: 'Nord America (USA & Canada)', en: 'North America (USA & Canada)' },
+        standard: 'FCC Part 74H / WMAS Order 24-17',
+        bands: '470–608 MHz TV · 653–663 MHz WMAS\nCanale 6/8 MHz // 32 TX + 32 RX BiDi',
+        body: 'FCC · ISED · Sennheiser Certified',
+        intermod: { it: '0.00% IMD — SeDAC 24-bit/96kHz 0.7ms', en: '0.00% IMD — SeDAC 24-bit/96kHz 0.7ms' },
         statusClass: 'ok',
-        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
-        compliance: 98, quality: 96, congestion: 34
+        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA OPERATIONAL' },
+        compliance: 99, quality: 98, congestion: 32
     },
     'EU': {
         label: 'EU-ETSI',
-        name: { it: 'Unione Europea', en: 'European Union' },
+        name: { it: 'Unione Europea & UK', en: 'European Union & UK' },
         standard: 'ETSI EN 303 978 — WMAS Standard',
-        bands: '470–694 MHz (WMAS native)\n8 MHz TV channel carrier',
-        body: 'ETSI · CE Mark · AGCom-IT · OFCOM',
-        intermod: { it: 'BASSO — WMAS elimina intermod', en: 'LOW — WMAS eliminates intermod' },
+        bands: '470–694 MHz (UHF WMAS Nativo)\nCH 35: 582.000–590.000 MHz (8 MHz BW)',
+        body: 'ETSI · CE Mark · AGCOM-IT · OFCOM-UK',
+        intermod: { it: '0.00% IMD — Zero intermodulazione (OFDM)', en: '0.00% IMD — Zero intermodulation (OFDM)' },
         statusClass: 'ok',
         statusText: { it: 'SPECTERA NATIVO', en: 'SPECTERA NATIVE' },
-        compliance: 100, quality: 98, congestion: 40
+        compliance: 100, quality: 99, congestion: 38
     },
     'AS': {
-        label: 'AS-JPKR',
-        name: { it: 'Asia Pacifico', en: 'Asia Pacific' },
-        standard: 'MIC Ordinance 35 — WMAS Parziale',
-        bands: '806–810 MHz (limitato)\nLicenza WMAS locale richiesta',
+        label: 'AS-MIC',
+        name: { it: 'Asia Pacifico (JP / KR / SG)', en: 'Asia Pacific (JP / KR / SG)' },
+        standard: 'MIC Ordinance 35 / KCC WMAS Trial',
+        bands: '470–710 MHz & 806–810 MHz (WMAS Trial)\nPTP IEEE 1588 Sync Lock',
         body: 'MIC Japan · KCC Korea · IMDA Singapore',
-        intermod: { it: 'MEDIO — coordinamento richiesto', en: 'MEDIUM — coordination required' },
+        intermod: { it: '0.00% IMD — Licenza coordinata VECT', en: '0.00% IMD — VECT coordinated license' },
         statusClass: 'warn',
         statusText: { it: 'LICENZA RICHIESTA', en: 'LICENSE REQUIRED' },
-        compliance: 72, quality: 80, congestion: 68
+        compliance: 84, quality: 88, congestion: 62
     },
     'ME': {
-        label: 'ME-UAE',
-        name: { it: 'Medio Oriente', en: 'Middle East' },
-        standard: 'TRA UAE / CITC — WMAS Approvato',
-        bands: '470–790 MHz\nAutorizzazione WMAS per evento',
-        body: 'TRA UAE · CITC Saudi · VECT Consulting',
-        intermod: { it: 'BASSO con WMAS', en: 'LOW with WMAS' },
+        label: 'ME-TDRA',
+        name: { it: 'Medio Oriente (UAE / SA / QA)', en: 'Middle East (UAE / SA / QA)' },
+        standard: 'TDRA Class Licence / CST Regulation',
+        bands: '470–694 MHz (8 MHz WMAS Carrier)\nDAD Dual Active Diversity su fibra/Cat6',
+        body: 'TDRA UAE · CST Saudi Arabia · CRA Qatar',
+        intermod: { it: '0.00% IMD — RF Shielding Mission-Critical', en: '0.00% IMD — Mission-Critical RF Shielding' },
         statusClass: 'ok',
-        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
-        compliance: 86, quality: 88, congestion: 48
+        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA OPERATIONAL' },
+        compliance: 95, quality: 96, congestion: 42
     },
     'SA': {
-        label: 'SA-BRA',
-        name: { it: 'Sud America', en: 'South America' },
-        standard: 'ANATEL Res. 680 — WMAS Approvato',
-        bands: '470–698 MHz (WMAS operativo)\nDante 1Gbps ridondante',
-        body: 'Anatel Brazil · Subtel Chile · ARCOTEL',
-        intermod: { it: 'BASSO — WMAS carrier unico', en: 'LOW — single WMAS carrier' },
+        label: 'SA-ANATEL',
+        name: { it: 'Sud America (BR / AR / CL)', en: 'South America (BR / AR / CL)' },
+        standard: 'ANATEL Res. 680 / ENACOM WMAS',
+        bands: '470–698 MHz (WMAS BiDi Link)\nRidondanza Dante 1Gbps + AES-256',
+        body: 'Anatel Brazil · ENACOM · Subtel Chile',
+        intermod: { it: '0.00% IMD — Carrier unico ad alta densità', en: '0.00% IMD — High-density single carrier' },
         statusClass: 'ok',
         statusText: { it: 'SPECTERA CONFORME', en: 'SPECTERA COMPLIANT' },
-        compliance: 91, quality: 90, congestion: 38
+        compliance: 93, quality: 94, congestion: 36
     },
     'AU': {
         label: 'AU-ACMA',
-        name: { it: 'Australia / Oceania', en: 'Australia / Oceania' },
-        standard: 'ACMA LIPD Class — WMAS Registrato',
-        bands: '520–694 MHz (WMAS band)\nCanale da 8 MHz autorizzato',
-        body: 'ACMA · Sennheiser AU Partner Certified',
-        intermod: { it: 'BASSO — spettro libero', en: 'LOW — clear spectrum' },
+        name: { it: 'Australia & Nuova Zelanda', en: 'Australia & New Zealand' },
+        standard: 'ACMA LIPD Class Licence — WMAS Class',
+        bands: '520–694 MHz (8 MHz Ch 28–48)\nFull Duplex IEM + Mic su DAD',
+        body: 'ACMA Australia · RSM New Zealand',
+        intermod: { it: '0.00% IMD — Zero intermodulazione tra canali', en: '0.00% IMD — Zero intermodulation' },
         statusClass: 'ok',
-        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA ACTIVE' },
-        compliance: 95, quality: 93, congestion: 28
+        statusText: { it: 'SPECTERA OPERATIVO', en: 'SPECTERA OPERATIONAL' },
+        compliance: 98, quality: 97, congestion: 26
     }
 };
 
