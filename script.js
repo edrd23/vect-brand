@@ -310,17 +310,164 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ═══════ RF SCANNER LOGIC ═══════
-    const freqElements = document.querySelectorAll('.scanner-main-freq');
-    
-    if (freqElements.length > 0) {
-        // Generatore veloce di valori RF finti tra 470.000 e 694.000 MHz
-        setInterval(() => {
-            const randomFreq = (Math.random() * (694 - 470) + 470).toFixed(3);
-            freqElements.forEach(el => {
-                el.innerHTML = `${randomFreq} <span class="mhz">MHz</span>`;
+    // ═══════ RACKMOUNT RF SPECTRUM ANALYZER (SECTION 03) ═══════
+    const rackCanvas = document.getElementById('aboutRfCanvas');
+    const rackFreqVal = document.getElementById('rackFreqVal');
+    const rackHudCursor = document.getElementById('rackHudCursor');
+    const rackHudBadge = document.getElementById('rackHudBadge');
+    const rackScreenWrap = document.getElementById('rackScreenWrap');
+
+    if (rackCanvas) {
+        const ctx = rackCanvas.getContext('2d');
+        let isHovering = false;
+        let hoverX = 0;
+        let sweepPhase = 0;
+        let isVisible = false;
+        let animId = null;
+
+        const resizeRackCanvas = () => {
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const rect = rackCanvas.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+            rackCanvas.width = rect.width * dpr;
+            rackCanvas.height = rect.height * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        };
+        resizeRackCanvas();
+        window.addEventListener('resize', resizeRackCanvas);
+
+        if (rackScreenWrap) {
+            rackScreenWrap.addEventListener('mousemove', (e) => {
+                isHovering = true;
+                const rect = rackCanvas.getBoundingClientRect();
+                hoverX = Math.max(0, Math.min(rect.width, e.clientX - rect.left));
+                if (rackHudCursor) {
+                    rackHudCursor.style.left = `${hoverX}px`;
+                    const freqMhz = (470 + (hoverX / rect.width) * (694 - 470)).toFixed(3);
+                    let pwr = -108 + Math.random() * 1.5;
+                    if (freqMhz >= 582 && freqMhz <= 590) {
+                        pwr = -18.2 + Math.sin(freqMhz * 10) * 1.5;
+                    } else if (Math.abs(freqMhz - 530) < 4 || Math.abs(freqMhz - 642) < 4) {
+                        pwr = -46 + Math.random() * 3;
+                    }
+                    if (rackHudBadge) {
+                        rackHudBadge.textContent = `${freqMhz} MHz | ${pwr.toFixed(1)} dBm`;
+                    }
+                }
             });
-        }, 80);
+            rackScreenWrap.addEventListener('mouseleave', () => {
+                isHovering = false;
+            });
+        }
+
+        const SUBCARRIERS = 32;
+        const subcarrierAmps = new Float32Array(SUBCARRIERS);
+        for (let i = 0; i < SUBCARRIERS; i++) subcarrierAmps[i] = 0.8 + Math.random() * 0.2;
+
+        const drawRackSpectrum = () => {
+            if (!isVisible) return;
+            const W = rackCanvas.offsetWidth;
+            const H = rackCanvas.offsetHeight;
+            if (!W || !H) return;
+
+            ctx.clearRect(0, 0, W, H);
+            ctx.fillStyle = '#040404';
+            ctx.fillRect(0, 0, W, H);
+
+            sweepPhase = (sweepPhase + 0.006) % 1;
+            const sweepX = sweepPhase * W;
+            if (!isHovering && rackHudCursor) {
+                rackHudCursor.style.left = `${sweepX}px`;
+                const freq = (470 + sweepPhase * (694 - 470)).toFixed(3);
+                let pwr = -108 + (Math.random() - 0.5) * 2;
+                if (freq >= 582 && freq <= 590) {
+                    pwr = -18.4 + (Math.random() - 0.5) * 1.2;
+                    if (rackFreqVal) rackFreqVal.textContent = freq;
+                } else if (Math.abs(freq - 530) < 4) {
+                    pwr = -46.2;
+                } else if (Math.abs(freq - 642) < 4) {
+                    pwr = -52.1;
+                }
+                if (rackHudBadge) {
+                    rackHudBadge.textContent = `${freq} MHz | ${pwr.toFixed(1)} dBm`;
+                }
+            }
+
+            for (let i = 0; i < SUBCARRIERS; i++) {
+                subcarrierAmps[i] += (Math.random() - 0.5) * 0.08;
+                subcarrierAmps[i] = Math.max(0.65, Math.min(0.98, subcarrierAmps[i]));
+            }
+
+            const wmasStart = W * ((582 - 470) / (694 - 470));
+            const wmasEnd = W * ((590 - 470) / (694 - 470));
+            const wmasWidth = wmasEnd - wmasStart;
+
+            ctx.fillStyle = 'rgba(255, 107, 26, 0.06)';
+            ctx.fillRect(wmasStart, 6, wmasWidth, H - 16);
+            ctx.strokeStyle = 'rgba(255, 107, 26, 0.25)';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            ctx.strokeRect(wmasStart, 6, wmasWidth, H - 16);
+            ctx.setLineDash([]);
+
+            ctx.beginPath();
+            ctx.moveTo(0, H - 12);
+
+            for (let x = 0; x <= W; x += 2) {
+                const freq = 470 + (x / W) * (694 - 470);
+                let y = H - 14 + (Math.random() - 0.5) * 3;
+
+                if (Math.abs(freq - 530) < 4) {
+                    const dist = 1 - Math.abs(freq - 530) / 4;
+                    y -= dist * dist * (H * 0.42);
+                } else if (Math.abs(freq - 642) < 4) {
+                    const dist = 1 - Math.abs(freq - 642) / 4;
+                    y -= dist * dist * (H * 0.35);
+                } else if (freq >= 582 && freq <= 590) {
+                    const scIndex = Math.min(SUBCARRIERS - 1, Math.floor(((freq - 582) / 8) * SUBCARRIERS));
+                    const scAmp = subcarrierAmps[scIndex];
+                    const edgeFactor = Math.sin(((freq - 582) / 8) * Math.PI);
+                    const basePeak = H * 0.82;
+                    y -= basePeak * Math.min(1, edgeFactor * 2.5) * scAmp;
+                }
+
+                ctx.lineTo(x, Math.max(8, y));
+            }
+
+            ctx.lineTo(W, H - 12);
+
+            const grad = ctx.createLinearGradient(0, 0, 0, H);
+            grad.addColorStop(0, 'rgba(255, 107, 26, 0.4)');
+            grad.addColorStop(0.5, 'rgba(255, 107, 26, 0.12)');
+            grad.addColorStop(1, 'rgba(255, 107, 26, 0.0)');
+            ctx.fillStyle = grad;
+            ctx.fill();
+
+            ctx.strokeStyle = 'rgba(255, 107, 26, 0.95)';
+            ctx.lineWidth = 1.5;
+            ctx.stroke();
+
+            animId = requestAnimationFrame(drawRackSpectrum);
+        };
+
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isVisible = entry.isIntersecting;
+                    if (isVisible) {
+                        resizeRackCanvas();
+                        if (!animId) animId = requestAnimationFrame(drawRackSpectrum);
+                    } else if (animId) {
+                        cancelAnimationFrame(animId);
+                        animId = null;
+                    }
+                });
+            }, { threshold: 0.05 });
+            obs.observe(rackCanvas);
+        } else {
+            isVisible = true;
+            animId = requestAnimationFrame(drawRackSpectrum);
+        }
     }
 
     // ═══════ RADAR — UTC LIVE CLOCK ═══════
@@ -337,58 +484,124 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(tick, 1000);
     }
 
-    // ═══════ RADAR — SPECTRUM CANVAS ═══════
+    // ═══════ RADAR — DUAL FFT & WATERFALL SCOPE ═══════
     const specCanvas = document.getElementById('spectrumCanvas');
     if (specCanvas) {
         const ctx2 = specCanvas.getContext('2d');
-        let bins = [];
-        const NUM_BINS = 80;
-        for (let i = 0; i < NUM_BINS; i++) bins.push(Math.random() * 0.3);
+        const NUM_BINS = 96;
+        let bins = new Float32Array(NUM_BINS);
+        for (let i = 0; i < NUM_BINS; i++) bins[i] = 0.08 + Math.random() * 0.05;
+
+        // Offline waterfall offscreen canvas
+        const offCanvas = document.createElement('canvas');
+        const offCtx = offCanvas.getContext('2d');
+
+        let isSpecVisible = false;
+        let specInterval = null;
 
         const drawSpectrum = () => {
+            if (!isSpecVisible) return;
             const W = specCanvas.offsetWidth;
             const H = specCanvas.offsetHeight;
-            if (specCanvas.width !== W) specCanvas.width = W;
-            if (specCanvas.height !== H) specCanvas.height = H;
+            if (!W || !H) return;
 
-            // Shift left (waterfall)
-            ctx2.clearRect(0, 0, W, H);
-            ctx2.fillStyle = 'rgba(8,8,8,0.9)';
-            ctx2.fillRect(0, 0, W, H);
+            if (specCanvas.width !== W || specCanvas.height !== H) {
+                specCanvas.width = W;
+                specCanvas.height = H;
+                offCanvas.width = W;
+                offCanvas.height = H;
+            }
+
+            const splitH = Math.floor(H * 0.48); // Top: FFT line, Bottom: Waterfall
+            const waterH = H - splitH;
+
+            // Scroll waterfall down 1px
+            if (offCanvas.width > 0 && offCanvas.height > 0) {
+                offCtx.drawImage(specCanvas, 0, splitH, W, waterH - 1, 0, splitH + 1, W, waterH - 1);
+            }
+
+            // Update spectrum bins
+            // WMAS is between bins 46 and 54 (corresponding to 582-590 MHz out of 470-694 MHz)
+            const wmasBinStart = Math.floor(NUM_BINS * ((582 - 470) / (694 - 470)));
+            const wmasBinEnd = Math.floor(NUM_BINS * ((590 - 470) / (694 - 470)));
 
             for (let i = 0; i < NUM_BINS; i++) {
-                bins[i] += (Math.random() - 0.48) * 0.15;
-                bins[i] = Math.max(0.02, Math.min(1, bins[i]));
-                // Occasional spikes
-                if (Math.random() > 0.995) bins[i] = 0.7 + Math.random() * 0.3;
+                if (i >= wmasBinStart && i <= wmasBinEnd) {
+                    bins[i] = 0.72 + (Math.random() - 0.5) * 0.16; // WMAS high energy
+                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.28)) < 2) {
+                    bins[i] = 0.42 + (Math.random() - 0.5) * 0.1; // DTV 1
+                } else if (Math.abs(i - Math.floor(NUM_BINS * 0.74)) < 2) {
+                    bins[i] = 0.38 + (Math.random() - 0.5) * 0.1; // DTV 2
+                } else {
+                    bins[i] = Math.max(0.04, Math.min(0.2, bins[i] + (Math.random() - 0.49) * 0.04));
+                }
             }
+
+            // Render top FFT pane
+            ctx2.fillStyle = '#060606';
+            ctx2.fillRect(0, 0, W, splitH);
 
             const binW = W / NUM_BINS;
-            bins.forEach((v, i) => {
-                const barH = v * H;
-                const alpha = 0.4 + v * 0.6;
-                const r = Math.floor(255 * v);
-                const g = Math.floor(107 * (1 - v));
-                ctx2.fillStyle = `rgba(${r},${g},26,${alpha})`;
-                ctx2.fillRect(i * binW, H - barH, binW - 1, barH);
-            });
+            ctx2.beginPath();
+            ctx2.moveTo(0, splitH - 2);
+
+            for (let i = 0; i < NUM_BINS; i++) {
+                const x = i * binW;
+                const barH = bins[i] * (splitH - 4);
+                ctx2.lineTo(x, splitH - barH);
+            }
+            ctx2.lineTo(W, splitH - 2);
+
+            ctx2.fillStyle = 'rgba(255, 107, 26, 0.15)';
+            ctx2.fill();
+            ctx2.strokeStyle = 'rgba(255, 107, 26, 0.85)';
+            ctx2.lineWidth = 1;
+            ctx2.stroke();
+
+            // Highlight WMAS boundary in FFT pane
+            const wmasX1 = wmasBinStart * binW;
+            const wmasX2 = wmasBinEnd * binW;
+            ctx2.fillStyle = 'rgba(255, 107, 26, 0.08)';
+            ctx2.fillRect(wmasX1, 0, wmasX2 - wmasX1, splitH);
+
+            // Render bottom Waterfall row
+            for (let i = 0; i < NUM_BINS; i++) {
+                const v = bins[i];
+                let r = 10, g = 10, b = 15;
+                if (v > 0.6) {
+                    r = 255; g = Math.floor(107 + (v - 0.6) * 300); b = 30;
+                } else if (v > 0.25) {
+                    r = Math.floor(v * 280); g = Math.floor(v * 90); b = 20;
+                } else {
+                    r = Math.floor(v * 70); g = Math.floor(v * 40); b = 40;
+                }
+                ctx2.fillStyle = `rgb(${r},${g},${b})`;
+                ctx2.fillRect(i * binW, splitH, binW + 1, 1);
+            }
+
+            // Copy scrolled waterfall history
+            if (offCanvas.width > 0 && offCanvas.height > 0) {
+                ctx2.drawImage(offCanvas, 0, splitH + 1, W, waterH - 1, 0, splitH + 1, W, waterH - 1);
+            }
         };
 
-let specInterval = setInterval(drawSpectrum, 80);
-
-if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                if (!specInterval) specInterval = setInterval(drawSpectrum, 80);
-            } else {
-                clearInterval(specInterval);
-                specInterval = null;
-            }
-        });
-    });
-    observer.observe(specCanvas);
-}
+        if ('IntersectionObserver' in window) {
+            const obs2 = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    isSpecVisible = entry.isIntersecting;
+                    if (isSpecVisible) {
+                        if (!specInterval) specInterval = setInterval(drawSpectrum, 60);
+                    } else if (specInterval) {
+                        clearInterval(specInterval);
+                        specInterval = null;
+                    }
+                });
+            }, { threshold: 0.05 });
+            obs2.observe(specCanvas);
+        } else {
+            isSpecVisible = true;
+            specInterval = setInterval(drawSpectrum, 60);
+        }
     }
 
 // ═══════ RADAR — REGION DATA (WMAS / SPECTERA FOCUS) ═══════
@@ -473,6 +686,7 @@ const valQuality = document.getElementById('val-quality');
 const valCongestion = document.getElementById('val-congestion');
 
 const radarHotspots = document.querySelectorAll('.radar-hotspot');
+const radarRibbonBtns = document.querySelectorAll('.rrb-btn');
 
 function showRegionData(regionKey) {
     const data = RADAR_REGIONS[regionKey];
@@ -480,14 +694,32 @@ function showRegionData(regionKey) {
 
     const lang = document.documentElement.getAttribute('lang') || 'it';
 
-    // Deselect all, select clicked
-    radarHotspots.forEach(h => h.classList.remove('selected'));
-    const btn = document.querySelector(`.radar-hotspot[data-region="${regionKey}"]`);
-    if (btn) btn.classList.add('selected');
+    // Deselect all reticles, select matched
+    radarHotspots.forEach(h => {
+        const isMatch = h.getAttribute('data-region') === regionKey;
+        h.classList.toggle('selected', isMatch);
+        const dot = h.querySelector('.rh-dot');
+        const lbl = h.querySelector('.rh-lbl');
+        if (dot) dot.classList.toggle('rh-dot-active', isMatch);
+        if (lbl) lbl.classList.toggle('rh-lbl-active', isMatch);
+    });
+
+    // Synchronize quick region selector ribbon buttons
+    radarRibbonBtns.forEach(btn => {
+        const isMatch = btn.getAttribute('data-region') === regionKey;
+        btn.classList.toggle('active', isMatch);
+        btn.setAttribute('aria-selected', String(isMatch));
+    });
 
     // Update header
     ripRegionId.textContent = data.label;
-    ripStatusText.textContent = data.statusText[lang];
+    if (ripStatusText) {
+        ripStatusText.textContent = data.statusText[lang];
+        const statusChip = ripStatusText.closest('.rip-status-chip');
+        if (statusChip) {
+            statusChip.classList.toggle('warn', data.statusClass === 'warn');
+        }
+    }
 
     // Build data rows
     const bandLabel = lang === 'it' ? 'BANDE WMAS' : 'WMAS BANDS';
@@ -495,7 +727,6 @@ function showRegionData(regionKey) {
     const bodyLabel = lang === 'it' ? 'ENTE CERTIFICANTE' : 'CERTIFYING BODY';
     const intermodLabel = lang === 'it' ? 'RISCHIO INTERMOD WMAS' : 'WMAS INTERMOD RISK';
     const regionLabel = lang === 'it' ? 'REGIONE' : 'REGION';
-
 
     const statusClass = data.statusClass === 'ok' ? 'ok' : 'warn';
 
@@ -526,7 +757,6 @@ function showRegionData(regionKey) {
     // Show and animate bars
     if (ripBars) {
         ripBars.style.display = 'flex';
-        // Reset first
         barCompliance.style.width = '0%';
         barQuality.style.width = '0%';
         barCongestion.style.width = '0%';
@@ -534,7 +764,6 @@ function showRegionData(regionKey) {
         valQuality.textContent = '-';
         valCongestion.textContent = '-';
 
-        // Animate after paint
         requestAnimationFrame(() => {
             setTimeout(() => {
                 barCompliance.style.width = data.compliance + '%';
@@ -543,7 +772,7 @@ function showRegionData(regionKey) {
                 valCompliance.textContent = data.compliance + '%';
                 valQuality.textContent = data.quality + '%';
                 valCongestion.textContent = data.congestion + '%';
-            }, 80);
+            }, 60);
         });
     }
 }
@@ -554,6 +783,20 @@ radarHotspots.forEach(btn => {
         showRegionData(region);
     });
 });
+
+radarRibbonBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const region = btn.getAttribute('data-region');
+        showRegionData(region);
+    });
+});
+
+// Auto-initialize with EU-ETSI on page load
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => showRegionData('EU'));
+} else {
+    showRegionData('EU');
+}
 
 
 // ═══════ FORM HANDLING — WEB3FORMS + TURNSTILE ═══════

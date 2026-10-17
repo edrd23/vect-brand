@@ -134,9 +134,9 @@
     <link rel="icon" type="image/svg+xml" href="./favicon.svg">
     <link rel="apple-touch-icon" href="./favicon.svg">
     <link rel="stylesheet" href="fonts/fonts.css">
-    <link rel="stylesheet" href="style.css?v=2.7">
+    <link rel="stylesheet" href="style.css?v=2.8">
     <link rel="stylesheet" href="whitepaper.css">
-    <script src="particles.js?v=2.7" defer></script>
+    <script src="particles.js?v=2.8" defer></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     <script src="consent.js"></script>
 </head>
@@ -535,82 +535,198 @@
             <!-- Body: 2 colonne — Radar Scanner | Info Panel -->
             <div class="radar-about-grid">
 
-                <!-- COL 1: Radar Scanner -->
+                <!-- COL 1: Radar Scanner & Hardware Deck -->
                 <div class="radar-scanner-wrap">
+                    <!-- Quick Region Selector Ribbon -->
+                    <div class="radar-region-bar mono" role="tablist" aria-label="Region selector">
+                        <button class="rrb-btn active" data-region="EU" role="tab" aria-selected="true">
+                            <span class="rrb-badge">EU</span>
+                            <span class="rrb-title">ETSI EN 303 978</span>
+                            <span class="rrb-freq">470–694 MHz</span>
+                        </button>
+                        <button class="rrb-btn" data-region="NA" role="tab" aria-selected="false">
+                            <span class="rrb-badge">NA</span>
+                            <span class="rrb-title">FCC Part 74H</span>
+                            <span class="rrb-freq">470–608 MHz</span>
+                        </button>
+                        <button class="rrb-btn" data-region="AS" role="tab" aria-selected="false">
+                            <span class="rrb-badge">AS</span>
+                            <span class="rrb-title">MIC Ord. 35</span>
+                            <span class="rrb-freq">806–810 MHz</span>
+                        </button>
+                        <button class="rrb-btn" data-region="ME" role="tab" aria-selected="false">
+                            <span class="rrb-badge">ME</span>
+                            <span class="rrb-title">TRA / CITC</span>
+                            <span class="rrb-freq">470–790 MHz</span>
+                        </button>
+                        <button class="rrb-btn" data-region="SA" role="tab" aria-selected="false">
+                            <span class="rrb-badge">SA</span>
+                            <span class="rrb-title">ANATEL 680</span>
+                            <span class="rrb-freq">470–698 MHz</span>
+                        </button>
+                        <button class="rrb-btn" data-region="AU" role="tab" aria-selected="false">
+                            <span class="rrb-badge">AU</span>
+                            <span class="rrb-title">ACMA LIPD</span>
+                            <span class="rrb-freq">520–694 MHz</span>
+                        </button>
+                    </div>
+
                     <div class="radar-scanner-frame">
+                        <!-- Corner chassis brackets -->
+                        <div class="rframe-corner rframe-tl"></div>
+                        <div class="rframe-corner rframe-tr"></div>
+                        <div class="rframe-corner rframe-bl"></div>
+                        <div class="rframe-corner rframe-br"></div>
+
+                        <!-- Polar Dial Markings -->
+                        <div class="radar-azimuth-dial mono">
+                            <span class="rad-deg rad-0">000°</span>
+                            <span class="rad-deg rad-45">045°</span>
+                            <span class="rad-deg rad-90">090°</span>
+                            <span class="rad-deg rad-135">135°</span>
+                            <span class="rad-deg rad-180">180°</span>
+                            <span class="rad-deg rad-225">225°</span>
+                            <span class="rad-deg rad-270">270°</span>
+                            <span class="rad-deg rad-315">315°</span>
+                        </div>
+
                         <div class="radar-scanner-inner">
                             <div class="radar-rings">
-                                <div class="radar-ring" style="width:28%;height:28%;"></div>
-                                <div class="radar-ring" style="width:54%;height:54%;"></div>
-                                <div class="radar-ring" style="width:80%;height:80%;"></div>
+                                <div class="radar-ring rr-inner" style="width:28%;height:28%;"><span class="rr-tag mono">694M</span></div>
+                                <div class="radar-ring rr-mid" style="width:56%;height:56%;"><span class="rr-tag mono">582M WMAS</span></div>
+                                <div class="radar-ring rr-outer" style="width:84%;height:84%;"><span class="rr-tag mono">470M</span></div>
                             </div>
                             <div class="radar-crosshairs">
                                 <div class="radar-ch-h"></div>
                                 <div class="radar-ch-v"></div>
+                                <div class="radar-ch-diag1"></div>
+                                <div class="radar-ch-diag2"></div>
                             </div>
                             <div class="radar-sweep-arm"></div>
-                            <button class="radar-hotspot rh-na" data-region="NA"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">NA</span></button>
-                            <button class="radar-hotspot rh-eu" data-region="EU"><span class="rh-dot rh-dot-active"></span><span class="rh-ping"></span><span class="rh-lbl rh-lbl-active">EU</span></button>
-                            <button class="radar-hotspot rh-as" data-region="AS"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">AS</span></button>
-                            <button class="radar-hotspot rh-me" data-region="ME"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">ME</span></button>
-                            <button class="radar-hotspot rh-sa" data-region="SA"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">SA</span></button>
-                            <button class="radar-hotspot rh-au" data-region="AU"><span class="rh-dot"></span><span class="rh-ping"></span><span class="rh-lbl">AU</span></button>
+                            
+                            <!-- Tactical Target Reticles -->
+                            <button class="radar-hotspot rh-na" data-region="NA" aria-label="North America FCC">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl">NA // 40°N</span>
+                            </button>
+                            <button class="radar-hotspot rh-eu selected" data-region="EU" aria-label="Europe ETSI">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot rh-dot-active"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl rh-lbl-active">EU // 52°N</span>
+                            </button>
+                            <button class="radar-hotspot rh-as" data-region="AS" aria-label="Asia Pacific MIC">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl">AS // 35°N</span>
+                            </button>
+                            <button class="radar-hotspot rh-me" data-region="ME" aria-label="Middle East TRA">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl">ME // 25°N</span>
+                            </button>
+                            <button class="radar-hotspot rh-sa" data-region="SA" aria-label="South America ANATEL">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl">SA // 23°S</span>
+                            </button>
+                            <button class="radar-hotspot rh-au" data-region="AU" aria-label="Australia ACMA">
+                                <span class="rh-reticle"></span>
+                                <span class="rh-dot"></span>
+                                <span class="rh-ping"></span>
+                                <span class="rh-lbl">AU // 33°S</span>
+                            </button>
                         </div>
                     </div>
+
+                    <!-- Spectrum Waterfall / FFT scope -->
                     <div class="spectrum-bar-wrap">
-                        <span class="mono spectrum-freq-label">470 MHz</span>
-                        <div class="spectrum-waterfall"><canvas id="spectrumCanvas"></canvas></div>
-                        <span class="mono spectrum-freq-label">694 MHz</span>
+                        <div class="spectrum-telemetry-hdr mono">
+                            <span class="sth-left"><span class="sth-pulse"></span>WMAS 8 MHz CARRIER ANALYZER</span>
+                            <span class="sth-center">CHANNEL 35 // 582.000–590.000 MHz</span>
+                            <span class="sth-right">PEAK: -18.2 dBm</span>
+                        </div>
+                        <div class="spectrum-waterfall">
+                            <canvas id="spectrumCanvas"></canvas>
+                        </div>
+                        <div class="spectrum-scale-row mono">
+                            <span>470 MHz [CH 21]</span>
+                            <span class="scale-accent">▲ 582.000 MHz (WMAS CARRIER)</span>
+                            <span class="scale-accent">590.000 MHz ▲</span>
+                            <span>694 MHz [CH 48]</span>
+                        </div>
                     </div>
+
                     <div class="radar-status-row">
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCom</span></div>
-                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">FCC-UWB : COMPLIANT</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">ETSI-EN : CERTIFIED</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">OFCOM-UK : LICENSED</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-ok"></span><span class="mono">AGCOM-IT : REGISTERED</span></div>
+                        <div class="rsb-item"><span class="rsb-dot rsb-live"></span><span class="mono">MIC-JPN : VERIFIED</span></div>
                     </div>
                 </div>
 
-                <!-- COL 3: Info Panel -->
+                <!-- COL 2: Info Panel (Telemetry Rack) -->
                 <div class="radar-info-panel">
                     <div class="rip-header">
                         <div>
-                            <div class="mono" style="font-size:9px;letter-spacing:2px;color:var(--vect-ash);margin-bottom:6px;">WMAS · SPECTERA DATA</div>
-                            <div class="rip-region-id mono" id="rip-region-id">GLBL</div>
+                            <div class="mono rip-meta-label">WMAS · SENNHEISER SPECTERA TELEMETRY</div>
+                            <div class="rip-region-id mono" id="rip-region-id">EU-ETSI</div>
                         </div>
                         <div class="rip-status-chip">
-                            <span class="rsb-dot rsb-live"></span>
-                            <span class="mono" id="rip-status-text">IDLE</span>
+                            <span class="rsb-dot rsb-ok"></span>
+                            <span class="mono" id="rip-status-text">SPECTERA NATIVO</span>
                         </div>
                     </div>
                     <div class="rip-body" id="rip-body">
-                        <div class="rip-idle">
-                            <div class="rip-idle-icon">&#9678;</div>
-                            <p class="mono rip-idle-msg">
-                                <span class="it-text">&gt; SISTEMA ATTIVO<br>&gt; SELEZIONA UNA REGIONE<br>&gt; PER I DATI WMAS / SPECTERA</span>
-                                <span class="en-text">&gt; SYSTEM ACTIVE<br>&gt; SELECT A REGION<br>&gt; FOR WMAS / SPECTERA DATA</span>
-                            </p>
+                        <div class="rip-data">
+                            <div class="rip-data-row">
+                                <span class="rip-data-label"><span class="it-text">REGIONE</span><span class="en-text">REGION</span></span>
+                                <span class="rip-data-value"><span class="it-text">Unione Europea</span><span class="en-text">European Union</span></span>
+                            </div>
+                            <div class="rip-data-row">
+                                <span class="rip-data-label"><span class="it-text">NORMATIVA WMAS</span><span class="en-text">WMAS STANDARD</span></span>
+                                <span class="rip-data-value accent">ETSI EN 303 978 — WMAS Standard</span>
+                            </div>
+                            <div class="rip-data-row">
+                                <span class="rip-data-label"><span class="it-text">BANDE WMAS</span><span class="en-text">WMAS BANDS</span></span>
+                                <span class="rip-data-value" style="white-space:pre-line">470–694 MHz (WMAS native)
+8 MHz TV channel carrier</span>
+                            </div>
+                            <div class="rip-data-row">
+                                <span class="rip-data-label"><span class="it-text">ENTE CERTIFICANTE</span><span class="en-text">CERTIFYING BODY</span></span>
+                                <span class="rip-data-value" style="font-size:10px">ETSI · CE Mark · AGCom-IT · OFCOM</span>
+                            </div>
+                            <div class="rip-data-row">
+                                <span class="rip-data-label"><span class="it-text">RISCHIO INTERMOD WMAS</span><span class="en-text">WMAS INTERMOD RISK</span></span>
+                                <span class="rip-data-value ok"><span class="it-text">BASSO — WMAS elimina intermod</span><span class="en-text">LOW — WMAS eliminates intermod</span></span>
+                            </div>
                         </div>
                     </div>
-                    <div class="rip-bars" id="rip-bars" style="display:none;">
+                    <div class="rip-bars" id="rip-bars">
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">WMAS COMPLIANCE</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance"></div></div>
-                            <span class="rip-bar-val mono" id="val-compliance">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-compliance" style="width:100%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-compliance">100%</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTERA QUALITY</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality"></div></div>
-                            <span class="rip-bar-val mono" id="val-quality">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill" id="bar-quality" style="width:98%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-quality">98%</span>
                         </div>
                         <div class="rip-bar-row">
                             <span class="rip-bar-lbl mono">SPECTRUM LOAD</span>
-                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion"></div></div>
-                            <span class="rip-bar-val mono" id="val-congestion">-</span>
+                            <div class="rip-bar-bg"><div class="rip-bar-fill rip-bar-warn" id="bar-congestion" style="width:40%;"></div></div>
+                            <span class="rip-bar-val mono" id="val-congestion">40%</span>
                         </div>
                     </div>
                     <div class="rip-footer">
-                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.4</span>
+                        <span class="mono" style="font-size:9px;color:var(--vect-graphite);">WMAS · SENNHEISER SPECTERA · VECT RF INTEL v2.8</span>
                     </div>
                 </div>
 
@@ -637,22 +753,64 @@
                 </blockquote>
             </div>
             <div class="about-synthetic-visual">
-                <div class="mini-rf-scanner rf-scanner-ui">
-                    <div class="scanner-header mono" style="margin-bottom: 8px;">
-                        <div class="scanner-status"><span class="status-dot"></span> <span class="it-text">LIVE SCAN</span><span class="en-text">LIVE SCAN</span></div>
-                        <div class="scanner-main-freq">470.000 <span class="mhz">MHz</span></div>
+                <!-- VECT SPECTERA RF-01 RACK TELEMETRY DECK -->
+                <div class="mini-rf-scanner rf-rack-deck">
+                    <span class="rack-screw rack-screw-tl">+</span>
+                    <span class="rack-screw rack-screw-tr">+</span>
+                    <span class="rack-screw rack-screw-bl">+</span>
+                    <span class="rack-screw rack-screw-br">+</span>
+                    
+                    <div class="rack-header mono">
+                        <div class="rack-header-left">
+                            <span class="status-dot"></span>
+                            <span class="rack-id-label">LIVE SCAN // DECK 01</span>
+                        </div>
+                        <div class="rack-header-center">
+                            <span class="rack-freq-val" id="rackFreqVal">582.400</span> <span class="mhz">MHz</span>
+                            <span class="rack-chan-tag">CH 35 WMAS</span>
+                        </div>
+                        <div class="rack-header-right">
+                            <span class="rack-chip">SPAN 120 MHz</span>
+                            <span class="rack-chip chip-accent">IMD 0.00%</span>
+                        </div>
                     </div>
-                    <div class="scanner-display" style="height:50px;">
-                        <svg viewBox="0 0 1000 300" class="scanner-peaks" preserveAspectRatio="none" role="img">
-                            <title>VECT RF Scan</title>
-                            <defs><linearGradient id="peakGrad3" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.4"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0"/></linearGradient></defs>
-                            <path d="M0 300 C 100 300, 150 150, 250 300 C 350 300, 400 80, 500 300 C 600 300, 650 200, 750 300 C 850 300, 880 120, 1000 300" fill="url(#peakGrad3)" stroke="rgba(255,255,255,0.8)" stroke-width="2" vector-effect="non-scaling-stroke"/>
-                        </svg>
-                        <div class="scanner-sweep"></div>
+                    
+                    <div class="rack-screen" id="rackScreenWrap">
+                        <canvas id="aboutRfCanvas"></canvas>
+                        <div class="rack-grid-overlay">
+                            <div class="rgo-line rgo-h" style="top:25%;"><span>-20 dBm</span></div>
+                            <div class="rgo-line rgo-h" style="top:50%;"><span>-50 dBm</span></div>
+                            <div class="rgo-line rgo-h" style="top:75%;"><span>-80 dBm</span></div>
+                            <div class="rgo-line rgo-v" style="left:35%;"><span>CH 33</span></div>
+                            <div class="rgo-line rgo-v" style="left:52%;"><span>CH 35 WMAS</span></div>
+                            <div class="rgo-line rgo-v" style="left:72%;"><span>CH 38</span></div>
+                        </div>
+                        <div class="rack-hud-cursor" id="rackHudCursor">
+                            <div class="rhc-line"></div>
+                            <div class="rhc-badge mono" id="rackHudBadge">586.000 MHz | -18.2 dBm</div>
+                        </div>
+                    </div>
+                    
+                    <div class="rack-footer mono">
+                        <div class="rfk-col">
+                            <span class="rfk-k">BW OCCUPIED</span>
+                            <span class="rfk-v">8.00 MHz</span>
+                        </div>
+                        <div class="rfk-col">
+                            <span class="rfk-k">MODULATION</span>
+                            <span class="rfk-v">OFDM 32-CH</span>
+                        </div>
+                        <div class="rfk-col">
+                            <span class="rfk-k">NOISE FLOOR</span>
+                            <span class="rfk-v">-108 dBm</span>
+                        </div>
+                        <div class="rfk-col">
+                            <span class="rfk-k">LINK INTEGRITY</span>
+                            <span class="rfk-v rfk-ok">99.98% PASS</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <div class="divider"></div>
@@ -1141,7 +1299,7 @@
         </svg>
     </a>
 
-    <script src="script.js?v=2.7" defer></script>
+    <script src="script.js?v=2.8" defer></script>
 
     <!-- ═══════ SERVICE WORKER ═══════ -->
     <script>
