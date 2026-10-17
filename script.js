@@ -40,27 +40,41 @@ window.onTurnstileError = function () {
 document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.add('js-ready');
 
-    /* ═══════ SNAPPY REVEAL SYSTEM ═══════ */
+    /* ═══════ HIGH-SPEED INSTANT REVEAL SYSTEM ═══════ */
     const setupReveal = () => {
+        // Pre-reveal 300px BEFORE entering viewport so text is already loaded!
         const observerOptions = {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
+            threshold: 0.01,
+            rootMargin: "300px 0px 200px 0px"
         };
 
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('active');
-                    // Snappy sequence for children if needed
                     if (entry.target.hasAttribute('data-reveal-group')) {
-                        entry.target.querySelectorAll('.reveal-item').forEach((item, index) => {
-                            setTimeout(() => item.classList.add('active'), index * 60);
+                        entry.target.querySelectorAll('.reveal-item').forEach(item => {
+                            item.classList.add('active');
                         });
                     }
+                    revealObserver.unobserve(entry.target);
                 }
             });
         }, observerOptions);
-        document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium, .reveal').forEach(el => revealObserver.observe(el));
+
+        const targets = document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium, .reveal, .reveal-item');
+        targets.forEach(el => {
+            // Instant reveal for anything in or near initial viewport
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight + 300) {
+                el.classList.add('active');
+                if (el.hasAttribute('data-reveal-group')) {
+                    el.querySelectorAll('.reveal-item').forEach(item => item.classList.add('active'));
+                }
+            } else {
+                revealObserver.observe(el);
+            }
+        });
     };
 
     /* ═══════ GETLAYERS.AI CINEMATIC SPOTLIGHT & 3D TILT ═══════ */
@@ -839,7 +853,7 @@ function showToast(message, type = 'success') {
             
             side.innerHTML = text.split('').map((char, i) => {
                 if (char === '\n') return '<br>';
-                return `<span class="char-wrap"><span class="char" style="transition-delay: ${i * 0.025}s">${char === ' ' ? '&nbsp;' : char}</span></span>`;
+                return `<span class="char-wrap"><span class="char" style="transition-delay: 0s">${char === ' ' ? '&nbsp;' : char}</span></span>`;
             }).join('');
         });
     };

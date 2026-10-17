@@ -480,12 +480,14 @@ section.hero {
 
 .char {
     display: inline-block;
-    transform: translateY(105%);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(0) !important;
+    transition: none !important;
 }
 
 .active .char {
-    transform: translateY(0);
+    display: inline-block;
+    transform: translateY(0) !important;
+    transition: none !important;
 }
 
 .section-desc {
@@ -1722,29 +1724,40 @@ body::after {
 /* ── Snappy Reveal Core ── */
 .reveal {
     opacity: 0;
-    transform: translateY(20px) scale(0.98);
+    transform: translateY(6px);
     transition: 
-        opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        opacity 0.16s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.16s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
 }
 
 .reveal-item {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(4px);
     transition: 
-        opacity 0.3s cubic-bezier(0, 0, 0, 1),
-        transform 0.4s cubic-bezier(0, 0, 0, 1);
+        opacity 0.14s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.14s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
 }
 
 .reveal-item.active {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Above-the-fold content is INSTANTLY visible with ZERO delay */
+#hero,
+#hero .hero-content,
+#hero .hero-content *,
+.trust-badges-wrapper {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
 }
 
 /* ── Tactical Corner HUD Elements ── */
@@ -2835,15 +2848,14 @@ body::after {
 /* 3. Premium Scroll Reveal (Blur + Zoom) */
 .reveal-premium {
     opacity: 0;
-    filter: blur(15px);
-    transform: scale(0.95) translateY(40px);
-    transition: opacity 1.2s ease, filter 1.0s ease, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(6px);
+    transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal-premium.active {
     opacity: 1;
-    filter: blur(0);
-    transform: scale(1) translateY(0);
+    filter: none !important;
+    transform: translateY(0);
 }
 
 /* 4. Mouse Spotlight Overlay */
