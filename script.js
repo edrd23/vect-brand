@@ -63,25 +63,106 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-reveal], [data-reveal-group], .reveal-premium, .reveal').forEach(el => revealObserver.observe(el));
     };
 
-    const setupSpotlight = () => {
+    /* ═══════ GETLAYERS.AI CINEMATIC SPOTLIGHT & 3D TILT ═══════ */
+    const setupGetLayersAtmosphere = () => {
+        // 1. Global Atmospheric Cursor Spotlight
+        const spotlightEl = document.getElementById('vect-cursor-spotlight');
+        if (spotlightEl) {
+            window.addEventListener('mousemove', (e) => {
+                if (!document.body.classList.contains('has-cursor')) {
+                    document.body.classList.add('has-cursor');
+                }
+                spotlightEl.style.setProperty('--cursor-x', e.clientX + 'px');
+                spotlightEl.style.setProperty('--cursor-y', e.clientY + 'px');
+            }, { passive: true });
+
+            window.addEventListener('mouseleave', () => {
+                document.body.classList.remove('has-cursor');
+            }, { passive: true });
+        }
+
+        // 2. Per-Card Border Illumination
+        const interactiveCards = document.querySelectorAll(
+            '.service-card, .advantage-item, .radar-card, .stat-pill, .spectera-banner, .faq-item'
+        );
+        interactiveCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                card.style.setProperty('--card-mouse-x', x + 'px');
+                card.style.setProperty('--card-mouse-y', y + 'px');
+            }, { passive: true });
+        });
+
+        // 3. Spotlight containers backward compatibility
         const spotlights = document.querySelectorAll('.spotlight-container');
         spotlights.forEach(container => {
-            const overlay = document.createElement('div');
-            overlay.className = 'spotlight-overlay';
-            container.appendChild(overlay);
-
+            if (!container.querySelector('.spotlight-overlay')) {
+                const overlay = document.createElement('div');
+                overlay.className = 'spotlight-overlay';
+                container.appendChild(overlay);
+            }
             container.addEventListener('mousemove', (e) => {
                 const rect = container.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
-                container.style.setProperty('--mouse-x', `${x}px`);
-                container.style.setProperty('--mouse-y', `${y}px`);
+                container.style.setProperty('--mouse-x', x + 'px');
+                container.style.setProperty('--mouse-y', y + 'px');
+            }, { passive: true });
+        });
+    };
+
+    const setup3DTiltCards = () => {
+        const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!canHover) return;
+
+        const tiltCards = document.querySelectorAll('.service-card, .advantage-item, .stat-pill');
+        tiltCards.forEach(card => {
+            card.classList.add('has-tilt');
+
+            let glare = card.querySelector('.card-glare');
+            if (!glare) {
+                glare = document.createElement('div');
+                glare.className = 'card-glare';
+                card.appendChild(glare);
+            }
+
+            let rafId = null;
+
+            card.addEventListener('mouseenter', () => {
+                card.classList.add('is-tilting');
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                if (rafId) cancelAnimationFrame(rafId);
+                rafId = requestAnimationFrame(() => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = ((y - centerY) / centerY) * -5.0;
+                    const rotateY = ((x - centerX) / centerX) * 5.0;
+
+                    card.style.transform = 'perspective(900px) rotateX(' + rotateX.toFixed(2) + 'deg) rotateY(' + rotateY.toFixed(2) + 'deg) translateY(-4px) scale3d(1.015, 1.015, 1.015)';
+                    card.style.setProperty('--glare-x', x + 'px');
+                    card.style.setProperty('--glare-y', y + 'px');
+                });
+            }, { passive: true });
+
+            card.addEventListener('mouseleave', () => {
+                if (rafId) cancelAnimationFrame(rafId);
+                card.classList.remove('is-tilting');
+                card.style.transform = 'perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px) scale3d(1, 1, 1)';
             });
         });
     };
 
     setupReveal();
-    setupSpotlight();
+    setupGetLayersAtmosphere();
+    setup3DTiltCards();
 
 
     // ═══════ LANGUAGE SWITCHER ═══════
